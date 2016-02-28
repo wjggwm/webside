@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd "
+	default-lazy-init="true">
+	
+	<bean id="credentialsMatcher" class="com.webside.shiro.LimitRetryHashedMatcher">
+		<!-- hashAlgorithmName必须的，没有默认值。可以有MD5或者SHA-1，如果对密码安全有更高要求可以用SHA-256或者更高。
+		这里使用MD5 storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码 
+		hashIterations迭代次数，默认值是1。 -->
+		<constructor-arg ref="cacheManager" />
+		<!-- RetryLimitHashedCredentialsMatcher继承父类HashedCredentialsMatcher，需要给父类注入以下属性 -->
+		<property name="hashAlgorithmName" value="MD5" />
+		<property name="hashIterations" value="2" />
+		<!-- 这里需要和注册时使用的加密方式一样，都使用MD5加密，然后转为base64,密码匹配也需和注册时的加密方式一致 -->
+		<property name="storedCredentialsHexEncoded" value="false" />
+	</bean>
+	
+	<!--自定义Realm -->
+	<bean id="myRealm" class="com.webside.shiro.MyRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher" />
+		<property name="cachingEnabled" value="false" />
+		<!-- 如需要自定义缓存时间放开以下.修改 ehcache.xml-->
+		 <!--<property name="authenticationCachingEnabled" value="true"/>-->
+        <!--<property name="authenticationCacheName" value="authenticationCache"/>-->
+        <!--<property name="authorizationCachingEnabled" value="true"/>-->
+        <!--<property name="authorizationCacheName" value="authorizationCache"/>-->
+	</bean>
+	
+	
+	
+	<!-- 凭证匹配器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="myRealm" />
+		<property name="sessionManager" ref="sessionManager"/>
+		<!-- 使用下面配置的缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+	
+	<!-- 用户过滤器,将用户信息放入request中 -->
+	<bean id="sysUserFilter" class="com.webside.shiro.filter.SysUserFilter"/>
+	
+	<!-- 用户登录数控制,超过最大回话数会强制退出 -->
+	 <bean id="kickoutSessionFilter" class="com.webside.shiro.filter.KickoutSessionFilter">
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="kickoutAfter" value="false"/>
+        <property name="maxSession" value="1"/>
+        <property name="kickoutUrl" value="/login.html"/>
+    </bean>
+    
+    
+	<!-- 配置shiro的过滤器工厂类，这里bean的id shiroFilter要和我们在web.xml中配置的shior过滤器名称一致<filter-name>shiroFilter</filter-name> -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		 <!-- shiro的核心安全接口 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 要求登录时的链接 --> 
+		<property name="loginUrl" value="/login.html" />
+		<!-- 登陆成功后要跳转的连接 --> 
+		<property name="successUrl" value="/index.html" />
+		<!-- 未授权时要跳转的连接 --> 
+		<property name="unauthorizedUrl" value="/denied.jsp" />
+		<!-- shiro连接约束配置,在这里使用自定义的动态获取资源类 -->
+		<property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" />
+		<!-- 自定义过滤器 -->
+		<property name="filters">
+            <util:map>
+                <entry key="sysUser" value-ref="sysUserFilter"/>
+                <entry key="kickout" value-ref="kickoutSessionFilter"/>
+            </util:map>
+        </property>
+	</bean>
+	
+	<!--自定义filterChainDefinitionMap -->
+	<bean id="chainDefinitionSectionMetaSource" class="com.webside.shiro.ChainDefinitionSectionMetaSource">
+		<property name="filterChainDefinitions">
+			<value>
+			/resources/** = anon
+			/login.html = anon
+			/logout.html = anon
+			/register.html = anon
+			/user/resetPassword.html = anon
+			/user/validateAccountName.html = anon
+			/captcha.html = anon
+			/denied.jsp = anon
+			/welcome.jsp = anon
+			/** = user
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+	
+	 <!-- 会话DAO -->
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    </bean>
+
+    <!-- 会话验证调度器 -->
+     <!-- 全局的会话信息检测扫描信息间隔30分钟-->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        <property name="sessionValidationInterval" value="1800000"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+	
+	 <!-- 会话管理器 -->
+	  <!-- 全局的会话信息设置成30分钟,sessionValidationSchedulerEnabled参数就是是否开启扫描  -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionDAO" ref="sessionDAO"/>
+    </bean>
+	
+	
+	<!--shiro缓存管理器 -->
+	<bean id="cacheManager" class="com.webside.shiro.SpringCacheManagerWrapper" >
+	<property name="cacheManager" ref="springCacheManager"/>
+	</bean>
+	
+	 <bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcacheManager"/>
+    </bean>
+	
+	<!--ehcache-->
+    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+        <property name="shared" value="true"/>
+    </bean>
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <!--这两个类主要用于注解-->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<!-- AOP式方法级权限检查,注解  -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.resource.mapper.ResourceMapper">
+	
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<!-- 
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+	 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<sql id="resourceAttributes">
+		s_id,
+		s_parent_id,
+		s_name,
+		s_source_key,
+		s_type,
+		s_source_url,
+		s_level,
+		s_icon,
+		s_is_hide,
+		s_description,
+		s_create_time,
+		s_update_time
+	</sql>
+
+	<resultMap id="resourceMap" type="com.webside.resource.model.ResourceEntity">
+		<id property="id" column="s_id"/>
+		<result property="parentId" column="s_parent_id"/>
+		<result property="name" column="s_name"/>
+		<result property="sourceKey" column="s_source_key"/>
+		<result property="type" column="s_type"/>
+		<result property="sourceUrl" column="s_source_url"/>
+		<result property="level" column="s_level"/>
+		<result property="icon" column="s_icon"/>
+		<result property="isHide" column="s_is_hide"/>
+		<result property="description" column="s_description"/>
+		<result property="createTime" column="s_create_time"/>
+		<result property="updateTime" column="s_update_time"/>
+		<result property="parentName" column="s_parentName"/>
+		<result property="isExpanded" column="s_isExpanded"/>
+		<result property="isLeaf" column="s_isLeaf"/>
+		<result property="selected" column="s_selected"/>
+	</resultMap>
+	
+	<select id="findResourcesByUserId" parameterType="int" resultMap="resourceMap">
+		SELECT s.* FROM tb_resource s, tb_resources_role sr, tb_role r, tb_role_user ru
+		WHERE s.s_id = sr.s_id AND sr.r_id = r.r_id AND r.r_id = ru.r_id AND ru.u_id=${userId}
+	</select>
+	
+	<select id="findByName" parameterType="String" resultMap="resourceMap" useCache="false">
+		SELECT t1.s_id,
+			t1.s_parent_id,
+			t1.s_name,
+			t2.s_name AS s_parentName,
+			t1.s_source_key,
+			t1.s_type,
+			t1.s_source_url,
+			t1.s_level,
+			t1.s_icon,
+			t1.s_is_hide,
+			t1.s_description,
+			t1.s_create_time,
+			t1.s_update_time 
+		FROM tb_resource t1 LEFT JOIN tb_resource t2 ON t1.s_parent_id = t2.s_id	
+		where t1.s_name = #{name}
+	</select>
+	
+	<select id="queryListByPage" parameterType="map" resultMap="resourceMap">
+		SELECT t1.s_id,
+			t1.s_parent_id,
+			t1.s_name,
+			t2.s_name AS s_parentName,
+			t1.s_source_key,
+			t1.s_type,
+			t1.s_source_url,
+			t1.s_level,
+			t1.s_icon,
+			t1.s_is_hide,
+			t1.s_description,
+			t1.s_create_time,
+			t1.s_update_time 
+		FROM tb_resource t1 LEFT JOIN tb_resource t2 ON t1.s_parent_id = t2.s_id
+		<where>
+			<if test="name != null and name != ''">
+				and t1.s_name=#{name}
+			</if>
+			<if test="isHide != null">
+				and t1.s_is_hide=${isHide}
+			</if>
+			<if test="type != null">
+				and t1.s_type=${type}
+			</if>
+		</where>
+	<!--  
+		 SELECT <include refid="resourceAttributes" /> ,
+		 CASE WHEN s_parent_id != 0 THEN FALSE ELSE TRUE end AS s_isExpanded,
+		 CASE WHEN (SELECT count(*) FROM tb_resource t2 where t2.s_parent_id = t1.s_id)>0 THEN FALSE ELSE TRUE END AS s_isLeaf
+		 FROM tb_resource t1
+		<where>
+			<if test="name != null and name != ''">
+				s_name=#{name}
+			</if>
+		</where>
+		-->
+	</select>
+
+	<select id="queryResourceList" parameterType="map" resultMap="resourceMap">
+		SELECT t1.s_id,
+			t1.s_parent_id,
+			t1.s_name,
+			t2.s_name AS s_parentName,
+			t1.s_source_key,
+			t1.s_type,
+			t1.s_source_url,
+			t1.s_level,
+			t1.s_icon,
+			t1.s_is_hide,
+			t1.s_description,
+			t1.s_create_time,
+			t1.s_update_time,
+		CASE WHEN t3.s_id IS NULL THEN FALSE ELSE TRUE END AS s_selected
+		FROM tb_resource t1 LEFT JOIN tb_resource t2 ON t1.s_parent_id = t2.s_id 
+		LEFT JOIN tb_resources_role t3 on t1.s_id = t3.s_id and t3.r_id=${roleId}
+		<where>
+			<if test="isHide != null">
+				and t1.s_is_hide=${isHide}
+			</if>
+			<if test="type != null">
+				and t1.s_type=${type}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insert" parameterType="com.webside.resource.model.ResourceEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_resource (
+		<if test="parentId neq null">
+			s_parent_id,
+		</if>
+			s_name,
+			s_source_key,
+			s_type,
+			s_source_url,
+			s_icon,
+			s_is_hide,
+			s_description,
+			s_create_time
+			)   
+		values (
+		<if test="parentId neq null">
+			${parentId},
+		</if>
+			#{name},
+			#{sourceKey},
+			${type},
+			#{sourceUrl},
+			#{icon},
+			#{isHide},
+			#{description},
+			#{createTime}
+			)  
+	</insert>
+	
+	<select id="findById" parameterType="long" resultMap="resourceMap" useCache="false">
+		SELECT t1.s_id,
+			t1.s_parent_id,
+			t1.s_name,
+			t2.s_name AS s_parentName,
+			t1.s_source_key,
+			t1.s_type,
+			t1.s_source_url,
+			t1.s_level,
+			t1.s_icon,
+			t1.s_is_hide,
+			t1.s_description,
+			t1.s_create_time,
+			t1.s_update_time 
+		FROM tb_resource t1 LEFT JOIN tb_resource t2 ON t1.s_parent_id = t2.s_id
+		where t1.s_id = ${id}
+	</select>
+	
+	<update id="update" parameterType="com.webside.resource.model.ResourceEntity" flushCache="true">
+		update tb_resource set
+		<choose>
+			<when test="parentId eq null">s_parent_id = null,</when>
+			<otherwise>s_parent_id = ${parentId},</otherwise>
+		</choose>
+		s_name = #{name},
+		s_source_key = #{sourceKey},
+		s_type = ${type},
+		s_source_url = #{sourceUrl},
+		s_icon = #{icon},
+		s_is_hide = ${isHide},
+		s_description = #{description}
+		where s_id = ${id}
+	</update>
+	
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from tb_resource where s_id in  
+    	]]>  
+	    <foreach collection="list" item = "id" open="(" separator="," close=")">
+	    #{id}  
+	    </foreach>  
+	</delete>
+	
+</mapper>

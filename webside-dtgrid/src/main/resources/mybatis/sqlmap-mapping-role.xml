@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.role.mapper.RoleMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<sql id="roleAttributes">
+		r_id,
+		r_name,
+		r_key,
+		r_status,
+		r_description,
+		r_create_time,
+		r_update_time
+	</sql>
+
+	<resultMap id="roleMap" type="com.webside.role.model.RoleEntity">
+		<id property="id" column="r_id"/>
+		<result property="name" column="r_name"/>
+		<result property="key" column="r_key"/>
+		<result property="status" column="r_status"/>
+		<result property="description" column="r_description"/>
+		<result property="createTime" column="r_create_time"/>
+		<result property="updateTime" column="r_update_time"/>
+		<collection property="userList" column="id" ofType="com.webside.user.model.UserEntity">
+			<id property="id" column="u_id"/>
+			<result property="userName" column="u_name" />
+			<result property="accountName" column="u_account_name"/>
+			<result property="password" column="u_password"/>
+			<result property="deleteStatus" column="u_delete_status"/>
+			<result property="locked" column="u_locked"/>
+			<result property="description" column="u_description"/>
+			<result property="credentialsSalt" column="u_credentials_salt"/>
+			<result property="creatorName" column="u_creator_name"/>
+			<result property="createTime" column="u_create_time"/>
+			<result property="updateTime" column="u_update_time"/>
+		</collection>
+	</resultMap>
+	
+	<select id="queryListByPage" parameterType="map" resultMap="roleMap" useCache="false">
+		<!-- 
+			偏移offset较小的时候，直接使用limit较优；
+			偏移offset较大的时候，使用下面子查询的方式较优；
+			具体可以根据业务情况选择 
+		-->
+		<!-- 
+		select <include refid="userAttributes" /> from tb_user Where u_id >=(
+		select u_id from tb_user order by u_id limit ${start},1
+		) limit ${pageNumber}
+		 -->
+		SELECT 
+		r.r_id,
+		r.r_name,
+		r.r_key,
+		r.r_status,
+		r.r_description,
+		r.r_create_time,
+		r.r_update_time,
+		u.u_id,
+		u.u_name,
+		u.u_account_name,
+		u.u_password,
+		u.u_delete_status,
+		u.u_locked,
+		u.u_description,
+		u.u_credentials_salt,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_update_time
+		FROM tb_role r LEFT JOIN tb_role_user ru ON r.r_id = ru.r_id LEFT JOIN tb_user u ON ru.u_id = u.u_id
+		<where>
+			<if test="name != null and name != ''">
+				r.r_name=#{name}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findByName" parameterType="String" resultMap="roleMap" useCache="false">
+		SELECT 
+		r.r_id,
+		r.r_name,
+		r.r_key,
+		r.r_status,
+		r.r_description,
+		r.r_create_time,
+		r.r_update_time,
+		u.u_id,
+		u.u_name,
+		u.u_account_name,
+		u.u_password,
+		u.u_delete_status,
+		u.u_locked,
+		u.u_description,
+		u.u_credentials_salt,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_update_time
+		FROM tb_role r LEFT JOIN tb_role_user ru ON r.r_id = ru.r_id LEFT JOIN tb_user u ON ru.u_id = u.u_id
+		where r.r_name = #{name}
+	</select>
+	
+	<insert id="insert" parameterType="com.webside.role.model.RoleEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_role (
+			r_name,
+			r_key,
+			r_status,
+			r_description,
+			r_create_time
+			)   
+		values (
+			#{name},
+			#{key},
+			#{status},
+			#{description},
+			now()
+			)  
+	</insert>
+	
+	
+	<select id="findById" parameterType="long" resultMap="roleMap" useCache="false">
+		SELECT 
+		r.r_id,
+		r.r_name,
+		r.r_key,
+		r.r_status,
+		r.r_description,
+		r.r_create_time,
+		r.r_update_time,
+		u.u_id,
+		u.u_name,
+		u.u_account_name,
+		u.u_password,
+		u.u_delete_status,
+		u.u_locked,
+		u.u_description,
+		u.u_credentials_salt,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_update_time
+		FROM tb_role r LEFT JOIN tb_role_user ru ON r.r_id = ru.r_id LEFT JOIN tb_user u ON ru.u_id = u.u_id
+		where r.r_id = #{id}
+	</select>
+	
+	<update id="update" parameterType="com.webside.role.model.RoleEntity" flushCache="true">
+		update tb_role
+		<set>
+			<if test="name != null and name != ''">
+				r_name = #{name},
+			</if>
+			<if test="key != null and key != ''">
+				r_key = #{key},
+			</if>
+			<if test="status != null and status != ''">
+				r_status = #{status},
+			</if>
+			<if test="description != null and description != ''">
+				r_description = #{description}
+			</if>
+		</set>
+		where r_id = ${id}
+	</update>
+	
+	<delete id="deleteBatchById" parameterType="list">
+       delete from tb_role where r_id in  
+	    <foreach collection="list" item = "id" open="(" separator="," close=")">
+	    #{id}  
+	    </foreach>  
+	</delete>
+	
+	<delete id="deleteRoleResource" parameterType="int">
+       delete from tb_resources_role where r_id = ${roleId}   
+	</delete>
+	
+	<select id="findRoleResourceById" parameterType="int" resultType="int" useCache="false">
+		SELECT count(*)
+		FROM tb_resources_role
+		where r_id = ${roleId}
+	</select>
+	
+	<insert id="addRoleResource" parameterType="map">
+		insert into tb_resources_role (
+			s_id,
+			r_id,
+			t_create_time
+		)   
+		values 
+		<foreach collection="resourceIds" item ="id" separator=",">
+			(
+				#{id},
+				#{roleId},
+				now()
+			)
+		</foreach>
+	</insert>
+	
+</mapper>
