@@ -13,9 +13,12 @@
 	<!-- 系统根目录变量 -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>webside-dtgrid.root</param-value>
+		<param-value>webside.dtgrid.root</param-value>
 	</context-param>
 
+	<listener>
+		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+	</listener>
 	<!-- 处理静态资源的访问 ,这种方式效率最高,但是无法访问classpath下的资源文件-->
 	<servlet-mapping> 
 		<!--

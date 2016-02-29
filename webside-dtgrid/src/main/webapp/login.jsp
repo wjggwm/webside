@@ -243,7 +243,7 @@ if ("${error}" != "") {
 												<label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> 
 													<input name="accountName" id="registerAccountName"
-														type="email" class="form-control" placeholder="邮箱,将做为登录系统的账户名..." />
+														type="email" class="form-control" placeholder="真实邮箱,将做为登录系统的账户名" />
 														<i class="ace-icon icon-envelope"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
