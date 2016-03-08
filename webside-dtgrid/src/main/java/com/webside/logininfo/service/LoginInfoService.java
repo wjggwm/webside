@@ -7,7 +7,7 @@ import com.webside.logininfo.model.LoginInfoEntity;
 
 public interface LoginInfoService {
 
-	public int insert(LoginInfoEntity loginInfo);
+	public int log(LoginInfoEntity loginInfo);
 	
 	public List<LoginInfoEntity> queryListByPage(Map<String, Object> parameter);
 }

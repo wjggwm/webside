@@ -19,7 +19,6 @@
 	<context:component-scan base-package="com.webside.*.service" />
 	<context:component-scan base-package="com.webside.util" />
 
-
 	<!-- 引入其他beans -->
 	<!-- <import resource="xxx.xml"/> -->
 
@@ -151,6 +150,7 @@
             <tx:method name="insert*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="com.webside.exception.WebsideServiceException"/>
             <tx:method name="update*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="com.webside.exception.WebsideServiceException" />
             <tx:method name="delete*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="com.webside.exception.WebsideServiceException" />
+            <tx:method name="add*" propagation="REQUIRED" read-only="false" isolation="READ_COMMITTED" rollback-for="com.webside.exception.WebsideServiceException" />
 
             <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>

@@ -20,5 +20,10 @@ public class LoginInfoServiceImpl extends AbstractService<LoginInfoEntity, Long>
 	public void setBaseMapper() {
 		super.setBaseMapper(loginInfoMapper);
 	}
+
+	@Override
+	public int log(LoginInfoEntity loginInfo) {
+		return loginInfoMapper.insert(loginInfo);
+	}
 	
 }

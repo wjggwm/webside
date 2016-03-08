@@ -5,6 +5,11 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
+import com.webside.user.model.UserEntity;
+
 /**
  * 
  * <p>Description: 基础工具类</p>
@@ -17,6 +22,28 @@ public class Common {
 	public static final String BACKGROUND_PATH = "/WEB-INF/view";
 	// 默认除法运算精度
 	private static final int DEF_DIV_SCALE = 10;
+	
+	/**
+	 * 获取登录用户的userId
+	 * @return
+	 */
+	public static Long getloginUserId()
+	{
+		Subject subject = SecurityUtils.getSubject();
+		UserEntity sessionUser = (UserEntity)subject.getSession().getAttribute("userSession");
+		return sessionUser.getId();
+	}
+	
+	/**
+	 * 获取登录用户的userId
+	 * @return
+	 */
+	public static String getloginUserAccountName()
+	{
+		Subject subject = SecurityUtils.getSubject();
+		UserEntity sessionUser = (UserEntity)subject.getSession().getAttribute("userSession");
+		return sessionUser.getAccountName();
+	}
 	
 
 	/**

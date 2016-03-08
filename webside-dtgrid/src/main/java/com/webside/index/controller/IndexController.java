@@ -108,7 +108,7 @@ public class IndexController extends BaseController {
 					loginInfo.setUserId(Integer.valueOf(session.getAttribute("userSessionId").toString()));
 					loginInfo.setAccountName(accountName);
 					loginInfo.setLoginIp(session.getHost());
-					loginInfoService.insert(loginInfo);
+					loginInfoService.log(loginInfo);
 					request.removeAttribute("error");
 				} else {
 					token.clear();

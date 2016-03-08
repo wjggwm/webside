@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.loginfo.mapper.LogInfoMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<sql id="logInfoAttributes">
+		l_id,
+		u_id,
+		l_account_name,
+		l_operation,
+		l_content,
+		l_create_time
+	</sql>
+
+	<resultMap id="logInfoMap" type="com.webside.loginfo.model.LogInfoEntity">
+		<id property="id" column="l_id"/>
+		<result property="userId" column="u_id" />
+		<result property="accountName" column="l_account_name"/>
+		<result property="operation" column="l_operation"/>
+		<result property="content" column="l_content"/>
+		<result property="createTime" column="l_create_time"/>
+	</resultMap>
+	
+	<select id="queryListByPage" parameterType="map" resultMap="logInfoMap">
+		SELECT 
+		<include refid="logInfoAttributes"/>
+		FROM tb_log_info
+		<where>
+			<if test="accountName != null and accountName != ''">
+				l_account_name = #{accountName}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insert" parameterType="com.webside.loginfo.model.LogInfoEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_log_info (
+			u_id,
+			l_account_name,
+			l_operation,
+			l_content,
+			l_create_time
+			)
+		values (
+			#{userId},
+			#{accountName},
+			#{operation},
+			#{content},
+			NOW()
+			)
+	</insert>
+	
+</mapper>
