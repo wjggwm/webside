@@ -37,7 +37,7 @@
 		<div class="widget-box transparent ui-sortable-handle"
 			style="opacity: 1; z-index: 0;">
 			<div class="widget-header">
-				<h4 class="widget-title lighter">用户登录信息列表</h4>
+				<h4 class="widget-title lighter">角色列表</h4>
 				<div class="widget-toolbar no-border">
 					<a href="#" data-action="fullscreen" class="orange2"> 
 						<i class="ace-icon fa fa-arrows-alt"></i>
