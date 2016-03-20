@@ -28,6 +28,7 @@
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<datumbox.version>0.6.0</datumbox.version>
 		<kaptcha.version>0.0.9</kaptcha.version>
+		<sirona.version>0.2-incubating</sirona.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<commons-logging.version>1.2</commons-logging.version>
 		<mybatis-spring.version>1.2.3</mybatis-spring.version>
@@ -325,6 +326,23 @@
 			<groupId>com.github.axet</groupId>
 			<artifactId>kaptcha</artifactId>
 			<version>${kaptcha.version}</version>
+		</dependency>
+		<!-- sirona dependencies -->
+		<dependency>
+			<groupId>org.apache.sirona</groupId>
+			<artifactId>sirona-core</artifactId>
+			<version>${sirona.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.sirona</groupId>
+			<artifactId>sirona-reporting</artifactId>
+			<version>${sirona.version}</version>
+			<classifier>classes</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.sirona</groupId>
+			<artifactId>sirona-web</artifactId>
+			<version>${sirona.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

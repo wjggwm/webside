@@ -4,10 +4,17 @@ $(function() {
         $(this).bind("click", function() {
             var nav = $(this).attr("nav-menu");
             var sn = nav.split(",");
+            if(sn[sn.length-1] == '/sirona' || sn[sn.length-1] == '/druid')
+            {
+                window.open(sys.rootPath + sn[sn.length - 1]);
+            }else
+            {
+            
             var breadcrumb = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:init();">首页</a></li>';
             for (var i = 0; i < sn.length - 1; i++) {
                 breadcrumb += '<li class="active">' + sn[i] + '</li>';
             }
+            
             //设置面包屑内容
             $(".breadcrumb").html(breadcrumb);
             //加载页面
@@ -23,6 +30,8 @@ $(function() {
             $(".user-menu").find('li').each(function() {
                 $(this).removeClass('active');
             }); 
+            
+            }
             
         });
     });

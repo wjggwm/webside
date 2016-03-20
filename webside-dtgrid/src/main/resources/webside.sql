@@ -142,9 +142,9 @@ CREATE TABLE `tb_role` (
 -- ----------------------------
 -- Records of tb_role
 -- ----------------------------
-INSERT INTO `tb_role` VALUES ('1', '超级管理员', 'administrator', '0', '超级管理员', '2016-01-05 12:07:42', '2016-02-27 22:30:15');
-INSERT INTO `tb_role` VALUES ('2', '管理员', 'admin', '0', '管理员', '2016-01-05 12:07:42', '2016-02-27 22:30:22');
-INSERT INTO `tb_role` VALUES ('3', '普通用户', 'customer', '0', '普通用户', '2016-02-28 17:09:40', '0000-00-00 00:00:00');
+INSERT INTO `tb_user` VALUES ('4', 'admin', 'admin@webside.com', 'VaNoSnm8zZFL6eIckR9nkQ==', '0', '0', '超级管理员', '6b8c008bd7d242f1b60d713f8e3b7422', 'admin', '2016-02-15 17:17:26', '2016-03-20 16:16:46');
+INSERT INTO `tb_user` VALUES ('9', '高刚', '254813870@qq.com', 'UcsN9eTNVUpNuWqA4FZ9Ng==', '0', '0', ' 管理员', '563f0ff44bbd15b70daec5355701f363', 'admin', '2016-02-28 17:39:31', '2016-03-20 16:16:49');
+INSERT INTO `tb_user` VALUES ('10', '普通用户', '381543724@qq.com', '3kC8GTcGYkARWJG5du22+A==', '0', '0', '普通用户', '1ec5ba267bbefb7c405c95b20e815738', '高刚', '2016-02-28 20:10:05', '2016-03-20 16:17:03');
 
 -- ----------------------------
 -- Table structure for tb_role_user

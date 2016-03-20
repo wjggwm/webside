@@ -15,7 +15,17 @@
 		<param-name>webAppRootKey</param-name>
 		<param-value>webside.dtgrid.root</param-value>
 	</context-param>
-
+	<!-- activated per default -->
+	<context-param>
+		<param-name>org.apache.sirona.reporting.activated</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<!-- path in the application default is /sirona -->
+	<context-param>
+		<param-name>org.apache.sirona.reporting.mapping</param-name>
+		<param-value>/sirona</param-value>
+	</context-param>
+	
 	<listener>
 		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
 	</listener>
