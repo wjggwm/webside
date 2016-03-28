@@ -28,6 +28,7 @@
 	        <bean class="com.google.code.kaptcha.util.Config">
 	            <constructor-arg>
 	                <props>
+	                	<prop key="kaptcha.session.key">kaptcha.code</prop>  
 	                	<!-- 无边框 -->
 	                    <prop key="kaptcha.border">no</prop>
 	                    <prop key="kaptcha.textproducer.font.color">black</prop>
@@ -58,6 +59,9 @@
 	<aop:aspectj-autoproxy />
 
 	<!-- 加载 jdbc.properties 配置文件 -->
+	<!-- 
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:jdbc.properties,classpath*:webside.properties"/>
+	 -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -67,6 +71,13 @@
 			</list>
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+	    <property name="slowSqlMillis" value="30000" />
+	    <property name="logSlowSql" value="true" />
+	    <property name="mergeSql" value="true" />
+	    <property name="dbType" value="mysql" />
 	</bean>
 
 	<!-- 配置数据源,使用 druid -->
@@ -108,7 +119,13 @@
 
 		<!-- 配置监控统计拦截的filters -->
 		<property name="filters" value="${druid.filters}" />
+		<property name="proxyFilters">
+	        <list>
+	            <ref bean="stat-filter" />
+	        </list>
+	    </property>
 		<property name="connectionProperties" value="${druid.connectionProperties}" />
+		<property name="useGlobalDataSourceStat" value="${druid.useGlobalDataSourceStat}" />
 	</bean>
 
 	<!-- 使用sqlSessionFactoryBean工厂产生SqlSession对象，方便后期注入Dao -->
@@ -122,7 +139,7 @@
 	</bean>
 
 	<!-- 通过扫描的模式,不需要配置SqlSessionFactory 或 SqlSessionTemplate,MapperScannerConfigurer 将会创建 MapperFactoryBean,之后自动装配;
-	但是,如果你使 用了一个 以上的 DataSource ,那 么自动 装配可 能会失效 。这种 情况下 ,你可 以使用 sqlSessionFactoryBeanName 或 sqlSessionTemplateBeanName 属性来设置正确的 bean 名 称来使用;
+	但是,如果你使用了一个 以上的 DataSource ,那么自动装配可能会失效 。这种情况下 ,你可以使用 sqlSessionFactoryBeanName 或 sqlSessionTemplateBeanName 属性来设置正确的 bean 名 称来使用;
 	注意 bean 的名称是必须的,而不是 bean 的引用,因 此,value 属性在这里替代通常的 ref;
 	扫描目录在com.webside.*.mapper目录下，所有的mapper都继承SqlMapper接口， 这样一个bean就可以了 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -163,26 +180,29 @@
 		<!-- 配置哪些类的方法进行事务管理:定义在service包或者子包里的任意方法的执行 -->
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.webside.*.service..*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointcut"/>
-		<aop:advisor pointcut-ref="druid-stat-pointcut" advice-ref="druid-stat-interceptor" />
 	</aop:config>
 	
 	<!-- 事物管理方式二：基于@Transactional注解方式 -->
     <!-- <tx:annotation-driven transaction-manager="transactionManager"/>  -->
     
+       <!-- 配置事务异常封装 -->
+   <bean id="persistenceExceptionTranslationPostProcessor"
+    	class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
     
-	<!--配置druid监控拦截器 druid-stat-interceptor -->
+	<!--配置druid spring jdbc监控 -->
 	<bean id="druid-stat-interceptor"
 		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 	</bean>
-
-	<!-- 配置druid监控切面 -->
-	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
-		scope="prototype">
-		<property name="patterns">
-			<list>
-				<value>com.webside.*.service.impl</value>
-			</list>
-		</property>
-	</bean>
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>com.webside.*.service.*</value>
+                <value>cn.webisde.*.mapper.*</value>
+            </list>
+        </property>
+    </bean>
+    <aop:config proxy-target-class="true">
+        <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+    </aop:config>
 
 </beans>    

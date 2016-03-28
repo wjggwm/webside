@@ -14,7 +14,7 @@
 		<junit.version>4.11</junit.version>
 		<shiro.version>1.2.4</shiro.version>
 		<log4j.version>1.2.17</log4j.version>
-		<druid.version>1.0.14</druid.version>
+		<druid.version>1.0.18</druid.version>
 		<mysql.version>5.1.26</mysql.version>
 		<aspectj.version>1.8.6</aspectj.version>
 		<hamcrest.version>1.3</hamcrest.version>

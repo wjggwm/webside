@@ -48,7 +48,7 @@ user-scalable - 用户是否可以手动缩放
 <!-- basic scripts -->
 <script type="text/javascript">
 	if ("ontouchend" in document)
-		document.write("<script src='${ctx}/resources/js/jquery/jquery/jquery.mobile.custom.min.js'>" + "<"+"script>");
+		document.write("<script src='${ctx}/resources/js/jquery/jquery.mobile.custom.min.js'>" + "<"+"script>");
 </script>
 
 <script type="text/javascript" src="${ctx}/resources/js/bootstrap/bootstrap.min.js"></script>

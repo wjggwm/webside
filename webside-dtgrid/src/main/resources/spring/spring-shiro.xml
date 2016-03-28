@@ -32,14 +32,13 @@
         <!--<property name="authorizationCacheName" value="authorizationCache"/>-->
 	</bean>
 	
-	
-	
 	<!-- 凭证匹配器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="myRealm" />
 		<property name="sessionManager" ref="sessionManager"/>
 		<!-- 使用下面配置的缓存管理器 -->
 		<property name="cacheManager" ref="cacheManager" />
+		<property name="sessionMode" value="native"/>
 	</bean>
 	
 	<!-- 用户过滤器,将用户信息放入request中 -->
@@ -116,6 +115,8 @@
         <property name="deleteInvalidSessions" value="true"/>
         <property name="sessionValidationSchedulerEnabled" value="true"/>
         <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie.name" value="webside.cookieid"></property>
         <property name="sessionDAO" ref="sessionDAO"/>
     </bean>
 	
