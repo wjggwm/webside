@@ -12,9 +12,8 @@ import java.util.*;
 
 /**
  * 封装Spring cache
- * <p>Version: 3.0
  */
-public class SpringCacheManagerWrapper implements CacheManager {
+public class ShiroCacheManagerWrapper implements CacheManager {
 
     private org.springframework.cache.CacheManager cacheManager;
 

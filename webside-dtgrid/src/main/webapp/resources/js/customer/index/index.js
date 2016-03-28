@@ -7,6 +7,19 @@ $(function() {
             if(sn[sn.length-1] == '/sirona' || sn[sn.length-1] == '/druid')
             {
                 window.open(sys.rootPath + sn[sn.length - 1]);
+                
+                //处理目录类型的点击事件
+                $(this).parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style','display:none');
+                //处理菜单类型的点击事件
+                $(this).parent().parent().parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style','display:none');
+                $("ul.nav-list").find("li.active").removeClass("active").removeClass('open');
+                $(this).parent().addClass("active").parent().parent("li").addClass('active open');
+                
+                //清除用户信息菜单样式
+                $(".user-menu").find('li').each(function() {
+                    $(this).removeClass('active');
+                });
+                
             }else
             {
             

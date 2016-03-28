@@ -30,7 +30,7 @@
 
      <defaultCache 
         maxElementsInMemory="10000"
-        eternal="false"
+        eternal="true"
         timeToIdleSeconds="120"
         timeToLiveSeconds="120"
         overflowToDisk="true"
@@ -43,24 +43,24 @@
         
     <cache name="shiro-activeSessionCache"
            maxEntriesLocalHeap="2000"
-           eternal="false"
+           eternal="true"
            timeToIdleSeconds="3600"
            timeToLiveSeconds="0"
-           overflowToDisk="false"
+           overflowToDisk="true"
            statistics="true">
     </cache> 
     
 	<!-- 用户会话数缓存 -->            
 	<cache name="shiro-kickout-session"
            maxEntriesLocalHeap="2000"
-           eternal="false"
+           eternal="true"
            timeToIdleSeconds="3600"
            timeToLiveSeconds="0"
-           overflowToDisk="false"
+           overflowToDisk="true"
            statistics="true">
     </cache>
 
-	<!-- 用户尝试登录次数缓存,如果登录次数超过5次,则锁定10分钟 -->
+	<!-- 用户尝试登录次数缓存 -->
     <cache name="passwordRetryCache"
            maxEntriesLocalHeap="2000"
            eternal="false"

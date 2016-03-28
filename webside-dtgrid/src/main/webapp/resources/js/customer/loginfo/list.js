@@ -29,7 +29,7 @@ var dtGridColumns = [{
     type : 'date',
     format : 'yyyy-MM-dd hh:mm:ss',
     otype:'string', 
-    oformat:'yyyy-MM-dd',
+    oformat:'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
     headerStyle:'background:#00a2ca;color:white;',
     hideType : 'sm|xs'

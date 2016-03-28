@@ -13,7 +13,7 @@
 		<!-- hashAlgorithmName必须的，没有默认值。可以有MD5或者SHA-1，如果对密码安全有更高要求可以用SHA-256或者更高。
 		这里使用MD5 storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码 
 		hashIterations迭代次数，默认值是1。 -->
-		<constructor-arg ref="cacheManager" />
+		<constructor-arg ref="shiroCacheManager" />
 		<!-- RetryLimitHashedCredentialsMatcher继承父类HashedCredentialsMatcher，需要给父类注入以下属性 -->
 		<property name="hashAlgorithmName" value="MD5" />
 		<property name="hashIterations" value="2" />
@@ -32,14 +32,14 @@
         <!--<property name="authorizationCacheName" value="authorizationCache"/>-->
 	</bean>
 	
-	
-	
 	<!-- 凭证匹配器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="myRealm" />
-		<property name="sessionManager" ref="sessionManager"/>
+		<property name="sessionManager" ref="shiroSessionManager"/>
 		<!-- 使用下面配置的缓存管理器 -->
-		<property name="cacheManager" ref="cacheManager" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+		<!-- sessionMode参数设置为native时，那么shrio就将用户的基本认证信息保存到缺省名称为shiro-activeSessionCache 的Cache中 -->
+		<property name="sessionMode" value="native"/>
 	</bean>
 	
 	<!-- 用户过滤器,将用户信息放入request中 -->
@@ -47,8 +47,8 @@
 	
 	<!-- 用户登录数控制,超过最大回话数会强制退出 -->
 	 <bean id="kickoutSessionFilter" class="com.webside.shiro.filter.KickoutSessionFilter">
-        <property name="cacheManager" ref="cacheManager"/>
-        <property name="sessionManager" ref="sessionManager"/>
+        <property name="cacheManager" ref="shiroCacheManager"/>
+        <property name="sessionManager" ref="shiroSessionManager"/>
         <property name="kickoutAfter" value="false"/>
         <property name="maxSession" value="1"/>
         <property name="kickoutUrl" value="/login.html"/>
@@ -105,32 +105,34 @@
     <!-- 会话验证调度器 -->
      <!-- 全局的会话信息检测扫描信息间隔30分钟-->
     <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        <!-- 相隔多久检查一次session的有效性 -->
         <property name="sessionValidationInterval" value="1800000"/>
-        <property name="sessionManager" ref="sessionManager"/>
+        <property name="sessionManager" ref="shiroSessionManager"/>
     </bean>
 	
-	 <!-- 会话管理器 -->
-	  <!-- 全局的会话信息设置成30分钟,sessionValidationSchedulerEnabled参数就是是否开启扫描  -->
-    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+	<!-- 会话管理器 -->
+	<!-- 全局的会话信息设置成30分钟,sessionValidationSchedulerEnabled参数就是是否开启扫描  -->
+    <bean id="shiroSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- session 有效时间为半小时 （毫秒单位）-->
         <property name="globalSessionTimeout" value="1800000"/>
         <property name="deleteInvalidSessions" value="true"/>
-        <property name="sessionValidationSchedulerEnabled" value="true"/>
-        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie.name" value="webside.cookieid"></property>
         <property name="sessionDAO" ref="sessionDAO"/>
     </bean>
 	
 	
 	<!--shiro缓存管理器 -->
-	<bean id="cacheManager" class="com.webside.shiro.SpringCacheManagerWrapper" >
-	<property name="cacheManager" ref="springCacheManager"/>
+	<bean id="shiroCacheManager" class="com.webside.shiro.ShiroCacheManagerWrapper" >
+	<property name="cacheManager" ref="ehCacheManager"/>
 	</bean>
 	
-	 <bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="ehcacheManager"/>
+	 <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehCacheManagerFactory"/>
     </bean>
 	
 	<!--ehcache-->
-    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"/>
         <property name="shared" value="true"/>
     </bean>

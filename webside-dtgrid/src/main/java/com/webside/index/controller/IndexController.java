@@ -118,11 +118,11 @@ public class IndexController extends BaseController {
 	        }
 		} catch (LockedAccountException e) {
 			token.clear();
-			request.setAttribute("error", "用户已经被锁定不能登录，请与管理员联系！");
+			request.setAttribute("error", "您的账户已被锁定,请与管理员联系或10分钟后重试！");
 			return "/login";
 		} catch (ExcessiveAttemptsException e) {
 			token.clear();
-			request.setAttribute("error", "账号：" + accountName + " 登录失败次数过多,锁定10分钟!");
+			request.setAttribute("error", "您连续输错5次,帐号将被锁定10分钟!");
 			return "/login";
 		} catch (AuthenticationException e) {
 			token.clear();

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2016-03-22 16:56:21
+Date: 2016-03-29 19:07:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `tb_login_info` (
   `l_ip` varchar(255) DEFAULT NULL,
   `l_login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=444 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=473 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -41,21 +41,8 @@ CREATE TABLE `tb_log_info` (
   `l_content` varchar(1000) DEFAULT NULL COMMENT '日志内容',
   `l_create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建日期',
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_log_info
--- ----------------------------
-INSERT INTO `tb_log_info` VALUES ('1', '4', null, 'update', 'update[参数1，类型：UserEntity，值：(getUserInfo : UserInfo [id=10, sex=null, birthday=null, telephone=null, email=null, address=null, createTime=null])(getDescription : 普通用户)(getRole : RoleEntity [id=3, name=null, key=null, status=null, description=null, createTime=null, updateTime=null, userList=null])(getUserName : 普通用户)(getCreatorName : wjggwm)(getAccountName : 381543724@qq.com)]', '2016-03-07 23:50:36');
-INSERT INTO `tb_log_info` VALUES ('2', '4', 'wjggwm@126.com', 'update', 'update[参数1，类型：UserEntity，值：(getUserInfo : UserInfo [id=10, sex=null, birthday=null, telephone=null, email=null, address=null, createTime=null])(getDescription : 普通用户1)(getRole : RoleEntity [id=3, name=null, key=null, status=null, description=null, createTime=null, updateTime=null, userList=null])(getUserName : 普通用户)(getAccountName : 381543724@qq.com)(getCreatorName : wjggwm)]', '2016-03-08 22:10:51');
-INSERT INTO `tb_log_info` VALUES ('3', '4', 'wjggwm@126.com', 'update', 'update[参数1，类型：UserEntity，值：(getUserInfo : UserInfo [id=10, sex=null, birthday=null, telephone=null, email=null, address=null, createTime=null])(getDescription : 普通用户)(getRole : RoleEntity [id=3, name=null, key=null, status=null, description=null, createTime=null, updateTime=null, userList=null])(getUserName : 普通用户)(getAccountName : 381543724@qq.com)(getCreatorName : wjggwm)]', '2016-03-08 22:16:52');
-INSERT INTO `tb_log_info` VALUES ('4', '4', 'wjggwm@126.com', 'update', 'update[参数1，类型：RoleEntity，值：(getName : 普通用户)(getKey : customer)(getDescription : 普通用户1)]', '2016-03-08 22:47:51');
-INSERT INTO `tb_log_info` VALUES ('5', '4', 'wjggwm@126.com', 'insert', 'permissionUI[参数1，类型：BindingAwareModelMap，值：][参数2，类型：ShiroHttpServletRequest，值：(getRemoteUser : wjggwm@126.com)(getSession : org.apache.shiro.web.servlet.ShiroHttpSession@2de26cc8)(getRequestedSessionId : 914dd057-e5cf-415a-a760-349ea2a00c0a)(getUserPrincipal : wjggwm@126.com)][参数3，类型：Long，值：]', '2016-03-08 22:48:36');
-INSERT INTO `tb_log_info` VALUES ('6', '4', 'wjggwm@126.com', 'insert', 'permission[参数1，类型：Integer，值：][参数2，类型：String，值：(getBytes : [B@7852917d)]', '2016-03-08 22:48:46');
-INSERT INTO `tb_log_info` VALUES ('7', '4', 'wjggwm@126.com', 'update', 'update[参数1，类型：RoleEntity，值：(getName : 普通用户)(getKey : customer)(getDescription : 普通用户)]', '2016-03-08 22:55:36');
-INSERT INTO `tb_log_info` VALUES ('8', '4', 'wjggwm@126.com', 'permission', 'permission[参数1，类型：Integer，值：][参数2，类型：String，值：(getBytes : [B@4d0dcd1a)]', '2016-03-08 22:55:56');
-INSERT INTO `tb_log_info` VALUES ('9', '4', 'wjggwm@126.com', 'update', 'update[参数1，类型：ResourceEntity，值：(getName : Druid监控)(getType : 0)(getDescription : Druid监控)(getChildren : [])(getIcon : )(getSourceKey : monitor:druid)(getSourceUrl : /druid)(getParentId : 6)(getIsHide : 0)(getIsExpanded : false)(getIsLeaf : false)(getLoaded : true)(getSelected : false)]', '2016-03-20 15:00:53');
-INSERT INTO `tb_log_info` VALUES ('10', '4', 'wjggwm@126.com', 'update', 'update[参数1，类型：ResourceEntity，值：(getName : Sirona监控)(getType : 0)(getDescription : Sirona监控)(getChildren : [])(getIcon : )(getParentId : 6)(getIsHide : 0)(getIsExpanded : false)(getIsLeaf : false)(getLoaded : true)(getSelected : false)(getSourceKey : monitor:sirona)(getSourceUrl : /sirona)]', '2016-03-20 15:08:24');
 
 -- ----------------------------
 -- Table structure for tb_resource
@@ -225,8 +212,8 @@ CREATE TABLE `tb_user` (
 -- Records of tb_user
 -- ----------------------------
 INSERT INTO `tb_user` VALUES ('4', 'admin', 'admin@webside.com', 'VaNoSnm8zZFL6eIckR9nkQ==', '0', '0', '超级管理员', '6b8c008bd7d242f1b60d713f8e3b7422', 'admin', '2016-02-15 17:17:26', '2016-03-20 16:16:46');
-INSERT INTO `tb_user` VALUES ('9', '高刚', '254813870@qq.com', 'UcsN9eTNVUpNuWqA4FZ9Ng==', '0', '0', ' 管理员', '563f0ff44bbd15b70daec5355701f363', 'admin', '2016-02-28 17:39:31', '2016-03-20 16:16:49');
-INSERT INTO `tb_user` VALUES ('10', '普通用户', '381543724@qq.com', '3kC8GTcGYkARWJG5du22+A==', '0', '0', '普通用户', '1ec5ba267bbefb7c405c95b20e815738', '高刚', '2016-02-28 20:10:05', '2016-03-20 16:17:03');
+INSERT INTO `tb_user` VALUES ('9', '管理员', '254813870@qq.com', 'UcsN9eTNVUpNuWqA4FZ9Ng==', '0', '0', ' 管理员', '563f0ff44bbd15b70daec5355701f363', 'admin', '2016-02-28 17:39:31', '2016-03-29 17:39:37');
+INSERT INTO `tb_user` VALUES ('10', '普通用户', '381543724@qq.com', '3kC8GTcGYkARWJG5du22+A==', '0', '0', '普通用户', '1ec5ba267bbefb7c405c95b20e815738', 'admin', '2016-02-28 20:10:05', '2016-03-29 19:06:51');
 
 -- ----------------------------
 -- Table structure for tb_user_info
@@ -247,6 +234,6 @@ CREATE TABLE `tb_user_info` (
 -- ----------------------------
 -- Records of tb_user_info
 -- ----------------------------
-INSERT INTO `tb_user_info` VALUES ('4', '1', '2016-02-10', '15161527385', 'wjggwm@126.com', '江苏省无锡市新区', '2016-02-18 16:43:28');
+INSERT INTO `tb_user_info` VALUES ('4', '1', '2016-02-10', '15361427685', 'admin@webside.com', '江苏省无锡市国家软件园', '2016-02-18 16:43:28');
 INSERT INTO `tb_user_info` VALUES ('9', null, null, null, null, null, null);
 INSERT INTO `tb_user_info` VALUES ('10', null, null, null, null, null, null);
