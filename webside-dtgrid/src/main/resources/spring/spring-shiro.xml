@@ -116,6 +116,7 @@
         <!-- session 有效时间为半小时 （毫秒单位）-->
         <property name="globalSessionTimeout" value="1800000"/>
         <property name="deleteInvalidSessions" value="true"/>
+
         <property name="sessionIdCookieEnabled" value="true"/>
         <property name="sessionIdCookie.name" value="webside.cookieid"></property>
         <property name="sessionDAO" ref="sessionDAO"/>
