@@ -24,12 +24,12 @@
 	<!--自定义Realm -->
 	<bean id="myRealm" class="com.webside.shiro.MyRealm">
 		<property name="credentialsMatcher" ref="credentialsMatcher" />
-		<property name="cachingEnabled" value="false" />
-		<!-- 如需要自定义缓存时间放开以下.修改 ehcache.xml-->
-		 <!--<property name="authenticationCachingEnabled" value="true"/>-->
-        <!--<property name="authenticationCacheName" value="authenticationCache"/>-->
-        <!--<property name="authorizationCachingEnabled" value="true"/>-->
-        <!--<property name="authorizationCacheName" value="authorizationCache"/>-->
+		<!-- 缓存-->
+		<property name="cachingEnabled" value="true" />
+		<property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/> 
 	</bean>
 	
 	<!-- 凭证匹配器 -->
@@ -40,6 +40,9 @@
 		<property name="cacheManager" ref="shiroCacheManager" />
 		<!-- sessionMode参数设置为native时，那么shrio就将用户的基本认证信息保存到缺省名称为shiro-activeSessionCache 的Cache中 -->
 		<property name="sessionMode" value="native"/>
+		<!-- 
+		<property name="rememberMeManager" ref="rememberMeManager" />
+		 -->
 	</bean>
 	
 	<!-- 用户过滤器,将用户信息放入request中 -->
@@ -54,6 +57,13 @@
         <property name="kickoutUrl" value="/login.html"/>
     </bean>
     
+    <!-- 
+    <bean id="rememberAuthenticationFilter" class="com.webside.shiro.filter.RememberAuthenticationFilter">
+    	<property name="usernameParam" value="accountName"></property>
+    	<property name="passwordParam" value="password"></property>
+    	<property name="rememberMeParam" value="rememberMe"></property>
+    </bean>
+     -->
     
 	<!-- 配置shiro的过滤器工厂类，这里bean的id shiroFilter要和我们在web.xml中配置的shior过滤器名称一致<filter-name>shiroFilter</filter-name> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -72,6 +82,9 @@
             <util:map>
                 <entry key="sysUser" value-ref="sysUserFilter"/>
                 <entry key="kickout" value-ref="kickoutSessionFilter"/>
+                <!-- 
+                <entry key="remeberMe" value-ref="rememberAuthenticationFilter"/>
+                 -->
             </util:map>
         </property>
 	</bean>
@@ -82,14 +95,14 @@
 			<value>
 			/resources/** = anon
 			/login.html = anon
-			/logout.html = anon
+			/logout.html = logout
 			/register.html = anon
 			/user/resetPassword.html = anon
 			/user/validateAccountName.html = anon
 			/captcha.html = anon
 			/denied.jsp = anon
-			/welcome.jsp = anon
-			/** = user
+			/welcome.jsp = authc
+			/** = authc
 			</value>
 		</property>
 	</bean>
@@ -118,10 +131,28 @@
         <property name="deleteInvalidSessions" value="true"/>
 
         <property name="sessionIdCookieEnabled" value="true"/>
-        <property name="sessionIdCookie.name" value="webside.cookieid"></property>
+        <property name="sessionIdCookie.name" value="webside.jsessionid"/>
+        <property name="sessionIdCookie.httpOnly" value="true"/>
+        <property name="sessionIdCookie.maxAge" value="-1"/>
         <property name="sessionDAO" ref="sessionDAO"/>
     </bean>
 	
+	
+	<!-- 会话Cookie模板 -->  
+	<!-- 
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
+	    <constructor-arg value="webside.rememberMe"/>  
+	    <property name="httpOnly" value="true"/> 
+	    <property name="maxAge" value="2592000"/>
+	</bean> 
+	 -->
+	<!-- rememberMe管理器 --> 
+	<!--  
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">  
+        <property name="cipherKey"  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>  
+        <property name="cookie" ref="rememberMeCookie"/>  
+    </bean>
+	-->
 	
 	<!--shiro缓存管理器 -->
 	<bean id="shiroCacheManager" class="com.webside.shiro.ShiroCacheManagerWrapper" >
