@@ -96,8 +96,6 @@ public class MyRealm extends AuthorizingRealm {
 			session.setAttribute("userSession", userEntity);
 			// 用户ID
 			session.setAttribute("userSessionId", userEntity.getId());
-			// 用户账户
-			session.setAttribute("accountName", userEntity.getAccountName());
 			return authenticationInfo;
 		} else {
 			throw new UnknownAccountException();// 没找到帐号

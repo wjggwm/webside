@@ -86,7 +86,7 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "login.html", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
-	public String userLogin(String accountName, String password, String captcha, HttpServletRequest request) {
+	public String userLogin(String accountName, String password, String captcha, Boolean rememberMe, HttpServletRequest request) {
 		UsernamePasswordToken token = null;
 		try {
 			 //从session中取出servlet生成的验证码text值
@@ -101,6 +101,7 @@ public class IndexController extends BaseController {
 				// 想要得到Subject对象,访问地址必须在shiro的拦截地址内,不然会报空指针
 				Subject subject = SecurityUtils.getSubject();
 				token = new UsernamePasswordToken(accountName, password);
+				//token.setRememberMe(rememberMe);
 				subject.login(token);
 				if (subject.isAuthenticated()) {
 					LoginInfoEntity loginInfo = new LoginInfoEntity();

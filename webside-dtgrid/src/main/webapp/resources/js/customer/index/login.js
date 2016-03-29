@@ -67,6 +67,10 @@ function login() {
         layer.alert('请输入验证码', {icon : 5,shift : 6,time : 0});
          return false;
     }
+    if($("#rememberMeCheckBox").is(':checked'))
+    {
+        $("#rememberMe").val(true);
+    }
     $("#loginform").submit();
 }
 
