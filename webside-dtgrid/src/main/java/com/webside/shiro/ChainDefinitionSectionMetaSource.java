@@ -156,16 +156,14 @@ public class ChainDefinitionSectionMetaSource implements
 		List<ResourceEntity> lists = resourceService.queryListByPage(parameter);
 		for (ResourceEntity resource : lists) {
 			// 构成permission字符串
-			if (StringUtils.isNotEmpty(resource.getSourceUrl()) && StringUtils.isNotEmpty(resource.getSourceKey())) {
+			if (StringUtils.isNotBlank(resource.getSourceUrl()) && StringUtils.isNotBlank(resource.getSourceKey())) {
 				// 如果不为空值添加到section中
 				section.put(resource.getSourceUrl(),String.format(PREMISSION_STRING,resource.getSourceKey()));
 				// 不对角色进行权限验证,如需要则 permission = "roles[" + resources.getResKey() + "]";
-				
 			}
 		}
 		// 所有资源的访问权限，必须放在最后
-		/* section.put("/**", "authc"); */
-		section.put("/**", "authc,kickout,sysUser,user");
+		section.put("/**", "authc");
 		return section;
 	}
 

@@ -4,9 +4,9 @@
 <mapper namespace="com.webside.resource.mapper.ResourceMapper">
 	
 	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
-	<!-- 
+	 
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
-	 -->
+	 
 	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
 
 	<sql id="resourceAttributes">
@@ -43,12 +43,12 @@
 		<result property="selected" column="s_selected"/>
 	</resultMap>
 	
-	<select id="findResourcesByUserId" parameterType="int" resultMap="resourceMap">
+	<select id="findResourcesByUserId" parameterType="int" resultMap="resourceMap" flushCache="true" useCache="true">
 		SELECT s.* FROM tb_resource s, tb_resources_role sr, tb_role r, tb_role_user ru
 		WHERE s.s_id = sr.s_id AND sr.r_id = r.r_id AND r.r_id = ru.r_id AND ru.u_id=${userId}
 	</select>
 	
-	<select id="findByName" parameterType="String" resultMap="resourceMap" useCache="false">
+	<select id="findByName" parameterType="String" resultMap="resourceMap" flushCache="true" useCache="true">
 		SELECT t1.s_id,
 			t1.s_parent_id,
 			t1.s_name,
@@ -66,7 +66,7 @@
 		where t1.s_name = #{name}
 	</select>
 	
-	<select id="queryListByPage" parameterType="map" resultMap="resourceMap">
+	<select id="queryListByPage" parameterType="map" resultMap="resourceMap" flushCache="true" useCache="true">
 		SELECT t1.s_id,
 			t1.s_parent_id,
 			t1.s_name,
@@ -105,7 +105,7 @@
 		-->
 	</select>
 
-	<select id="queryResourceList" parameterType="map" resultMap="resourceMap">
+	<select id="queryResourceList" parameterType="map" resultMap="resourceMap" flushCache="true" useCache="true">
 		SELECT t1.s_id,
 			t1.s_parent_id,
 			t1.s_name,

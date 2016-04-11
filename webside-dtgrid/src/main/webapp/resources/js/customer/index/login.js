@@ -167,14 +167,18 @@ function resetPassword()
         layer.alert('请输入账户邮箱', {icon : 5,shift : 6,time : 0});
         return;
     }
-    var index = layer.load();
+    var index ;
     $.ajax({
         type : "POST",
-        url : sys.rootPath + '/user/resetPassword.html',
+        url : sys.rootPath + '/user/resetPassWithoutAuthc.html',
         data : {
             "accountName" : accountName
         },
         dataType : "json",
+        beforeSend : function()
+        {
+            index = layer.load();
+        },
         success : function(resultdata) {
             layer.close(index);
             if (resultdata.success) {

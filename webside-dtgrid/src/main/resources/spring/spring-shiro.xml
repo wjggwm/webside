@@ -97,12 +97,10 @@
 			/login.html = anon
 			/logout.html = logout
 			/register.html = anon
-			/user/resetPassword.html = anon
+			/user/resetPassWithoutAuthc.html = anon
 			/user/validateAccountName.html = anon
 			/captcha.html = anon
 			/denied.jsp = anon
-			/welcome.jsp = authc
-			/** = authc
 			</value>
 		</property>
 	</bean>

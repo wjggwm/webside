@@ -22,7 +22,7 @@
 		<result property="loginTime" column="l_login_time"/>
 	</resultMap>
 	
-	<select id="queryListByPage" parameterType="map" resultMap="loginInfoMap">
+	<select id="queryListByPage" parameterType="map" resultMap="loginInfoMap" flushCache="true" useCache="true">
 		SELECT 
 		<include refid="loginInfoAttributes"/>
 		FROM tb_login_info

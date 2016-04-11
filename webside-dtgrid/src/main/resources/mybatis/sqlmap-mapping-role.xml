@@ -39,7 +39,7 @@
 		</collection>
 	</resultMap>
 	
-	<select id="queryListByPage" parameterType="map" resultMap="roleMap" useCache="false">
+	<select id="queryListByPage" parameterType="map" resultMap="roleMap" flushCache="true" useCache="true">
 		<!-- 
 			偏移offset较小的时候，直接使用limit较优；
 			偏移offset较大的时候，使用下面子查询的方式较优；
@@ -77,7 +77,7 @@
 		</where>
 	</select>
 	
-	<select id="findByName" parameterType="String" resultMap="roleMap" useCache="false">
+	<select id="findByName" parameterType="String" resultMap="roleMap" flushCache="true" useCache="true">
 		SELECT 
 		r.r_id,
 		r.r_name,
@@ -119,7 +119,7 @@
 	</insert>
 	
 	
-	<select id="findById" parameterType="long" resultMap="roleMap" useCache="false">
+	<select id="findById" parameterType="long" resultMap="roleMap" flushCache="true" useCache="true">
 		SELECT 
 		r.r_id,
 		r.r_name,
@@ -173,7 +173,7 @@
        delete from tb_resources_role where r_id = ${roleId}   
 	</delete>
 	
-	<select id="findRoleResourceById" parameterType="int" resultType="int" useCache="false">
+	<select id="findRoleResourceById" parameterType="int" resultType="int" flushCache="true" useCache="true">
 		SELECT count(*)
 		FROM tb_resources_role
 		where r_id = ${roleId}

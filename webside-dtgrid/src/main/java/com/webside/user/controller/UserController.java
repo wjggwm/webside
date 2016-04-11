@@ -306,6 +306,69 @@ public class UserController extends BaseController {
 		return result;
 	}
 	
+	@RequestMapping("resetPassWithoutAuthc.html")
+	@ResponseBody
+	public Object resetPassWithoutAuthc(UserEntity userEntity){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try
+		{
+			//生成随机密码
+			String password = RandomUtil.generateString(6);
+			
+			//加密用户输入的密码，得到密码和加密盐，保存到数据库
+			UserEntity user = EndecryptUtils.md5Password(userEntity.getAccountName(), password, 2);
+			//设置添加用户的密码和加密盐
+			userEntity.setPassword(user.getPassword());
+			userEntity.setCredentialsSalt(user.getCredentialsSalt());
+			if(userEntity.getId() == null)
+			{
+				user = null;
+				user = userService.findByName(userEntity.getAccountName());
+				if(user != null)
+				{
+					userEntity.setId(user.getId());
+					userEntity.setUserName(user.getUserName());
+					int cnt = userService.updateOnly(userEntity, password);
+					if(cnt > 0)
+					{
+						result.put("success", true);
+						result.put("data", null);
+						result.put("message", "密码重置成功");
+					}else
+					{
+						result.put("success", false);
+						result.put("data", null);
+						result.put("message", "密码重置失败");
+					}
+				}else
+				{
+					result.put("success", false);
+					result.put("data", null);
+					result.put("message", "账户不存在");
+				}
+			}else
+			{
+				int cnt = userService.updateOnly(userEntity, password);
+				if(cnt > 0)
+				{
+					result.put("success", true);
+					result.put("data", null);
+					result.put("message", "密码重置成功");
+				}else
+				{
+					result.put("success", false);
+					result.put("data", null);
+					result.put("message", "密码重置失败");
+				}
+			}
+			
+		}catch(Exception e)
+		{
+			throw new AjaxException(e);
+		}
+		return result;
+	}
+	
 	
 	@RequestMapping("infoUI.html")
 	public String infoUI(Model model, Long id) {

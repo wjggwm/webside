@@ -24,7 +24,7 @@
 		<result property="createTime" column="l_create_time"/>
 	</resultMap>
 	
-	<select id="queryListByPage" parameterType="map" resultMap="logInfoMap">
+	<select id="queryListByPage" parameterType="map" resultMap="logInfoMap" flushCache="true" useCache="true">
 		SELECT 
 		<include refid="logInfoAttributes"/>
 		FROM tb_log_info
