@@ -110,9 +110,6 @@
 		<param-value>/sirona</param-value>
 	</context-param>
 	
-	<listener>
-		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
-	</listener>
 	<!-- 处理静态资源的访问 ,这种方式效率最高,但是无法访问classpath下的资源文件-->
 	<servlet-mapping> 
 		<!--

@@ -66,8 +66,9 @@ jQuery(function($) {
 		if(ace.vars['non_auto_fixed']) {
 			$('body').addClass('mob-safari');
 		}
-
-		ace.vars['transition'] = !!$.support.transition.end;
+		
+        ace.vars['transition'] = $.support.transition == undefined ? false : !!$.support.transition.end;
+		
 	}
 	
 	function enableSidebar() {
