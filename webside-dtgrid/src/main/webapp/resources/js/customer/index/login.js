@@ -33,10 +33,6 @@ $(document).ready(function() {
     
 });
 
-//页面进行跳转到login.html
-if (window.location.href.indexOf("/login.html") == -1) {
-    top.location.href = "login.html";
-}
 
 //登录
 function login() {

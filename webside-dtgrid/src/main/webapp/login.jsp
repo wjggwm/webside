@@ -71,14 +71,28 @@
 var sys = sys || {};
 sys.rootPath = "${ctx}";
 $(document).ready(function() {
-//错误提示信息
-if ("${error}" != "") {
+	//错误提示信息
+	if ("${error}" != "") {
     	layer.alert('${error}', {icon : 5,shift : 6,time : 0});
 	}
+	
+	//页面进行跳转到login.html
+	if (window.location.href.indexOf("/login.html") == -1) {
+	    if($("#userId").val() == null || $("#userId").val() == "")
+	    {
+	        top.location.href = "login.html";
+	    }else
+	    {
+	        top.location.href = "index.html";
+	    }
+	}
+	
 });
 </script>
 </head>
 <body>
+
+<input id="userId" type="hidden" value="<c:if test="${not empty sessionScope.userSessionId}">${sessionScope.userSessionId }</c:if>"/>
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">

@@ -24,7 +24,6 @@ import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.AjaxException;
 import com.webside.exception.ServiceException;
-import com.webside.exception.SystemException;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
 import com.webside.user.model.UserEntity;
@@ -62,7 +61,7 @@ public class UserController extends BaseController {
 			return Common.BACKGROUND_PATH + "/user/list";
 		}catch(Exception e)
 		{
-			throw new SystemException(e);
+			throw new AjaxException(e);
 		}
 	}
 	
@@ -109,7 +108,7 @@ public class UserController extends BaseController {
 			return Common.BACKGROUND_PATH + "/user/form";
 		}catch(Exception e)
 		{
-			throw new SystemException(e);
+			throw new AjaxException(e);
 		}
 		
 	}
@@ -177,7 +176,7 @@ public class UserController extends BaseController {
 			return Common.BACKGROUND_PATH + "/user/form";
 		}catch(Exception e)
 		{
-			throw new SystemException(e);
+			throw new AjaxException(e);
 		}
 	}
 	
@@ -379,7 +378,7 @@ public class UserController extends BaseController {
 			return Common.BACKGROUND_PATH + "/user/info";
 		}catch(Exception e)
 		{
-			throw new SystemException(e);
+			throw new AjaxException(e);
 		}
 	}
 	
@@ -418,7 +417,7 @@ public class UserController extends BaseController {
 			return Common.BACKGROUND_PATH + "/user/password";
 		}catch(Exception e)
 		{
-			throw new SystemException(e);
+			throw new AjaxException(e);
 		}
 	}
 	

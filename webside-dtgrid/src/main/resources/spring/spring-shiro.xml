@@ -101,6 +101,7 @@
 			/user/validateAccountName.html = anon
 			/captcha.html = anon
 			/denied.jsp = anon
+			/view/error/** = anon
 			</value>
 		</property>
 	</bean>
@@ -121,29 +122,31 @@
         <property name="sessionManager" ref="shiroSessionManager"/>
     </bean>
 	
+	
+	
+ 
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="180000"/>
+    </bean>
+	
+	
 	<!-- 会话管理器 -->
 	<!-- 全局的会话信息设置成30分钟,sessionValidationSchedulerEnabled参数就是是否开启扫描  -->
     <bean id="shiroSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <!-- session 有效时间为半小时 （毫秒单位）-->
-        <property name="globalSessionTimeout" value="1800000"/>
+		<property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
         <property name="deleteInvalidSessions" value="true"/>
-
-        <property name="sessionIdCookieEnabled" value="true"/>
-        <property name="sessionIdCookie.name" value="webside.jsessionid"/>
-        <property name="sessionIdCookie.httpOnly" value="true"/>
-        <property name="sessionIdCookie.maxAge" value="-1"/>
         <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionValidationInterval" value="1800000"/><!--Session 超时检测时间 单位：毫秒-->
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
     </bean>
+
 	
-	
-	<!-- 会话Cookie模板 -->  
-	<!-- 
-	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
-	    <constructor-arg value="webside.rememberMe"/>  
-	    <property name="httpOnly" value="true"/> 
-	    <property name="maxAge" value="2592000"/>
-	</bean> 
-	 -->
 	<!-- rememberMe管理器 --> 
 	<!--  
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">  
