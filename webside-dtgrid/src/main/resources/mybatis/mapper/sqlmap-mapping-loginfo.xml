@@ -35,8 +35,8 @@
 		</where>
 	</select>
 	
-	<insert id="insert" parameterType="com.webside.loginfo.model.LogInfoEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into tb_log_info (
+	<insert id="insert" parameterType="com.webside.loginfo.model.LogInfoEntity">
+		insert ignore into tb_log_info (
 			u_id,
 			l_account_name,
 			l_operation,
@@ -48,7 +48,7 @@
 			#{accountName},
 			#{operation},
 			#{content},
-			NOW()
+			now()
 			)
 	</insert>
 	

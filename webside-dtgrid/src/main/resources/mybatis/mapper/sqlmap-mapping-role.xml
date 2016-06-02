@@ -102,7 +102,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.webside.role.model.RoleEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into tb_role (
+		insert ignore into tb_role (
 			r_name,
 			r_key,
 			r_status,
@@ -180,7 +180,7 @@
 	</select>
 	
 	<insert id="addRoleResource" parameterType="map">
-		insert into tb_resources_role (
+		insert ignore into tb_resources_role (
 			s_id,
 			r_id,
 			t_create_time

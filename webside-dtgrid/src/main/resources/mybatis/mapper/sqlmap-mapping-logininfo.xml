@@ -41,7 +41,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.webside.logininfo.model.LoginInfoEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into tb_login_info (
+		insert ignore into tb_login_info (
 			u_id,
 			u_account_name,
 			l_ip

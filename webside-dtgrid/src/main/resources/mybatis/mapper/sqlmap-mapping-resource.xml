@@ -133,7 +133,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.webside.resource.model.ResourceEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into tb_resource (
+		insert ignore into tb_resource (
 		<if test="parentId neq null">
 			s_parent_id,
 		</if>

@@ -134,7 +134,7 @@
 		<!-- mybatis 设置 -->
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 		<!-- 匹配Mapper映射文件 -->
-		<property name="mapperLocations" value="classpath:mybatis/sqlmap-mapping-*.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/mapper/sqlmap-mapping-*.xml" />
 	    <property name="typeAliasesPackage" value="com.webside.*.model" />
 	</bean>
 

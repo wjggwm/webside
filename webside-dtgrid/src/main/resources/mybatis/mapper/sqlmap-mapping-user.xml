@@ -123,7 +123,7 @@
 	</select>
 	
 	<select id="findById" parameterType="long" resultMap="userMap" flushCache="true" useCache="true">
-				SELECT u.u_id,
+		SELECT u.u_id,
 		u.u_name,
 		u.u_account_name,
 		u.u_password,
@@ -148,10 +148,38 @@
 		i.u_address
 		FROM tb_user u JOIN tb_role_user ru ON u.u_id = ru.u_id JOIN tb_role r ON ru.r_id = r.r_id JOIN tb_user_info i ON u.u_id = i.u_id 
 		where u.u_id = ${id}
+		
+		<!-- 这种映射方式可以不用写resultMap,同时加双引号是为了mybatis可以识别映射
+			SELECT u.u_id id,
+		u.u_name userName,
+		u.u_account_name accountName,
+		u.u_password password,
+		u.u_delete_status deleteStatus,
+		u.u_locked locked,
+		u.u_description description,
+		u.u_credentials_salt credentialsSalt,
+		u.u_creator_name creatorName,
+		u.u_create_time createTime,
+		u.u_update_time updateTime,
+		r.r_id "role.id",
+		r.r_name "role.name",
+		r.r_key "role.key",
+		r.r_status "role.status",
+		r.r_description "role.description",
+		r.r_create_time "role.createTime",
+		r.r_update_time "role.updateTime",
+		i.u_sex "userInfo.sex",
+		i.u_birthday "userInfo.birthday",
+		i.u_telephone "userInfo.telephone",
+		i.u_email "userInfo.email",
+		i.u_address "userInfo.address"
+		FROM tb_user u JOIN tb_role_user ru ON u.u_id = ru.u_id JOIN tb_role r ON ru.r_id = r.r_id JOIN tb_user_info i ON u.u_id = i.u_id 
+		where u.u_id = ${id}
+		 -->
 	</select>
 	
 	<insert id="insert" parameterType="com.webside.user.model.UserEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into tb_user (
+		insert ignore into tb_user (
 			u_name,
 			u_account_name,
 			u_password,
@@ -171,8 +199,8 @@
 			)  
 	</insert>
 	
-		<insert id="insertUserRole" parameterType="com.webside.user.model.UserEntity" useGeneratedKeys="true" keyProperty="role.id">
-		insert into tb_role_user (
+	<insert id="insertUserRole" parameterType="com.webside.user.model.UserEntity" useGeneratedKeys="true" keyProperty="role.id">
+		insert ignore into tb_role_user (
 			u_id,
 			r_id,
 			t_create_time
@@ -236,7 +264,7 @@
 	
 	
 	<insert id="insertUserInfo" parameterType="com.webside.user.model.UserEntity" useGeneratedKeys="true" keyProperty="userInfo.id">
-		insert into tb_user_info (
+		insert ignore into tb_user_info (
 			<include refid="userInfoAttributes"/>
 			)   
 		values (

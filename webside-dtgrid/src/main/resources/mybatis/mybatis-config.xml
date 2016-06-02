@@ -21,17 +21,20 @@
 		<setting name="cacheEnabled" value="true"/>
 		<!-- 是否允许单条语句返回多个数据集(取决于驱动需求),默认为true -->
 		<setting name="multipleResultSetsEnabled" value="true"/>
-		<!-- 是否使用列标签代替列名称,默认为true -->
+		<!-- 是否使用列别名代替列名称,默认为true -->
 		<setting name="useColumnLabel" value="true"/>
-		<!-- 是否允许JDBC生成主键,默认为false -->
-		<setting name="useGeneratedKeys" value="false"/>
+		<!-- 是否允许JDBC生成主键,获取数据库自增主键值,默认为false -->
+		<setting name="useGeneratedKeys" value="true"/>
+		<!-- 开启驼峰命名转换：Table(create_time)->Entity(createTime) -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		<!-- 指定mybatis是否并且如何来自动映射数据表字段与对象的属性，可选值:PARTIAL:默认值,自动映射简单的,没有嵌套的结果;FULL:自动映射所有复杂的结果;NONE:什么都不做,即不映射; -->
-		<setting name="autoMappingBehavior" value="PARTIAL"/>
+		<setting name="autoMappingBehavior" value="FULL"/>
 		<!-- 配置执行器,可选值：SIMPLE:默认值，无特别之处;REUSE:可以重复使用预处理(Prepared Statemnets)语句;BATCH:可以重复执行语句和批处理语句 -->
 		<setting name="defaultExecutorType" value="SIMPLE"/>
 		<!-- 设置一个时限,以决定让驱动器等待数据库回应的多长时间为超时,格式为正整数 -->
 		<setting name="defaultStatementTimeout" value="5000"/>
 	</settings>
+	
 	
 	<plugins>
 	    <!-- com.github.pagehelper为PageHelper类所在包名 -->
