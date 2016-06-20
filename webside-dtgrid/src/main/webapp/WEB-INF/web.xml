@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>webside-dtgrid</display-name>
 
-	<!-- 欢迎页面 -->
+	<!-- 默认页面 -->
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
@@ -131,7 +131,7 @@
 	<!-- 配置spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/spring-applicationContext.xml,classpath:spring/spring-shiro.xml,classpath:spring/spring-mvc-shiro.xml</param-value>
+		<param-value>classpath:spring/spring-*.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

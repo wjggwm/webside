@@ -33,6 +33,10 @@ $(document).ready(function() {
     
 });
 
+//页面进行跳转到login.html
+if (window.location.href.indexOf("/login.html") == -1) {
+    top.location.href = "login.html";
+}
 
 //登录
 function login() {
@@ -163,18 +167,14 @@ function resetPassword()
         layer.alert('请输入账户邮箱', {icon : 5,shift : 6,time : 0});
         return;
     }
-    var index ;
+    var index = layer.load();
     $.ajax({
         type : "POST",
-        url : sys.rootPath + '/user/resetPassWithoutAuthc.html',
+        url : sys.rootPath + '/user/resetPassword.html',
         data : {
             "accountName" : accountName
         },
         dataType : "json",
-        beforeSend : function()
-        {
-            index = layer.load();
-        },
         success : function(resultdata) {
             layer.close(index);
             if (resultdata.success) {

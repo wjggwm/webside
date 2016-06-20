@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd ">
+
+	<!-- Kaptcha验证码生成器 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha" scope="singleton">
+	    <property name="config">
+	        <bean class="com.google.code.kaptcha.util.Config">
+	            <constructor-arg>
+	                <props>
+	                	<prop key="kaptcha.session.key">kaptcha.code</prop>  
+	                	<!-- 无边框 -->
+	                    <prop key="kaptcha.border">no</prop>
+	                    <prop key="kaptcha.textproducer.font.color">black</prop>
+	                    <!-- 渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy -->
+	                    <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+	                    <!-- 不要噪点 -->
+	                    <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+	                    <prop key="kaptcha.image.width">90</prop>
+	                    <prop key="kaptcha.image.height">33</prop>
+	                    <prop key="kaptcha.textproducer.font.size">25</prop>
+	                    <prop key="kaptcha.textproducer.char.length">4</prop>
+	                    <prop key="kaptcha.textproducer.char.space">5</prop>
+	                    <!-- 和登录框背景颜色一致 -->
+	                    <prop key="kaptcha.background.clear.from">247,247,247</prop>
+	                    <prop key="kaptcha.background.clear.to">247,247,247</prop>
+	                </props>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>
+
+</beans>    

@@ -183,13 +183,14 @@ $(document).ready(function() {
 												class="ace-icon icon-arrow-left"></i> 忘记密码
 											</a>
 										</div>
-
+										<!-- 
 										<div>
 											<a href="#" data-target="#signup-box"
 												class="user-signup-link"> 新用户注册 <i
 												class="ace-icon icon-arrow-right"></i>
 											</a>
 										</div>
+										 -->
 									</div>
 								</div>
 								<!-- /.widget-body -->

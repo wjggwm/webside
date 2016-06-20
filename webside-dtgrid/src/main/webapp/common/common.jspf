@@ -63,9 +63,6 @@ user-scalable - 用户是否可以手动缩放
 	<script type="text/javascript" src="${ctx}/resources/js/ie/excanvas.min.js"></script>
 <![endif]-->
 
-<script type="text/javascript" src="${ctx}/resources/js/jqueryui/jquery-ui.custom.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/js/jqueryui/jquery.ui.touch-punch.min.js"></script>
-
 <!-- ace scripts -->
 <script type="text/javascript" src="${ctx}/resources/js/ace/ace.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/ace/ace-extra.min.js"></script>
