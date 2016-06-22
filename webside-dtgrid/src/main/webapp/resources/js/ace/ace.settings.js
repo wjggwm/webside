@@ -8,7 +8,7 @@
 
 	$(this).toggleClass('open');
 	$('#ace-settings-box').toggleClass('open');
- });
+ })
 
  $('#ace-settings-navbar').on('click', function(){
 	ace.settings.navbar_fixed(null, this.checked);//@ ace-extra.js
@@ -16,25 +16,25 @@
 
 	//force redraw?
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
- }).each(function(){this.checked = ace.settings.is('navbar', 'fixed')});
+ }).each(function(){this.checked = ace.settings.is('navbar', 'fixed')})
 
  $('#ace-settings-sidebar').on('click', function(){
 	ace.settings.sidebar_fixed(null, this.checked);//@ ace-extra.js
 
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
- }).each(function(){this.checked = ace.settings.is('sidebar', 'fixed')});
+ }).each(function(){this.checked = ace.settings.is('sidebar', 'fixed')})
 
  $('#ace-settings-breadcrumbs').on('click', function(){
 	ace.settings.breadcrumbs_fixed(null, this.checked);//@ ace-extra.js
 
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
- }).each(function(){this.checked = ace.settings.is('breadcrumbs', 'fixed')});
+ }).each(function(){this.checked = ace.settings.is('breadcrumbs', 'fixed')})
 
  $('#ace-settings-add-container').on('click', function(){
 	ace.settings.main_container_fixed(null, this.checked);//@ ace-extra.js
 
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
- }).each(function(){this.checked = ace.settings.is('main-container', 'fixed')});
+ }).each(function(){this.checked = ace.settings.is('main-container', 'fixed')})
 
 
 
@@ -48,11 +48,11 @@
 	}
 	else {
 		$('#sidebar').removeClass('compact');
-		$('#sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset');
+		$('#sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset')
 	}
 	
 	if(ace.vars['old_ie']) ace.helper.redraw($('#sidebar')[0], true);
- });/*.removeAttr('checked')*/
+ })/*.removeAttr('checked')*/
 
 
  $('#ace-settings-highlight').on('click', function(){
@@ -60,7 +60,7 @@
 	else $('#sidebar .nav-list > li').removeClass('highlight');
 	
 	if(ace.vars['old_ie']) ace.helper.redraw($('#sidebar')[0]);
- });/*.removeAttr('checked')*/
+ })/*.removeAttr('checked')*/
 
 
  $('#ace-settings-hover').on('click', function(){
@@ -79,10 +79,10 @@
 		}
 	}
 	
-	$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('reset');
-	$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset');
+	$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('reset')
+	$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset')
 	
 	if(ace.vars['old_ie']) ace.helper.redraw($('#sidebar')[0]);
- });/*.removeAttr('checked')*/
+ })/*.removeAttr('checked')*/
 
 })(jQuery);

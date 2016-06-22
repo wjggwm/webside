@@ -12,7 +12,7 @@
 		<asm.version>3.3.1</asm.version>
 		<jodd.version>3.6.7</jodd.version>
 		<junit.version>4.11</junit.version>
-		<shiro.version>1.2.4</shiro.version>
+		<shiro.version>1.2.5</shiro.version>
 		<log4j.version>1.2.17</log4j.version>
 		<druid.version>1.0.18</druid.version>
 		<mysql.version>5.1.26</mysql.version>
@@ -349,6 +349,11 @@
 			<groupId>io.reactivex</groupId>
 			<artifactId>rxjava</artifactId>
 			<version>${rxjava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.crazycake</groupId>
+			<artifactId>shiro-redis</artifactId>
+			<version>2.4.2.1-RELEASE</version>
 		</dependency>
 	</dependencies>
 	<build>

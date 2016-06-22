@@ -29,7 +29,7 @@ public class KickoutSessionFilter extends AccessControlFilter {
     /*
      * 强制退出之前登录的/之后登录的用户,默认退出之前登录的用户
      */
-    private boolean kickoutAfter = false; //
+    private boolean kickoutAfter = false;
     /*
      * 同一个帐号最大会话数,默认1
      */

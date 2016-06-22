@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $("body").css("background","#16a08");
+    /*
     //背景粒子效果
     $('.main-container').particleground({
         dotColor : '#5cbdaa',
@@ -7,7 +9,7 @@ $(document).ready(function() {
     $('.main-content').css({
         'margin-top' : -($('.main-content').height())
     });
-    
+    */
     //刷新验证码
     $('#kaptchaImage').click(function() {//生成验证码
         $(this).hide().attr('src', 'captcha.html?' + new Date().getTime()).fadeIn();
@@ -33,10 +35,6 @@ $(document).ready(function() {
     
 });
 
-//页面进行跳转到login.html
-if (window.location.href.indexOf("/login.html") == -1) {
-    top.location.href = "login.html";
-}
 
 //登录
 function login() {

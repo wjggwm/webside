@@ -48,8 +48,9 @@
 <p>
 	期待您的吐槽：
 </p>
+<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=ff472f4f018fa95b8e93d87aa4407629e91c675d66fbeca04d248ff39af8cbf3"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="webside权限系统" title="webside权限系统" /></a> 
 <p>
-	<img src="http://static.oschina.net/uploads/space/2016/0331/101953_TOi6_167416.png" alt="" />&nbsp;
+	<img src="http://static.oschina.net/uploads/space/2016/0615/133216_UzX3_167416.png" alt="" />&nbsp;
 </p>
 </div>
 

@@ -6,70 +6,11 @@
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>webside-登录</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Cache-Control" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-<meta http-equiv="X-UA-Compatible" content="E=edge;chrome=1" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="webside,响应式前端解决方案,一站式架构设计,基础功能模块" />
-<meta name="description" content="webside,响应式前端解决方案,一站式架构设计,基础功能模块" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<link
-	href="${ctx }/resources/images/webside.ico"
-	rel="icon" />
-<link
-	href="${ctx }/resources/images/webside.ico"
-	type="image/x-icon" rel="bookmark" />
-<link
-	href="${ctx }/resources/images/webside.ico"
-	type="image/x-icon" rel="shortcut icon" />
-<!-- bootstrap & fontawesome -->
-<link rel="stylesheet"
-	href="${ctx }/resources/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="${ctx }/resources/fonts/webside/font-webside.min.css" />
-	<!--[if lt IE 8]>
-<link rel="stylesheet" href="${ctx }/resources/fonts/webside/font-webside-ie7.min.css"/>
-<!--<![endif]-->
-<!-- ace styles -->
-<link rel="stylesheet"
-	href="${ctx }/resources/css/customer/webside-login.min.css" />
-
-<!--[if lte IE 9]>
-	<link rel="stylesheet" href="${ctx }/resources/css/ace/ace-part2.min.css" />
-<![endif]-->
-
-<!--[if lte IE 9]>
-	<link rel="stylesheet" href="${ctx }/resources/css/ace/ace-ie.min.css" />
-<![endif]-->
-		
-<!-- JQuery script -->
-<!--[if !IE]><!-->
-<script type="text/javascript"
-	src="${ctx }/resources/js/jquery/jquery-2.1.4.min.js"></script>
-<!--<![endif]-->
-<!--[if IE]>
-	<script type="text/javascript" src="${ctx }/resources/js/jquery/jquery-1.11.3.min.js"></script>
-<![endif]-->
-<!-- basic scripts -->
-<script type="text/javascript">
-	if ("ontouchend" in document)
-		document.write("<script src='${ctx }/resources/js/jquery/jquery.mobile.custom.min.js'>" + "<"+"script>");
-</script>
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-	<script type="text/javascript" src="${ctx }/resources/js/ie/html5shiv.min.js"></script>
-	<script type="text/javascript" src="${ctx }/resources/js/ie/respond.min.js"></script>
-<![endif]-->
-<script type="text/javascript" src="${ctx }/resources/js/layer-v2.1/layer.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/particleground/jquery.particleground.min.js"></script>
+<%@include file="common/common-login.jsp" %>
 <script type="text/javascript" src="${ctx }/resources/js/customer/index/login.js"></script>
- 
+<script type="text/javascript" src="${ctx }/resources/js/layer-v2.1/layer.js"></script>
 <script type="text/javascript">
-var sys = sys || {};
-sys.rootPath = "${ctx}";
+
 $(document).ready(function() {
 	//错误提示信息
 	if ("${error}" != "") {
@@ -90,8 +31,7 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<body>
-
+<body class="login-layout">
 <input id="userId" type="hidden" value="<c:if test="${not empty sessionScope.userSessionId}">${sessionScope.userSessionId }</c:if>"/>
 	<div class="main-container">
 		<div class="main-content">
@@ -100,7 +40,7 @@ $(document).ready(function() {
 					<div class="login-container">
 						<div class="center">
 							<h1>
-								<i class="icon-leaf ace-icon  green"></i> <span class="white">WebSide
+								<i class="ace-icon fa fa-leaf green"></i> <span class="white">WebSide
 									V1.0</span>
 							</h1>
 						</div>
@@ -113,7 +53,7 @@ $(document).ready(function() {
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
-											<i class="ace-icon icon-coffee blue"></i> 请输入帐号信息
+											<i class="ace-icon fa fa-coffee blue"></i> 请输入帐号信息
 										</h4>
 
 										<div class="space-6"></div>
@@ -125,13 +65,13 @@ $(document).ready(function() {
 												<label class="block clearfix"> 
 												<span class="block input-icon input-icon-right"> 
 													<input name="accountName" id="accountName" type="email" class="form-control" placeholder="邮箱" /> 
-													<i class="ace-icon icon-user"></i>
+													<i class="ace-icon fa fa-user"></i>
 												</span>
 												</label> 
 												<label class="block clearfix"> 
 												<span class="block input-icon input-icon-right"> 
 													<input name="password" id="password" type="password" class="form-control" placeholder="密码" />
-													<i class="ace-icon icon-lock"></i>
+													<i class="ace-icon fa fa-lock"></i>
 												</span>
 												</label>
 												<label class="block clearfix"> 
@@ -149,7 +89,7 @@ $(document).ready(function() {
 
 													<button onclick="login();" type="button" 
 														class="width-35 pull-right btn btn-sm btn-primary">
-														<i class="ace-icon icon-key"></i> <span
+														<i class="ace-icon fa fa-key"></i> <span
 															class="bigger-110">登录</span>
 													</button>
 												</div>
@@ -157,7 +97,7 @@ $(document).ready(function() {
 												<div class="space-4"></div>
 											</fieldset>
 										</form>
-
+								<!-- 
 										<div class="social-or-login center">
 											<span class="bigger-110">第三方帐号登录</span>
 										</div>
@@ -173,6 +113,7 @@ $(document).ready(function() {
 												class="ace-icon icon-wechat"></i>
 											</a>
 										</div>
+								-->
 									</div>
 									<!-- /.widget-main -->
 
@@ -180,17 +121,17 @@ $(document).ready(function() {
 										<div>
 											<a href="#" data-target="#forgot-box"
 												class="forgot-password-link"> <i
-												class="ace-icon icon-arrow-left"></i> 忘记密码
+												class="ace-icon fa fa-arrow-left"></i> 忘记密码
 											</a>
 										</div>
-										<!-- 
+									<!-- 
 										<div>
 											<a href="#" data-target="#signup-box"
 												class="user-signup-link"> 新用户注册 <i
-												class="ace-icon icon-arrow-right"></i>
+												class="ace-icon fa fa-arrow-right"></i>
 											</a>
 										</div>
-										 -->
+									 -->
 									</div>
 								</div>
 								<!-- /.widget-body -->
@@ -201,7 +142,7 @@ $(document).ready(function() {
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header red lighter bigger">
-											<i class="ace-icon icon-key"></i> 密码找回
+											<i class="ace-icon fa fa-key"></i> 密码找回
 										</h4>
 
 										<div class="space-6"></div>
@@ -214,14 +155,14 @@ $(document).ready(function() {
 												<label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> 
 													<input name="accountName" id="recoverAccoutName" type="email" class="form-control" placeholder="邮箱" />
-														<i class="ace-icon icon-envelope"></i>
+														<i class="ace-icon fa fa-envelope"></i>
 												</span>
 												</label>
 
 												<div class="clearfix">
 													<button type="button" onclick="resetPassword();"
 														class="width-35 pull-right btn btn-sm btn-danger">
-														<i class="ace-icon icon-lightbulb-o"></i> <span
+														<i class="ace-icon fa fa-lightbulb-o"></i> <span
 															class="bigger-110">发送</span>
 													</button>
 												</div>
@@ -233,7 +174,7 @@ $(document).ready(function() {
 									<div class="toolbar center">
 										<a href="#" id="recoverWidget" data-target="#login-box"
 											class="back-to-login-link"> 返回登录 <i
-											class="ace-icon icon-arrow-right"></i>
+											class="ace-icon fa fa-arrow-right"></i>
 										</a>
 									</div>
 								</div>
@@ -245,7 +186,7 @@ $(document).ready(function() {
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header green lighter bigger">
-											<i class="ace-icon icon-group green"></i> 
+											<i class="ace-icon fa fa-group green"></i> 
 											新用户注册
 										</h4>
 
@@ -260,25 +201,25 @@ $(document).ready(function() {
 													class="block input-icon input-icon-right"> 
 													<input name="accountName" id="registerAccountName"
 														type="email" class="form-control" placeholder="真实邮箱,将做为登录系统的账户名" />
-														<i class="ace-icon icon-envelope"></i>
+														<i class="ace-icon fa fa-envelope"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> 
 													<input name="userName" id="registerUserName"
 														type="text" class="form-control" placeholder="真实姓名" />
-														<i class="ace-icon icon-user"></i>
+														<i class="ace-icon fa fa-user"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> 
 													<input name="password" id="registerPassword"
 														type="password" class="form-control"
-														placeholder="密码" /> <i class="ace-icon icon-lock"></i>
+														placeholder="密码" /> <i class="ace-icon fa fa-lock"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> 
 													<input id="registerRePassword" type="password" class="form-control"
 														placeholder="确认密码" /> <i
-														class="ace-icon icon-retweet"></i>
+														class="ace-icon fa fa-retweet"></i>
 												</span>
 												</label> <label class="block"> <input id="registerAccept" type="checkbox"
 													class="ace" /> <span class="lbl"> 我接受 <a
@@ -290,14 +231,14 @@ $(document).ready(function() {
 
 												<div class="clearfix">
 													<button type="reset" class="width-30 pull-left btn btn-sm">
-														<i class="ace-icon icon-refresh"></i> <span
+														<i class="ace-icon fa fa-refresh"></i> <span
 															class="bigger-110">重置</span>
 													</button>
 
 													<button type="button" onclick="register();"
 														class="width-65 pull-right btn btn-sm btn-success">
 														<span class="bigger-110">注册</span> <i
-															class="ace-icon icon-arrow-right icon-on-right"></i>
+															class="ace-icon fa fa-arrow-right icon-on-right"></i>
 													</button>
 												</div>
 											</fieldset>

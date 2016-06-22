@@ -24,7 +24,6 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<bean id="logAspect" class="com.webside.util.LogAspect" />
 
-	<aop:config proxy-target-class="true"></aop:config>
 	
 	<!-- 加载 jdbc.properties 配置文件:方式一 -->
 	<context:property-placeholder 
@@ -149,7 +148,7 @@
 	</tx:advice>
 
 
-	<aop:config>
+	<aop:config expose-proxy="true" proxy-target-class="true">
 		<!-- 配置哪些类的方法进行事务管理:定义在service包或者子包里的任意方法的执行 -->
 		<aop:pointcut id="transactionPointcut"
 			expression="execution(* com.webside.*.service..*.*(..))" />
@@ -172,7 +171,7 @@
 		<property name="patterns">
 			<list>
 				<value>com.webside.*.service.*</value>
-				<value>cn.webisde.*.mapper.*</value>
+				<value>con.webisde.*.mapper.*</value>
 			</list>
 		</property>
 	</bean>

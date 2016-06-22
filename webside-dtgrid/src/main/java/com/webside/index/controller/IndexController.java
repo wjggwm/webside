@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.ExpiredCredentialsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -76,7 +79,7 @@ public class IndexController extends BaseController {
 	/**
 	 * 用户登录
 	 * 认证过程：
-	 * 1、想要得到Subject对象,访问地址必须跟shiro的拦截地址内,不然会报空指针
+	 * 1、想要得到Subject对象,访问地址必须在shiro的拦截地址内,不然会报空指针
 	 * 2、用户输入的账号和密码,存到UsernamePasswordToken对象中,然后由shiro内部认证对比
 	 * 3、认证执行者交由ShiroDbRealm中doGetAuthenticationInfo处理
 	 * 4、当以上认证成功后会向下执行,认证失败会抛出异常
@@ -117,7 +120,18 @@ public class IndexController extends BaseController {
 					return "/login";
 				}
 	        }
-		} catch (LockedAccountException e) {
+		}catch (UnknownAccountException uae)
+		{
+			token.clear();
+			request.setAttribute("error", "账户不存在！");
+			return "/login";
+		}
+		catch (IncorrectCredentialsException ice)
+		{
+			token.clear();
+			request.setAttribute("error", "密码错误！");
+			return "/login";
+		}catch (LockedAccountException e) {
 			token.clear();
 			request.setAttribute("error", "您的账户已被锁定,请与管理员联系或10分钟后重试！");
 			return "/login";
@@ -125,9 +139,14 @@ public class IndexController extends BaseController {
 			token.clear();
 			request.setAttribute("error", "您连续输错5次,帐号将被锁定10分钟!");
 			return "/login";
-		} catch (AuthenticationException e) {
+		}catch(ExpiredCredentialsException eca)
+		{
 			token.clear();
-			request.setAttribute("error", "用户名或密码不正确！");
+			request.setAttribute("error", "账户凭证过期！");
+			return "/login";
+		}catch (AuthenticationException e) {
+			token.clear();
+			request.setAttribute("error", "账户验证失败！");
 			return "/login";
 		}catch (Exception e)
 		{

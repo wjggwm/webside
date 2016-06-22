@@ -154,7 +154,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>发现发生错误 <span>:(</span></h1>
+            <h1>发生错误 <span>:(</span></h1>
             <p>抱歉,系统发生错误了</p>
             <ul>
                 <li>请刷新再试试</li>

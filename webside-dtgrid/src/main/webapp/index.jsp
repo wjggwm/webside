@@ -4,6 +4,7 @@
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <%@include file="common/common.jspf"%>
+<script src="${ctx}/resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
 <body class="no-skin">
@@ -328,5 +329,16 @@
 		</a>
 	</div>
 	<!-- /.main-container -->
+	
+	<!-- ace scripts -->
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace-extra.min.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace.sidebar.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace.sidebar-scroll-1.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace.widget-box.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace.settings.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/ace.settings-skin.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/js/ace/elements.scroller.js"></script>
+
 </body>
 </html>
