@@ -24,6 +24,19 @@
 		<property name="messageConverters"> <list> <ref bean="stringConverter" /> 
 		<ref bean="fastjsonConverter" /> </list> </property> </bean> -->
 
+	<!-- 默认扫描的包路径 -->
+	<!-- 设置只扫描 @Controller注解的Bean,添加 use-default-filters="false",base-package即可配置为如下方式"com.webside" -->
+	<context:component-scan base-package="com.webside.*.controller"/>
+	<!--
+	<context:component-scan base-package="com.webside.*.controller"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+ 	-->
+
 	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="formatters">
@@ -52,16 +65,6 @@
 		</property>
 	</bean>
 
-
-	<!-- 默认扫描的包路径 -->
-	<!-- 设置只扫描 @Controller注解的Bean,添加 use-default-filters="false",base-package即可配置为如下方式"com.webside" -->
-	<context:component-scan base-package="com.webside.*.controller"
-		use-default-filters="false">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-	</context:component-scan>
 
 	<!-- 解析String请求数据 -->
 	<bean id="stringConverter"
