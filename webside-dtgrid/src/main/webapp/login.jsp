@@ -40,8 +40,7 @@ $(document).ready(function() {
 					<div class="login-container">
 						<div class="center">
 							<h1>
-								<i class="ace-icon fa fa-leaf green"></i> <span class="white">WebSide
-									V1.0</span>
+								<img src="${ctx }/resources/images/logo.png"/>
 							</h1>
 						</div>
 
