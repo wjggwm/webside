@@ -6,7 +6,13 @@
 <link rel="stylesheet" href="${ctx }/resources/js/datepicker/css/bootstrap-datepicker3.standalone.min.css"/>
 <script type="text/javascript" src="${ctx }/resources/js/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${ctx }/resources/js/customer/user/info.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    webside.form.userInfo.initButton();
+    webside.form.userInfo.initBirthday();
+    webside.form.userInfo.validateUserInfoForm();
+});
+</script>
 <style type="text/css">
 .noform{
 	padding:7px 0px 0px 12px;

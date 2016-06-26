@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/customer/user/password.js"></script>
+<script type="text/javascript">
+$(function() {
+    webside.form.user.validateUserPasswordForm();
+}); 
+</script>
 <div class="page-header">
 	<h1>
 		修改密码
@@ -9,7 +13,7 @@
 
 <div class="row" style="margin-top:5px;">
 	<div class="col-xs-12">
-		<form id="userInfo" name="userInfo" class="form-horizontal" role="form" method="post">
+		<form id="userPassword" name="userInfo" class="form-horizontal" role="form" method="post">
 			<input type="hidden" name="id" value="${userEntity.id }">
 			<input type="hidden" name="userName" value="${userEntity.userName }">
 		    <input type="hidden" name="accountName" value="${userEntity.accountName }"/>

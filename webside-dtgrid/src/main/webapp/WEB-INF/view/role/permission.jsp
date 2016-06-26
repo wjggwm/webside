@@ -36,7 +36,7 @@
 	  	<i class="fa fa-user-plus"></i>&nbsp;
 		保存
 	</button>
-		<button id="btn" type="button" onclick="loadPage('/role/listUI.html?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }')" class="btn btn-info btn-sm">
+		<button id="btn" type="button" onclick="webside.common.loadPage('/role/listUI.html?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }')" class="btn btn-info btn-sm">
 		<i class="fa fa-trash-o"></i>&nbsp;返回
 	</button>
 </div>

@@ -8,8 +8,15 @@
 	src="${ctx }/resources/js/select2/select2.min.js"></script>
 <script type="text/javascript"
 	src="${ctx }/resources/js/select2/zh-CN.js"></script>
-<script type="text/javascript"
-	src="${ctx }/resources/js/customer/resource/form.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	webside.form.resource.initSourceType();
+	webside.form.resource.initSourceTree();
+	webside.form.resource.initIcon();
+	webside.form.resource.initType();
+	webside.form.resource.validateResourceForm();
+});
+</script>
 <style>
 .iconShow
 {
@@ -21,19 +28,25 @@
 	 width:95%;
 	 float:left;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 374px){
 	.source-icon
 	{
-		 width:60%;
+		 width:82%;
 	}
 }
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 375px) and (max-width: 449px){
 	.source-icon
 	{
-		 width:80%;
+		 width:85%;
 	}
 }
-@media screen and (max-width: 1100px) {
+@media screen and (min-width: 450px) and (max-width: 1279px) {
+	.source-icon
+	{
+		 width:90%;
+	}
+}
+@media screen and (min_width: 1280px) {
 	.source-icon
 	{
 		 width:90%;
@@ -118,8 +131,7 @@
 					<c:if test="${resourceEntity.parentId eq null}">style="display: none;"</c:if>
 				</c:when>
 				<c:otherwise>style="display: none;"</c:otherwise>
-			</c:choose>
-			>
+			</c:choose>>
 				<label class="control-label col-sm-1 no-padding-right"
 					for="sourceUrl">资源URL</label>
 				<div class="col-sm-10">
@@ -132,8 +144,7 @@
 			</div>
 			
 			<div id="iconDiv" class="form-group" 
-			<c:if test="${resourceEntity.parentId ne null}">style="display: none;"</c:if>
-			>
+			<c:if test="${resourceEntity.parentId ne null}">style="display: none;"</c:if>>
 				<label class="control-label col-sm-1 no-padding-right" for="icon">菜单图标</label>
 				<div class="col-sm-10">
 				<div class="clearfix">
@@ -169,7 +180,7 @@
 		</c:if>
 	</button>
 	<button id="btn" type="button"
-		onclick="loadPage('/resource/listUI.html<c:if test="${!empty resourceEntity}">?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }</c:if>')"
+		onclick="webside.common.loadPage('/resource/listUI.html<c:if test="${!empty resourceEntity}">?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }</c:if>')"
 		class="btn btn-info btn-sm">
 		<i class="fa fa-undo"></i>&nbsp;返回
 	</button>

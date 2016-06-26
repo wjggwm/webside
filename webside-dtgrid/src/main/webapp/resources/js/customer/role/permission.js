@@ -26,7 +26,7 @@ var ids = [];
 
 /**
  * 提交表单
- * 适用场景：form表单的提交，主要用在用户、角色、资源等表单的添加、修改等
+ * 适用场景：form表单的提交，角色授权提交
  * @param {Object} commitUrl 表单提交地址
  * @param {Object} listUrl 表单提交成功后转向的列表页地址
  */
@@ -59,7 +59,7 @@ function commitPerm(commitUrl, listUrl) {
              layer.close(index);
             if (resultdata.success) {
                 layer.msg(resultdata.message,{icon:1});
-                loadPage(listUrl + '?page=' + $("#pageNum").val() + '&rows=' + $("#pageSize").val() + '&sidx=' + $("#orderByColumn").val() + '&sord=' + $("#orderByType").val());
+                webside.common.loadPage(listUrl + '?page=' + $("#pageNum").val() + '&rows=' + $("#pageSize").val() + '&sidx=' + $("#orderByColumn").val() + '&sord=' + $("#orderByType").val());
             } else {
                 layer.msg(resultdata.message, {
                     icon : 5

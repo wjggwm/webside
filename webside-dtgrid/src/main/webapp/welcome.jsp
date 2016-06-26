@@ -15,13 +15,13 @@
 	<strong>服务端</strong>：
 </p>
 <p>
-	Spring4.1.6.RELEASE+SpringMVC4.1.6.RELEASE+Mybatis3.3.0+Shiro1.2.4+druid1.0.14+ehcache2.6.11 等
+Spring4.1.6.RELEASE<br/>SpringMVC4.1.6.RELEASE<br/>Mybatis3.3.0<br/>Shiro1.2.4<br/>druid1.0.14<br/>ehcache2.6.11等
 </p>
 <p>
 	<strong>前端</strong>：
 </p>
 <p>
-	JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板）+layer+JQuery validation等
+	JQuery<br/>Bootstrap3.3.5<br/>ACE1.3.4（基于bootstrap的响应式后台管理模板）<br/>layer<br/>JQuery validation等
 </p>
 <p>
 	<strong>特点</strong>：

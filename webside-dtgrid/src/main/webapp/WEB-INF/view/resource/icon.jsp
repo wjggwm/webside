@@ -17,9 +17,26 @@
 <script type="text/javascript"
 	src="${ctx}/resources/js/nicescroll/jquery.nicescroll.min.js"></script>
 <link rel="stylesheet" href="${ctx }/resources/css/customer/webside-icon.min.css" />
-<script type="text/javascript"
-	src="${ctx}/resources/js/customer/resource/icon.js"></script>
-
+<script type="text/javascript">
+$(function() {
+	$("li").each(function() {
+        $(this).bind('click', function(e) {
+            var icon = $(this).find("i").attr("class").replace('fa-3x', '');
+            parent.$("#icon").val(icon);
+            parent.$("#iconShow").removeClass().addClass(icon + ' fa-2x green iconShow');
+            //先得到当前iframe层的索引
+            var index = parent.layer.getFrameIndex(window.name);
+            //再执行关闭
+            parent.layer.close(index);
+        });
+    });
+	$("html").niceScroll({
+        cursorborderradius : "5px",
+        cursorwidth:10,
+        autohidemode:false
+    });
+});
+</script>
 </head>
 <body class="no-skin">
 	<div class="container">

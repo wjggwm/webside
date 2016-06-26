@@ -4,17 +4,17 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/user/list.js"></script>
 <div class="page-header">
 	<shiro:hasPermission name="user:add">
-	<button id="btnAdd" type="button" onclick="addModel('/user/addUI.html')" class="btn btn-primary btn-sm">
+	<button id="btnAdd" type="button" onclick="webside.common.addModel('/user/addUI.html')" class="btn btn-primary btn-sm">
 	  	<i class="fa fa-user-plus"></i>&nbsp;添加
 	</button>
 	</shiro:hasPermission>
 	<shiro:hasPermission name="user:edit">
-	<button id="btnEdit" type="button" onclick="editModel('/user/editUI.html')" class="btn btn-success btn-sm">
+	<button id="btnEdit" type="button" onclick="webside.common.editModel('/user/editUI.html')" class="btn btn-success btn-sm">
 		 <i class="fa fa-pencil-square-o"></i>&nbsp;编辑
 	</button>
 	</shiro:hasPermission>
 	<shiro:hasPermission name="user:deleteBatch ">
-	<button id="btnDel" type="button" onclick="delModel('/user/deleteBatch.html', customSearch)" class="btn btn-danger btn-sm">
+	<button id="btnDel" type="button" onclick="webside.common.delModel('/user/deleteBatch.html', customSearch)" class="btn btn-danger btn-sm">
 		<i class="fa fa-trash-o"></i>&nbsp;删除
 	</button>
 	</shiro:hasPermission>

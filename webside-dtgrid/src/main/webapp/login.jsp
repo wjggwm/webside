@@ -8,9 +8,8 @@
 <title>webside-登录</title>
 <%@include file="common/common-login.jsp" %>
 <script type="text/javascript" src="${ctx }/resources/js/customer/index/login.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/layer-v2.1/layer.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/layer-v2.3/layer.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function() {
 	//错误提示信息
 	if ("${error}" != "") {

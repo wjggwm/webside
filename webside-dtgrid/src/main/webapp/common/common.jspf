@@ -52,7 +52,10 @@
 	<script type="text/javascript" src="${ctx}/resources/js/ie/excanvas.min.js"></script>
 <![endif]-->
 
-<script type="text/javascript" src="${ctx}/resources/js/layer-v2.1/layer.js"></script>
+<script src="${ctx}/resources/js/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="${ctx}/resources/js/jqueryui/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="${ctx}/resources/js/layer-v2.3/layer.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.css" />
 <script type="text/javascript" src="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.js"></script>
@@ -62,9 +65,6 @@
 <script type="text/javascript" src="${ctx}/resources/js/jquery-validation/localization/messages_zh.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/nicescroll/jquery.nicescroll.min.js"></script>
-
-<script src="${ctx}/resources/js/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="${ctx}/resources/js/jqueryui/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/customer/index/index.js"></script>
 <script type="text/javascript" type="text/javascript">

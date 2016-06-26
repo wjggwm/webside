@@ -5,6 +5,15 @@
 <head>
 <%@include file="common/common.jspf"%>
 <script src="${ctx}/resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function() {
+    webside.index.initHomePage();
+    webside.index.initMenu();
+    webside.index.initNavigation();
+    webside.index.initScrollBar();
+    webside.index.initMenuStyle();
+});
+</script>
 </head>
 
 <body class="no-skin">

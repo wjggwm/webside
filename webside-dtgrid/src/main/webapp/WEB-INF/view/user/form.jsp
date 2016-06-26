@@ -8,8 +8,11 @@
 	src="${ctx }/resources/js/select2/select2.min.js"></script>
 <script type="text/javascript"
 	src="${ctx }/resources/js/select2/zh-CN.js"></script>
-<script type="text/javascript"
-	src="${ctx }/resources/js/customer/user/form.js"></script>
+<script type="text/javascript">
+	$(function() {
+	    webside.form.user.validateUserForm();
+	});
+</script>
 <div class="page-header">
 	<h1>
 		<c:if test="${empty userEntity}">
@@ -143,7 +146,7 @@
 		保存
 		</c:if>
 	</button>
-		<button id="btn" type="button" onclick="loadPage('/user/listUI.html<c:if test="${!empty userEntity}">?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }</c:if>')" class="btn btn-info btn-sm">
+		<button id="btn" type="button" onclick="webside.common.loadPage('/user/listUI.html<c:if test="${!empty userEntity}">?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }</c:if>')" class="btn btn-info btn-sm">
 		<i class="fa fa-undo"></i>&nbsp;返回
 	</button>
 </div>

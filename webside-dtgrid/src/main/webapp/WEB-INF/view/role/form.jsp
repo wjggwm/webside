@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script type="text/javascript" src="${ctx }/resources/js/customer/role/form.js"></script>
+<script type="text/javascript">
+$(function() {
+    webside.form.role.validateRoleForm();
+});
+</script>
 <div class="page-header">
 	<h1>
 		<c:if test="${empty roleEntity}">
@@ -64,7 +68,7 @@
 		保存
 		</c:if>
 	</button>
-		<button id="btn" type="button" onclick="loadPage('/role/listUI.html<c:if test="${!empty roleEntity}">?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }</c:if>')" class="btn btn-info btn-sm">
+		<button id="btn" type="button" onclick="webside.common.loadPage('/role/listUI.html<c:if test="${!empty roleEntity}">?page=${page.pageNum }&rows=${page.pageSize }&sidx=${page.orderByColumn }&sord=${page.orderByType }</c:if>')" class="btn btn-info btn-sm">
 		<i class="fa fa-undo"></i>&nbsp;返回
 	</button>
 </div>
