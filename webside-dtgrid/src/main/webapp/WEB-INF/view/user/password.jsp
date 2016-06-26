@@ -40,7 +40,7 @@ $(function() {
 	</div>
 </div>
 <div class="center">
-	<button id="btnAdd" type="button" onclick="javascript:$('#userInfo').submit();" class="btn btn-success btn-sm">
+	<button id="btnAdd" type="button" onclick="javascript:$('#userPassword').submit();" class="btn btn-success btn-sm">
 	  	<i class="fa fa-user-plus"></i>&nbsp;保存
 	</button>
 	<button id="btnBack" type="button" onclick="javascript:top.location.href = 'index.html'" class="btn btn-info btn-sm">
