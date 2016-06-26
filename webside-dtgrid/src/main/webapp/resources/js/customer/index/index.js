@@ -2,7 +2,7 @@ var webside = {
     index : {
         initHomePage : function() {
             $(".page-content").load(sys.rootPath + "/welcome.jsp");
-            $(".breadcrumb").html('<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:init();">首页</a></li>');
+            $(".breadcrumb").html('<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li>');
         },
         initMenu : function() {
             $("[nav-menu]").each(function() {
@@ -24,7 +24,7 @@ var webside = {
                         });
 
                     } else {
-                        var breadcrumb = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:init();">首页</a></li>';
+                        var breadcrumb = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li>';
                         for (var i = 0; i < sn.length - 1; i++) {
                             breadcrumb += '<li class="active">' + sn[i] + '</li>';
                         }

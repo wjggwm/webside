@@ -21,7 +21,7 @@ Spring4.1.6.RELEASE<br/>SpringMVC4.1.6.RELEASE<br/>Mybatis3.3.0<br/>Shiro1.2.4<b
 	<strong>前端</strong>：
 </p>
 <p>
-	JQuery<br/>Bootstrap3.3.5<br/>ACE1.3.4（基于bootstrap的响应式后台管理模板）<br/>layer<br/>JQuery validation等
+	JQuery<br/>Bootstrap3.3.5<br/>ACE1.3.4（基于bootstrap的响应式后台管理模板）<br/>layer<br/>DTGrid<br/>JQuery validation等
 </p>
 <p>
 	<strong>特点</strong>：
