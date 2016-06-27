@@ -622,7 +622,7 @@
 					//绑定复选方法（全选反选）
 					if(dtGridReflectionObj.option.check){
 						$('#dt_grid_'+gridId+'_check').click(function(e){
-							$('input[id*=dt_grid_'+gridId+'_check_]').attr('checked', this.checked);
+							$('input[id*=dt_grid_'+gridId+'_check_]').prop('checked', this.checked);
 							if(dtGridReflectionObj.option.onCheck){
 								$('input[id*=dt_grid_'+gridId+'_check_]').each(function(){
 									dtGridReflectionObj.bindCheckEvent(dtGridReflectionObj.option.onCheck, this, e);
@@ -2268,7 +2268,7 @@
 					$('body').append(content);
 					//绑定复选全选反选方法
 					$('#dt_grid_print_check_'+dtGridReflectionObj.option.id).click(function(){
-						$('input[id*=dt_grid_print_check_'+dtGridReflectionObj.option.id+'_]').attr('checked', this.checked);
+						$('input[id*=dt_grid_print_check_'+dtGridReflectionObj.option.id+'_]').prop('checked', this.checked);
 					});
 					//绑定上移方法
 					$('button[id*=dt_grid_print_up_'+dtGridReflectionObj.option.id+'_]').click(function(){

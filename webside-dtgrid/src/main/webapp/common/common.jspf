@@ -57,8 +57,8 @@
 
 <script type="text/javascript" src="${ctx}/resources/js/layer-v2.3/layer.js"></script>
 
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.css" />
-<script type="text/javascript" src="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.min.css" />
+<script type="text/javascript" src="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/dtGrid-v1.1.9/i18n/zh-cn.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/jquery-validation/jquery.validate.min.js"></script>
