@@ -6,7 +6,11 @@
 <script type="text/javascript" src="${ctx }/resources/js/jstree/jstree.min.js"></script>   
 <script type="text/javascript" src="${ctx }/resources/js/jstree/jstree.checkbox.js"></script> 
 <script type="text/javascript" src="${ctx }/resources/js/underscore/underscore-min.js"></script> 
-<script type="text/javascript" src="${ctx }/resources/js/customer/role/permission.js"></script>  
+<script type="text/javascript">
+$(function() {
+    webside.form.resource.authorize.initResourceTree();
+});
+</script>  
 <div class="page-header">
 	<h1>
 		权限设置-<small>[${roleEntity.name }]</small>
@@ -32,7 +36,7 @@
 	</div>
 </div>
 <div class="center">
-	<button id="btnAdd" type="button" onclick="commitPerm('/role/permission.html' , '/role/listUI.html')" class="btn btn-success btn-sm">
+	<button id="btnAdd" type="button" onclick="webside.form.resource.authorize.commitPerm('/role/permission.html' , '/role/listUI.html')" class="btn btn-success btn-sm">
 	  	<i class="fa fa-user-plus"></i>&nbsp;
 		保存
 	</button>
