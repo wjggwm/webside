@@ -108,7 +108,7 @@ $(function() {
 
 								<li class="dropdown-footer">
 									<a href="#">
-										See all notifications
+										查看所有
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
 								</li>
