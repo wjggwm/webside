@@ -116,9 +116,9 @@ $(function() {
 						</li>
 					<!-- #section:basics/navbar.user_menu -->
 					<li class="light-blue"><a data-toggle="dropdown" href="#"
-						class="dropdown-toggle"> <img class="nav-user-photo"
-							src="${ctx}/resources/images/user.jpg" />
-							<span class="user-info"> <small>欢迎,</small> ${userEntity.userName }
+						class="dropdown-toggle"> 
+						<img class="nav-user-photo" src="${ctx}/resources/images/user.jpg" alt="" />
+							<span class="user-info"> <small>欢迎</small> ${userEntity.userName }
 						</span> <i class="ace-icon fa fa-caret-down"></i>
 					</a>
 						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
