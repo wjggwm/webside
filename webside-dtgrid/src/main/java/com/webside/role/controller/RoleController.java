@@ -23,11 +23,11 @@ import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
+import com.webside.model.dtgrid.Pager;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
 import com.webside.util.Common;
 import com.webside.util.PageUtil;
-import com.webside.util.Pager;
 
 @Controller
 @Scope("prototype")

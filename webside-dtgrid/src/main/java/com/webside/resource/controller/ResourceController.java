@@ -21,12 +21,12 @@ import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
+import com.webside.model.dtgrid.Pager;
 import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
 import com.webside.util.Common;
 import com.webside.util.JSTreeEntity;
 import com.webside.util.PageUtil;
-import com.webside.util.Pager;
 import com.webside.util.Select2Entity;
 import com.webside.util.TreeUtil;
 

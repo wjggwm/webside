@@ -17,8 +17,8 @@ import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.SystemException;
 import com.webside.loginfo.model.LogInfoEntity;
 import com.webside.loginfo.service.LogInfoService;
+import com.webside.model.dtgrid.Pager;
 import com.webside.util.Common;
-import com.webside.util.Pager;
 
 @Controller
 @Scope("prototype")

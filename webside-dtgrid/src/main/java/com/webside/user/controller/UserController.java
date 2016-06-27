@@ -24,6 +24,7 @@ import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.AjaxException;
 import com.webside.exception.ServiceException;
+import com.webside.model.dtgrid.Pager;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
 import com.webside.user.model.UserEntity;
@@ -32,7 +33,6 @@ import com.webside.user.service.UserService;
 import com.webside.util.Common;
 import com.webside.util.EndecryptUtils;
 import com.webside.util.PageUtil;
-import com.webside.util.Pager;
 import com.webside.util.RandomUtil;
 
 @Controller
