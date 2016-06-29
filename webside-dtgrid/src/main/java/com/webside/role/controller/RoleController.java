@@ -174,21 +174,27 @@ public class RoleController extends BaseController {
 		try
 		{
 			String[] roleIds = ids.split(",");
-			List<Long> list = new ArrayList<Long>();
-			for (String string : roleIds) {
-				list.add(Long.valueOf(string));
-			}
-			int cnt = roleService.deleteBatchById(list);
-			if(cnt == list.size())
-			{
-				result.put("success", true);
-				result.put("data", null);
-				result.put("message", "删除成功");
-			}else
+			//1、检查该角色下是否有用户，如果有则抛异常，没有则执行后面删除操作
+			int userCount = roleService.findRoleUserById(Integer.valueOf(roleIds[0]));
+			if(userCount>0)
 			{
 				result.put("success", false);
 				result.put("data", null);
-				result.put("message", "删除失败");
+				result.put("message", "该角色已分配用户,请去掉用户角色关联后再删除");
+			}else
+			{
+				Boolean flag = roleService.deleteRoleById(Long.valueOf(roleIds[0]));
+				if(flag)
+				{
+					result.put("success", true);
+					result.put("data", null);
+					result.put("message", "删除成功");
+				}else
+				{
+					result.put("success", false);
+					result.put("data", null);
+					result.put("message", "删除失败");
+				}
 			}
 		}catch(Exception e)
 		{

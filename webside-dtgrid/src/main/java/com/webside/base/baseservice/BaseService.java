@@ -14,7 +14,7 @@ public interface BaseService<T,ID extends Serializable> {
  
     public int deleteById(ID id);
  
-    public int deleteByUUID(String uuid);
+    public int deleteById(String id);
  
     public int update(T t);
     
@@ -22,7 +22,7 @@ public interface BaseService<T,ID extends Serializable> {
  
     public T findById(ID id);
  
-    public T findByUUID(String uuid);
+    public T findById(String id);
  
     public T findByName(String name);
  

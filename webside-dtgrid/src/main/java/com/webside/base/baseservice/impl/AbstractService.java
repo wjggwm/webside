@@ -50,10 +50,10 @@ public class AbstractService<T, ID extends Serializable> implements BaseService<
 	}
 
 	@Override
-	public int deleteByUUID(String uuid) {
+	public int deleteById(String id) {
 		try
 		{
-			return baseMapper.deleteByUUID(uuid);
+			return baseMapper.deleteById(id);
 		}catch(Exception e)
 		{
 			throw new ServiceException(e);
@@ -95,8 +95,8 @@ public class AbstractService<T, ID extends Serializable> implements BaseService<
 	}
 
 	@Override
-	public T findByUUID(String uuid) {
-		return baseMapper.findByUUID(uuid);
+	public T findById(String id) {
+		return baseMapper.findById(id);
 	}
 
 	@Override

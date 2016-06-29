@@ -19,6 +19,9 @@ public interface RoleService {
     
     public int deleteBatchById(List<Long> roleIds);
     
+    public boolean deleteRoleById(Long roleId);
+    
     public boolean addRolePerm(int id, List<Integer> ids) throws Exception ;
 
+    public int findRoleUserById(int roleId);
 }

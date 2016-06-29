@@ -169,9 +169,19 @@
 	    </foreach>  
 	</delete>
 	
+	<delete id="deleteById" parameterType="int">
+       delete from tb_role where r_id = ${id}
+	</delete>
+	
 	<delete id="deleteRoleResource" parameterType="int">
        delete from tb_resources_role where r_id = ${roleId}   
 	</delete>
+	
+	<select id="findRoleUserById" parameterType="int" resultType="int" flushCache="true" useCache="true">
+		SELECT count(*)
+		FROM tb_role_user
+		where r_id = ${roleId}
+	</select>
 	
 	<select id="findRoleResourceById" parameterType="int" resultType="int" flushCache="true" useCache="true">
 		SELECT count(*)
