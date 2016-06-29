@@ -49,8 +49,8 @@
 					<input id="pageSize" type="hidden" value="${page.pageSize }">
 					<input id="orderByColumn" type="hidden" value="${page.orderByColumn }">
 					<input id="orderByType" type="hidden" value="${page.orderByType }">
-					<div id="dtGridContainer" class="dt-grid-container"></div>
-					<div id="dtGridToolBarContainer" class="dt-grid-toolbar-container"></div>
+					<div id="dtGridContainer" class="dlshouwen-grid-container"></div>
+					<div id="dtGridToolBarContainer" class="dlshouwen-grid-toolbar-container"></div>
 				</div>
 			</div>
 		</div>

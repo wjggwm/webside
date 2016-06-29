@@ -4,32 +4,32 @@ var dtGridColumns = [{
     type : 'number',
     columnClass : 'text-center',
     hideType : 'xs',
-    headerStyle : 'background:#00a2ca;color:white;'
+headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'name',
     title : '资源名称',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;'
+headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'parentName',
     title : '上级名称',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'sourceKey',
     title : '资源标识',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs'
 }, {
     id : 'type',
     title : '资源类型',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if(value==0)
@@ -45,7 +45,7 @@ var dtGridColumns = [{
     title : '图标',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if(value != null && value != "")
@@ -62,7 +62,7 @@ var dtGridColumns = [{
     title : '资源url',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs|sm'
 }, {
     id : 'createTime',
@@ -72,7 +72,7 @@ var dtGridColumns = [{
     otype : 'string',
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs|sm|md'
 }, {
     id : 'updateTime',
@@ -82,7 +82,7 @@ var dtGridColumns = [{
     otype : 'string',
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs|md|lg',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == null) {
@@ -101,6 +101,8 @@ var dtGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
     check : true,
+    checkWidth :'37px',
+    extraWidth : '37px',
     loadURL : sys.rootPath + '/resource/list.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
@@ -110,7 +112,7 @@ var dtGridOption = {
     pageSizeLimit : [10, 20, 30]
 };
 
-var grid = $.fn.DtGrid.init(dtGridOption);
+var grid = $.fn.dlshouwen.grid.init(dtGridOption);
 $(function() {
     if(null != $("#orderByColumn").val() && '' != $("#orderByColumn").val())
     {

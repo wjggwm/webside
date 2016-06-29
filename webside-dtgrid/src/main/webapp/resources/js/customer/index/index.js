@@ -513,7 +513,7 @@ var webside = {
                     }
                 });
             },
-            formatState : function() {
+            formatState : function(state) {
                 if (!state.id) {
                     return state.text;
                 }

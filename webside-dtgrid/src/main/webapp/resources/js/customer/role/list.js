@@ -4,25 +4,25 @@ var dtGridColumns = [{
     type : 'number',
     columnClass : 'text-center',
     hideType : 'xs',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'name',
     title : '角色名称',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'key',
     title : '角色标识',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'status',
     title : '角色状态',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if(value == 0)
@@ -38,7 +38,7 @@ var dtGridColumns = [{
     title : '角色描述',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs'
 }, {
     id : 'createTime',
@@ -48,7 +48,7 @@ var dtGridColumns = [{
     otype : 'string',
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs'
 }, {
     id : 'updateTime',
@@ -58,7 +58,7 @@ var dtGridColumns = [{
     otype : 'string',
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs|md',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == null) {
@@ -77,6 +77,8 @@ var dtGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
     check : true,
+    checkWidth :'37px',
+    extraWidth : '37px',
     loadURL : sys.rootPath + '/role/list.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
@@ -86,7 +88,7 @@ var dtGridOption = {
     pageSizeLimit : [10, 20, 30]
 };
 
-var grid = $.fn.DtGrid.init(dtGridOption);
+var grid = $.fn.dlshouwen.grid.init(dtGridOption);
 $(function() {
     if(null != $("#orderByColumn").val() && '' != $("#orderByColumn").val())
     {

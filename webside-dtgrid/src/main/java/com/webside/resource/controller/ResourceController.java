@@ -60,10 +60,10 @@ public class ResourceController extends BaseController {
 	
 	@RequestMapping("list.html")
 	@ResponseBody
-	public Object list(String dtGridPager) throws Exception{
+	public Object list(String gridPager) throws Exception{
 		Map<String,Object> parameters = null;
 		// 映射Pager对象
-		Pager pager = JSON.parseObject(dtGridPager, Pager.class);
+		Pager pager = JSON.parseObject(gridPager, Pager.class);
 		// 判断是否包含自定义参数
 		parameters = pager.getParameters();
 		if (parameters.size() < 0) {

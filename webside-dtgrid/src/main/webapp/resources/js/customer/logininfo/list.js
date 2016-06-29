@@ -3,25 +3,25 @@ var dtGridColumns = [{
     title : '编号',
     type : 'number',
     columnClass : 'text-center',
-    headerStyle:'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'userId',
     title : '用户ID',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle:'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'accountName',
     title : '账户名称',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle:'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'loginIp',
     title : '登录IP',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle:'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs'
 }, {
     id : 'loginTime',
@@ -31,12 +31,13 @@ var dtGridColumns = [{
     otype:'string', 
     oformat:'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle:'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs'
 }];
 var dtGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
+    extraWidth : '37px',
     loadURL : sys.rootPath + '/loginInfo/list.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
@@ -45,7 +46,7 @@ var dtGridOption = {
     pageSize : 10,
     pageSizeLimit : [10, 20, 30]
 };
-var grid = $.fn.DtGrid.init(dtGridOption);
+var grid = $.fn.dlshouwen.grid.init(dtGridOption);
 $(function() {
     grid.load();
     $("#btnSearch").click(customSearch);

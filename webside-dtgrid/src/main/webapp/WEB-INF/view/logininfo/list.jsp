@@ -32,8 +32,8 @@
 
 			<div class="widget-body" style="display: block;">
 				<div class="widget-main padding-6 no-padding-left no-padding-right">
-					<div id="dtGridContainer" class="dt-grid-container"></div>
-					<div id="dtGridToolBarContainer" class="dt-grid-toolbar-container"></div>
+					<div id="dtGridContainer" class="dlshouwen-grid-container"></div>
+					<div id="dtGridToolBarContainer" class="dlshouwen-grid-toolbar-container"></div>
 				</div>
 			</div>
 		</div>

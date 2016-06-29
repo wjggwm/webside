@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="${ctx}/resources/fonts/fontawesome/font-awesome.min.css" media="all"/>
 <link rel="stylesheet" href="${ctx}/resources/fonts/opensans/ace-fonts.min.css"/>
 <link rel="stylesheet" href="${ctx}/resources/css/ace/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+<link rel="stylesheet" href="${ctx}/resources/css/customer/webside.min.css"/>
 <!--[if lte IE 9]>
 	<link rel="stylesheet" href="${ctx}/resources/css/ace/ace-part2.min.css" />
 <![endif]-->
@@ -57,9 +58,9 @@
 
 <script type="text/javascript" src="${ctx}/resources/js/layer-v2.3/layer.js"></script>
 
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.min.css" />
-<script type="text/javascript" src="${ctx}/resources/js/dtGrid-v1.1.9/jquery.dtGrid.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/js/dtGrid-v1.1.9/i18n/zh-cn.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.css" />
+<script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/i18n/zh-cn.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/jquery-validation/localization/messages_zh.js"></script>

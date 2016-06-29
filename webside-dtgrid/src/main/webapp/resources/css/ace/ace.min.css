@@ -8838,7 +8838,7 @@ select {
   height: 30px;
 }
 select.form-control {
-  padding: 4px 6px;
+  padding: 2px 3px;
 }
 select[multiple],
 select.form-control[multiple] {

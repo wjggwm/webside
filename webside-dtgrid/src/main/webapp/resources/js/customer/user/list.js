@@ -4,25 +4,25 @@ var dtGridColumns = [{
     type : 'number',
     columnClass : 'text-center',
     hideType : 'xs',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'accountName',
     title : '账户名',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'userName',
     title : '姓名',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;'
+    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'role',
     title : '所属角色',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (typeof(value) == "undefined") {
@@ -36,7 +36,7 @@ var dtGridColumns = [{
     title : '是否删除',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == 0) {
@@ -50,7 +50,7 @@ var dtGridColumns = [{
     title : '是否锁定',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == 0) {
@@ -64,7 +64,7 @@ var dtGridColumns = [{
     title : '创建者',
     type : 'string',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs'
 }, {
     id : 'createTime',
@@ -74,7 +74,7 @@ var dtGridColumns = [{
     otype : 'string',
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs'
 }, {
     id : 'updateTime',
@@ -84,7 +84,7 @@ var dtGridColumns = [{
     otype : 'string',
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
-    headerStyle : 'background:#00a2ca;color:white;',
+    headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs|md',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == null) {
@@ -103,6 +103,8 @@ var dtGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
     check : true,
+    checkWidth :'37px',
+    extraWidth : '37px',
     loadURL : sys.rootPath + '/user/list.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
@@ -112,7 +114,7 @@ var dtGridOption = {
     pageSizeLimit : [10, 20, 30]
 };
 
-var grid = $.fn.DtGrid.init(dtGridOption);
+var grid = $.fn.dlshouwen.grid.init(dtGridOption);
 $(function() {
     if(null != $("#orderByColumn").val() && '' != $("#orderByColumn").val())
     {
