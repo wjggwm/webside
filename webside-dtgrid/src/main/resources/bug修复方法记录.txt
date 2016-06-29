@@ -1,0 +1,4 @@
+1、dlshouwen.grid.v1.2.1  分页条页码大小不一，分页说明和页面导航垂直不对齐的修改方法
+	1、页面大小不一：bootstrap.min.css 中搜索 .pagination>li>a,.pagination>li>span 将 float:left 取消掉
+	2、垂直不对齐：dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-pager .dlshouwen-grid-pager-status 将margin:6px 20px 0 0;改为margin:0px 20px 0 0;
+2、删除角色时，如果角色下面有用户，需要提示该角色下面有用户，不能删除，如果角色已经分配了全选，需要先删除权限关联信息，然后再删除角色
