@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.webside.base.basecontroller.BaseController;
@@ -168,9 +169,10 @@ public class IndexController extends BaseController {
 			// 获取登录的bean
 			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 			UserEntity userEntity = (UserEntity)request.getSession().getAttribute("userSession");
-			List<ResourceEntity> list = resourceService.findResourcesByUserId(userEntity.getId().intValue());
+			List<ResourceEntity> list = resourceService.findResourcesMenuByUserId(userEntity.getId().intValue());
 			List<ResourceEntity> treeList = new TreeUtil().getChildResourceEntitys(list, null);
 			model.addAttribute("list", treeList);
+			model.addAttribute("menu", JSON.toJSONString(treeList));
 			// 登陆的信息回传页面
 			model.addAttribute("userEntity", userEntity);
 			return "/index";

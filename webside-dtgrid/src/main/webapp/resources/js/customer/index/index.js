@@ -2,56 +2,70 @@ var webside = {
     index : {
         initHomePage : function() {
             $(".page-content").load(sys.rootPath + "/welcome.jsp");
-            $(".breadcrumb").html('<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li>');
+            $(".breadcrumb").html('<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li><li class="active">控制台</li>');
         },
-        initMenu : function() {
-            $("[nav-menu]").each(function() {
-                $(this).bind("click", function() {
-                    var nav = $(this).attr("nav-menu");
-                    var sn = nav.split(",");
-                    if (sn[sn.length - 1] == '/sirona' || sn[sn.length - 1] == '/druid') {
-                        window.open(sys.rootPath + sn[sn.length - 1]);
-                        //处理目录类型的点击事件
-                        $(this).parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
-                        //处理菜单类型的点击事件
-                        $(this).parent().parent().parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
-                        $("ul.nav-list").find("li.active").removeClass("active").removeClass('open');
-                        $(this).parent().addClass("active").parent().parent("li").addClass('active open');
-
+        menu : {
+            initMenuEvent : function() {
+                $("[nav-menu]").each(function() {
+                    $(this).bind("click", function() {
+                        var nav = $(this).attr("nav-menu");
+                        var sn = nav.split(",");
                         //清除用户信息菜单样式
                         $(".user-menu").find('li').each(function() {
                             $(this).removeClass('active');
                         });
-
-                    } else {
-                        var breadcrumb = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li>';
-                        for (var i = 0; i < sn.length - 1; i++) {
-                            breadcrumb += '<li class="active">' + sn[i] + '</li>';
+                        //处理监控-新窗口打开
+                        if (sn[sn.length - 1] == '/sirona' || sn[sn.length - 1] == '/druid') {
+                            window.open(sys.rootPath + sn[sn.length - 1]);
+                        } else {
+                            var breadcrumb = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li>';
+                            for (var i = 0; i < sn.length - 1; i++) {
+                                breadcrumb += '<li class="active">' + sn[i] + '</li>';
+                            }
+                            //设置面包屑内容
+                            $(".breadcrumb").html(breadcrumb);
+                            //加载页面
+                            $(".page-content").load(sys.rootPath + sn[sn.length - 1]);
                         }
-                        //设置面包屑内容
-                        $(".breadcrumb").html(breadcrumb);
-                        //加载页面
-                        $(".page-content").load(sys.rootPath + sn[sn.length - 1]);
-                        //处理目录类型的点击事件
-                        $(this).parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
-                        //处理菜单类型的点击事件
-                        $(this).parent().parent().parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
-                        $("ul.nav-list").find("li.active").removeClass("active").removeClass('open');
-                        $(this).parent().addClass("active").parent().parent("li").addClass('active open');
-
-                        //清除用户信息菜单样式
-                        $(".user-menu").find('li').each(function() {
-                            $(this).removeClass('active');
-                        });
-                    }
+                        var level = $(this).parent("li").attr("level");
+                        if (level == 'level1' || level == 'level2') {
+                            //处理目录类型的点击事件-两级菜单
+                            $(this).parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
+                            //处理菜单类型的点击事件
+                            $(this).parent().parent().parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
+                            $("ul.nav-list").find("li.active").removeClass("active").removeClass('open');
+                            $(this).parent().addClass("active").parent().parent("li").addClass('active open');
+                        } else if (level == 'level3') {
+                            //处理目录类型的点击事件-三级菜单
+                            $(this).parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
+                            //处理菜单类型的点击事件
+                            $(this).parent().parent().parent().parent().parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
+                            $("ul.nav-list").find("li.active").removeClass("active").removeClass('open');
+                            $(this).parent().addClass("active").parent().parent().parent().parent("li").addClass('active open');
+                        } else {
+                            //处理目录类型的点击事件-四级菜单
+                            $(this).parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
+                            //处理菜单类型的点击事件
+                            $(this).parent().parent().parent().parent().parent().parent().parent("li").siblings().find("ul.nav-show").removeClass('nav-show').addClass('nav-hide').attr('style', 'display:none');
+                            $("ul.nav-list").find("li.active").removeClass("active").removeClass('open');
+                            $(this).parent().addClass("active").parent().parent().parent().parent().parent().parent("li").addClass('active open');
+                        }
+                    });
                 });
-            });
+            },
+            initDropdownMenuStyle : function() {
+                $(".user-menu").find('li').each(function() {
+                    $(this).bind('click', function() {
+                        $(this).siblings().removeClass('active');
+                        $(this).addClass('active');
+                    });
+                });
+            }
         },
         initNavigation : function() {
             $("#ace-settings-navbar").click();
             $("#ace-settings-sidebar").click();
             //$("#ace-settings-breadcrumbs").click();
-
         },
         initScrollBar : function() {
             $("html").niceScroll({
@@ -65,14 +79,6 @@ var webside = {
         resizeScrollBar : function() {
             $(window).resize(function() {
                 $("html").getNiceScroll().resize();
-            });
-        },
-        initMenuStyle : function() {
-            $(".user-menu").find('li').each(function() {
-                $(this).bind('click', function() {
-                    $(this).siblings().removeClass('active');
-                    $(this).addClass('active');
-                });
             });
         }
     },
@@ -534,16 +540,21 @@ var webside = {
                     //弹出即全屏
                     layer.full(iconLayer);
                 });
+                $("#iconShow").bind('click', function(event) {
+                    $("#icon").val('');
+                    $(this).removeClass();
+                });
+                $('[data-rel=tooltip]').tooltip();
             },
             initType : function() {
                 $("#parentId").change(function() {
                     var parentId = $.trim($(this).children('option:selected').val());
                     if (parentId == null || parentId == '') {
-                        $("#iconDiv").show();
-                        $("#sourceUrlDiv").hide();
+                        //$("#iconDiv").show();
+                        //$("#sourceUrlDiv").hide();
                     } else {
-                        $("#iconDiv").hide();
-                        $("#sourceUrlDiv").show();
+                        //$("#iconDiv").hide();
+                        //$("#sourceUrlDiv").show();
                     }
                 });
             },
@@ -568,24 +579,30 @@ var webside = {
                         },
                         sourceUrl : {
                             required : function() {
-                                //仅目录菜单不需要url
-                                var parentId = $.trim($("#parentId").val());
-                                if (parentId == null || parentId == "") {
-                                    return false;
-                                } else {
-                                    return true;
-                                }
+                                /*
+                                 //仅目录菜单不需要url
+                                 var parentId = $.trim($("#parentId").val());
+                                 if (parentId == null || parentId == "") {
+                                 return false;
+                                 } else {
+                                 return true;
+                                 }
+                                 */
+                                return false;
                             }
                         },
                         icon : {
                             required : function() {
-                                //仅目录菜单需要icon
-                                var parentId = $.trim($("#parentId").val());
-                                if (parentId == null || parentId == "") {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                /*
+                                 //仅目录菜单需要icon
+                                 var parentId = $.trim($("#parentId").val());
+                                 if (parentId == null || parentId == "") {
+                                 return true;
+                                 } else {
+                                 return false;
+                                 }
+                                 */
+                                return false;
                             }
                         }
                     },
@@ -630,14 +647,13 @@ var webside = {
                     }
                 });
             },
-            authorize:{
-                ids:[],
-                initResourceTree:function()
-                {
+            authorize : {
+                ids : [],
+                initResourceTree : function() {
                     $('#tree').jstree({
                         "core" : {
                             'data' : {
-                                "url" : sys.rootPath + "/resource/resourceTree.html?roleId="+$("#id").val(),
+                                "url" : sys.rootPath + "/resource/resourceTree.html?roleId=" + $("#id").val(),
                                 "dataType" : "json"
                             },
                             "themes" : {
@@ -661,13 +677,11 @@ var webside = {
                  * @param {Object} treeObj  jstree对象
                  * @param {Object} nodeObj  jstree node节点对象
                  */
-                getParents:function(treeObj,nodeObj)
-                {
+                getParents : function(treeObj, nodeObj) {
                     var parentId = treeObj.get_parent(nodeObj);
-                    if(parentId != "#")
-                    {
+                    if (parentId != "#") {
                         webside.form.resource.authorize.ids.push(parentId);
-                        webside.form.resource.authorize.getParents(treeObj,treeObj.get_node(parentId));
+                        webside.form.resource.authorize.getParents(treeObj, treeObj.get_node(parentId));
                     }
                 },
                 /**
@@ -676,8 +690,7 @@ var webside = {
                  * @param {Object} commitUrl 表单提交地址
                  * @param {Object} listUrl 表单提交成功后转向的列表页地址
                  */
-                commitPerm:function(commitUrl, listUrl)
-                {
+                commitPerm : function(commitUrl, listUrl) {
                     webside.form.resource.authorize.ids = [];
                     var tree = $('#tree').jstree();
                     //获取所有选中节点id
@@ -685,9 +698,8 @@ var webside = {
                     //获取所有选中节点
                     var selected = tree.get_checked(true);
                     //遍历节点，获取选中节点的所有父节点
-                    for(var i = 0; i<selected.length; i++)
-                    {
-                        webside.form.resource.authorize.getParents(tree,selected[i]);
+                    for (var i = 0; i < selected.length; i++) {
+                        webside.form.resource.authorize.getParents(tree, selected[i]);
                     }
                     var index;
                     $.ajax({
@@ -695,17 +707,18 @@ var webside = {
                         url : sys.rootPath + commitUrl,
                         data : {
                             "roleId" : $("#id").val(),
-                            "resourceIds" : _.union(webside.form.resource.authorize.ids,selectedIds).join(',')
+                            "resourceIds" : _.union(webside.form.resource.authorize.ids, selectedIds).join(',')
                         },
                         dataType : "json",
-                        beforeSend : function()
-                        {
+                        beforeSend : function() {
                             index = layer.load();
                         },
                         success : function(resultdata) {
-                             layer.close(index);
+                            layer.close(index);
                             if (resultdata.success) {
-                                layer.msg(resultdata.message,{icon:1});
+                                layer.msg(resultdata.message, {
+                                    icon : 1
+                                });
                                 webside.common.loadPage(listUrl + '?page=' + $("#pageNum").val() + '&rows=' + $("#pageSize").val() + '&sidx=' + $("#orderByColumn").val() + '&sord=' + $("#orderByType").val());
                             } else {
                                 layer.msg(resultdata.message, {
@@ -725,4 +738,3 @@ var webside = {
         }
     }
 };
-

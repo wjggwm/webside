@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet"
 	href="${ctx }/resources/js/select2/select2.min.css" />
@@ -125,13 +126,15 @@ $(document).ready(function() {
 				</div>
 			</div>
 			
-			<div class="form-group" id="sourceUrlDiv" 
+			<!-- 
 			<c:choose>
 				<c:when test="${!empty resourceEntity}">
 					<c:if test="${resourceEntity.parentId eq null}">style="display: none;"</c:if>
 				</c:when>
 				<c:otherwise>style="display: none;"</c:otherwise>
-			</c:choose>>
+			</c:choose>
+			 -->
+			<div class="form-group" id="sourceUrlDiv" >
 				<label class="control-label col-sm-1 no-padding-right"
 					for="sourceUrl">资源URL</label>
 				<div class="col-sm-10">
@@ -143,14 +146,14 @@ $(document).ready(function() {
 				</div>
 			</div>
 			
-			<div id="iconDiv" class="form-group" 
-			<c:if test="${resourceEntity.parentId ne null}">style="display: none;"</c:if>>
+			<!-- <c:if test="${resourceEntity.parentId ne null}">style="display: none;"</c:if> -->
+			<div id="iconDiv" class="form-group" >
 				<label class="control-label col-sm-1 no-padding-right" for="icon">菜单图标</label>
 				<div class="col-sm-10">
 				<div class="clearfix">
 					<input class="form-control source-icon" name="icon" id="icon" type="text"
 						value="${resourceEntity.icon }" placeholder="请选择菜单图标..."/> 
-					<i id="iconShow" class="${resourceEntity.icon } green fa-2x iconShow"></i>
+					<i id="iconShow" data-rel="tooltip" data-placement="left" data-original-title="点击清除图标" class="<c:if test="${fn:length(resourceEntity.icon) gt 0 }">${resourceEntity.icon } green fa-2x iconShow tooltip-success</c:if>"></i>
 				</div>
 				</div>
 			</div>

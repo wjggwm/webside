@@ -33,4 +33,9 @@ public class ResourceServiceImpl extends AbstractService<ResourceEntity, Long> i
 		return resourceMapper.queryResourceList(parameter);
 	}
 
+	@Override
+	public List<ResourceEntity> findResourcesMenuByUserId(int userId) {
+		return resourceMapper.findResourcesMenuByUserId(userId);
+	}
+
 }

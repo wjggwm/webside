@@ -8,10 +8,10 @@
 <script type="text/javascript">
 $(function() {
     webside.index.initHomePage();
-    webside.index.initMenu();
     webside.index.initNavigation();
     webside.index.initScrollBar();
-    webside.index.initMenuStyle();
+    webside.index.menu.initDropdownMenuStyle();
+    webside.index.menu.initMenuEvent();
 });
 </script>
 </head>
@@ -108,7 +108,7 @@ $(function() {
 
 								<li class="dropdown-footer">
 									<a href="#">
-										See all notifications
+										查看所有通知
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
 								</li>
@@ -191,27 +191,61 @@ $(function() {
 				</div>
 			</div>
 			<!-- /.sidebar-shortcuts -->
-
 			<ul class="nav nav-list">
-
+			<!-- 最多支持四级菜单 -->
 			<c:forEach var="resource" items="${list}" varStatus="s">
-					<li class=""><a href="javascript:void(0)" <c:if test="${resource.type eq 0 and fn:length(resource.sourceUrl) gt 0 }"> nav-menu="${resource.name },${resource.sourceUrl }"</c:if> <c:if test="${fn:length(resource.children) gt 0 }">class="dropdown-toggle"</c:if>> <i
-							class="menu-icon fa ${resource.icon }"></i> <span class="menu-text">
-								${resource.name } </span> <b class="arrow<c:if test="${fn:length(resource.children) gt 0 }"> fa fa-angle-down</c:if>"></b>
-					</a> <b class="arrow"></b>
+					<!-- 一级 -->
+					<li level="level1" class="">
+					<a href="javascript:void(0)" <c:if test="${fn:length(resource.sourceUrl) gt 0 }"> nav-menu="${resource.name },${resource.sourceUrl }"</c:if> <c:if test="${fn:length(resource.children) gt 0 }"> class="dropdown-toggle"</c:if>> 
+						<i class="menu-icon fa ${resource.icon }"></i> 
+						<span class="menu-text">${resource.name } </span> 
+						<b class="arrow<c:if test="${fn:length(resource.children) gt 0 }"> fa fa-angle-down</c:if>"></b>
+					</a>
+					<b class="arrow"></b>
 					<c:if test="${fn:length(resource.children) gt 0 }" >
 						<ul class="submenu">
-						<c:forEach var="childrens" items="${resource.children}" varStatus="idx">
-								<li class=""><a href="javascript:void(0)"
-								nav-menu="${resource.name },${childrens.name },${childrens.sourceUrl }"> <i
-										class="menu-icon fa fa-caret-right"></i> ${childrens.name }
-								</a> <b class="arrow"></b></li>
-						</c:forEach>
+							<!-- 二级 -->
+							<c:forEach var="firstChildrens" items="${resource.children}" varStatus="idx1">
+									<li level="level2" class="">
+										<a href="javascript:void(0)" <c:if test="${fn:length(firstChildrens.sourceUrl) gt 0 }">nav-menu="${resource.name },${firstChildrens.name },${firstChildrens.sourceUrl }"</c:if><c:if test="${fn:length(firstChildrens.children) gt 0 }"> class="dropdown-toggle"</c:if>> 
+											<i class="menu-icon fa fa-caret-right"></i> ${firstChildrens.name }
+											<c:if test="${fn:length(firstChildrens.children) gt 0 }"><b class="arrow  fa fa-angle-down"></b></c:if>
+										</a>
+										<b class="arrow"></b>
+										<c:if test="${fn:length(firstChildrens.children) gt 0 }" >
+											<ul class="submenu">
+												<!-- 三级 -->
+												<c:forEach var="secondChildrens" items="${firstChildrens.children}" varStatus="idx2">
+														<li level="level3" class="">
+															<a href="javascript:void(0)" <c:if test="${fn:length(secondChildrens.sourceUrl) gt 0 }">nav-menu="${resource.name },${firstChildrens.name },${secondChildrens.name },${secondChildrens.sourceUrl }"</c:if><c:if test="${fn:length(secondChildrens.children) gt 0 }"> class="dropdown-toggle"</c:if>> 
+																<i class="menu-icon <c:if test="${fn:length(secondChildrens.icon) gt 0 }">${secondChildrens.icon } green</c:if><c:if test="${fn:length(secondChildrens.icon) le 0 }">fa fa-caret-right</c:if>"></i> ${secondChildrens.name }
+																<c:if test="${fn:length(secondChildrens.children) gt 0 }"><b class="arrow  fa fa-angle-down"></b></c:if>
+															</a>
+															<b class="arrow"></b>
+															<c:if test="${fn:length(secondChildrens.children) gt 0 }" >
+																<ul class="submenu">
+																	<!-- 四级 -->
+																	<c:forEach var="thridChildrens" items="${secondChildrens.children}" varStatus="idx3">
+																			<li level="level4" class="">
+																				<a href="javascript:void(0)" <c:if test="${fn:length(thridChildrens.sourceUrl) gt 0 }">nav-menu="${resource.name },${firstChildrens.name },${secondChildrens.name },${thridChildrens.name },${thridChildrens.sourceUrl }"</c:if><c:if test="${fn:length(thridChildrens.children) gt 0 }"> class="dropdown-toggle"</c:if>> 
+																					<i class="menu-icon <c:if test="${fn:length(thridChildrens.icon) gt 0 }">${thridChildrens.icon } orange</c:if><c:if test="${fn:length(thridChildrens.icon) le 0 }">fa fa-caret-right</c:if>"></i> ${thridChildrens.name }
+																				</a> 
+																				<b class="arrow"></b>
+																			</li>
+																	</c:forEach>
+																</ul>
+															</c:if>
+														</li>
+												</c:forEach>
+											</ul>
+										</c:if>
+									</li>
+							</c:forEach>
 						</ul>
 					</c:if>
 				</li>
 			</c:forEach>
-
+			
 			</ul>
 			<!-- /.nav-list -->
 

@@ -15,6 +15,14 @@ public interface ResourceService{
 	 */
 	public List<ResourceEntity> findResourcesByUserId(int userId);
 
+	/**
+	 * 自定义方法
+	 * 获取用户ID对应的资源菜单信息
+	 * @param userId
+	 * @return
+	 */
+	public List<ResourceEntity> findResourcesMenuByUserId(int userId);
+	
 	public List<ResourceEntity> queryListByPage(Map<String, Object> parameter);
 	
 	public ResourceEntity findByName(String name);

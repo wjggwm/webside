@@ -23,7 +23,7 @@ $(function() {
         $(this).bind('click', function(e) {
             var icon = $(this).find("i").attr("class").replace('fa-3x', '');
             parent.$("#icon").val(icon);
-            parent.$("#iconShow").removeClass().addClass(icon + ' fa-2x green iconShow');
+            parent.$("#iconShow").removeClass().addClass(icon + ' fa-2x green iconShow tooltip-success');
             //先得到当前iframe层的索引
             var index = parent.layer.getFrameIndex(window.name);
             //再执行关闭
