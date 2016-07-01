@@ -49,7 +49,8 @@ var dtGridOption = {
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
     toolbarContainer : 'dtGridToolBarContainer',
-    tools : '',
+    tools : 'refresh|print|export[excel,pdf]',
+    exportFileName : '用户登录信息',
     pageSize : 10,
     pageSizeLimit : [10, 20, 30]
 };
