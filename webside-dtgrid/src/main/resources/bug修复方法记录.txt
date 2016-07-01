@@ -1,5 +1,7 @@
 1、dlshouwen.grid.v1.2.1  分页条页码大小不一，分页说明和页面导航垂直不对齐的修改方法
 	1、页面大小不一：bootstrap.min.css 中搜索 .pagination>li>a,.pagination>li>span 将 float:left 取消掉
-	2、垂直不对齐：dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-pager .dlshouwen-grid-pager-status 删掉margin:6px 20px 0 0;
+	2、垂直不对齐：dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-pager .dlshouwen-grid-pager-status 修改为float:right;margin:-3px 0px 0px 0px;height:28px;line-height:28px;
 2、修复火狐浏览器下分页页码水平不对齐的bug
-	1、在dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-pager .dlshouwen-grid-pager-button 修改为float:right;margin:2px 0px 8px 10px;white-space: nowrap;
+	1、在dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-pager .dlshouwen-grid-pager-button 修改为float:right;margin:2px 0px 11px 10px;white-space: nowrap;
+3、工具栏调整
+	1、在dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-tools 修改为 float:left;margin:0px 0px 12px 0px
