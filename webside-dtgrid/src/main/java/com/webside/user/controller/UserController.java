@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,9 +23,10 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.dtgrid.model.Pager;
+import com.webside.dtgrid.util.ExportUtils;
 import com.webside.exception.AjaxException;
 import com.webside.exception.ServiceException;
-import com.webside.model.dtgrid.Pager;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
 import com.webside.user.model.UserEntity;
@@ -73,28 +75,50 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/list.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(String gridPager) throws Exception{
+	public Object list(String gridPager, HttpServletResponse response) throws Exception{
 		Map<String, Object> parameters = null;
-		// 映射Pager对象
+		//1、映射Pager对象
 		Pager pager = JSON.parseObject(gridPager, Pager.class);
-		// 判断是否包含自定义参数
+		//2、设置查询参数
+		//获取登录用户
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		UserEntity sessionUser = (UserEntity)request.getSession().getAttribute("userSession");
 		parameters = pager.getParameters();
+		parameters.put("creatorName", sessionUser.getAccountName());
 		if (parameters.size() < 0) {
 			parameters.put("userName", null);
 		}
-		// 设置分页，page里面包含了分页信息
-		Page<Object> page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "u_id DESC");
-		List<UserEntity> list = userService.queryListByPage(parameters);
-		parameters.clear();
-		parameters.put("isSuccess", Boolean.TRUE);
-		parameters.put("nowPage", pager.getNowPage());
-		parameters.put("pageSize", pager.getPageSize());
-		parameters.put("pageCount", page.getPages());
-		parameters.put("recordCount", page.getTotal());
-		parameters.put("startRecord", page.getStartRow());
-		//列表展示数据
-		parameters.put("exhibitDatas", list);
-		return parameters;
+		//3、判断是否是导出操作
+		if(pager.getIsExport())
+		{
+			if(pager.getExportAllData())
+			{
+				//3.1、导出全部数据
+				List<UserEntity> list = userService.queryListByPage(parameters);
+				ExportUtils.exportAll(response, pager, list);
+				return null;
+			}else
+			{
+				//3.2、导出当前页数据
+				ExportUtils.export(response, pager);
+				return null;
+			}
+		}else
+		{
+			//设置分页，page里面包含了分页信息
+			Page<Object> page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "u_id DESC");
+			List<UserEntity> list = userService.queryListByPage(parameters);
+			parameters.clear();
+			parameters.put("isSuccess", Boolean.TRUE);
+			parameters.put("nowPage", pager.getNowPage());
+			parameters.put("pageSize", pager.getPageSize());
+			parameters.put("pageCount", page.getPages());
+			parameters.put("recordCount", page.getTotal());
+			parameters.put("startRecord", page.getStartRow());
+			//列表展示数据
+			parameters.put("exhibitDatas", list);
+			return parameters;
+		}
 	}
 	
 	
@@ -130,7 +154,7 @@ public class UserController extends BaseController {
 			userEntity.setPassword(user.getPassword());
 			userEntity.setCredentialsSalt(user.getCredentialsSalt());
 			//设置创建者姓名
-			userEntity.setCreatorName(sessionUser.getUserName());
+			userEntity.setCreatorName(sessionUser.getAccountName());
 			userEntity.setCreateTime(new Date());
 			//设置锁定状态：未锁定；删除状态：未删除
 			userEntity.setLocked(0);
@@ -305,7 +329,7 @@ public class UserController extends BaseController {
 		return result;
 	}
 	
-	@RequestMapping("resetPassWithoutAuthc.html")
+	@RequestMapping("withoutAuth/resetPassWithoutAuthc.html")
 	@ResponseBody
 	public Object resetPassWithoutAuthc(UserEntity userEntity){
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -313,40 +337,18 @@ public class UserController extends BaseController {
 		{
 			//生成随机密码
 			String password = RandomUtil.generateString(6);
-			
 			//加密用户输入的密码，得到密码和加密盐，保存到数据库
 			UserEntity user = EndecryptUtils.md5Password(userEntity.getAccountName(), password, 2);
 			//设置添加用户的密码和加密盐
 			userEntity.setPassword(user.getPassword());
 			userEntity.setCredentialsSalt(user.getCredentialsSalt());
-			if(userEntity.getId() == null)
+			
+			user = null;
+			user = userService.findByName(userEntity.getAccountName());
+			if(user != null)
 			{
-				user = null;
-				user = userService.findByName(userEntity.getAccountName());
-				if(user != null)
-				{
-					userEntity.setId(user.getId());
-					userEntity.setUserName(user.getUserName());
-					int cnt = userService.updateOnly(userEntity, password);
-					if(cnt > 0)
-					{
-						result.put("success", true);
-						result.put("data", null);
-						result.put("message", "密码重置成功");
-					}else
-					{
-						result.put("success", false);
-						result.put("data", null);
-						result.put("message", "密码重置失败");
-					}
-				}else
-				{
-					result.put("success", false);
-					result.put("data", null);
-					result.put("message", "账户不存在");
-				}
-			}else
-			{
+				userEntity.setId(user.getId());
+				userEntity.setUserName(user.getUserName());
 				int cnt = userService.updateOnly(userEntity, password);
 				if(cnt > 0)
 				{
@@ -359,8 +361,12 @@ public class UserController extends BaseController {
 					result.put("data", null);
 					result.put("message", "密码重置失败");
 				}
+			}else
+			{
+				result.put("success", false);
+				result.put("data", null);
+				result.put("message", "账户不存在");
 			}
-			
 		}catch(Exception e)
 		{
 			throw new AjaxException(e);
@@ -455,7 +461,7 @@ public class UserController extends BaseController {
 	}
 	
 	
-	@RequestMapping("validateAccountName.html")
+	@RequestMapping("withoutAuth/validateAccountName.html")
 	@ResponseBody
 	public Object validateAccount(String accountName){
 		try

@@ -168,10 +168,8 @@ function resetPassword()
     var index = layer.load();
     $.ajax({
         type : "POST",
-        url : sys.rootPath + '/user/resetPassword.html',
-        data : {
-            "accountName" : accountName
-        },
+        url : sys.rootPath + '/user/withoutAuth/resetPassWithoutAuthc.html',
+        data : {"accountName" : accountName},
         dataType : "json",
         success : function(resultdata) {
             layer.close(index);

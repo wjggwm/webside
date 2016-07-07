@@ -36,9 +36,13 @@ public interface RoleMapper extends BaseMapper<RoleEntity, Long>{
 	public int deleteRoleResource(@Param(value="roleId") int roleId);
 	
 	/**
+	 * 批量添加角色和权限映射信息
+	 * @return
+	 */
+	public int addRoleResourceBatch(Map<String, Object> parameter);
+	
+	/**
 	 * 添加角色和权限映射信息
-	 * @param roleId	角色id
-	 * @param list<Long>
 	 * @return
 	 */
 	public int addRoleResource(Map<String, Object> parameter);

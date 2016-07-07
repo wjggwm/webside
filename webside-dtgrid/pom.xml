@@ -122,11 +122,29 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-quartz</artifactId>
 			<version>${shiro.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.opensymphony.quartz</groupId>
+					<artifactId>quartz</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- shiro-redis实现 -->
+		<dependency>
+			<groupId>org.crazycake</groupId>
+			<artifactId>shiro-redis</artifactId>
+			<version>2.4.2.1-RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-aspectj</artifactId>
 			<version>${shiro.version}</version>
+		</dependency>
+		<!-- 定时任务 -->
+		<dependency>
+			<groupId>org.opensymphony.quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 		<!-- spring framework 依赖 -->
 		<dependency>
@@ -345,24 +363,42 @@
 			<artifactId>sirona-web</artifactId>
 			<version>${sirona.version}</version>
 		</dependency>
+		<!-- 响应式编程框架 -->
 		<dependency>
 			<groupId>io.reactivex</groupId>
 			<artifactId>rxjava</artifactId>
 			<version>${rxjava.version}</version>
 		</dependency>
+
+		<!-- 消息队列 -->
 		<dependency>
-			<groupId>org.crazycake</groupId>
-			<artifactId>shiro-redis</artifactId>
-			<version>2.4.2.1-RELEASE</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.rabbitmq</groupId>
-			<artifactId>amqp-client</artifactId>
-			<version>3.6.2</version>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.13.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.9</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-asian</artifactId>
+			<version>5.2.0</version>
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>webside-app</finalName>
+		<finalName>webside</finalName>
 		<plugins>
 			<!-- Run the JUnit unit tests in an isolated classloader -->
 			<plugin>

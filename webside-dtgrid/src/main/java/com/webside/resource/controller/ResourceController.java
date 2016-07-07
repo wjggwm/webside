@@ -21,9 +21,10 @@ import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
-import com.webside.model.dtgrid.Pager;
+import com.webside.dtgrid.model.Pager;
 import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
+import com.webside.roleresource.service.RoleResourceService;
 import com.webside.util.Common;
 import com.webside.util.JSTreeEntity;
 import com.webside.util.PageUtil;
@@ -37,6 +38,9 @@ public class ResourceController extends BaseController {
 
 	@Autowired
 	private ResourceService resourceService;
+	
+	@Autowired
+	private RoleResourceService roleResourceService;
 	
 	@RequestMapping("listUI.html")
 	public String listUI(Model model, HttpServletRequest request) {
@@ -153,8 +157,8 @@ public class ResourceController extends BaseController {
 			{
 				resourceEntity.setIcon(null);
 			}
-			int result = resourceService.insert(resourceEntity);
-			if(result > 0)
+			boolean result = roleResourceService.insertRoleAndResource(resourceEntity);
+			if(result)
 			{
 				map.put("success", Boolean.TRUE);
 				map.put("data", null);

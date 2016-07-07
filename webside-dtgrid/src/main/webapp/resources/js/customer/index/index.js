@@ -249,7 +249,7 @@ var webside = {
                             email : true,
                             remote : {//更新时不验证
                                 param : {
-                                    url : sys.rootPath + '/user/validateAccountName.html',
+                                    url : sys.rootPath + '/user/withoutAuth/validateAccountName.html',
                                     cache : false
                                 },
                                 depends : function() {
@@ -468,14 +468,23 @@ var webside = {
                     ignore : "",
                     rules : {
                         name : {
-                            required : true
+                            required : true,
+                            remote : {
+                                param : {
+                                    url : sys.rootPath + '/role/withoutAuth/validateRoleName.html',
+                                    cache : false
+                                }
+                            }
                         },
                         key : {
                             required : true
                         }
                     },
                     messages : {
-                        name : "请填写角色名称",
+                        name : {
+                            required : "请填写角色名称",
+                            remote : "该角色已存在"
+                        },
                         key : "请填写角色标识"
                     },
                     highlight : function(e) {

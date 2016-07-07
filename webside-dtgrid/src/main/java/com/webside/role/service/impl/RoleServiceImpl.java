@@ -27,7 +27,7 @@ public class RoleServiceImpl extends AbstractService<RoleEntity, Long>
 	}
 
 	@Override
-	public boolean addRolePerm(int id, List<Integer> ids) {
+	public boolean addRolePermBatch(int id, List<Integer> ids) {
 		boolean flag = false;
 		try {
 			int permCount = roleMapper.findRoleResourceById(id);
@@ -44,7 +44,7 @@ public class RoleServiceImpl extends AbstractService<RoleEntity, Long>
 					Map<String, Object> parameter = new HashMap<String, Object>();
 					parameter.put("roleId", id);
 					parameter.put("resourceIds", ids);
-					int addResult = roleMapper.addRoleResource(parameter);
+					int addResult = roleMapper.addRoleResourceBatch(parameter);
 					if (addResult == ids.size()) {
 						flag = true;
 					}
@@ -64,11 +64,9 @@ public class RoleServiceImpl extends AbstractService<RoleEntity, Long>
 			// 1、删除该角色的权限信息
 			roleMapper.deleteRoleResource(id.intValue());
 			// 2、删除该角色
-			if(roleMapper.deleteById(id)>0)
-			{
+			if (roleMapper.deleteById(id) > 0) {
 				return Boolean.TRUE;
-			}else
-			{
+			} else {
 				return Boolean.FALSE;
 			}
 		} catch (Exception e) {
@@ -79,6 +77,18 @@ public class RoleServiceImpl extends AbstractService<RoleEntity, Long>
 	@Override
 	public int findRoleUserById(int roleId) {
 		return roleMapper.findRoleUserById(roleId);
+	}
+
+	@Override
+	public boolean addRolePerm(Long roleId, Long resourceId) {
+		try {
+			Map<String, Object> parameter = new HashMap<String, Object>();
+			parameter.put("roleId", roleId);
+			parameter.put("resourceId", resourceId);
+			return roleMapper.addRoleResource(parameter) > 0 ? true : false;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 
 }

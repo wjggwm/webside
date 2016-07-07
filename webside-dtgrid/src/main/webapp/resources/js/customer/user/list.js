@@ -10,7 +10,10 @@ var dtGridColumns = [{
     title : '账户名',
     type : 'string',
     columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header'
+    headerClass : 'dlshouwen-grid-header',
+    resolution : function(value, record, column, grid, dataNo, columnNo) {
+        return '<a href="mailto:'+value+'">'+value+'</a>';
+    }
 }, {
     id : 'userName',
     title : '姓名',
@@ -18,17 +21,17 @@ var dtGridColumns = [{
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header'
 }, {
-    id : 'role',
+    id : 'roleName',
     title : '所属角色',
     type : 'string',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
     hideType : 'xs',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
-        if (typeof(value) == "undefined") {
+        if (/*typeof(value) == "undefined" ||*/ "" == value || null == value) {
             return '未指定';
         } else {
-            return value.name;
+            return value;
         }
     }
 }, {
@@ -109,7 +112,7 @@ var dtGridOption = {
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
     toolbarContainer : 'dtGridToolBarContainer',
-    tools : 'refresh|print|export[excel,pdf]',
+    tools : 'refresh|print|export[excel,csv,pdf,txt]',
     exportFileName : '用户信息',
     pageSize : pageSize,
     pageSizeLimit : [10, 20, 30]

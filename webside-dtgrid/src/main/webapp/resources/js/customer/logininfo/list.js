@@ -42,7 +42,7 @@ var dtGridOption = {
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
     toolbarContainer : 'dtGridToolBarContainer',
-    tools : 'refresh|print|export[excel,pdf]',
+    tools : 'refresh|print|export[excel,csv,pdf,txt]',
     exportFileName : '用户操作信息',
     pageSize : 10,
     pageSizeLimit : [10, 20, 30]

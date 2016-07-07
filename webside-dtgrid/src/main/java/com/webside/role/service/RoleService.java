@@ -13,7 +13,7 @@ public interface RoleService {
 	
 	public int insert(RoleEntity roleEntity);
 	
-	public RoleEntity findById(Long id);
+	public RoleEntity findById(Long roleId);
 
 	public int update(RoleEntity roleEntity);
     
@@ -21,7 +21,9 @@ public interface RoleService {
     
     public boolean deleteRoleById(Long roleId);
     
-    public boolean addRolePerm(int id, List<Integer> ids) throws Exception ;
+    public boolean addRolePermBatch(int roleId, List<Integer> ids);
+    
+    public boolean addRolePerm(Long roleId, Long resourceId);
 
     public int findRoleUserById(int roleId);
 }

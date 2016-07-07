@@ -96,6 +96,9 @@
 			<if test="userName != null and userName != ''">
 				u.u_name=#{userName} or u.u_account_name=#{userName}
 			</if>
+			<if test="creatorName !=null and creatorName != ''">
+				and u.u_creator_name = #{creatorName}
+			</if>
 		</where>
 	</select>
 	

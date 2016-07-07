@@ -189,7 +189,7 @@
 		where r_id = ${roleId}
 	</select>
 	
-	<insert id="addRoleResource" parameterType="map">
+	<insert id="addRoleResourceBatch" parameterType="map">
 		insert ignore into tb_resources_role (
 			s_id,
 			r_id,
@@ -203,6 +203,20 @@
 				now()
 			)
 		</foreach>
+	</insert>
+	
+	<insert id="addRoleResource" parameterType="map">
+		insert ignore into tb_resources_role (
+			s_id,
+			r_id,
+			t_create_time
+		)   
+		values 
+			(
+				#{resourceId},
+				#{roleId},
+				now()
+			)
 	</insert>
 	
 </mapper>

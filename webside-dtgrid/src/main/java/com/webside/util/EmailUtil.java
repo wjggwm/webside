@@ -1,6 +1,9 @@
 package com.webside.util;
 
+import javax.mail.AuthenticationFailedException;
+
 import jodd.mail.Email;
+import jodd.mail.MailException;
 import jodd.mail.SendMailSession;
 import jodd.mail.SmtpServer;
 
@@ -39,21 +42,15 @@ public class EmailUtil {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public boolean send126Mail(String toMail, String subject, String text) throws Exception{
-		boolean flag = false;
-		try {
-			Email email = Email.create().from(USER_126).to(toMail)
-					.subject(subject).addText(text);
-			SmtpServer smtpServer = SmtpServer.create("smtp.126.com")
-					.authenticateWith(USER_126, PASSWORD_126);
-			SendMailSession session = smtpServer.createSession();
-			session.open();
-			session.sendMail(email);
-			session.close();
-			flag = true;
-		} catch (Exception e) {
-			throw new RuntimeException("邮件发送失败:"+ e.getMessage());
-		}
-		return flag;
+	public boolean send126Mail(String toMail, String subject, String text) throws AuthenticationFailedException,MailException{
+		Email email = Email.create().from(USER_126).to(toMail)
+				.subject(subject).addText(text);
+		SmtpServer smtpServer = SmtpServer.create("smtp.126.com")
+				.authenticateWith(USER_126, PASSWORD_126);
+		SendMailSession session = smtpServer.createSession();
+		session.open();
+		session.sendMail(email);
+		session.close();
+		return true;
 	}
 }

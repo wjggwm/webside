@@ -12,11 +12,10 @@
 		<!-- hashAlgorithmName必须的，没有默认值。可以有MD5或者SHA-1，如果对密码安全有更高要求可以用SHA-256或者更高。 
 			这里使用MD5 storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码 
 			hashIterations迭代次数，默认值是1。 -->
-		<!-- <constructor-arg ref="redisCacheManager"/> -->
 		<constructor-arg ref="shiroCacheManager" />
 		<!-- RetryLimitHashedCredentialsMatcher继承父类HashedCredentialsMatcher，需要给父类注入以下属性 -->
 		<property name="hashAlgorithmName" value="MD5" />
-		<property name="hashIterations" value="2" />
+		<property name="hashIterations" value="${shiro.hashIterations}" />
 		<!-- 这里需要和注册时使用的加密方式一样，都使用MD5加密，然后转为base64,密码匹配也需和注册时的加密方式一致 -->
 		<property name="storedCredentialsHexEncoded" value="false" />
 	</bean>
@@ -43,7 +42,6 @@
 		<property name="realm" ref="myRealm" />
 		<property name="sessionManager" ref="shiroSessionManager" />
 		<!-- 使用下面配置的缓存管理器 -->
-		<!--<property name="cacheManager" ref="redisCacheManager"/>-->
 		 <property name="cacheManager" ref="shiroCacheManager" /> 
 		<!-- sessionMode参数设置为native时，那么shrio就将用户的基本认证信息保存到缺省名称为shiro-activeSessionCache 
 			的Cache中 -->
@@ -57,7 +55,6 @@
 
 	<!-- 用户登录数控制,超过最大回话数会强制退出 -->
 	<bean id="kickoutSessionFilter" class="com.webside.shiro.filter.KickoutSessionFilter">
-		<!-- <property name="cacheManager" ref="redisCacheManager" /> -->
 		<property name="cacheManager" ref="shiroCacheManager" />
 		<property name="sessionManager" ref="shiroSessionManager" />
 		<property name="kickoutAfter" value="false" />
@@ -98,14 +95,13 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/resources/** = anon
-				/login.html = anon
+				/login.html = authc
 				/logout.html = logout
 				/register.html = anon
-				/user/resetPassWithoutAuthc.html = anon
-				/user/validateAccountName.html = anon
 				/captcha.html = anon
 				/denied.jsp = anon
 				/view/error/** = anon
+				/*/withoutAuth/** = anon
 			</value>
 		</property>
 	</bean>
@@ -144,8 +140,7 @@
 		<property name="sessionIdCookieEnabled" value="true" />
 		<property name="sessionIdCookie" ref="sessionIdCookie" />
 		<property name="deleteInvalidSessions" value="true" />
-		<property name="sessionDAO" ref="redisSessionDAO" />
-		<!-- <property name="sessionDAO" ref="sessionDAO" /> -->
+		<property name="sessionDAO" ref="sessionDAO" />
 		<property name="sessionValidationSchedulerEnabled" value="true" />
 		<property name="globalSessionTimeout" value="1800000" />
 		<property name="sessionValidationInterval" value="1800000" /><!--Session 超时检测时间 单位：毫秒 -->
@@ -158,44 +153,8 @@
 		<property name="cacheManager" ref="ehCacheManager" />
 	</bean>
 
-	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-		<property name="cacheManager" ref="ehCacheManagerFactory" />
-	</bean>
-
-	<!--ehcache -->
-	<bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<property name="configLocation" value="classpath:ehcache.xml" />
-		<property name="shared" value="true" />
-	</bean>
-
-
-	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<!-- Shiro生命周期处理器-->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-
-
-	<!-- shiro redisManager -->
-	<bean id="redisManager" class="org.crazycake.shiro.RedisManager">
-		<property name="host" value="127.0.0.1" />
-		<property name="port" value="6379" />
-		<property name="expire" value="1800" />
-		<!-- optional properties -->
-		<property name="timeout" value="10000" />
-		<property name="password" value="adsage" />
-	</bean>
-
-	<!-- redisSessionDAO -->
-	<bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
-		<property name="redisManager" ref="redisManager" />
-		<!-- <property name="keyPrefix" value=""/> -->
-	</bean>
-
-
-	<!-- redisCacheManager -->
-	<bean id="redisCacheManager" class="org.crazycake.shiro.RedisCacheManager">
-		<property name="redisManager" ref="redisManager" />
-		<!-- <property name="keyPrefix" value=""/> -->
-	</bean>
-
 
 	<!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->
 	<!-- 配置以下两个bean即可实现此功能 -->

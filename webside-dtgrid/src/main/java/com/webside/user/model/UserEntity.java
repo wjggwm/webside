@@ -46,6 +46,8 @@ public class UserEntity extends BaseEntity{
 	 * 个人资料信息
 	 */
 	private UserInfoEntity userInfo;
+	
+	private String roleName;
 
 	public String getUserName() {
 		return userName;
@@ -133,6 +135,8 @@ public class UserEntity extends BaseEntity{
 
 	public void setRole(RoleEntity role) {
 		this.role = role;
+		//设置角色名称,dtgrid使用
+		this.roleName = role.getName();
 	}
 	
 	public UserInfoEntity getUserInfo() {
@@ -141,6 +145,10 @@ public class UserEntity extends BaseEntity{
 
 	public void setUserInfo(UserInfoEntity userInfo) {
 		this.userInfo = userInfo;
+	}
+	
+	public String getRoleName() {
+		return roleName;
 	}
 
 	@Override

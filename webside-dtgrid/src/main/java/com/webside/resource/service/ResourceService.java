@@ -27,8 +27,6 @@ public interface ResourceService{
 	
 	public ResourceEntity findByName(String name);
 	
-	public int insert(ResourceEntity resourceEntity);
-	
 	public ResourceEntity findById(Long id);
 
 	public int update(ResourceEntity resourceEntity);
@@ -36,4 +34,6 @@ public interface ResourceService{
     public int deleteBatchById(List<Long> roleIds);
     
     public List<ResourceEntity> queryResourceList(Map<String, Object> parameter);
+    
+    public int insert(ResourceEntity resourceEntity);
 }

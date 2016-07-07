@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import jodd.util.StringUtil;
 
@@ -16,15 +17,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.dtgrid.model.Pager;
+import com.webside.dtgrid.util.ExportUtils;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
-import com.webside.model.dtgrid.Pager;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
 import com.webside.util.Common;
@@ -59,7 +62,7 @@ public class RoleController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "list.html", method = RequestMethod.POST)
-	public Object list(String gridPager) throws Exception{
+	public Object list(String gridPager, HttpServletResponse response) throws Exception{
 		Map<String, Object> parameters = null;
 		// 映射Pager对象
 		Pager pager = JSON.parseObject(gridPager, Pager.class);
@@ -68,22 +71,37 @@ public class RoleController extends BaseController {
 		if (parameters.size() < 0) {
 			parameters.put("name", null);
 		}
-		
-		//设置分页，page里面包含了分页信息
-		Page<Object> page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "r_id DESC");
-	
-		List<RoleEntity> list = roleService.queryListByPage(parameters);
-		parameters.clear();
-		parameters.put("isSuccess", Boolean.TRUE);
-		parameters.put("nowPage", pager.getNowPage());
-		parameters.put("pageSize", pager.getPageSize());
-		parameters.put("pageCount", page.getPages());
-		parameters.put("recordCount", page.getTotal());
-		parameters.put("startRecord", page.getStartRow());
-		//列表展示数据
-		parameters.put("exhibitDatas", list);
-		return parameters;
-		
+		//3、判断是否是导出操作
+				if(pager.getIsExport())
+				{
+					if(pager.getExportAllData())
+					{
+						//3.1、导出全部数据
+						List<RoleEntity> list = roleService.queryListByPage(parameters);
+						ExportUtils.exportAll(response, pager, list);
+						return null;
+					}else
+					{
+						//3.2、导出当前页数据
+						ExportUtils.export(response, pager);
+						return null;
+					}
+				}else
+				{
+					//设置分页，page里面包含了分页信息
+					Page<Object> page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "r_id DESC");
+					List<RoleEntity> list = roleService.queryListByPage(parameters);
+					parameters.clear();
+					parameters.put("isSuccess", Boolean.TRUE);
+					parameters.put("nowPage", pager.getNowPage());
+					parameters.put("pageSize", pager.getPageSize());
+					parameters.put("pageCount", page.getPages());
+					parameters.put("recordCount", page.getTotal());
+					parameters.put("startRecord", page.getStartRow());
+					//列表展示数据
+					parameters.put("exhibitDatas", list);
+					return parameters;
+				}
 	}
 	
 	
@@ -238,7 +256,7 @@ public class RoleController extends BaseController {
 					list.add(Integer.valueOf(id));
 				}
 			}
-			boolean result = roleService.addRolePerm(roleId, list);
+			boolean result = roleService.addRolePermBatch(roleId, list);
 			if(result)
 			{
 				map.put("success", Boolean.TRUE);
@@ -257,5 +275,24 @@ public class RoleController extends BaseController {
 		return map;
 	}
 	
+	@RequestMapping("withoutAuth/validateRoleName.html")
+	@ResponseBody
+	public Object validateRoleName(@RequestParam(value="name")String roleName){
+		try
+		{
+			roleName = new String(roleName.getBytes("iso-8859-1"),"utf-8");
+			RoleEntity roleEntity = roleService.findByName(roleName);
+			if(roleEntity == null)
+			{
+				return true;
+			}else
+			{
+				return false;
+			}
+		}catch(Exception e)
+		{
+			throw new AjaxException(e);
+		}
+	}
 	
 }

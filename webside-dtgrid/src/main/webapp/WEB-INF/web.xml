@@ -122,11 +122,7 @@
 	<!-- 配置spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-		classpath:spring/spring-applicationContext.xml,
-		classpath:spring/spring-shiro.xml,
-		classpath:spring/spring-kaptcha.xml
-		</param-value>
+		<param-value>classpath:spring/spring-applicationContext.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
