@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+           http://www.springframework.org/schema/aop   
+           http://www.springframework.org/schema/aop/spring-aop-4.1.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx-4.1.xsd ">
+
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		<property name="slowSqlMillis" value="30000" />
+		<property name="logSlowSql" value="true" />
+		<property name="mergeSql" value="true" />
+		<property name="dbType" value="mysql" />
+	</bean>
+
+	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+    	<property name="resultSetLogEnabled" value="true" />
+	</bean>
+
+	<!-- 配置数据源,使用 druid -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${druid.initialSize}" />
+		<property name="minIdle" value="${druid.minIdle}" />
+		<property name="maxActive" value="${druid.maxActive}" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${druid.maxWait}" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${druid.validationQuery}" />
+		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
+		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
+		<property name="testOnReturn" value="${druid.testOnReturn}" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+
+		<property name="maxOpenPreparedStatements" value="${druid.maxOpenPreparedStatements}" />
+
+		<!-- 打开removeAbandoned功能 -->
+		<property name="removeAbandoned" value="${druid.removeAbandoned}" />
+		<!-- 1800秒，也就是30分钟,超过30分钟,连接会自动关闭 -->
+		<property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}" />
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="${druid.logAbandoned}" />
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="${druid.filters}" />
+		<property name="proxyFilters">
+			<list>
+				<ref bean="stat-filter" />
+				<ref bean="log-filter"/>
+			</list>
+		</property>
+		<property name="connectionProperties" value="${druid.connectionProperties}" />
+		<property name="useGlobalDataSourceStat" value="${druid.useGlobalDataSourceStat}" />
+	</bean>
+
+	<!-- 使用sqlSessionFactoryBean工厂产生SqlSession对象，方便后期注入Dao -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- mybatis 设置 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<!-- 匹配Mapper映射文件 -->
+		<property name="mapperLocations"
+			value="classpath:mybatis/mapper/sqlmap-mapping-*.xml" />
+		<property name="typeAliasesPackage" value="com.webside.*.model" />
+	</bean>
+
+	<!-- 通过扫描的模式,不需要配置SqlSessionFactory 或 SqlSessionTemplate,MapperScannerConfigurer 
+		将会创建 MapperFactoryBean,之后自动装配; 但是,如果你使用了一个 以上的 DataSource ,那么自动装配可能会失效 。这种情况下 
+		,你可以使用 sqlSessionFactoryBeanName 或 sqlSessionTemplateBeanName 属性来设置正确的 bean 
+		名 称来使用; 注意 bean 的名称是必须的,而不是 bean 的引用,因 此,value 属性在这里替代通常的 ref; 扫描目录在com.webside.*.mapper目录下，所有的mapper都继承SqlMapper接口， 
+		这样一个bean就可以了 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.webside.*.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<!--配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<!-- 事物管理方式一：基于xml配置方式 -->
+	<!-- propagation:事物传播行为
+			 1、REQUIRED（默认值）：在有transaction状态下执行；如当前没有transaction，则创建新的transaction
+			 2、SUPPORTS：如当前有transaction，则在transaction状态下执行；如果当前没有transaction，在无transaction状态下执行
+			 3、MANDATORY：必须在有transaction状态下执行，如果当前没有transaction，则抛出异常IllegalTransactionStateException
+			 4、REQUIRES_NEW：创建新的transaction并执行；如果当前已有transaction，则将当前transaction挂起
+			 5、NOT_SUPPORTED：在无transaction状态下执行；如果当前已有transaction，则将当前transaction挂起
+			 6、NEVER：在无transaction状态下执行；如果当前已有transaction，则抛出异常IllegalTransactionStateException
+			 7、NESTED 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与 REQUIRED 类似的操作
+		 read-only:读写或只读事务，默认false(读写)
+		 isolation:可选的事务隔离级别设置 
+		 	1、DEFAULT： 这是一个PlatfromTransactionManager默认的隔离级别，使用数据库默认的事务隔离级别.另外四个与JDBC的隔离级别相对应
+		 	2、READ_COMMITTED： 保证一个事务修改的数据提交后才能被另外一个事务读取。另外一个事务不能读取该事务未提交的数据
+		 	3、READ_UNCOMMITTED： 这是事务最低的隔离级别，它充许令外一个事务可以看到这个事务未提交的数据
+		 	4、REPEATABLE_READ： 这种事务隔离级别可以防止脏读，不可重复读。但是可能出现幻像读
+		 	5、SERIALIZABLE 这是花费最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读
+		 rollback-for:导致事务回滚的异常类数组,Class对象数组，必须继承自Throwable,一般我们都继承RuntimeException 
+		 timeout:事务超时时间设置 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			<tx:method name="add*" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+
+			<tx:method name="find*" propagation="SUPPORTS"/>
+			<tx:method name="query*" propagation="SUPPORTS"/>
+			<tx:method name="count*" propagation="SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice>
+
+
+	<aop:config expose-proxy="true" proxy-target-class="true">
+		<!-- 配置哪些类的方法进行事务管理:定义在service包或者子包里的任意方法的执行 -->
+		<aop:pointcut id="transactionPointcut"
+			expression="execution(* com.webside.*.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointcut" order="0"/>
+	</aop:config>
+
+	<!-- 事物管理方式二：基于@Transactional注解方式 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+
+	<!-- 配置事务异常封装 -->
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!--配置druid spring jdbc监控 -->
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.webside.*.service.*</value>
+				<value>con.webisde.*.mapper.*</value>
+			</list>
+		</property>
+	</bean>
+	<aop:config proxy-target-class="true">
+		<aop:advisor advice-ref="druid-stat-interceptor"
+			pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+
+</beans>
