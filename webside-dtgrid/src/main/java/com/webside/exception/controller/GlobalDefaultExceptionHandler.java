@@ -10,23 +10,19 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.webside.common.Common;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
-import com.webside.util.Common;
 
 /**
  * 
- * <p>
- * Description: Web层异常处理器,这里可以根据不同的异常,写多个方法去处理,可以处理跳转页面请求
- * 跳到异常指定的错误页,也可以处理Ajax请求,根据不同异常,在页面输出不同的提示信息
- * </p>
- * <p>
- * Company: 静之殇工作室
- * </p>
- * operateExp 处理普通请求 operateExpAjax 处理Ajax请求
- * 
- * @author wjggwm
- * @date 2016年2月26日 下午4:15:26
+ * @ClassName: GlobalDefaultExceptionHandler
+ * @Description: Web层异常处理器,这里可以根据不同的异常,写多个方法去处理,可以处理跳转页面请求,
+ * 跳到异常指定的错误页,也可以处理Ajax请求,根据不同异常,在页面输出不同的提示信息;
+ * </p>operateExp 处理普通请求 operateExpAjax 处理Ajax请求
+ * @author gaogang
+ * @date 2016年7月12日 下午3:14:17
+ *
  */
 @EnableWebMvc
 @ControllerAdvice

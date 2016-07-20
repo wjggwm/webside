@@ -3,9 +3,20 @@ package com.webside.role.model;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.type.Alias;
+
 import com.webside.base.basemodel.BaseEntity;
 import com.webside.user.model.UserEntity;
 
+/**
+ * 
+ * @ClassName: RoleEntity
+ * @Description: 角色信息
+ * @author gaogang
+ * @date 2016年7月12日 下午2:39:54
+ *
+ */
+@Alias("roleEntity")
 public class RoleEntity extends BaseEntity {
 
 	/**
@@ -16,19 +27,29 @@ public class RoleEntity extends BaseEntity {
 	 * 角色名
 	 */
 	private String name;
-	
+	/*
+	 * 角色key
+	 */
 	private String key;
 	/*
-	 * 状态
+	 * 角色状态
 	 */
 	private Integer status;
-
+	/*
+	 * 角色描述信息
+	 */
 	private String description;
-
+	/*
+	 * 角色创建时间
+	 */
 	private Date createTime;
-
+	/*
+	 * 角色更新时间
+	 */
 	private Date updateTime;
-	
+	/*
+	 * 角色下所有用户列表结合
+	 */
 	private List<UserEntity> userList;
 
 	public String getName() {

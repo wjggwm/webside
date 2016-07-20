@@ -16,7 +16,7 @@
 		<!-- RetryLimitHashedCredentialsMatcher继承父类HashedCredentialsMatcher，需要给父类注入以下属性 -->
 		<property name="hashAlgorithmName" value="MD5" />
 		<property name="hashIterations" value="${shiro.hashIterations}" />
-		<!-- 这里需要和注册时使用的加密方式一样，都使用MD5加密，然后转为base64,密码匹配也需和注册时的加密方式一致 -->
+		<!-- 是否存储散列后的密码为16进,制这里需要和注册时使用的加密方式一样，都使用MD5加密，然后转为base64,密码匹配也需和注册时的加密方式一致 -->
 		<property name="storedCredentialsHexEncoded" value="false" />
 	</bean>
 
@@ -26,7 +26,7 @@
 		<!-- 开启缓存 -->
 		<property name="cachingEnabled" value="true" />
 		<!-- 认证信息:这里不进行缓存 -->
-		<property name="authenticationCachingEnabled" value="false" />
+		<property name="authenticationCachingEnabled" value="true" />
 		<!-- ehcache中配置的认证缓存名称 -->
 		<property name="authenticationCacheName" value="authenticationCache" />
 		<!-- 授权信息 -->
@@ -50,8 +50,11 @@
 		<property name="sessionMode" value="native" />
 	</bean>
 
-	<!-- 用户过滤器,将用户信息放入request中 -->
-	<bean id="sysUserFilter" class="com.webside.shiro.filter.SysUserFilter" />
+	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+        <property name="arguments" ref="securityManager"/>
+    </bean>
 
 	<!-- 用户登录数控制,超过最大回话数会强制退出 -->
 	<bean id="kickoutSessionFilter" class="com.webside.shiro.filter.KickoutSessionFilter">
@@ -74,17 +77,36 @@
 		<property name="successUrl" value="/index.html" />
 		<!-- 未授权时要跳转的连接 -->
 		<property name="unauthorizedUrl" value="/denied.jsp" />
-		<!-- shiro连接约束配置,在这里使用自定义的动态获取资源类 -->
+		
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<!-- 此处可配合我的这篇文章来理解各个过滤连的作用http://blog.csdn.net/jadyer/article/details/12172839 -->
 		<!-- 下面value值的第一个'/'代表的路径是相对于HttpServletRequest.getContextPath()的值来的 -->
 		<!-- anon：它对应的过滤器里面是空的,什么都没做,这里.do和.jsp后面的*表示参数,比方说login.jsp?main这种 -->
 		<!-- authc：该过滤器下的页面必须验证后才能访问,它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter -->
-		<property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" />
+		<!-- 这里不使用自定义filterChainDefinitionMap -->
+		<!-- <property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" /> -->
+		<!-- 动态加载权限 -->
+		<!-- <property name="filterChainDefinitions" value="#{shiroManager.loadFilterChainDefinitions()}"/> -->
+		<!-- 这里暂时静态加载方式 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/resources/** = anon
+				/login.html = authc
+				/logout.html = logout
+				/register.html = anon
+				/captcha.html = anon
+				/denied.jsp = anon
+				/view/error/** = anon
+				/*/withoutAuth/** = anon
+				/* = authc
+			</value>
+		</property>
 		<!-- 自定义过滤器 -->
 		<property name="filters">
 			<util:map>
+				<!-- 
 				<entry key="sysUser" value-ref="sysUserFilter" />
+				 -->
 				<entry key="kickout" value-ref="kickoutSessionFilter" />
 			</util:map>
 		</property>
@@ -106,8 +128,6 @@
 		</property>
 	</bean>
 
-	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
-
 	<!-- 会话DAO -->
 	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
 		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
@@ -115,18 +135,23 @@
 	</bean>
 
 	<!-- 会话验证调度器 -->
-	<!-- 全局的会话信息检测扫描信息间隔30分钟 -->
+	<!-- 全局的会话信息检测扫描信息间隔60分钟 -->
 	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
 		<!-- 相隔多久检查一次session的有效性 -->
-		<property name="sessionValidationInterval" value="1800000" />
+		<property name="sessionValidationInterval" value="${shiro.session.validate.interval}" />
 		<property name="sessionManager" ref="shiroSessionManager" />
 	</bean>
 
-
+	<!-- 会话Session ID生成器 -->
+	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+	
+	<!-- 会话Cookie模板 -->
 	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-		<constructor-arg value="sid" />
-		<property name="httpOnly" value="true" />
-		<property name="maxAge" value="1800000" />
+		<!--cookie的name，修改cookie的名字 -->
+	    <constructor-arg value="webside_jsid"/>
+	    <property name="httpOnly" value="true"/>
+	    <!--cookie的有效时间 -->
+	    <property name="maxAge" value="-1"/>
 	</bean>
 
 
@@ -136,15 +161,26 @@
 	<!-- 即<property name="sessionMode" value="native"/>,详细说明见官方文档 -->
 	<!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 -->
 	<bean id="shiroSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<!-- session 有效时间为半小时 （毫秒单位） -->
-		<property name="sessionIdCookieEnabled" value="true" />
-		<property name="sessionIdCookie" ref="sessionIdCookie" />
-		<property name="deleteInvalidSessions" value="true" />
+		<!-- 是否删除无效的，默认也是开启 -->
+	  	<property name="deleteInvalidSessions" value="true"/>
 		<property name="sessionDAO" ref="sessionDAO" />
-		<property name="sessionValidationSchedulerEnabled" value="true" />
-		<property name="globalSessionTimeout" value="1800000" />
-		<property name="sessionValidationInterval" value="1800000" /><!--Session 超时检测时间 单位：毫秒 -->
+		<!-- session 有效时间为半小时 （毫秒单位）-->  
+		<property name="globalSessionTimeout" value="${shiro.session.timeout}"/>
+		<!-- 相隔多久检查一次session的有效性   -->
+	 	<property name="sessionValidationInterval" value="${shiro.session.validate.interval}"/> 
+	 	<!-- 是否开启 检测，默认开启 --> 
+	 	<property name="sessionValidationSchedulerEnabled" value="true" />
 		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
+		<!-- 会话Cookie模板 -->
+		<property name="sessionIdCookie" ref="sessionIdCookie" />
+	   <!-- session 监听，可以多个。 -->
+	   <property name="sessionListeners">
+	       <list>
+	       <!-- 
+	           <ref bean="customSessionListener"/>
+            -->
+	       </list>
+	   </property>
 	</bean>
 
 

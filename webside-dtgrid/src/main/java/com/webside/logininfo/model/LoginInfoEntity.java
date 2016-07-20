@@ -2,28 +2,40 @@ package com.webside.logininfo.model;
 
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+
 import com.webside.base.basemodel.BaseEntity;
 
 /**
  * 
- * <p>Description: 用户登录日志信息</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月11日 下午5:06:29
+ * @ClassName: LoginInfoEntity
+ * @Description: 用户登录日志信息
+ * @author gaogang
+ * @date 2016年7月12日 下午2:46:00
+ *
  */
+@Alias("loginInfoEntity")
 public class LoginInfoEntity extends BaseEntity{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	/*
+	 * 用户id
+	 */
 	private Integer userId;
-	
+	/*
+	 * 用户账户
+	 */
 	private String accountName;
-	
+	/*
+	 * 用户登录机器ip
+	 */
 	private String loginIp;
-	
+	/*
+	 * 用户登录时间
+	 */
 	private Date loginTime;
 
 	public Integer getUserId() {

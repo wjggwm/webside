@@ -14,11 +14,11 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.common.Common;
 import com.webside.exception.SystemException;
 import com.webside.loginfo.model.LogInfoEntity;
 import com.webside.loginfo.service.LogInfoService;
 import com.webside.dtgrid.model.Pager;
-import com.webside.util.Common;
 
 @Controller
 @Scope("prototype")

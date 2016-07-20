@@ -12,11 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 
- * <p>Description: 限制登录次数，如果连续5次输错用户名或密码，锁定10分钟，依靠Ehcache自带的timeToIdleSeconds来保证锁定时间
- * </p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月5日 下午5:43:32
+ * @ClassName: LimitRetryHashedMatcher
+ * @Description: 限制登录次数，如果连续5次输错用户名或密码，锁定10分钟，依靠Ehcache自带的timeToIdleSeconds来保证锁定时间
+ * @author gaogang
+ * @date 2016年7月12日 下午4:44:23
+ *
  */
 public class LimitRetryHashedMatcher extends HashedCredentialsMatcher {
     private Cache<String, AtomicInteger> passwordRetryCache;
@@ -28,7 +28,7 @@ public class LimitRetryHashedMatcher extends HashedCredentialsMatcher {
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token,
         AuthenticationInfo info) {
-        String username = (String) token.getPrincipal();
+        String username = token.getPrincipal().toString();
 
         // 尝试登录次数+1
         AtomicInteger retryCount = passwordRetryCache.get(username);

@@ -1,22 +1,16 @@
 package com.webside.enums;
 
+/**
+ * 
+ * @ClassName: ExportType
+ * @Description: dtgrid表格文件导出类型枚举
+ * @author gaogang
+ * @date 2016年7月12日 下午3:10:41
+ *
+ */
 public enum ExportType {
-
-	EXCEL("excel"),
-	CSV("csv"),
-	PDF("pdf"),
-	TXT("txt");
-	
-	private String fileType;
-	
-	private ExportType(String fileType)
-	{
-		this.fileType = fileType;
-	}
-	
-	public String getFileType()
-	{
-		return fileType;
-	}
-	
+	EXCEL,
+	CSV,
+	PDF,
+	TXT	
 }

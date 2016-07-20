@@ -252,7 +252,7 @@
        delete from tb_user where u_id in  
     	]]>  
 	    <foreach collection="list" item = "id" open="(" separator="," close=")">
-	    #{id}  
+	    ${id}  
 	    </foreach>  
 	</delete>
 	
@@ -261,7 +261,7 @@
        delete from tb_role_user where u_id in  
     	]]>  
 	    <foreach collection="list" item = "id" open="(" separator="," close=")">
-	    #{id}  
+	    ${id}  
 	    </foreach>  
 	</delete>
 	

@@ -10,6 +10,14 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @ClassName: TopicSender
+ * @Description: 多Subscribe模式发送消息
+ * @author gaogang
+ * @date 2016年7月12日 下午2:58:39
+ *
+ */
 @Component
 public class TopicSender {
 

@@ -14,16 +14,10 @@ import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
 
 /**
- * <p>
- * Description:产生责任链，确定每个url的访问权限
- * </p>
- * <p>
- * Company: 静之殇工作室
- * </p>
- * 
- * @author wjggwm
- * @date 2016年1月5日 下午3:40:02
- *       Shiro-1.2.3内置的FilterChain
+ * @ClassName: ChainDefinitionSectionMetaSource
+ * @Description: 产生责任链，确定每个url的访问权限
+ * @author gaogang
+ * @date 2016年7月12日 下午4:54:24
  * 
  * @see 1)Shiro验证URL时,URL匹配成功便不再继续匹配查找(所以要注意配置文件中的URL顺序,尤其在使用通配符时)
  * 
@@ -74,10 +68,6 @@ import com.webside.resource.service.ResourceService;
  * 
  * @see 说白了,以前的一个用户登录时开启了rememberMe,然后他关闭浏览器,下次再访问时他就是一个user,而不会authc
  * 
- * @see 
- *      ==========================================================================
- *      ===================================================
- * 
  * @see 4)举几个例子
  * 
  * @see /admin=authc,roles[admin] 表示用户必需已通过认证,并拥有admin角色才可以正常发起'/admin'请求
@@ -86,10 +76,6 @@ import com.webside.resource.service.ResourceService;
  *      表示用户必需已通过认证,并拥有admin:edit权限才可以正常发起'/edit'请求
  * 
  * @see /home=user 表示用户不一定需要已经通过认证,只需要曾经被Shiro记住过登录状态就可以正常发起'/home'请求
- * 
- * @see 
- *      ==========================================================================
- *      ===================================================
  * 
  * @see 5)各默认过滤器常用如下(注意URL Pattern里用到的是两颗星,这样才能实现任意层次的全匹配)
  * 

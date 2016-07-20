@@ -16,23 +16,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.common.Common;
 import com.webside.dtgrid.model.Pager;
 import com.webside.dtgrid.util.ExportUtils;
 import com.webside.exception.AjaxException;
 import com.webside.exception.ServiceException;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
+import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.model.UserEntity;
 import com.webside.user.model.UserInfoEntity;
 import com.webside.user.service.UserService;
-import com.webside.util.Common;
 import com.webside.util.EndecryptUtils;
 import com.webside.util.PageUtil;
 import com.webside.util.RandomUtil;
@@ -80,11 +79,8 @@ public class UserController extends BaseController {
 		//1、映射Pager对象
 		Pager pager = JSON.parseObject(gridPager, Pager.class);
 		//2、设置查询参数
-		//获取登录用户
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		UserEntity sessionUser = (UserEntity)request.getSession().getAttribute("userSession");
 		parameters = pager.getParameters();
-		parameters.put("creatorName", sessionUser.getAccountName());
+		parameters.put("creatorName", ShiroAuthenticationManager.getUserAccountName());
 		if (parameters.size() < 0) {
 			parameters.put("userName", null);
 		}
@@ -145,17 +141,14 @@ public class UserController extends BaseController {
 		try
 		{
 			String password = userEntity.getPassword();
-			//获取登录用户
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-			UserEntity sessionUser = (UserEntity)request.getSession().getAttribute("userSession");
 			// 加密用户输入的密码，得到密码和加密盐，保存到数据库
 			UserEntity user = EndecryptUtils.md5Password(userEntity.getAccountName(), userEntity.getPassword(), 2);
 			//设置添加用户的密码和加密盐
 			userEntity.setPassword(user.getPassword());
 			userEntity.setCredentialsSalt(user.getCredentialsSalt());
 			//设置创建者姓名
-			userEntity.setCreatorName(sessionUser.getAccountName());
-			userEntity.setCreateTime(new Date());
+			userEntity.setCreatorName(ShiroAuthenticationManager.getUserAccountName());
+			userEntity.setCreateTime(new Date(System.currentTimeMillis()));
 			//设置锁定状态：未锁定；删除状态：未删除
 			userEntity.setLocked(0);
 			userEntity.setDeleteStatus(0);
@@ -211,11 +204,8 @@ public class UserController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try
 		{
-			//获取登录用户
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-			UserEntity sessionUser = (UserEntity)request.getSession().getAttribute("userSession");
 			//设置创建者姓名
-			userEntity.setCreatorName(sessionUser.getCreatorName());
+			userEntity.setCreatorName(ShiroAuthenticationManager.getUserAccountName());
 			int result = userService.update(userEntity);
 			if(result == 1)
 			{

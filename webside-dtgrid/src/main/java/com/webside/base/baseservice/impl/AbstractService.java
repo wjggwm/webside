@@ -8,6 +8,16 @@ import com.webside.base.basemapper.BaseMapper;
 import com.webside.base.baseservice.BaseService;
 import com.webside.exception.ServiceException;
 
+/**
+ * 
+ * @ClassName: AbstractService
+ * @Description: service层基类
+ * @author gaogang
+ * @date 2016年7月12日 下午3:03:43
+ *
+ * @param <T>	操作对象类型
+ * @param <ID>	id
+ */
 public class AbstractService<T, ID extends Serializable> implements BaseService<T, ID> {
 
 	private BaseMapper<T, ID> baseMapper;

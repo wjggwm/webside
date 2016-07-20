@@ -24,13 +24,13 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.common.Common;
 import com.webside.dtgrid.model.Pager;
 import com.webside.dtgrid.util.ExportUtils;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
-import com.webside.util.Common;
 import com.webside.util.PageUtil;
 
 @Controller
@@ -117,7 +117,7 @@ public class RoleController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try
 		{
-			roleEntity.setCreateTime(new Date());
+			roleEntity.setCreateTime(new Date(System.currentTimeMillis()));
 			roleEntity.setStatus(0);
 			int result = roleService.insert(roleEntity);
 			if(result > 0)

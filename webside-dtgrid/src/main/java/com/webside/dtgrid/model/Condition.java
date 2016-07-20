@@ -1,5 +1,13 @@
 package com.webside.dtgrid.model;
 
+/**
+ * 
+ * @ClassName: Condition
+ * @Description: dtgrid表格条件查询对象，拷贝自大连首闻科技有限公司的DLShouWen Grid
+ * @author gaogang
+ * @date 2016年7月12日 下午3:07:47
+ *
+ */
 public class Condition {
 	
 	/**

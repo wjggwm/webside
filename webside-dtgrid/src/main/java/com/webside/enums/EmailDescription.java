@@ -1,5 +1,13 @@
 package com.webside.enums;
 
+/**
+ * 
+ * @ClassName: EmailDescription
+ * @Description: 邮件提示信息枚举
+ * @author gaogang
+ * @date 2016年7月12日 下午3:10:06
+ *
+ */
 public enum EmailDescription {
 
 	ADD_EMAIL("新建账户通知","您好,您的账户已创建,账户名: %s ,密码: %s ,请尽快登录系统修改密码,谢谢."),
@@ -24,6 +32,7 @@ public enum EmailDescription {
 	{
 		return this.message;
 	}
+	
 	
 	
 }

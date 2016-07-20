@@ -2,6 +2,14 @@ package com.webside.dtgrid.model;
 
 import java.util.Map;
 
+/**
+ * 
+ * @ClassName: Column
+ * @Description: dtgrid表格列对象，拷贝自大连首闻科技有限公司的DLShouWen Grid
+ * @author gaogang
+ * @date 2016年7月12日 下午3:05:29
+ *
+ */
 public class Column {
 	
 	/**

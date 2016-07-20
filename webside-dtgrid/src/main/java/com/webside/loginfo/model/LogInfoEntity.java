@@ -2,19 +2,19 @@ package com.webside.loginfo.model;
 
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+
 import com.webside.base.basemodel.BaseEntity;
 
 /**
- * <p>
- * Description: 日志记录POJO
- * </p>
- * <p>
- * Company: 静之殇工作室
- * </p>
  * 
- * @author wjggwm
- * @date 2016年3月6日 下午11:00:39
+ * @ClassName: LogInfoEntity
+ * @Description: 用户操作日志信息
+ * @author gaogang
+ * @date 2016年7月12日 下午2:44:55
+ *
  */
+@Alias("logInfoEntity")
 public class LogInfoEntity extends BaseEntity{
 
 	/**
@@ -27,7 +27,7 @@ public class LogInfoEntity extends BaseEntity{
 	 */
 	private Long userId;
 	/*
-	 * 账户名称
+	 * 用户账户
 	 */
 	private String accountName;
 	/*
@@ -39,7 +39,7 @@ public class LogInfoEntity extends BaseEntity{
 	 */
 	private String content; 
 	/*
-	 * 操作(主要是"添加"、"修改"、"删除")
+	 * 操作(主要是"添加"、"修改"、"删除"、"授权")等
 	 */
 	private String operation;
 

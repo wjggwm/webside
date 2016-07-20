@@ -3,19 +3,29 @@ package com.webside.activemq.model;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 
+ * @ClassName: Mail
+ * @Description: 邮件信息
+ * @author gaogang
+ * @date 2016年7月12日 下午2:48:19
+ *
+ */
 public class Mail implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	/*
+	 * 邮件发件人
+	 */
 	private String sender;
 	/*
-	 * 收件人
+	 * 邮件收件人
 	 */
 	private String recipient;
 	/*
-	 * 主题
+	 * 邮件主题
 	 */
 	private String subject;
 	/*
@@ -23,11 +33,11 @@ public class Mail implements Serializable {
 	 */
 	private String message;
 	/*
-	 * 附件
+	 * 邮件附件
 	 */
 	private String attchment;
 	/*
-	 * 抄送人集合
+	 * 邮件抄送人集合
 	 */
 	private List<String> cc;
 	

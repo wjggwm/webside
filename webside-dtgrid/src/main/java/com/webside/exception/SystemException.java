@@ -2,10 +2,11 @@ package com.webside.exception;
 
 /**
  * 
- * <p>Description: 系统异常,处理非ajax请求的Exception</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年2月26日 上午11:07:07
+ * @ClassName: SystemException
+ * @Description: 系统异常,处理非ajax请求的Exception
+ * @author gaogang
+ * @date 2016年7月12日 下午3:20:18
+ *
  */
 public class SystemException extends RuntimeException{
 

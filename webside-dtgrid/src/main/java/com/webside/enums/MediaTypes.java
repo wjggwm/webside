@@ -1,5 +1,13 @@
 package com.webside.enums;
 
+/**
+ * 
+ * @ClassName: MediaTypes
+ * @Description: http请求媒体类型枚举
+ * @author gaogang
+ * @date 2016年7月12日 下午3:12:50
+ *
+ */
 public enum MediaTypes {
 
 	APPLICATION_XML("application/xml"),

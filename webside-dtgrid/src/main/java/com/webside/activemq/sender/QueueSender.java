@@ -10,6 +10,14 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @ClassName: QueueSender
+ * @Description: 单Subscribe模式发送消息
+ * @author gaogang
+ * @date 2016年7月12日 下午2:55:53
+ *
+ */
 @Component
 public class QueueSender {
 	

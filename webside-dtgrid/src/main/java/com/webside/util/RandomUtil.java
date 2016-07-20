@@ -4,10 +4,11 @@ import java.util.Random;
 
 /**
  * 
- * <p>Description: 生成随机字符串的工具类</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月18日 下午10:14:09
+ * @ClassName: RandomUtil
+ * @Description: 生成随机字符串的工具类
+ * @author gaogang
+ * @date 2016年7月12日 下午4:25:59
+ *
  */
 public class RandomUtil {
 	public static final String ALLCHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

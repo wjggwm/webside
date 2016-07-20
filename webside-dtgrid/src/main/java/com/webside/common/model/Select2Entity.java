@@ -1,13 +1,14 @@
-package com.webside.util;
+package com.webside.common.model;
 
 import java.io.Serializable;
 
 /**
  * 
- * <p>Description: select2 模型</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月25日 下午4:39:19
+ * @ClassName: Select2Entity
+ * @Description: select2 模型
+ * @author gaogang
+ * @date 2016年7月12日 下午4:16:05
+ *
  */
 public class Select2Entity implements Serializable{
 	

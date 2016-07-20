@@ -12,15 +12,11 @@ import org.springframework.stereotype.Component;
 
 /**
  * 
- * <p>
- * Description: 邮件发送工具类
- * </p>
- * <p>
- * Company: 静之殇工作室
- * </p>
- * 
- * @author wjggwm
- * @date 2016年1月19日 上午1:19:06
+ * @ClassName: EmailUtil
+ * @Description: 邮件发送工具类,封装了jodd的mail工具类
+ * @author gaogang
+ * @date 2016年7月12日 下午4:22:12
+ *
  */
 @Component
 public class EmailUtil {

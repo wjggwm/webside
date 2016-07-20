@@ -1,4 +1,4 @@
-package com.webside.util;
+package com.webside.aop;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -12,25 +12,20 @@ import org.springframework.stereotype.Component;
 
 import com.webside.loginfo.model.LogInfoEntity;
 import com.webside.loginfo.service.LogInfoService;
+import com.webside.shiro.ShiroAuthenticationManager;
 
 /**
- * 
  * 前置通知（@Before）：在某连接点（join point）之前执行的通知，但这个通知不能阻止连接点前的执行（除非它抛出一个异常）
  * 返回后通知（@AfterReturning）：在某连接点（join point）正常完成后执行的通知：例如，一个方法没有抛出任何异常，正常返回
  * 抛出异常后通知（@AfterThrowing）：方法抛出异常退出时执行的通知
  * 后通知（@After）：当某连接点退出的时候执行的通知（不论是正常返回还是异常退出） 环绕通知（@Around）：包围一个连接点（join
  * point）的通知，如方法调用。这是最强大的一种通知类型，环绕通知可以在方法调用前后完成自定义的行为，
  * 它也会选择是否继续执行连接点或直接返回它们自己的返回值或抛出异常来结束执行
- * 
- * <p>
- * Description: 日志记录，添加、删除、修改方法AOP
- * </p>
- * <p>
- * Company: 静之殇工作室
- * </p>
- * 
- * @author wjggwm
- * @date 2016年3月6日 下午11:40:26
+ * @ClassName: LogAspect
+ * @Description: 日志记录，添加、删除、修改方法AOP
+ * @author gaogang
+ * @date 2016年7月12日 下午4:03:58
+ *
  */
 @Component
 @Aspect
@@ -64,7 +59,7 @@ public class LogAspect {
 	}
 	
 	/**
-	 * 删除业务逻辑方法切入点 定义在controller包里以delete为前缀的方法的执行
+	 * 授权业务逻辑方法切入点 定义在controller包里以delete为前缀的方法的执行
 	 */
 	@Pointcut("execution(* com.webside.*.controller.*.permission(..))")
 	public void permissionServiceCall() {
@@ -81,7 +76,7 @@ public class LogAspect {
 	public void insertServiceCallCalls(JoinPoint joinPoint, Object rtv)
 			throws Throwable {
 		// 获取登录管理员id
-		Long adminUserId = Common.getloginUserId();
+		Long adminUserId = ShiroAuthenticationManager.getUserId();
 		if (adminUserId == null) {// 没有管理员登录
 			return;
 		}
@@ -96,8 +91,8 @@ public class LogAspect {
 		// 创建日志对象
 		LogInfoEntity log = new LogInfoEntity();
 		log.setUserId(adminUserId);// 设置管理员id
-		log.setAccountName(Common.getloginUserAccountName());
-		log.setCreateTime(new Date());// 操作时间
+		log.setAccountName(ShiroAuthenticationManager.getUserAccountName());
+		log.setCreateTime(new Date(System.currentTimeMillis()));// 操作时间
 		log.setContent(opContent);// 操作内容
 		log.setOperation("insert");// 操作
 
@@ -115,7 +110,7 @@ public class LogAspect {
 	public void updateServiceCallCalls(JoinPoint joinPoint, Object rtv)
 			throws Throwable {
 		// 获取登录管理员id
-		Long adminUserId = Common.getloginUserId();
+		Long adminUserId = ShiroAuthenticationManager.getUserId();
 		if (adminUserId == null) {// 没有管理员登录
 			return;
 		}
@@ -130,8 +125,8 @@ public class LogAspect {
 		// 创建日志对象
 		LogInfoEntity log = new LogInfoEntity();
 		log.setUserId(adminUserId);// 设置管理员id
-		log.setAccountName(Common.getloginUserAccountName());
-		log.setCreateTime(new Date());// 操作时间
+		log.setAccountName(ShiroAuthenticationManager.getUserAccountName());
+		log.setCreateTime(new Date(System.currentTimeMillis()));// 操作时间
 		log.setContent(opContent);// 操作内容
 		log.setOperation("update");// 操作
 
@@ -162,9 +157,9 @@ public class LogAspect {
 		}
 		// 创建日志对象
 		LogInfoEntity log = new LogInfoEntity();
-		log.setUserId(Common.getloginUserId());// 用户编号
-		log.setAccountName(Common.getloginUserAccountName());
-		log.setCreateTime(new Date());// 操作时间
+		log.setUserId(ShiroAuthenticationManager.getUserId());// 用户编号
+		log.setAccountName(ShiroAuthenticationManager.getUserAccountName());
+		log.setCreateTime(new Date(System.currentTimeMillis()));// 操作时间
 		log.setContent(rs.toString());// 操作内容
 		log.setOperation("delete");// 操作
 
@@ -182,7 +177,7 @@ public class LogAspect {
 	public void permissionServiceCallCalls(JoinPoint joinPoint, Object rtv)
 			throws Throwable {
 		// 获取登录管理员id
-		Long adminUserId = Common.getloginUserId();
+		Long adminUserId = ShiroAuthenticationManager.getUserId();
 		if (adminUserId == null) {// 没有管理员登录
 			return;
 		}
@@ -197,8 +192,8 @@ public class LogAspect {
 		// 创建日志对象
 		LogInfoEntity log = new LogInfoEntity();
 		log.setUserId(adminUserId);// 设置管理员id
-		log.setAccountName(Common.getloginUserAccountName());
-		log.setCreateTime(new Date());// 操作时间
+		log.setAccountName(ShiroAuthenticationManager.getUserAccountName());
+		log.setCreateTime(new Date(System.currentTimeMillis()));// 操作时间
 		log.setContent(opContent);// 操作内容
 		log.setOperation("permission");// 操作
 

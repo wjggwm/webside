@@ -2,71 +2,64 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
   http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
   http://www.springframework.org/schema/context
-  http://www.springframework.org/schema/context/spring-context-4.1.xsd
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/aop   
+  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
   http://www.springframework.org/schema/mvc
-  http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/util        
+  http://www.springframework.org/schema/util/spring-util-4.0.xsd ">
 
-	<!--返回json方式一 :这种方式有局限性，不灵活，一般不用 -->
-	<!-- <mvc:annotation-driven> <mvc:message-converters register-defaults="false"> 
-		避免IE执行AJAX时，返回JSON出现下载文件 <ref bean="stringConverter" /> <ref bean="fastjsonConverter" 
-		/> </mvc:message-converters> </mvc:annotation-driven> -->
+	<!--引入属性文件:
+		1、spring4.x dispatcherServlet 和  applicationContext是两个独立的context
+	    2、如果要在controller中使用@Value获取property文件中的属性值，必须在springmvc.xml文件中再次引入属性文件
+	   -->
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+				<value>classpath:webside.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+	<mvc:annotation-driven conversion-service="conversionService" content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="true">
+			<ref bean="stringConverter" />
+			<ref bean="fastjsonConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
-	<!-- 返回json方式二：推荐使用第二种方式， 这里和上面的 <mvc:annotation-driven> 只能出现一个 -->
-	<!-- spring 3.1 之前替代 </mvc:annotation-driven> 的配置方式 -->
-	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" 
-		/> <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 
-		<property name="messageConverters"> <list> <ref bean="stringConverter" /> 
-		<ref bean="fastjsonConverter" /> </list> </property> </bean> -->
+	<!--通知spring使用cglib而不是jdk的来生成代理方法, AOP可以拦截到Controller,因为是拦截Controller,这句必须加在springmvc配置文件中 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<!-- 默认扫描的包路径 -->
-	<!-- 设置只扫描 @Controller注解的Bean,添加 use-default-filters="false",base-package即可配置为如下方式"com.webside" -->
-	<context:component-scan base-package="com.webside.*.controller"/>
-	<!--
-	<context:component-scan base-package="com.webside.*.controller"
-		use-default-filters="false">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-	</context:component-scan>
- 	-->
+	<!-- 设置只扫描 controller包下的Bean -->
+	<context:component-scan base-package="com.webside.*.controller" />
 
-	<bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<!-- 也可如下配置 -->
+	<!-- <context:component-scan base-package="com.webside.*.controller" use-default-filters="false"> 
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" 
+		/> <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" 
+		/> </context:component-scan> -->
+
+	<!-- 类型转换 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="formatters">
 			<set>
-				<bean class="com.webside.util.DateFormatter"></bean>
+				<bean class="com.webside.util.DateFormatterUtil"></bean>
 			</set>
 		</property>
 	</bean>
 
-	<bean id="webBindingInitializer"
-		class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-		<property name="conversionService" ref="conversionService"></property>
-	</bean>
-
-	<!-- spring 3.1 及之后替代 </mvc:annotation-driven> 的配置方式 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="webBindingInitializer" ref="webBindingInitializer"></property>
-		<property name="messageConverters">
-			<list>
-				<ref bean="stringConverter" />
-				<ref bean="fastjsonConverter" />
-			</list>
-		</property>
-	</bean>
-
-
 	<!-- 解析String请求数据 -->
 	<bean id="stringConverter"
 		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg value="UTF-8" index="0"></constructor-arg>
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/plain;charset=UTF-8</value>
@@ -88,6 +81,7 @@
 			<array value-type="com.alibaba.fastjson.serializer.SerializerFeature">
 				<!-- 空值继续输出 -->
 				<value>WriteMapNullValue</value>
+				<value>QuoteFieldNames</value>
 				<!-- 防止循环引用 -->
 				<value>DisableCircularReferenceDetect</value>
 				<!-- 格式化日期,默认格式为：yyyy-MM-dd HH:mm:ss -->
@@ -96,6 +90,14 @@
 		</property>
 	</bean>
 
+
+
+	<!-- 返回类型定义 -->
+	<util:list id="messageConverters">
+		<ref bean="stringConverter" />
+		<ref bean="fastjsonConverter" />
+	</util:list>
+
 	<!-- 防止循环引用 -->
 	<bean id="DisableCircularReferenceDetect"
 		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
@@ -103,27 +105,27 @@
 			value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect"></property>
 	</bean>
 
-
-	<!-- ContentNegotiatingViewResolver视图解析器，返回多视图 -->
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order" value="1"></property>
-		<!-- 这里是否忽略掉accept header，默认就是false -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+        <!-- 这里是否忽略掉accept header，默认就是false -->
 		<property name="ignoreAcceptHeader" value="true" />
 		<!-- 启用参数支持 -->
 		<property name="favorParameter" value="false"></property>
 		<!-- 启用扩展名支持 -->
 		<property name="favorPathExtension" value="true"></property>
 		<!-- 如果所有的mediaType都没匹配上，就会使用defaultContentType -->
-		<property name="defaultContentType" value="text/html" />
-
-		<property name="mediaTypes">
-			<map>
+		<property name="defaultContentType" value="text/html"/>  
+        <property name="mediaTypes">  
+            <map>
 				<entry key="json" value="application/json" />
 				<entry key="xml" value="application/xml" />
 			</map>
-		</property>
+        </property>  
+    </bean>
 
+	<!-- ContentNegotiatingViewResolver视图解析器，返回多视图 -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1"></property>
+		<property name="contentNegotiationManager" ref="contentNegotiationManager"/> 
 		<property name="defaultViews">
 			<list>
 				<!-- json视图 -->
@@ -142,12 +144,10 @@
 				</bean>
 			</list>
 		</property>
-
 		<property name="viewResolvers">
 			<list>
 				<!-- 视图解析器，根据视图的名称new ModelAndView(name)，在配置文件查找对应的bean配置 -->
 				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-
 				<bean
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 					<property name="viewClass"
@@ -159,11 +159,11 @@
 
 			</list>
 		</property>
-
 	</bean>
 
-	<!-- 配置静态资源，这种方式效率相对比较低,如果DispatcherServlet拦截类似 *.do 这种格式的URL，就不存在访问不到静态资源的问题 -->
-	<!-- <mvc:default-servlet-handler/> -->
+	<!-- 先走默认的web.xml配置的servlet，没有的话才找对应controller,相当于处理配置静态资源，这种方式效率相对比较低,如果DispatcherServlet拦截类似 
+		*.do 这种格式的URL，就不存在访问不到静态资源的问题,静态资源访问详见web.xml -->
+	<mvc:default-servlet-handler />
 
 	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
 	<bean id="multipartResolver"
@@ -174,6 +174,12 @@
 		<property name="maxUploadSize" value="10485760000" />
 		<!-- 内存中的最大值 -->
 		<property name="maxInMemorySize" value="40960" />
+	</bean>
+
+	<!-- restTemplate -->
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters" ref="messageConverters">
+		</property>
 	</bean>
 
 

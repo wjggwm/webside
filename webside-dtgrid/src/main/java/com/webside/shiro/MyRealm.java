@@ -14,8 +14,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
 import com.webside.resource.mapper.ResourceMapper;
@@ -25,8 +25,11 @@ import com.webside.user.model.UserEntity;
 
 
 /**
- * 自定义Realm,进行数据源配置
+ * 
+ * @ClassName: MyRealm
+ * @Description: 自定义jdbcRealm,认证&授权
  * @author gaogang
+ * @date 2016年7月12日 下午4:30:16
  *
  */
 public class MyRealm extends AuthorizingRealm {
@@ -43,20 +46,22 @@ public class MyRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-		String loginName = SecurityUtils.getSubject().getPrincipal().toString();
-		if (loginName != null) {
-			String userId = SecurityUtils.getSubject().getSession().getAttribute("userSessionId").toString();
-			List<ResourceEntity> resourceList = resourceMapper.findResourcesByUserId(Integer.valueOf(userId));
+		UserEntity user = ShiroAuthenticationManager.getUserEntity();
+		if (user != null) {
+			List<ResourceEntity> resourceList = resourceMapper.findResourcesByUserId(user.getId().intValue());
 			// 权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			// 用户的角色集合
-			// info.addRole("default");
-			// 用户的角色集合
+			//根据用户ID查询角色（role），放入到Authorization里。
+			// 单角色用户情况
+			info.addRole(user.getRole().getName());
+			// 多角色用户情况
 			// info.setRoles(user.getRolesName());
-			// 用户的角色对应的所有权限，如果只使用角色定义访问权限
+			// 用户的角色对应的所有权限
 			for (ResourceEntity resourceEntity : resourceList) {
 				info.addStringPermission(resourceEntity.getSourceKey());
 			}
+			//或者直接查询出所有权限set集合
+			//info.setStringPermissions(permissions);
 			return info;
 		}
 		return null;
@@ -84,8 +89,9 @@ public class MyRealm extends AuthorizingRealm {
 			// 从数据库查询出来的账号名和密码,与用户输入的账号和密码对比
 			// 当用户执行登录时,在方法处理上要实现subject.login(token);
 			// 然后会自动进入这个类进行认证
-			// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-            authenticationInfo = new SimpleAuthenticationInfo(username, // 用户名
+			// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得shiro自带的不好可以自定义实现
+            authenticationInfo = new SimpleAuthenticationInfo(
+            		userEntity, // 用户对象
             		userEntity.getPassword(), // 密码
 					ByteSource.Util.bytes(username + userEntity.getCredentialsSalt()),// salt=username+salt
 					getName() // realm name
@@ -97,59 +103,58 @@ public class MyRealm extends AuthorizingRealm {
              */
             //TODO：因为shiro-redies 不支持带加密盐方式的验证，所以暂时不使用shiro-redies，后续再研究
             //authenticationInfo.setCredentialsSalt(new MySimpleByteSource(username + userEntity.getCredentialsSalt()));
-			// 当验证都通过后，把用户信息放在session里
-			Session session = SecurityUtils.getSubject().getSession();
-			// 用户对象
-			session.setAttribute("userSession", userEntity);
-			// 用户ID
-			session.setAttribute("userSessionId", userEntity.getId());
 			return authenticationInfo;
 		} else {
 			throw new UnknownAccountException();// 没找到帐号
 		}
 
 	}
+	
 	/**
-     * 更新用户授权信息缓存.
+     * 清除当前用户权限信息
      */
-	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+	public  void clearCachedAuthorizationInfo() {
+		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
 		super.clearCachedAuthorizationInfo(principals);
-	}
-	/**
-     * 更新用户信息缓存.
-     */
-	public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
-		super.clearCachedAuthenticationInfo(principals);
-	}
-
-	/**
-	 * 清除用户授权信息缓存.
-	 */
-	public void clearAllCachedAuthorizationInfo() {
-		getAuthorizationCache().clear();
-	}
-
-	/**
-	 * 清除用户认证缓存.
-	 */
-	public void clearAllCachedAuthenticationInfo() {
-		getAuthenticationCache().clear();
 	}
 	
 	/**
-	 * 清空所有缓存
+     * 清除当前用户认证信息
+     */
+	public  void clearCachedAuthenticationInfo() {
+		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
+		super.clearCachedAuthenticationInfo(principals);
+	}
+	
+	/**
+	 * 清除指定 principalCollection 的权限信息
 	 */
-	public void clearCache(PrincipalCollection principals) {
-		super.clearCache(principals);
+	public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
+		super.clearCachedAuthorizationInfo(principals);
+	}
+	
+	/**
+     * 清除用户认证信息
+     */
+	public void clearCachedAuthenticationInfo(PrincipalCollection principalCollection) {
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
+		super.clearCachedAuthenticationInfo(principals);
 	}
 
 
 	/**
-	 * 清空所有认证和授权缓存
+	 * 清除当前用户的认证和授权缓存信息
 	 */
 	public void clearAllCache() {
-		clearAllCachedAuthenticationInfo();
-		clearAllCachedAuthorizationInfo();
+		clearCachedAuthorizationInfo();
+		clearCachedAuthenticationInfo();
 	}
 
 }

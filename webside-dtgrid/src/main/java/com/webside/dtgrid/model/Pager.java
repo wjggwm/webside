@@ -3,6 +3,14 @@ package com.webside.dtgrid.model;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @ClassName: Pager
+ * @Description: dtgrid表格分页对象，拷贝自大连首闻科技有限公司的DLShouWen Grid
+ * @author gaogang
+ * @date 2016年7月12日 下午3:08:04
+ *
+ */
 public class Pager {
 	
 	/**

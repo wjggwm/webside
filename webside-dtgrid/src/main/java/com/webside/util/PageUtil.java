@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 /**
  * 
- * <p>Description: 分页工具类</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月14日 上午10:00:34
+ * @ClassName: PageUtil
+ * @Description: 分页工具类
+ * @author gaogang
+ * @date 2016年7月12日 下午4:25:03
+ *
  */
 public class PageUtil implements Serializable{
 	/*

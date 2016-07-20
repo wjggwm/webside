@@ -42,9 +42,12 @@ import com.webside.dtgrid.model.Pager;
 import com.webside.enums.ExportType;
 
 /**
- * 导出工具类
- * @author 大连首闻科技有限公司
- * @since 2014-8-22 16:25:30
+ * 
+ * @ClassName: ExportUtils
+ * @Description: dtgrid导出工具类，拷贝自大连首闻科技有限公司的DLShouWen Grid
+ * @author gaogang
+ * @date 2016年7月12日 下午3:08:51
+ *
  */
 public class ExportUtils {
 
@@ -69,25 +72,25 @@ public class ExportUtils {
 		String fileName = "datas";
 		fileName = URLEncoder.encode(pager.getExportFileName(), "UTF-8");
 		// 导出excel
-		if (ExportType.EXCEL.getFileType().equals(pager.getExportType())) {
+		if (ExportType.EXCEL.name().equalsIgnoreCase(pager.getExportType())) {
 			ExportUtils.exportExcel(response, pager, pager.getExportDatas(),
 					fileName);
 			return;
 		}
 		// 导出cvs
-		if (ExportType.CSV.getFileType().equals(pager.getExportType())) {
+		if (ExportType.CSV.name().equals(pager.getExportType())) {
 			ExportUtils.exportCsv(response, pager, pager.getExportDatas(),
 					fileName);
 			return;
 		}
 		// 导出txt
-		if (ExportType.TXT.getFileType().equals(pager.getExportType())) {
+		if (ExportType.TXT.name().equals(pager.getExportType())) {
 			ExportUtils.exportTxt(response, pager, pager.getExportDatas(),
 					fileName);
 			return;
 		}
 		// 导出pdf
-		if (ExportType.PDF.getFileType().equals(pager.getExportType())) {
+		if (ExportType.PDF.name().equals(pager.getExportType())) {
 			ExportUtils.exportPdf(response, pager, pager.getExportDatas(),
 					fileName);
 			return;

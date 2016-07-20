@@ -34,10 +34,10 @@ headerClass : 'dlshouwen-grid-header'
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if(value==0)
         {
-            return '<span class="label label-sm label-success arrowed arrowed-in">菜单</lable>';
+            return '<span class="label label-sm label-success arrowed arrowed-in">菜单</span>';
         }else
         {
-            return '<span class="label label-sm label-info arrowed arrowed-right">按钮</lable>';
+            return '<span class="label label-sm label-info arrowed arrowed-right">按钮</span>';
         }
     }
 }, {

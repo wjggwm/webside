@@ -1,13 +1,14 @@
-package com.webside.util;
+package com.webside.common.model;
 
 import java.io.Serializable;
 
 /**
  * 
- * <p>Description: JSTree 模型</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月20日 下午10:53:47
+ * @ClassName: JSTreeEntity
+ * @Description: JSTree 模型
+ * @author gaogang
+ * @date 2016年7月12日 下午4:16:17
+ *
  */
 public class JSTreeEntity implements Serializable{
 

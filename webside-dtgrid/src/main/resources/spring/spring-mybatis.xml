@@ -70,14 +70,14 @@
 	</bean>
 
 	<!-- 使用sqlSessionFactoryBean工厂产生SqlSession对象，方便后期注入Dao -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway">
 		<property name="dataSource" ref="dataSource" />
 		<!-- mybatis 设置 -->
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 		<!-- 匹配Mapper映射文件 -->
-		<property name="mapperLocations"
-			value="classpath:mybatis/mapper/sqlmap-mapping-*.xml" />
-		<property name="typeAliasesPackage" value="com.webside.*.model" />
+		<property name="mapperLocations" value="classpath:mybatis/mapper/sqlmap-mapping-*.xml" />
+		<!-- 这里通配符写法有问题,改为使用在javabean加上注解@Alias来自定义别名 -->	
+		<!-- <property name="typeAliasesPackage" value="com.webside.**.model" /> -->
 	</bean>
 
 	<!-- 通过扫描的模式,不需要配置SqlSessionFactory 或 SqlSessionTemplate,MapperScannerConfigurer 
@@ -125,10 +125,17 @@
 				rollback-for="com.webside.exception.ServiceException" />
 			<tx:method name="add*" propagation="REQUIRED" read-only="false"
 				rollback-for="com.webside.exception.ServiceException" />
-
-			<tx:method name="find*" propagation="SUPPORTS"/>
-			<tx:method name="query*" propagation="SUPPORTS"/>
-			<tx:method name="count*" propagation="SUPPORTS"/>
+			<tx:method name="log" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			<!-- quartz job 方法也需要在事物中执行 -->
+			<tx:method name="pauseJob" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			<tx:method name="resumeJob" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			<tx:method name="executeJob" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
+			
+			<tx:method name="*" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
 

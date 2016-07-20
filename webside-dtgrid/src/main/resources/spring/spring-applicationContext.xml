@@ -9,25 +9,23 @@
            http://www.springframework.org/schema/context  
            http://www.springframework.org/schema/context/spring-context-4.1.xsd ">
 
-	<!-- 配置要扫描的包 ,有多个可以用';'号隔开,也可写多个context:component-scan-->
-	<context:component-scan base-package="com.webside.*.dao;com.webside.*.service;com.webside.util" />
+	<!-- 配置要扫描的包 ,有多个可以用';'号隔开,也可写多个context:component-scan -->
+	<context:component-scan base-package="com.webside.*.dao" />
+	<context:component-scan base-package="com.webside.*.service" />
+	<context:component-scan base-package="com.webside.util" />
+	<context:component-scan base-package="com.webside.aop" />
 
-	<!-- 启动对@AspectJ注解的支持 -->
-	<!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<bean id="logAspect" class="com.webside.util.LogAspect" />
-	
+	<!-- spring 启用aop -->
+	<aop:aspectj-autoproxy />
+	<!-- 激活各种对于bean类的注解标注 -->
+	<context:annotation-config />
+
 	<!-- 引入属性文件:方式一 -->
-	<!--  
-	<context:property-placeholder 
-		ignore-unresolvable="true" 
-		location="classpath:jdbc.properties,classpath:webside.properties"/> 
-	-->
-	
+	<!-- <context:property-placeholder ignore-unresolvable="true" location="classpath:jdbc.properties,classpath:webside.properties"/> -->
+
 	<!-- 引入属性文件:方式二 -->
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="ignoreUnresolvablePlaceholders" value="true" />
-		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
 				<value>classpath:jdbc.properties</value>
@@ -37,9 +35,24 @@
 		</property>
 	</bean>
 
-	<import resource="spring-mybatis.xml"/>
-	<import resource="spring-shiro.xml"/>
-	<import resource="spring-kaptcha.xml"/>
-	<import resource="spring-jms.xml"/>
-	<import resource="spring-ehcache.xml"/>
+	<!-- 自定义属性编辑器,以便spring bean可以注入java.util.Date 等类型,也可以注入自定义类型 -->
+	<bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<!-- Date类型编辑器 -->
+				<entry key="java.util.Date" value="com.webside.util.DatePropertyEditorUtil"/>
+			</map>
+		</property>
+	</bean>
+	
+
+	<!-- 引入模块配置文件 -->
+	<import resource="spring-mybatis.xml" />
+	<import resource="spring-shiro.xml" />
+	<import resource="spring-kaptcha.xml" />
+	<import resource="spring-jms.xml" />
+	<import resource="spring-ehcache.xml" />
+	<import resource="spring-redis.xml" />
+	<import resource="spring-flyway.xml" />
+	<import resource="spring-schedule.xml" />
 </beans>    

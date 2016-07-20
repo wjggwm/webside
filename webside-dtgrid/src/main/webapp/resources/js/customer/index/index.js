@@ -473,6 +473,9 @@ var webside = {
                                 param : {
                                     url : sys.rootPath + '/role/withoutAuth/validateRoleName.html',
                                     cache : false
+                                },
+                                depends : function() {
+                                    return typeof ($("#roleId").val()) == "undefined";
                                 }
                             }
                         },
@@ -741,6 +744,214 @@ var webside = {
                                 icon : 2
                             });
                         }
+                    });
+                }
+            }
+        },
+        schedule: {
+            initJobGroup:function(){
+                $('#jobGroupSelect').select2({
+                    language : "zh-CN",
+                    minimumResultsForSearch : Infinity,
+                    placeholder : "请选择任务组..."
+                }).on('change',function(){
+                    $("#jobGroup").val($(this).find("option:selected").text());
+                    $("#jobClassName").val($(this).val());
+                });
+            },
+            initStartDate:function(){
+                $("#startDate").datepicker({
+                    format : 'yyyy-mm-dd',
+                    autoclose : true,
+                    language : 'zh-CN',
+                    todayHighlight : true,
+                    clearBtn : true,
+                    immediateUpdates : true,
+                    clearDate : function() {
+                        $("#startDate").val('').datepicker('update');
+                    }
+                }).on('changeDate',function(e){
+                    var startDate = e.date;
+                    $('#endDate').datepicker('setStartDate',startDate);  
+                });
+            },
+            initEndDate:function(){
+                $("#endDate").datepicker({
+                    format : 'yyyy-mm-dd',
+                    autoclose : true,
+                    language : 'zh-CN',
+                    todayHighlight : true,
+                    clearBtn : true,
+                    immediateUpdates : true,
+                    clearDate : function() {
+                        $("#endDate").val('').datepicker('update');
+                    }
+                }).on('changeDate',function(e){
+                    var EndDate = e.date;
+                    $('#startDate').datepicker('setEndDate',EndDate);  
+                });
+            },
+            validateScheduleForm:function(){
+                $('#scheduleForm').validate({
+                    errorElement : 'div',
+                    errorClass : 'help-block',
+                    focusInvalid : false,
+                    ignore : "",
+                    rules : {
+                        jobName : {
+                            required : {
+                                depends: function(element) {
+                                    return typeof ($("#jobId").val()) == "undefined";
+                                }
+                            }
+                        },
+                        jobGroupSelect : {
+                            required : {
+                                depends: function(element) {
+                                    return typeof ($("#jobId").val()) == "undefined";
+                                }
+                            }
+                        },
+                        cronExpression : {
+                            required : true,
+                            remote : {
+                                param : {
+                                    url : sys.rootPath + '/scheduleJob/withoutAuth/validateCron.html',
+                                    cache : false
+                                }
+                            }
+                        },
+                        startDate : {
+                            required : true
+                        },
+                        endDate : {
+                            required : true
+                        }
+                    },
+                    messages : {
+                        jobName : "请填写任务名称",
+                        jobGroupSelect : "请选择任务组",
+                        cronExpression : {
+                            required : "请填写任务触发表达式",
+                            remote : "表达式不正确"
+                        },
+                        startDate : "请选择任务开始日期",
+                        endDate : "请选择任务结束日期"
+                    },
+                    highlight : function(e) {
+                        $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+                    },
+                    success : function(e) {
+                        $(e).closest('.form-group').removeClass('has-error').addClass('has-success');
+                        $(e).remove();
+                    },
+                    errorPlacement : function(error, element) {
+                        if (element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+                            var controls = element.closest('div[class*="col-"]');
+                            if (controls.find(':checkbox,:radio').length > 1)
+                                controls.append(error);
+                            else
+                                error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+                        } else if (element.is('.select2')) {
+                            error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+                        } else if (element.is('.chosen-select')) {
+                            error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+                        } else
+                            error.insertAfter(element.parent());
+                    },
+                    submitHandler : function(form) {
+                        var jobId = $("#jobId").val();
+                        var url = "";
+                        if (jobId != undefined) {
+                            url = '/scheduleJob/edit.html';
+                        } else {
+                            url = '/scheduleJob/add.html';
+                        }
+                        webside.common.commit('scheduleForm', url, '/scheduleJob/listUI.html');
+                    }
+                });
+            },
+            delModel:function(nav, callback){
+                var rows = grid.getCheckedRecords();
+                if (rows.length == 1) {
+                    layer.confirm('确认删除吗？', {
+                    icon : 3,
+                    title : '删除提示'
+                }, function(index, layero) {
+                    $.ajax({
+                        type : "POST",
+                        url : sys.rootPath + nav,
+                        data : {
+                            "id" : rows[0].id,
+                            "jobName" : rows[0].jobName,
+                            "jobGroup" : rows[0].jobGroup
+                        },
+                        dataType : "json",
+                        success : function(resultdata) {
+                            if (resultdata.success) {
+                                layer.msg(resultdata.message, {
+                                    icon : 1
+                                });
+                                if (callback) {
+                                    callback();
+                                }
+                            } else {
+                                layer.msg(resultdata.message, {
+                                    icon : 5
+                                });
+                            }
+                        },
+                        error : function(errorMsg) {
+                            layer.msg('服务器未响应,请稍后再试', {
+                                icon : 3
+                            });
+                        }
+                    });
+                    layer.close(index);
+                });
+                } else {
+                    layer.msg("你没有选择行或选择了多行数据", {
+                        icon : 0
+                    });
+                }
+            },
+            executeJob:function(nav){
+                var rows = grid.getCheckedRecords();
+                var index;
+                if (rows.length == 1) {
+                    $.ajax({
+                        type : "POST",
+                        url : sys.rootPath + nav,
+                        beforeSend : function() {
+                            index = layer.load();
+                        },
+                        data : {
+                            "jobName" : rows[0].jobName,
+                            "jobGroup" : rows[0].jobGroup
+                        },
+                        dataType : "json",
+                        success : function(resultdata) {
+                            layer.close(index);
+                            if (resultdata.success) {
+                                grid.reload(true);
+                                layer.msg(resultdata.message, {
+                                    icon : 1
+                                });
+                            } else {
+                                layer.msg(resultdata.message, {
+                                    icon : 5
+                                });
+                            }
+                        },
+                        error : function(errorMsg) {
+                            layer.msg('服务器未响应,请稍后再试', {
+                                icon : 3
+                            });
+                        }
+                    });
+                }else {
+                    layer.msg("你没有选择任务或选择了多个任务", {
+                        icon : 0
                     });
                 }
             }

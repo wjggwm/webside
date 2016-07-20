@@ -9,9 +9,12 @@ import org.apache.commons.collections.MapUtils;
 import com.webside.dtgrid.model.Column;
 
 /**
- * 导出工具类
- * @author 大连首闻科技有限公司
- * @since 2014-8-22 16:25:30
+ * 
+ * @ClassName: GridUtils
+ * @Description: dtgrid工具类，拷贝自大连首闻科技有限公司的DLShouWen Grid
+ * @author gaogang
+ * @date 2016年7月12日 下午3:09:19
+ *
  */
 public class GridUtils {
 	

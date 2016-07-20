@@ -16,12 +16,12 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.common.Common;
 import com.webside.dtgrid.model.Pager;
 import com.webside.dtgrid.util.ExportUtils;
 import com.webside.exception.SystemException;
 import com.webside.logininfo.model.LoginInfoEntity;
 import com.webside.logininfo.service.LoginInfoService;
-import com.webside.util.Common;
 
 @Controller
 @Scope("prototype")

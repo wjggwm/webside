@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -19,7 +19,6 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -27,8 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.Constants;
@@ -41,11 +38,20 @@ import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
+import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.model.UserEntity;
 import com.webside.user.service.UserService;
 import com.webside.util.EndecryptUtils;
 import com.webside.util.TreeUtil;
 
+/**
+ * 
+ * @ClassName: IndexController
+ * @Description: 登录、注册、退出、验证码
+ * @author gaogang
+ * @date 2016年7月12日 下午3:20:47
+ *
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/")
@@ -90,13 +96,12 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "login.html", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
-	public String userLogin(String accountName, String password, String captcha, Boolean rememberMe, HttpServletRequest request) {
+	public String userLogin(UserEntity userEntity, String captcha, Boolean rememberMe, HttpServletRequest request) {
 		UsernamePasswordToken token = null;
 		try {
-			 //从session中取出servlet生成的验证码text值
-	        String expected = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+	        String expected = ShiroAuthenticationManager.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
 	        //获取用户页面输入的验证码
-	        if(!captcha.equalsIgnoreCase(expected))
+	        if(!StringUtils.equalsIgnoreCase(expected, captcha))
 	        {
 	        	request.setAttribute("error", "验证码错误！");
 				return "/login";
@@ -104,15 +109,16 @@ public class IndexController extends BaseController {
 	        {
 				// 想要得到Subject对象,访问地址必须在shiro的拦截地址内,不然会报空指针
 				Subject subject = SecurityUtils.getSubject();
-				token = new UsernamePasswordToken(accountName, password);
-				//token.setRememberMe(rememberMe);
+				token = new UsernamePasswordToken(userEntity.getAccountName(), userEntity.getPassword());
+				//记住用户登录状态
+				token.setRememberMe(rememberMe);
 				subject.login(token);
 				if (subject.isAuthenticated()) {
+					userEntity = (UserEntity)subject.getPrincipal();
 					LoginInfoEntity loginInfo = new LoginInfoEntity();
-					Session session = SecurityUtils.getSubject().getSession();
-					loginInfo.setUserId(Integer.valueOf(session.getAttribute("userSessionId").toString()));
-					loginInfo.setAccountName(accountName);
-					loginInfo.setLoginIp(session.getHost());
+					loginInfo.setUserId(userEntity.getId().intValue());
+					loginInfo.setAccountName(userEntity.getAccountName());
+					loginInfo.setLoginIp(SecurityUtils.getSubject().getSession().getHost());
 					loginInfoService.log(loginInfo);
 					request.removeAttribute("error");
 				} else {
@@ -167,8 +173,7 @@ public class IndexController extends BaseController {
 		try
 		{
 			// 获取登录的bean
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-			UserEntity userEntity = (UserEntity)request.getSession().getAttribute("userSession");
+			UserEntity userEntity = (UserEntity)SecurityUtils.getSubject().getPrincipal();
 			List<ResourceEntity> list = resourceService.findResourcesMenuByUserId(userEntity.getId().intValue());
 			List<ResourceEntity> treeList = new TreeUtil().getChildResourceEntitys(list, null);
 			model.addAttribute("list", treeList);
@@ -200,7 +205,7 @@ public class IndexController extends BaseController {
 			userEntity.setCredentialsSalt(user.getCredentialsSalt());
 			//设置创建者姓名
 			userEntity.setCreatorName(userEntity.getUserName());
-			userEntity.setCreateTime(new Date());
+			userEntity.setCreateTime(new Date(System.currentTimeMillis()));
 			//设置锁定状态：未锁定；删除状态：未删除
 			userEntity.setLocked(0);
 			userEntity.setDeleteStatus(0);
@@ -225,8 +230,8 @@ public class IndexController extends BaseController {
 	 */
 	@RequestMapping(value = "logout.html", method = RequestMethod.GET)
 	public String logout() {
-		// 使用权限管理工具进行用户的退出，注销登录
-		SecurityUtils.getSubject().logout(); // session
+		// 注销登录
+		ShiroAuthenticationManager.logout();
 		return "redirect:login.html";
 	}
 	
@@ -235,7 +240,6 @@ public class IndexController extends BaseController {
     public void kaptcha(HttpServletRequest req, HttpServletResponse rsp) {
 		ServletOutputStream out = null;
 		try {
-	        HttpSession session = req.getSession();
 	        rsp.setDateHeader("Expires", 0);
 	        rsp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
 	        rsp.addHeader("Cache-Control", "post-check=0, pre-check=0");
@@ -243,7 +247,8 @@ public class IndexController extends BaseController {
 	        rsp.setContentType("image/jpeg");
 	
 	        String capText = captchaProducer.createText();
-	        session.setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);
+	        //将验证码存入shiro 登录用户的session
+	        ShiroAuthenticationManager.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, capText);
 	
 	        BufferedImage image = captchaProducer.createImage(capText);
 	        out = rsp.getOutputStream();

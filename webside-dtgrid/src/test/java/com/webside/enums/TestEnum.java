@@ -7,8 +7,14 @@ import org.junit.Test;
 public class TestEnum {
 
 	@Test
-	public void test() {
+	public void testEmailDescription() {
 		assertTrue(EmailDescription.ADD_EMAIL.getSubject() == "账户创建");
+	}
+	
+	@Test
+	public void testExportType()
+	{
+		System.out.println(ExportType.EXCEL.name());
 	}
 
 }

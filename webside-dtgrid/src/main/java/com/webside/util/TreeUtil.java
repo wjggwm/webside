@@ -6,20 +6,26 @@ import java.util.List;
 
 import jodd.util.StringUtil;
 
+import com.webside.common.model.JSTreeEntity;
+import com.webside.common.model.Select2Entity;
 import com.webside.resource.model.ResourceEntity;
 
 /**
- * 把一个list集合,里面的bean含有 parentId 转为树形式
+ * 
+ * @ClassName: TreeUtil
+ * @Description: 树形结构工具类
+ * @author gaogang
+ * @date 2016年7月12日 下午4:27:10
  *
  */
 public class TreeUtil {
 	
 	/*
-	 * select2下来组件数据对象
+	 * select2下拉组件数据对象
 	 */
 	private List<Select2Entity> selectTree = new ArrayList<Select2Entity>();
 	/*
-	 * 生成select2下来组件数据时遍历的次数
+	 * 生成select2下拉组件数据时遍历的次数
 	 */
 	private int selectCnt = 0;
 	

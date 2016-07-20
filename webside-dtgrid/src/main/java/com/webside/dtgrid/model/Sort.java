@@ -1,5 +1,13 @@
 package com.webside.dtgrid.model;
 
+/**
+ * 
+ * @ClassName: Sort
+ * @Description: dtgrid表格排序对象，拷贝自大连首闻科技有限公司的DLShouWen Grid
+ * @author gaogang
+ * @date 2016年7月12日 下午3:08:20
+ *
+ */
 public class Sort {
 	
 	/**

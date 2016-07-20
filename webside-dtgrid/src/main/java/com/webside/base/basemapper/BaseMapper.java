@@ -8,10 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * 
- * <p>Description: 基础mapper定义,可以自己重写，也可加入自己的方法</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年1月14日 下午3:21:50
+ * @ClassName: BaseMapper
+ * @Description: 基础mapper定义,可以自己重写，也可加入自己的方法
+ * @author gaogang
+ * @date 2016年7月12日 下午3:01:23
+ *
+ * @param <T>	操作的对象类型
+ * @param <ID>	id
  */
 public interface BaseMapper<T,ID extends Serializable> {
 

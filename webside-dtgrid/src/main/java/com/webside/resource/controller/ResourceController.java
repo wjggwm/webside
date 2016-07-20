@@ -19,16 +19,16 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
+import com.webside.common.Common;
+import com.webside.common.model.JSTreeEntity;
+import com.webside.common.model.Select2Entity;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
 import com.webside.dtgrid.model.Pager;
 import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
 import com.webside.roleresource.service.RoleResourceService;
-import com.webside.util.Common;
-import com.webside.util.JSTreeEntity;
 import com.webside.util.PageUtil;
-import com.webside.util.Select2Entity;
 import com.webside.util.TreeUtil;
 
 @Controller
@@ -152,11 +152,7 @@ public class ResourceController extends BaseController {
 		try
 		{
 			resourceEntity.setIsHide(0);
-			resourceEntity.setCreateTime(new Date());
-			if(resourceEntity.getParentId() != null)
-			{
-				resourceEntity.setIcon(null);
-			}
+			resourceEntity.setCreateTime(new Date(System.currentTimeMillis()));
 			boolean result = roleResourceService.insertRoleAndResource(resourceEntity);
 			if(result)
 			{

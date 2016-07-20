@@ -11,14 +11,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.webside.enums.MediaTypes;
 import com.webside.exception.RestException;
 
-
 /**
- * <p>Description: 自定义ExceptionHandler，专门处理Restful异常</p>
- * <p>Company: 静之殇工作室</p>
- * @author wjggwm
- * @date 2016年7月6日 下午1:37:56
  * 
+ * @ClassName: RestExceptionHandler
+ * @Description: 自定义ExceptionHandler，专门处理Restful异常
  * </p>会被Spring-MVC自动扫描，但又不属于Controller的annotation
+ * @author gaogang
+ * @date 2016年7月12日 下午3:18:28
+ *
  */
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
