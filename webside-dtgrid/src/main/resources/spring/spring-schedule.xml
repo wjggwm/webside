@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    		http://www.springframework.org/schema/beans 
+    		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    		http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-4.1.xsd "
+	default-lazy-init="false">
+
+	<!-- quartz持久化存储 -->
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- quartz 属性配置文件 -->
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<!-- 使用spring管理的数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 防止数据表锁定导致不能正常工作 -->
+		<property name="transactionManager" ref="transactionManager" />
+		<!-- 存储spring上下文到quartz的上下文中，在quartz中可通过如下方式获取：ApplicationContext appCtx = (ApplicationContext) context.getScheduler().getContext().get("applicationContextKey") -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+		<!-- Will update database cron triggers to what is in this jobs file on each deploy. Replaces all previous trigger and job data that was in the database. YMMV -->
+		<property name="overwriteExistingJobs" value="true" />
+		<property name="schedulerName" value="webside_quartzScheduler" />
+		<property name="jobFactory">
+			<!-- inject bean reference into a Quartz job in Spring -->
+			<bean class="com.webside.quartz.extension.AutowiringSpringBeanJobFactory" />
+		</property>
+		<!-- 初始化后立即启动 -->
+		<property name="autoStartup" value="true" />
+		<!-- 延迟启动时间 -->
+		<property name="startupDelay" value="100" />
+		<!-- 配置固定的job -->
+		 <property name="triggers">
+            <list>
+                <ref bean="emailTrigger"/>
+            </list>
+        </property>
+	</bean>
+
+	<!-- 由于当把job信息存入数据库时需要用到序列化(Serializable),不能使用MethodInvokingJobDetailFactoryBean对象了,建议使用 CronTriggerFactoryBean-->
+    <bean id="emailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="emailJobDetail"/>
+        <property name="cronExpression" value="${quartz.job.email.cron.expression}"/>
+        <property name="name" value="${quartz.job.email.name}"/>
+        <property name="group" value="${quartz.job.email.group}"/>
+        <property name="startTime" value="${quartz.job.email.startTime}"/>
+    </bean>
+
+	<bean id="emailJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="jobClass" value="com.webside.quartz.job.EmailJob"/>
+	    <property name="name" value="${quartz.job.email.name}"/>
+	    <property name="group" value="${quartz.job.email.group}"/>
+	    <property name="description" value="每天下午13:15执行一次发送邮件的job"/>
+	    <property name="durability" value="true"/>
+	</bean>
+
+</beans>

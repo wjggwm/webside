@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.quartz.mapper.ScheduleJobMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<sql id="scheduleJobAttributes">
+		j_id id,
+		j_job_name jobName,
+		j_job_group jobGroup,
+		j_job_status jobStatus,
+		j_cron_expression cronExpression,
+		j_job_class_name jobClassName,
+		j_job_desc jobDesc,
+		j_job_start startDate,
+		j_job_end endDate,
+		j_job_create_time createTime,
+		j_job_update_time updateTime
+	</sql>
+	
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.quartz.model.ScheduleJobEntity" flushCache="true" useCache="true">
+		SELECT 
+		<include refid="scheduleJobAttributes"/>
+		FROM tb_schedule_job where <![CDATA[j_job_status <> 'DELETE']]>
+			<if test="jobName != null and jobName != ''">
+				AND j_job_name=#{jobName}
+			</if>
+	</select>
+	
+	<select id="findById" parameterType="long" resultType="com.webside.quartz.model.ScheduleJobEntity" flushCache="true" useCache="true">
+		SELECT 
+		<include refid="scheduleJobAttributes"/>
+		FROM tb_schedule_job 
+		where j_id = ${id}
+	</select>
+	
+	<insert id="insert" parameterType="com.webside.quartz.model.ScheduleJobEntity" useGeneratedKeys="true" keyProperty="id">
+		insert ignore into tb_schedule_job (
+			j_job_name,
+			j_job_group,
+			j_job_status,
+			j_cron_expression,
+			j_job_class_name,
+			j_job_desc,
+			j_job_start,
+			j_job_end,
+			j_job_create_time
+			)   
+		values (
+			#{jobName},
+			#{jobGroup},
+			#{jobStatus},
+			#{cronExpression},
+			#{jobClassName},
+			#{jobDesc},
+			#{startDate},
+			#{endDate},
+			#{createTime}
+			)  
+	</insert>
+	
+	<update id="update" parameterType="com.webside.quartz.model.ScheduleJobEntity" flushCache="true">
+		update tb_schedule_job
+		<set>
+			<if test="jobStatus != null and jobStatus != ''">
+				j_job_status = #{jobStatus},
+			</if>
+			<if test="cronExpression != null and cronExpression != ''">
+				j_cron_expression = #{cronExpression},
+			</if>
+			<if test="startDate != null">
+				j_job_start = #{startDate},
+			</if>
+			<if test="endDate != null">
+				j_job_end = #{endDate},
+			</if>
+		</set>
+		where j_id = ${id}
+	</update>
+
+	<delete id="deleteById" parameterType="long">
+       delete from tb_schedule_job where j_id=${id}
+	</delete>
+
+	
+</mapper>
