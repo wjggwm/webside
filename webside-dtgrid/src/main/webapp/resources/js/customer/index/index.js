@@ -791,46 +791,80 @@ var webside = {
                     $('#startDate').datepicker('setEndDate',EndDate);  
                 });
             },
-            validateScheduleForm:function(){
-                $('#scheduleForm').validate({
+            initTrigger : function(){
+                $("#triggerDiv").fadeOut(1);
+                $("#isAddTrigger").bootstrapSwitch({
+                    state : false,
+                    onColor : 'success',
+                    offColor : 'warning',
+                    onText : '是',
+                    offText : '否',
+                    labelText : '是否添加trigger',
+                    labelWidth : 100,
+                    onSwitchChange : function(event, state){
+                        if(state)
+                        {
+                            $("#triggerDiv").fadeIn();
+                        }else
+                        {
+                            $("#triggerDiv").fadeOut();
+                        }
+                    }
+                });
+            },
+            validateJobForm : function(){
+                $('#jobForm').validate({
                     errorElement : 'div',
                     errorClass : 'help-block',
                     focusInvalid : false,
                     ignore : "",
                     rules : {
-                        jobName : {
-                            required : {
-                                depends: function(element) {
-                                    return typeof ($("#jobId").val()) == "undefined";
-                                }
-                            }
+                        jobName :{
+                           required : true 
                         },
                         jobGroupSelect : {
-                            required : {
-                                depends: function(element) {
-                                    return typeof ($("#jobId").val()) == "undefined";
-                                }
+                           required : true 
+                        },
+                        triggerName : {
+                            required : function() {
+                                 return $("#isAddTrigger").prop("checked");
+                            }
+                        },
+                        triggerGroup: {
+                            required : function() {
+                                 return false;//$("#isAddTrigger").prop("checked");
                             }
                         },
                         cronExpression : {
-                            required : true,
+                            required : function() {
+                                 return $("#isAddTrigger").prop("checked");
+                            },
                             remote : {
                                 param : {
                                     url : sys.rootPath + '/scheduleJob/withoutAuth/validateCron.html',
                                     cache : false
+                                },
+                                depends : function() {
+                                    return $("#isAddTrigger").prop("checked");
                                 }
                             }
                         },
                         startDate : {
-                            required : true
+                            required : function() {
+                                 return $("#isAddTrigger").prop("checked");
+                            }
                         },
                         endDate : {
-                            required : true
+                            required : function() {
+                                 return $("#isAddTrigger").prop("checked");
+                            }
                         }
                     },
                     messages : {
                         jobName : "请填写任务名称",
                         jobGroupSelect : "请选择任务组",
+                        triggerName: "请填写trigger名称",
+                        triggerGroup: "请填写trigger组",
                         cronExpression : {
                             required : "请填写任务触发表达式",
                             remote : "表达式不正确"
@@ -860,19 +894,111 @@ var webside = {
                             error.insertAfter(element.parent());
                     },
                     submitHandler : function(form) {
-                        var jobId = $("#jobId").val();
-                        var url = "";
-                        if (jobId != undefined) {
-                            url = '/scheduleJob/edit.html';
-                        } else {
-                            url = '/scheduleJob/add.html';
-                        }
-                        webside.common.commit('scheduleForm', url, '/scheduleJob/listUI.html');
+                        webside.common.commit('jobForm', '/scheduleJob/addJob.html', '/scheduleJob/planningJobListUI.html');
                     }
                 });
             },
-            delModel:function(nav, callback){
+            validateTriggerForm:function(){
+                $('#triggerForm').validate({
+                    errorElement : 'div',
+                    errorClass : 'help-block',
+                    focusInvalid : false,
+                    ignore : "",
+                    rules : {
+                        triggerName : {
+                            required : true
+                        },
+                        triggerGroup:{
+                            required : false
+                        },
+                        cronExpression : {
+                            required : true,
+                            remote : {
+                                param : {
+                                    url : sys.rootPath + '/scheduleJob/withoutAuth/validateCron.html',
+                                    cache : false
+                                }
+                            }
+                        },
+                        startDate : {
+                            required : true
+                        },
+                        endDate : {
+                            required : true
+                        }
+                    },
+                    messages : {
+                        triggerName: "请填写trigger名称",
+                        triggerGroup: "请填写trigger组",
+                        cronExpression : {
+                            required : "请填写任务触发表达式",
+                            remote : "表达式不正确"
+                        },
+                        startDate : "请选择任务开始日期",
+                        endDate : "请选择任务结束日期"
+                    },
+                    highlight : function(e) {
+                        $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+                    },
+                    success : function(e) {
+                        $(e).closest('.form-group').removeClass('has-error').addClass('has-success');
+                        $(e).remove();
+                    },
+                    errorPlacement : function(error, element) {
+                        if (element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+                            var controls = element.closest('div[class*="col-"]');
+                            if (controls.find(':checkbox,:radio').length > 1)
+                                controls.append(error);
+                            else
+                                error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+                        } else if (element.is('.select2')) {
+                            error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+                        } else if (element.is('.chosen-select')) {
+                            error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+                        } else
+                            error.insertAfter(element.parent());
+                    },
+                    submitHandler : function(form) {
+                        var jobTriggerHide = $("#jobTriggerHide").val();
+                        var jobName = $("#jobName").val();
+                        var jobGroup = $("#jobGroup").val();
+                        var url = "";
+                        if (jobTriggerHide != undefined) {
+                            url = '/scheduleJob/editTrigger.html';
+                        } else {
+                            url = '/scheduleJob/addTrigger.html';
+                        }
+                        webside.common.commit('triggerForm', url, '/scheduleJob/jobTriggerListUI.html?jobName='+jobName+'&jobGroup='+jobGroup);
+                    }
+                });
+            },
+            editModel : function(nav) {
+                //获取选择的行
                 var rows = grid.getCheckedRecords();
+                if (rows.length == 1) {
+                    webside.common.loadPage(nav + '?jobName=' + rows[0].jobName+'&jobGroup='+rows[0].jobGroup+'&triggerName='+rows[0].triggerName+'&triggerGroup='+rows[0].triggerGroup);
+                } else {
+                    layer.msg("你没有选择行或选择了多行数据", {
+                        icon : 0
+                    });
+                }
+            },
+            delModel:function(nav,callback){
+                var index;
+                var rows = grid.getCheckedRecords();
+                var jobName = $("#jobName").val();
+                var param = {};
+                if(undefined ==jobName)
+                {
+                    //执行job
+                    param.jobName = rows[0].jobName;
+                    param.jobGroup = rows[0].jobGroup;
+                }else
+                {
+                    //执行trigger
+                    param.triggerName = rows[0].triggerName;
+                    param.triggerGroup = rows[0].triggerGroup;
+                }
                 if (rows.length == 1) {
                     layer.confirm('确认删除吗？', {
                     icon : 3,
@@ -881,11 +1007,7 @@ var webside = {
                     $.ajax({
                         type : "POST",
                         url : sys.rootPath + nav,
-                        data : {
-                            "id" : rows[0].id,
-                            "jobName" : rows[0].jobName,
-                            "jobGroup" : rows[0].jobGroup
-                        },
+                        data : param,
                         dataType : "json",
                         success : function(resultdata) {
                             if (resultdata.success) {
@@ -915,8 +1037,21 @@ var webside = {
                     });
                 }
             },
-            executeJob:function(nav){
+            executeJob:function(nav, callback){
                 var rows = grid.getCheckedRecords();
+                var jobName = $("#jobName").val();
+                var param = {};
+                if(undefined ==jobName)
+                {
+                    //执行job
+                    param.jobName = rows[0].jobName;
+                    param.jobGroup = rows[0].jobGroup;
+                }else
+                {
+                    //执行trigger
+                    param.triggerName = rows[0].triggerName;
+                    param.triggerGroup = rows[0].triggerGroup;
+                }
                 var index;
                 if (rows.length == 1) {
                     $.ajax({
@@ -925,18 +1060,17 @@ var webside = {
                         beforeSend : function() {
                             index = layer.load();
                         },
-                        data : {
-                            "jobName" : rows[0].jobName,
-                            "jobGroup" : rows[0].jobGroup
-                        },
+                        data : param,
                         dataType : "json",
                         success : function(resultdata) {
                             layer.close(index);
                             if (resultdata.success) {
-                                grid.reload(true);
                                 layer.msg(resultdata.message, {
                                     icon : 1
                                 });
+                                if (callback) {
+                                    callback();
+                                }
                             } else {
                                 layer.msg(resultdata.message, {
                                     icon : 5
@@ -954,6 +1088,10 @@ var webside = {
                         icon : 0
                     });
                 }
+            },
+            getTrigger:function(jobName, jobGroup)
+            {
+                webside.common.loadPage('/scheduleJob/jobTriggerListUI.html?jobName='+jobName+'&jobGroup='+jobGroup);
             }
         }
     }

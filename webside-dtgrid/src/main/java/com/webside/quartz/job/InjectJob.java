@@ -1,26 +1,27 @@
 package com.webside.quartz.job;
 
 import org.apache.log4j.Logger;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.webside.quartz.model.ScheduleJobEntity;
 
 /**
  * 
- * @ClassName: MyJob
- * @Description: 可动态添加的job
- * @author gaogang
+ * @ClassName: InjectJob
+ * @Description: QuartzJobBean:This allows to implement dependency-injected Quartz Jobs without a dependency on Spring base classes
+ * @author wjggwm
  * @date 2016年7月18日 下午5:54:08
  *
  */
-public class MyJob implements Job {
+public class InjectJob extends QuartzJobBean {
 
-	private static Logger logger = Logger.getLogger(MyJob.class);
+	private static Logger logger = Logger.getLogger(InjectJob.class);
 	
+
 	@Override
-	public void execute(JobExecutionContext context)
+	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException {
 		logger.info("任务执行了...");
 		/*
@@ -30,6 +31,7 @@ public class MyJob implements Job {
 		ScheduleJobEntity scheduleJob = (ScheduleJobEntity) context.getMergedJobDataMap().get("scheduleJob");
 		
 		System.out.println("任务名称 = [" + scheduleJob.getJobName() + "]");
+		
 	}
 
 }

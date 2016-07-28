@@ -128,13 +128,14 @@
 			<tx:method name="log" propagation="REQUIRED" read-only="false"
 				rollback-for="com.webside.exception.ServiceException" />
 			<!-- quartz job 方法也需要在事物中执行 -->
-			<tx:method name="pauseJob" propagation="REQUIRED" read-only="false"
+			<tx:method name="pause*" propagation="REQUIRED" read-only="false"
 				rollback-for="com.webside.exception.ServiceException" />
-			<tx:method name="resumeJob" propagation="REQUIRED" read-only="false"
+			<tx:method name="resume*" propagation="REQUIRED" read-only="false"
 				rollback-for="com.webside.exception.ServiceException" />
-			<tx:method name="executeJob" propagation="REQUIRED" read-only="false"
+			<tx:method name="execute*" propagation="REQUIRED" read-only="false"
 				rollback-for="com.webside.exception.ServiceException" />
-			
+			<tx:method name="interrupt*" propagation="REQUIRED" read-only="false"
+				rollback-for="com.webside.exception.ServiceException" />
 			<tx:method name="*" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>

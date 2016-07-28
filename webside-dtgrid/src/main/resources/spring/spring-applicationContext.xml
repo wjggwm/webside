@@ -54,5 +54,5 @@
 	<import resource="spring-ehcache.xml" />
 	<import resource="spring-redis.xml" />
 	<import resource="spring-flyway.xml" />
-	<import resource="spring-schedule.xml" />
+	<import resource="spring-quartz.xml" />
 </beans>    

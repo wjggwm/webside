@@ -9,6 +9,10 @@ import com.webside.quartz.job.EmailJob;
  * 
  * @ClassName: QuartzStatefulJob
  * @Description: 
+ * 这里实现的是有状态job,即job不可并发,只能串行
+ * 实现方式:
+ * 1、添加注解@DisallowConcurrentExecution
+ * 2、继承StatefulJob
  * This job has the same functionality of SimpleRecoveryJob except 
  * that this job implements is 'stateful', in that it will have it's data 
  * (JobDataMap) automatically re-persisted after each execution, and only one

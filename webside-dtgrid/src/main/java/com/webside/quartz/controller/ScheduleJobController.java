@@ -1,34 +1,29 @@
 package com.webside.quartz.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.quartz.CronExpression;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONArray;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.webside.common.Common;
-import com.webside.dtgrid.model.Pager;
-import com.webside.enums.JobStatus;
 import com.webside.exception.AjaxException;
 import com.webside.exception.ServiceException;
 import com.webside.quartz.model.ScheduleJobEntity;
 import com.webside.quartz.service.ScheduleJobService;
-import com.webside.util.PageUtil;
 
 @Controller
 @Scope("prototype")
@@ -38,20 +33,15 @@ public class ScheduleJobController {
 	@Autowired
 	private ScheduleJobService scheduleJobService;
 	
+	@Autowired
+	private SchedulerFactoryBean schedulerFactoryBean;
+	
 	@Value("${quartz.job.jobGroup}")
 	private String jobGroup;
 
 	@RequestMapping("planningJobListUI.html")
-	public String planJobListUI(Model model, HttpServletRequest request) {
+	public String planJobListUI(Model model) {
 		try {
-			PageUtil page = new PageUtil();
-			if (request.getParameterMap().containsKey("page")) {
-				page.setPageNum(Integer.valueOf(request.getParameter("page")));
-				page.setPageSize(Integer.valueOf(request.getParameter("rows")));
-				page.setOrderByColumn(request.getParameter("sidx"));
-				page.setOrderByType(request.getParameter("sord"));
-			}
-			model.addAttribute("page", page);
 			return Common.BACKGROUND_PATH + "/schedule/planningList";
 		} catch (Exception e) {
 			throw new AjaxException(e);
@@ -59,34 +49,19 @@ public class ScheduleJobController {
 	}
 	
 	@RequestMapping("runningJobListUI.html")
-	public String runningJobListUI(Model model, HttpServletRequest request) {
+	public String runningJobListUI(Model model) {
 		try {
-			PageUtil page = new PageUtil();
-			if (request.getParameterMap().containsKey("page")) {
-				page.setPageNum(Integer.valueOf(request.getParameter("page")));
-				page.setPageSize(Integer.valueOf(request.getParameter("rows")));
-				page.setOrderByColumn(request.getParameter("sidx"));
-				page.setOrderByType(request.getParameter("sord"));
-			}
-			model.addAttribute("page", page);
 			return Common.BACKGROUND_PATH + "/schedule/runningList";
 		} catch (Exception e) {
 			throw new AjaxException(e);
 		}
 	}
 	
-	@RequestMapping("listUI.html")
-	public String listUI(Model model, HttpServletRequest request) {
+	@RequestMapping("jobTriggerListUI.html")
+	public String jobTriggerListUI(Model model, ScheduleJobEntity job) {
 		try {
-			PageUtil page = new PageUtil();
-			if (request.getParameterMap().containsKey("page")) {
-				page.setPageNum(Integer.valueOf(request.getParameter("page")));
-				page.setPageSize(Integer.valueOf(request.getParameter("rows")));
-				page.setOrderByColumn(request.getParameter("sidx"));
-				page.setOrderByType(request.getParameter("sord"));
-			}
-			model.addAttribute("page", page);
-			return Common.BACKGROUND_PATH + "/schedule/list";
+			model.addAttribute("scheduleJobEntity", job);
+			return Common.BACKGROUND_PATH + "/schedule/triggerList";
 		} catch (Exception e) {
 			throw new AjaxException(e);
 		}
@@ -103,7 +78,7 @@ public class ScheduleJobController {
 	 */
 	@RequestMapping(value = "/planningJobList.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object planJobList() throws Exception {
+	public Object planJobList(String timestamp) throws Exception {
 		// 1、映射Pager对象
 		List<ScheduleJobEntity> list = scheduleJobService.getPlanJobList();
 		// 列表展示数据
@@ -121,9 +96,8 @@ public class ScheduleJobController {
 	 */
 	@RequestMapping(value = "/runningJobList.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object runningJobList() throws Exception {
+	public Object runningJobList(String timestamp) throws Exception {
 		// 1、映射Pager对象
-
 		List<ScheduleJobEntity> list = scheduleJobService.getRunningJobList();
 		// 列表展示数据
 		return list;
@@ -131,47 +105,37 @@ public class ScheduleJobController {
 	
 	/**
 	 * 
-	 * @Title: list
-	 * @Description: ajax分页动态加载模式
+	 * @Title: runningJobList
+	 * @Description: 获取正在运行的任务列表
 	 * @param gridPager
 	 * @param response
 	 * @return Object
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/jobTriggerList.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(String gridPager)
-			throws Exception {
-		Map<String, Object> parameters = null;
-		// 1、映射Pager对象
-		Pager pager = JSON.parseObject(gridPager, Pager.class);
-		// 2、设置查询参数
-		parameters = pager.getParameters();
-		if (parameters.size() < 0) {
-			parameters.put("jobName", null);
-		}
-		// 设置分页，page里面包含了分页信息
-		Page<Object> page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "j_id DESC");
-		List<ScheduleJobEntity> list = scheduleJobService.queryListByPage(parameters);
-		parameters.clear();
-		parameters.put("isSuccess", Boolean.TRUE);
-		parameters.put("nowPage", pager.getNowPage());
-		parameters.put("pageSize", pager.getPageSize());
-		parameters.put("pageCount", page.getPages());
-		parameters.put("recordCount", page.getTotal());
-		parameters.put("startRecord", page.getStartRow());
+	public Object jobTriggerList(ScheduleJobEntity job) throws Exception {
+		List<ScheduleJobEntity> list = scheduleJobService.getTriggers(job);
 		// 列表展示数据
-		parameters.put("exhibitDatas", list);
-		return parameters;
+		return list;
 	}
 	
-	
-
-	@RequestMapping("addUI.html")
-	public String addUI(Model model) {
+	@RequestMapping("addJobUI.html")
+	public String addJobUI(Model model) {
 		try {
 			model.addAttribute("jobGroup", JSONArray.parseArray(jobGroup).toArray());
-			return Common.BACKGROUND_PATH + "/schedule/form";
+			return Common.BACKGROUND_PATH + "/schedule/jobForm";
+		} catch (Exception e) {
+			throw new AjaxException(e);
+		}
+	}
+	
+	@RequestMapping("addTriggerUI.html")
+	public String addTriggerUI(Model model,ScheduleJobEntity job) {
+		try {
+			model.addAttribute("jobGroup", JSONArray.parseArray(jobGroup).toArray());
+			model.addAttribute("scheduleJobEntity", job);
+			return Common.BACKGROUND_PATH + "/schedule/triggerForm";
 		} catch (Exception e) {
 			throw new AjaxException(e);
 		}
@@ -185,13 +149,13 @@ public class ScheduleJobController {
 	 * @return Object
 	 * @throws
 	 */
-	@RequestMapping(value = "/add.html")
+	@RequestMapping(value = "/addJob.html")
 	@ResponseBody
 	public Object addQuartzJob(ScheduleJobEntity job) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			job.setCreateTime(new Date(System.currentTimeMillis()));
-			job.setJobStatus(JobStatus.NORMAL.name());
+			Scheduler scheduler = schedulerFactoryBean.getScheduler();
+			if (!scheduler.checkExists(job.getJobKey())) {
 			boolean result = scheduleJobService.addJob(job);
 			if (result) {
 				map.put("success", Boolean.TRUE);
@@ -202,26 +166,71 @@ public class ScheduleJobController {
 				map.put("data", null);
 				map.put("message", "添加失败");
 			}
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "job已存在");
+			}
 		} catch (ServiceException e) {
+			throw new AjaxException(e);
+		} catch (SchedulerException e) {
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	/**
+	 * 
+	 * @Title: addQuartzJob
+	 * @Description: 任务创建
+	 * @param job
+	 * @return Object
+	 * @throws
+	 */
+	@RequestMapping(value = "/addTrigger.html")
+	@ResponseBody
+	public Object addQuartzTrigger(ScheduleJobEntity job) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Scheduler scheduler = schedulerFactoryBean.getScheduler();
+			if(StringUtils.isEmpty(job.getTriggerGroup()))
+			{
+				//使用默认组名称:DEFAULT
+				job.setTriggerGroup(Scheduler.DEFAULT_GROUP);
+			}
+			if (!scheduler.checkExists(job.getTriggerKey())) {
+				boolean result = scheduleJobService.addJobTrigger(job);
+				if (result) {
+					map.put("success", Boolean.TRUE);
+					map.put("data", null);
+					map.put("message", "添加成功");
+				} else {
+					map.put("success", Boolean.FALSE);
+					map.put("data", null);
+					map.put("message", "添加失败");
+				}
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "trigger已存在");
+			}
+		} catch (ServiceException e) {
+			throw new AjaxException(e);
+		} catch (SchedulerException e) {
 			throw new AjaxException(e);
 		}
 		return map;
 	}
 
-	@RequestMapping("editUI.html")
-	public String editUI(Model model, HttpServletRequest request, Long id) {
+	@RequestMapping("editTriggerUI.html")
+	public String editUI(Model model, ScheduleJobEntity job) {
 		try {
-			ScheduleJobEntity scheduleJobEntity = scheduleJobService.findById(id);
-			PageUtil page = new PageUtil();
-			page.setPageNum(Integer.valueOf(request.getParameter("page")));
-			page.setPageSize(Integer.valueOf(request.getParameter("rows")));
-			page.setOrderByColumn(request.getParameter("sidx"));
-			page.setOrderByType(request.getParameter("sord"));
-			
+			ScheduleJobEntity scheduleJobEntity = scheduleJobService.getScheduleJobEntity(job);
 			model.addAttribute("jobGroup", JSONArray.parseArray(jobGroup).toArray());
-			model.addAttribute("page", page);
 			model.addAttribute("scheduleJobEntity", scheduleJobEntity);
-			return Common.BACKGROUND_PATH + "/schedule/form";
+			return Common.BACKGROUND_PATH + "/schedule/triggerForm";
 		} catch (Exception e) {
 			throw new AjaxException(e);
 		}
@@ -229,18 +238,18 @@ public class ScheduleJobController {
 
 	/**
 	 * 
-	 * @Title: updateQuartzJob
-	 * @Description: 任务更新:任务名称和组不可更新
+	 * @Title: updateQuartzTrigger
+	 * @Description: 更新trigger
 	 * @param job
-	 * @return Object
+	 * @return	Object
 	 * @throws
 	 */
-	@RequestMapping(value = "/edit.html")
+	@RequestMapping(value = "/editTrigger.html")
 	@ResponseBody
-	public Object updateQuartzJob(ScheduleJobEntity job) {
+	public Object updateQuartzTrigger(ScheduleJobEntity job) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			boolean result = scheduleJobService.updateJob(job);
+			boolean result = scheduleJobService.updateJobTrigger(job);
 			if (result) {
 				map.put("success", Boolean.TRUE);
 				map.put("data", null);
@@ -258,21 +267,50 @@ public class ScheduleJobController {
 	}
 
 	/**
-	 * 暂停任务
 	 * 
-	 * @param request
-	 * @param response
+	 * @Title: pauseQuartzJob
+	 * @Description: 暂停job
 	 * @param job
-	 * @param model
-	 * @return
+	 * @return	Object
+	 * @throws
 	 */
-	@RequestMapping(value = "/pause.html")
+	@RequestMapping(value = "/pauseJob.html")
 	@ResponseBody
 	public Object pauseQuartzJob(ScheduleJobEntity job) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			job.setJobStatus(JobStatus.PAUSED.name());
-			boolean result = scheduleJobService.pauseJob(job);
+			boolean result = scheduleJobService.pauseJob(job.getJobKey());
+			if(result)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "暂停成功");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "暂停失败");
+			}
+		} catch (ServiceException e) {
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	/**
+	 * 
+	 * @Title: pauseQuartzTrigger
+	 * @Description: 暂停trigger
+	 * @param job
+	 * @return	Object
+	 * @throws
+	 */
+	@RequestMapping(value = "/pauseTrigger.html")
+	@ResponseBody
+	public Object pauseQuartzTrigger(ScheduleJobEntity job) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			boolean result = scheduleJobService.pauseJobTrigger(job.getTriggerKey());
 			if(result)
 			{
 				map.put("success", Boolean.TRUE);
@@ -291,21 +329,19 @@ public class ScheduleJobController {
 	}
 
 	/**
-	 * 恢复任务
 	 * 
-	 * @param request
-	 * @param response
-	 * @param scheduleJob
-	 * @param model
-	 * @return
+	 * @Title: resumeQuartzJob
+	 * @Description: 恢复job
+	 * @param job
+	 * @return	Object
+	 * @throws
 	 */
-	@RequestMapping(value = "/resume.html")
+	@RequestMapping(value = "/resumeJob.html")
 	@ResponseBody
 	public Object resumeQuartzJob(ScheduleJobEntity job) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			job.setJobStatus(JobStatus.NORMAL.name());
-			boolean result = scheduleJobService.resumeJob(job);
+			boolean result = scheduleJobService.resumeJob(job.getJobKey());
 			if(result)
 			{
 				map.put("success", Boolean.TRUE);
@@ -324,21 +360,50 @@ public class ScheduleJobController {
 	}
 
 	/**
-	 * 删除任务
 	 * 
-	 * @param request
-	 * @param response
-	 * @param scheduleJob
-	 * @param model
-	 * @return
+	 * @Title: resumeQuartzTrigger
+	 * @Description: 恢复trigger
+	 * @param job
+	 * @return	Object
+	 * @throws
 	 */
-	@RequestMapping(value = "/delete.html")
+	@RequestMapping(value = "/resumeTrigger.html")
+	@ResponseBody
+	public Object resumeQuartzTrigger(ScheduleJobEntity job) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			boolean result = scheduleJobService.resumeJobTrigger(job.getTriggerKey());
+			if(result)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "恢复成功");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "恢复失败");
+			}
+		} catch (ServiceException e) {
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	/**
+	 * 
+	 * @Title: deleteQuartzJob
+	 * @Description: 删除job
+	 * @param job
+	 * @return	Object
+	 * @throws
+	 */
+	@RequestMapping(value = "/deleteJob.html")
 	@ResponseBody
 	public Object deleteQuartzJob(ScheduleJobEntity job) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			job.setJobStatus(JobStatus.DELETE.name());
-			boolean result = scheduleJobService.deleteJob(job);
+			boolean result = scheduleJobService.deleteJob(job.getJobKey());
 			if(result)
 			{
 				map.put("success", Boolean.TRUE);
@@ -357,7 +422,38 @@ public class ScheduleJobController {
 	}
 
 	/**
-	 * 执行一次任务
+	 * 
+	 * @Title: deleteQuartzTrigger
+	 * @Description: 删除trigger
+	 * @param job
+	 * @return	Object
+	 * @throws
+	 */
+	@RequestMapping(value = "/deleteTrigger.html")
+	@ResponseBody
+	public Object deleteQuartzTrigger(ScheduleJobEntity job) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			boolean result = scheduleJobService.deleteJobTrigger(job.getTriggerKey());
+			if(result)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "删除成功");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "删除失败");
+			}
+		} catch (ServiceException e) {
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	/**
+	 * 执行一次job
 	 * 
 	 * @param request
 	 * @param response
@@ -365,12 +461,44 @@ public class ScheduleJobController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/executeOnce.html")
+	@RequestMapping(value = "/executeJob.html")
 	@ResponseBody
 	public Object executeQuartzJob(ScheduleJobEntity job) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			boolean result = scheduleJobService.executeJob(job);
+			boolean result = scheduleJobService.executeJob(job.getJobKey());
+			if(result)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "执行成功");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "执行失败");
+			}
+		} catch (ServiceException e) {
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	/**
+	 * 执行一次j
+	 * 
+	 * @param request
+	 * @param response
+	 * @param scheduleJob
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/interruptJob.html")
+	@ResponseBody
+	public Object interruptQuartzJob(ScheduleJobEntity job) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			boolean result = scheduleJobService.interruptJob(job.getJobKey());
 			if(result)
 			{
 				map.put("success", Boolean.TRUE);

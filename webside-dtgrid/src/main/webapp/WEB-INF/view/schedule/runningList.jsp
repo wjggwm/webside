@@ -3,14 +3,9 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/schedule/runningList.js"></script>
 <div class="page-header">
-	<shiro:hasPermission name="schedule:pause">
-	<button id="btnDel" type="button" onclick="webside.form.schedule.executeJob('/scheduleJob/pause.html')" class="btn btn-warning btn-sm">
-		<i class="fa fa-unlock-alt"></i>&nbsp;暂停
-	</button>
-	</shiro:hasPermission>
-	<shiro:hasPermission name="schedule:resume">
-	<button id="btnDel" type="button" onclick="webside.form.schedule.executeJob('/scheduleJob/resume.html')" class="btn btn-success btn-sm">
-		<i class="fa fa-unlock-alt"></i>&nbsp;恢复
+	<shiro:hasPermission name="schedule:pauseJob">
+	<button id="btnPause" type="button" onclick="webside.form.schedule.executeJob('/scheduleJob/interruptJob.html', customSearch)" class="btn btn-warning btn-sm">
+		<i class="fa fa-pause"></i>&nbsp;停止
 	</button>
 	</shiro:hasPermission>
 </div>
@@ -21,7 +16,7 @@
 		<div class="widget-box transparent ui-sortable-handle"
 			style="opacity: 1; z-index: 0;">
 			<div class="widget-header">
-				<h4 class="widget-title lighter">运行中任务列表</h4>
+				<h4 class="widget-title lighter">运行中Job列表</h4>
 				<div class="widget-toolbar no-border">
 					<a href="#" data-action="fullscreen" class="orange2"> 
 						<i class="ace-icon fa fa-arrows-alt"></i>

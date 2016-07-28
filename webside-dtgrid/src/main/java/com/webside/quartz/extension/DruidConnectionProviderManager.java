@@ -9,7 +9,7 @@ import org.quartz.utils.ConnectionProvider;
 import com.alibaba.druid.pool.DruidDataSource;
 
 /**
- * <font color="red">该类已废弃,不使用</font>
+ * <font color="red">配置让quartz使用单独的连接池,如果要使用spring管理的dataSource,请参考quartz配置文件</font>
  * @ClassName: DruidConnectionProvider
  * @Description: Druid连接池的Quartz扩展类
  * @author gaogang

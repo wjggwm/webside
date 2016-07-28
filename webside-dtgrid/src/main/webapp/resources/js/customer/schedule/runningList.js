@@ -9,14 +9,29 @@ var dtGridColumns = [{
     title : '任务组',
     type : 'string',
     columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header'
+    headerClass : 'dlshouwen-grid-header',
+    hideType : 'sm|xs'
+}, {
+    id : 'triggerName',
+    title : 'trigger名称',
+    type : 'string',
+    columnClass : 'text-center',
+    headerClass : 'dlshouwen-grid-header',
+    hideType : 'sm|xs'
+}, {
+    id : 'triggerGroup',
+    title : 'trigger组',
+    type : 'string',
+    columnClass : 'text-center',
+    headerClass : 'dlshouwen-grid-header',
+    hideType : 'sm|xs'
 }, {
     id : 'jobStatus',
     title : '任务状态',
     type : 'string',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
-    hideType : 'xs',
+    hideType : 'sm|xs|md',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if(value == 'NONE')
         {
@@ -36,9 +51,9 @@ var dtGridColumns = [{
         }else if(value == 'BLOCKED')
         {
             return '<span class="label label-sm label-light arrowed arrowed-right">等待运行</span>';
-        }else if(value == 'DELETE')
+        }else
         {
-            return '<span class="label label-sm label-error arrowed arrowed-right">已删除</span>';
+            return '<span class="label label-sm label-pink arrowed arrowed-right">未知</span>';
         }
     }
 }, {
@@ -64,7 +79,7 @@ var dtGridColumns = [{
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs',
+    hideType : 'sm|xs|md|lg',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == null) {
             return '';
@@ -81,7 +96,7 @@ var dtGridColumns = [{
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs',
+    hideType : 'sm|xs|md|lg',
     resolution : function(value, record, column, grid, dataNo, columnNo) {
         if (value == null) {
             return '';
@@ -140,6 +155,8 @@ var dtGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
     loadAll : true,
+    postParams : true,//是否传递参数,只在loadAll=true时有效
+    isreload : true,//刷新时是否重新从服务器获取数据,只在loadAll=true时有效
     check : true,
     checkWidth :'37px',
     extraWidth : '37px',
@@ -154,6 +171,16 @@ var dtGridOption = {
 
 var grid = $.fn.dlshouwen.grid.init(dtGridOption);
 $(function() {
+    grid.parameters = new Object();
+    grid.parameters['timestamp'] = new Date().getTime();
     grid.load();
 });
 
+/**
+ * 重新加载表格
+ */
+function customSearch() {
+    grid.parameters = new Object();
+    grid.parameters['timestamp'] = new Date().getTime();
+    grid.reload(true);
+}

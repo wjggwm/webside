@@ -1,24 +1,19 @@
 var dtGridColumns = [{
-    id : 'id',
-    title : '编号',
-    type : 'number',
-    columnClass : 'text-center',
-    hideType : 'xs',
-    headerClass : 'dlshouwen-grid-header'
-}, {
-    id : 'jobName',
-    title : '任务名称',
+    id : 'triggerName',
+    title : 'trigger名称',
     type : 'string',
     columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header'
+    headerClass : 'dlshouwen-grid-header',
+    hideType : 'sm|xs'
 }, {
-    id : 'jobGroup',
-    title : '任务组',
+    id : 'triggerGroup',
+    title : 'trigger组',
     type : 'string',
     columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header'
+    headerClass : 'dlshouwen-grid-header',
+    hideType : 'sm|xs'
 }, {
-    id : 'jobStatus',
+    id : 'triggerStatus',
     title : '任务状态',
     type : 'string',
     columnClass : 'text-center',
@@ -43,69 +38,37 @@ var dtGridColumns = [{
         }else if(value == 'BLOCKED')
         {
             return '<span class="label label-sm label-light arrowed arrowed-right">等待运行</span>';
-        }else if(value == 'DELETE')
+        }else
         {
-            return '<span class="label label-sm label-error arrowed arrowed-right">已删除</span>';
+            return '<span class="label label-sm label-pink arrowed arrowed-right">未知</span>';
         }
     }
 }, {
     id : 'cronExpression',
-    title : '表达式',
+    title : 'cron表达式',
     type : 'string',
     columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs'
+    headerClass : 'dlshouwen-grid-header'
 }, {
-    id : 'jobClassName',
-    title : '执行类',
-    type : 'string',
+    id : 'nextFireTime',
+    title : '下次触发时间',
+    type : 'date',
+    format : 'yyyy-MM-dd hh:mm:ss',
+    otype : 'string',
+    oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs|md|lg'
+    hideType : 'sm|xs',
+    resolution : function(value, record, column, grid, dataNo, columnNo) {
+        if (value == null) {
+            return '';
+        } else {
+            return value;
+        }
+    }
 }, {
     id : 'startDate',
     title : '执行开始时间',
-    type : 'date',
-    format : 'yyyy-MM-dd hh:mm:ss',
-    otype : 'string',
-    oformat : 'yyyy-MM-dd hh:mm:ss',
-    columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs',
-    resolution : function(value, record, column, grid, dataNo, columnNo) {
-        if (value == null) {
-            return '';
-        } else {
-            return value;
-        }
-    }
-}, {
-    id : 'endDate',
-    title : '执行结束时间',
-    type : 'date',
-    format : 'yyyy-MM-dd hh:mm:ss',
-    otype : 'string',
-    oformat : 'yyyy-MM-dd hh:mm:ss',
-    columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs',
-    resolution : function(value, record, column, grid, dataNo, columnNo) {
-        if (value == null) {
-            return '';
-        } else {
-            return value;
-        }
-    }
-}, {
-    id : 'jobDesc',
-    title : '任务描述',
-    type : 'string',
-    columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header',
-    hideType : 'sm|xs|md|lg'
-}, {
-    id : 'createTime',
-    title : '创建时间',
     type : 'date',
     format : 'yyyy-MM-dd hh:mm:ss',
     otype : 'string',
@@ -121,8 +84,8 @@ var dtGridColumns = [{
         }
     }
 }, {
-    id : 'updateTime',
-    title : '更新时间',
+    id : 'endDate',
+    title : '执行结束时间',
     type : 'date',
     format : 'yyyy-MM-dd hh:mm:ss',
     otype : 'string',
@@ -146,10 +109,13 @@ pageSize = pageSize == 0 || pageSize == "" ? sys.pageNum : pageSize;
 var dtGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
+    loadAll : true,
+    postParams : true,//是否传递参数,只在loadAll=true时有效
+    isreload : true,//刷新时是否重新从服务器获取数据,只在loadAll=true时有效
     check : true,
     checkWidth :'37px',
     extraWidth : '37px',
-    loadURL : sys.rootPath + '/scheduleJob/list.html',
+    loadURL : sys.rootPath + '/scheduleJob/jobTriggerList.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
     toolbarContainer : 'dtGridToolBarContainer',
@@ -160,22 +126,10 @@ var dtGridOption = {
 
 var grid = $.fn.dlshouwen.grid.init(dtGridOption);
 $(function() {
-    if(null != $("#orderByColumn").val() && '' != $("#orderByColumn").val())
-    {
-        grid.sortParameter.columnId = $("#orderByColumn").val();
-        grid.sortParameter.sortType = $("#orderByType").val();
-    }
+    grid.parameters = new Object();
+    grid.parameters['jobName'] = $("#jobName").val();
+    grid.parameters['jobGroup'] = $("#jobGroup").val();
     grid.load();
-    $("#btnSearch").click(customSearch);
-    
-    //注册回车键事件
-    document.onkeypress = function(e){
-    var ev = document.all ? window.event : e;
-        if(ev.keyCode==13) {
-            customSearch();
-        }
-    };
-    
 });
 
 /**
@@ -184,6 +138,7 @@ $(function() {
  */
 function customSearch() {
     grid.parameters = new Object();
-    grid.parameters['jobName'] = $("#searchKey").val();
-    grid.refresh(true);
+    grid.parameters['jobName'] = $("#jobName").val();
+    grid.parameters['jobGroup'] = $("#jobGroup").val();
+    grid.load();
 }

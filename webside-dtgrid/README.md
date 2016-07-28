@@ -77,7 +77,10 @@ dtgrid bug修复记录：
 	1、在dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-tools 修改为 float:left;margin:0px 0px 12px 0px
 4、导出全部数据有后台报空指针异常
 	1、修改GridUtils.java 中 else if("number".equalsIgnoreCase(column.getType())&&!"".equals(column.getFormat())) 为  else if("number".equalsIgnoreCase(column.getType())&&!"".equals(column.getFormat())&& null != column.getFormat()) 
-
+5、修改loadAll=true时是否传递参数到后台
+	添加表格属性：postParams //是否传递参数,只在loadAll=true时有效
+6、修改loadAll=true时刷新时是否重新从服务器获取数据
+	添加表格属性：isreload //刷新时是否重新从服务器获取数据,只在loadAll=true时有效
 
 附加知识点：
 quartz cron 说明：

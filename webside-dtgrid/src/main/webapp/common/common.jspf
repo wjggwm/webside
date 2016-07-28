@@ -67,6 +67,9 @@
 
 <script type="text/javascript" src="${ctx}/resources/js/nicescroll/jquery.nicescroll.min.js"></script>
 
+<link rel="stylesheet" href="${ctx }/resources/js/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css"/>
+<script type="text/javascript" src="${ctx }/resources/js/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
 <script type="text/javascript" src="${ctx}/resources/js/customer/index/index.js"></script>
 <script type="text/javascript" type="text/javascript">
 var sys = sys || {};

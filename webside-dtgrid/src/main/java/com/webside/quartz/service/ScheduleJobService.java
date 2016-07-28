@@ -3,6 +3,9 @@ package com.webside.quartz.service;
 import java.util.List;
 import java.util.Map;
 
+import org.quartz.JobKey;
+import org.quartz.TriggerKey;
+
 import com.webside.quartz.model.ScheduleJobEntity;
 
 public interface ScheduleJobService {
@@ -36,60 +39,103 @@ public interface ScheduleJobService {
     public List<ScheduleJobEntity> getRunningJobList();
     /**
      * 
+     * @Title: getTriggers
+     * @Description: 根据job获取和该job绑定的trigger列表信息
+     * @param job
+     * @return	List<Trigger>
+     * @throws
+     */
+    public List<ScheduleJobEntity> getTriggers(ScheduleJobEntity job);
+    /**
+     * 
+     * @Title: getScheduleJobEntity
+     * @Description: 根据job从scheduler中获取ScheduleJobEntity信息
+     * @param job
+     * @return	ScheduleJobEntity
+     * @throws
+     */
+    public ScheduleJobEntity getScheduleJobEntity(ScheduleJobEntity job);
+    /**
+     * 
      * @Title: addJob
-     * @Description: 动态添加job:1、添加job到数据库;2、注册job到schedule
+     * @Description: 动态添加job
      * @param job
      * @return	boolean
      * @throws
      */
     public boolean addJob(ScheduleJobEntity job);
-    
     /**
      * 
-     * @Title: updateJob
-     * @Description: 更新job:1、更新job到数据库;2、更新job到schedule
+     * @Title: addJobTrigger
+     * @Description: 动态添加trigger
      * @param job
      * @return	boolean
      * @throws
      */
-    public boolean updateJob(ScheduleJobEntity job);
-    
+    public boolean addJobTrigger(ScheduleJobEntity job);
+    /**
+     * 
+     * @Title: updateJobTrigger
+     * @Description: 更新triggerr
+     * @param job
+     * @return	boolean
+     * @throws
+     */
+    public boolean updateJobTrigger(ScheduleJobEntity job);
     /**
      * 
      * @Title: pauseJob
-     * @Description: 暂停job:1、更新job状态到数据库;2、更新job状态到schedule
+     * @Description: 暂停job
      * @param job
      * @return	boolean
      * @throws
      */
-    public boolean pauseJob(ScheduleJobEntity job);
+    public boolean pauseJob(JobKey jobKey);
+    /**
+     * 
+     * @Title: pauseJobTrigger
+     * @Description: 暂停trigger
+     * @param job
+     * @return	boolean
+     * @throws
+     */
+    public boolean pauseJobTrigger(TriggerKey triggerKey);
     /**
      * 
      * @Title: resumeJob
-     * @Description: 恢复job:1、更新job状态到数据库;2、更新job状态到schedule
+     * @Description: 恢复job
      * @param job
      * @return	boolean
      * @throws
      */
-    public boolean resumeJob(ScheduleJobEntity job);
+    public boolean resumeJob(JobKey jobKey);
+    /**
+     * 
+     * @Title: resumeJobTrigger
+     * @Description: 恢复trigger
+     * @param job
+     * @return	boolean
+     * @throws
+     */
+    public boolean resumeJobTrigger(TriggerKey triggerKey);
     /**
      * 
      * @Title: deleteJob
-     * @Description: 删除job:1、从数据库删除job;2、从schedule中删除job
+     * @Description: 删除job,同时会删除和job相关的trigger
      * @param job
      * @return	boolean
      * @throws
      */
-    public boolean deleteJob(ScheduleJobEntity job);
+    public boolean deleteJob(JobKey jobKey);
     /**
      * 
      * @Title: deleteJobTrigger
-     * @Description: 删除job触发器:1、从数据库删除job的触发器(这里不好判断从schedule中删除job触发器时是否也删除了该schedule,所以该方法咱不使用);2、从schedule中删除job触发器
+     * @Description: 删除job触发器
      * @param job
      * @return	boolean
      * @throws
      */
-    public boolean deleteJobTrigger(ScheduleJobEntity job);
+    public boolean deleteJobTrigger(TriggerKey triggerKey);
     /**
      * 
      * @Title: executeJob
@@ -98,7 +144,9 @@ public interface ScheduleJobService {
      * @return	boolean
      * @throws
      */
-    public boolean executeJob(ScheduleJobEntity job);
+    public boolean executeJob(JobKey jobKey);
+    
+    public boolean interruptJob(JobKey jobKey);
     /**
      * 
      * @Title: startAllJob

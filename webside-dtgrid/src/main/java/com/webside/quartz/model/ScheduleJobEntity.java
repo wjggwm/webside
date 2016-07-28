@@ -2,9 +2,13 @@ package com.webside.quartz.model;
 
 import java.util.Date;
 
+import jxl.common.Logger;
+
 import org.apache.ibatis.type.Alias;
 import org.quartz.Job;
+
 import static org.quartz.JobBuilder.newJob;
+
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.TriggerKey;
@@ -17,6 +21,8 @@ public class ScheduleJobEntity extends BaseEntity {
 	 * @Fields serialVersionUID : TODO
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static Logger logger = Logger.getLogger(ScheduleJobEntity.class);
 	/*
 	 * 任务名称
 	 */
@@ -25,6 +31,10 @@ public class ScheduleJobEntity extends BaseEntity {
 	 * 任务分组
 	 */
 	private String jobGroup;
+	
+	private String triggerName;
+	
+	private String triggerGroup;
 	/*
 	 * 任务状态：	 
 	 * NONE:未知
@@ -33,9 +43,12 @@ public class ScheduleJobEntity extends BaseEntity {
 	 * COMPLETE:完成
 	 * ERROR:异常
 	 * BLOCKED:等待运行,阻塞
-	 * DELETE:删除
 	 */
-	private String jobStatus;
+	private String triggerStatus;
+	/*
+	 * 下一次触发时间
+	 */
+	private Date nextFireTime;
 	/*
 	 * 任务运行时间表达式
 	 */
@@ -66,6 +79,7 @@ public class ScheduleJobEntity extends BaseEntity {
 	private Date updateTime;
 	/*
 	 * 执行具体任务的任务类,必须继承自org.quartz.Job
+	 * transient:不参与序列化
 	 */
 	private transient Class<? extends Job> jobClass;
 
@@ -75,25 +89,6 @@ public class ScheduleJobEntity extends BaseEntity {
 
 	private transient JobKey jobKey;
 
-	public ScheduleJobEntity() {
-	}
-
-	public ScheduleJobEntity(Long id, String jobName, String jobGroup,
-			String jobStatus, String cronExpression, String jobDesc,
-			Date startDate, Date endDate, String jobClassName, Date createTime,
-			Date updateTime) {
-		this.id = id;
-		this.jobName = jobName;
-		this.jobGroup = jobGroup;
-		this.jobStatus = jobStatus;
-		this.cronExpression = cronExpression;
-		this.jobDesc = jobDesc;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.jobClassName = jobClassName;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-	}
 
 	public String getJobName() {
 		return jobName;
@@ -110,13 +105,37 @@ public class ScheduleJobEntity extends BaseEntity {
 	public void setJobGroup(String jobGroup) {
 		this.jobGroup = jobGroup;
 	}
-
-	public String getJobStatus() {
-		return jobStatus;
+	
+	public String getTriggerName() {
+		return triggerName;
 	}
 
-	public void setJobStatus(String jobStatus) {
-		this.jobStatus = jobStatus;
+	public void setTriggerName(String triggerName) {
+		this.triggerName = triggerName;
+	}
+
+	public String getTriggerGroup() {
+		return triggerGroup;
+	}
+
+	public void setTriggerGroup(String triggerGroup) {
+		this.triggerGroup = triggerGroup;
+	}
+
+	public String getTriggerStatus() {
+		return triggerStatus;
+	}
+
+	public void setTriggerStatus(String triggerStatus) {
+		this.triggerStatus = triggerStatus;
+	}
+
+	public Date getNextFireTime() {
+		return nextFireTime;
+	}
+
+	public void setNextFireTime(Date nextFireTime) {
+		this.nextFireTime = nextFireTime;
 	}
 
 	public String getCronExpression() {
@@ -180,12 +199,13 @@ public class ScheduleJobEntity extends BaseEntity {
 	 */
 	public Class<? extends Job> getJobClass() {
 		try {
-			if(jobClass == null)
-			{
-				jobClass = Class.forName(getJobClassName()).asSubclass(Job.class);
+				if(jobClass == null)
+				{
+					jobClass = Class.forName(getJobClassName()).asSubclass(Job.class);
+				}
+			} catch (ClassNotFoundException e){
+				logger.error("获取job执行类异常",e);
 			}
-			} catch (ClassNotFoundException e) {
-		}
 		return jobClass;
 	}
 
@@ -203,8 +223,8 @@ public class ScheduleJobEntity extends BaseEntity {
 	 * @throws
 	 */
 	public TriggerKey getTriggerKey() {
-		if (triggerKey == null) {
-			triggerKey = TriggerKey.triggerKey(getJobName(), getJobGroup());
+		if (triggerKey == null && this.triggerName !=null && this.triggerGroup != null) {
+			triggerKey = TriggerKey.triggerKey(getTriggerName(),getTriggerGroup());
 		}
 		return triggerKey;
 	}
@@ -221,6 +241,7 @@ public class ScheduleJobEntity extends BaseEntity {
 			jobDetail = newJob(getJobClass())
 					.withIdentity(getJobName(), getJobGroup())
 					.withDescription(getJobDesc())
+					//Job should remain stored after it is orphaned (no Triggers point to it)
 					.storeDurably(true).build();
 		}
 		return jobDetail;
