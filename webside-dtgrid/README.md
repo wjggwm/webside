@@ -47,7 +47,7 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 
 
 开发计划(不分先后)：
-1、quartz计划任务
+1、quartz计划任务(已实现)
 2、restful api 支持
 3、restful api引入Protostuff(基于 Protobuf 序列化框架，面向 POJO，无需编写 .proto 文件)
 4、Shiro Ajax请求权限不满足，拦截后解决方案
@@ -65,7 +65,7 @@ webside系统bug：
 2016-07-07
 1、导出全部数据时日志报空指针异常 (已修复)
 2、添加角色资源时赋权限给超级管理员异常(已修复)
-
+3、添加用户事务管理优化(已修复)
 
 dtgrid bug修复记录：
 1、dlshouwen.grid.v1.2.1  分页条页码大小不一，分页说明和页面导航垂直不对齐的修改方法
@@ -128,3 +128,29 @@ Cron表达式示例：
 "0 15 10 ? * 6#3"			每月第三个星期五的10:15分运行。
 0 0 12 1/5 * ?              每月的第一个中午开始每隔5天触发一次 
 0 11 11 11 11 ?             每年的11月11号 11点11分触发(光棍节)
+
+
+
+
+maven操作：
+
+部署到Tomcat7:
+
+在project视图中选中项目，右键"Run As"->"Maven bulid"，执行tomcat7:deploy命令，即可完成部署，执行tomcat7:redeploy即可重新部署项目，tomcat7:undeploy卸载部署。
+
+logback+spring4配置：
+
+<dependency>
+  <groupId>org.logback-extensions</groupId>
+  <artifactId>logback-ext-spring</artifactId>
+  <version>0.1.4</version>
+</dependency>
+
+<context-param>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/logback.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+    </listener>
+</context-param>

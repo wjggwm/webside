@@ -559,6 +559,17 @@
 					<overwrite>true</overwrite>
 				</configuration>
 			</plugin>
+			
+			<plugin> 
+				<groupId>org.apache.tomcat.maven</groupId> 
+				<artifactId>tomcat7-maven-plugin</artifactId> 
+				<version>2.2</version> 
+				<configuration> 
+				<url>http://localhost:8080/manager</url> <!-- tomcat管理路径 -->
+				<server>Tomcat8</server> <!-- 与settings.xml文件中Server的id相同 -->
+				<path>/webapps</path> <!-- 应用的部署位置 -->
+				</configuration> 
+		    </plugin>
 
 			<!-- 部署至本机 -->
 			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
