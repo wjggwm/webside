@@ -56,11 +56,11 @@ public class UserServiceImpl extends AbstractService<UserEntity, Long> implement
 					return cnt;
 				}else
 				{
-					return 0;
+					throw new ServiceException("更新用户: "+userEntity.getId()+" 的权限信息失败");
 				}
 			}else
 			{
-				return 0;
+				throw new ServiceException("新增用户: "+userEntity.getId()+" 失败");
 			}
 		}catch(Exception e)
 		{
