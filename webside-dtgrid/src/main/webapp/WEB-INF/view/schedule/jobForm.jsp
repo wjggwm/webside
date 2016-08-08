@@ -8,13 +8,16 @@
 <link rel="stylesheet" href="${ctx }/resources/js/datepicker/css/bootstrap-datepicker3.standalone.min.css"/>
 <script type="text/javascript" src="${ctx }/resources/js/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="${ctx }/resources/js/cronGen/cronGen.css"/>
 <script type="text/javascript" src="${ctx }/resources/js/cronGen/cronGen.js"></script>
 <script type="text/javascript">
 	$(function() {
 		webside.form.schedule.initJobGroup();
 		webside.form.schedule.initStartDate();
 		webside.form.schedule.initEndDate();
-		$("#cronExpression").cronGen();
+	    $("#cronExpression").cronGen({
+	    	direction : 'left' //可选：top|right|bottom|left
+	    });
 		webside.form.schedule.initTrigger();
 	    webside.form.schedule.validateJobForm();
 	});

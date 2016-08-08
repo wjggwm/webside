@@ -1,16 +1,16 @@
-﻿
-
-(function ($) {
-    
+﻿(function ($) {
     var resultsName = "";
     var inputElement;
     var displayElement;
-    
     $.fn.extend({
-        cronGen: function () {
+        cronGen: function (options) {
+            if (options == null) {
+              options = {};
+            }
+            options = $.extend({}, $.fn.cronGen.defaultOptions, options);
             //create top menu
             var cronContainer = $("<div/>", { id: "CronContainer", style: "display:none;width:300px;height:300px;" });
-            var mainDiv = $("<div/>", { id: "CronGenMainDiv", style: "width:370px;height:270px;" });
+            var mainDiv = $("<div/>", { id: "CronGenMainDiv", style: "width:410px;height:320px;" });
             var topMenu = $("<ul/>", { "class": "nav nav-tabs", id: "CronGenTabs" });
             $('<li/>', { 'class': 'active' }).html($('<a id="SecondlyTab" href="#Secondly">秒</a>')).appendTo(topMenu);
             $('<li/>').html($('<a id="MinutesTab" href="#Minutes">分钟</a>')).appendTo(topMenu);
@@ -25,150 +25,294 @@
             var container = $("<div/>", { "class": "container-fluid", "style": "margin-top: 10px;margin-left: -14px;" });
             var row = $("<div/>", { "class": "row-fluid" });
             var span12 = $("<div/>", { "class": "span12" });
-            var tabContent = $("<div/>", { "class": "tab-content" });
+            var tabContent = $("<div/>", { "class": "tab-content", "style": "border:0px; margin-top:-20px;" });
 
-            //creating the minutesTab
-            var minutesTab = $("<div/>", { "class": "tab-pane active", id: "Secondly" });
-            $(minutesTab).append("Every&nbsp;");
-            $("<input/>", { id: "SecondsInput", type: "text", value: "1", style: "width: 40px" }).appendTo(minutesTab);
-            $(minutesTab).append("&nbsp;second(s)");
-            $(minutesTab).appendTo(tabContent);
 
+            //creating the secondsTab
+            var secondsTab = $("<div/>", { "class": "tab-pane active", id: "Secondly" });
+            var seconds1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "second"}).appendTo(seconds1);
+            $(seconds1).append("每秒 允许的通配符[, - * /]");
+            $(seconds1).appendTo(secondsTab);
+            
+            var seconds2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "second"}).appendTo(seconds2);
+            $(seconds2).append("周期 从");
+            $("<input/>",{type : "text", id : "secondStart_0", value : "1", style:"width:35px; height:20px;"}).appendTo(seconds2);
+            $(seconds2).append("-");
+            $("<input/>",{type : "text", id : "secondEnd_0", value : "2", style:"width:35px; height:20px;"}).appendTo(seconds2);
+            $(seconds2).append("秒");
+            $(seconds2).appendTo(secondsTab);
+            
+            var seconds3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "second"}).appendTo(seconds3);
+            $(seconds3).append("从");
+            $("<input/>",{type : "text", id : "secondStart_1", value : "0", style:"width:35px; height:20px;"}).appendTo(seconds3);
+            $(seconds3).append("秒开始,每");
+            $("<input/>",{type : "text", id : "secondEnd_1", value : "1", style:"width:35px; height:20px;"}).appendTo(seconds3);
+            $(seconds3).append("秒执行一次");
+            $(seconds3).appendTo(secondsTab);
+            
+            var seconds4 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "4", name : "second", id: "sencond_appoint"}).appendTo(seconds4);
+            $(seconds4).append("指定");
+            $(seconds4).appendTo(secondsTab);
+            
+            $(secondsTab).append('<div class="imp secondList"><input type="checkbox" style="margin-left: 5px"  value="0">00<input type="checkbox" style="margin-left: 5px"  value="1">01<input type="checkbox" style="margin-left: 5px"  value="2">02<input type="checkbox" style="margin-left: 5px"  value="3">03<input type="checkbox" style="margin-left: 5px"  value="4">04<input type="checkbox" style="margin-left: 5px"  value="5">05<input type="checkbox" style="margin-left: 5px"  value="6">06<input type="checkbox" style="margin-left: 5px"  value="7">07<input type="checkbox" style="margin-left: 5px"  value="8">08<input type="checkbox" style="margin-left: 5px"  value="9">09</div>');
+            $(secondsTab).append('<div class="imp secondList"><input type="checkbox" style="margin-left: 5px"  value="10">10<input type="checkbox" style="margin-left: 5px"  value="11">11<input type="checkbox" style="margin-left: 5px"  value="12">12<input type="checkbox" style="margin-left: 5px"  value="13">13<input type="checkbox" style="margin-left: 5px"  value="14">14<input type="checkbox" style="margin-left: 5px"  value="15">15<input type="checkbox" style="margin-left: 5px"  value="16">16<input type="checkbox" style="margin-left: 5px"  value="17">17<input type="checkbox" style="margin-left: 5px"  value="18">18<input type="checkbox" style="margin-left: 5px"  value="19">19</div>');
+            $(secondsTab).append('<div class="imp secondList"><input type="checkbox" style="margin-left: 5px"  value="20">20<input type="checkbox" style="margin-left: 5px"  value="21">21<input type="checkbox" style="margin-left: 5px"  value="22">22<input type="checkbox" style="margin-left: 5px"  value="23">23<input type="checkbox" style="margin-left: 5px"  value="24">24<input type="checkbox" style="margin-left: 5px"  value="25">25<input type="checkbox" style="margin-left: 5px"  value="26">26<input type="checkbox" style="margin-left: 5px"  value="27">27<input type="checkbox" style="margin-left: 5px"  value="28">28<input type="checkbox" style="margin-left: 5px"  value="29">29</div>');
+            $(secondsTab).append('<div class="imp secondList"><input type="checkbox" style="margin-left: 5px"  value="30">30<input type="checkbox" style="margin-left: 5px"  value="31">31<input type="checkbox" style="margin-left: 5px"  value="32">32<input type="checkbox" style="margin-left: 5px"  value="33">33<input type="checkbox" style="margin-left: 5px"  value="34">34<input type="checkbox" style="margin-left: 5px"  value="35">35<input type="checkbox" style="margin-left: 5px"  value="36">36<input type="checkbox" style="margin-left: 5px"  value="37">37<input type="checkbox" style="margin-left: 5px"  value="38">38<input type="checkbox" style="margin-left: 5px"  value="39">39</div>');
+            $(secondsTab).append('<div class="imp secondList"><input type="checkbox" style="margin-left: 5px"  value="40">40<input type="checkbox" style="margin-left: 5px"  value="41">41<input type="checkbox" style="margin-left: 5px"  value="42">42<input type="checkbox" style="margin-left: 5px"  value="43">43<input type="checkbox" style="margin-left: 5px"  value="44">44<input type="checkbox" style="margin-left: 5px"  value="45">45<input type="checkbox" style="margin-left: 5px"  value="46">46<input type="checkbox" style="margin-left: 5px"  value="47">47<input type="checkbox" style="margin-left: 5px"  value="48">48<input type="checkbox" style="margin-left: 5px"  value="49">49</div>');
+            $(secondsTab).append('<div class="imp secondList"><input type="checkbox" style="margin-left: 5px"  value="50">50<input type="checkbox" style="margin-left: 5px"  value="51">51<input type="checkbox" style="margin-left: 5px"  value="52">52<input type="checkbox" style="margin-left: 5px"  value="53">53<input type="checkbox" style="margin-left: 5px"  value="54">54<input type="checkbox" style="margin-left: 5px"  value="55">55<input type="checkbox" style="margin-left: 5px"  value="56">56<input type="checkbox" style="margin-left: 5px"  value="57">57<input type="checkbox" style="margin-left: 5px"  value="58">58<input type="checkbox" style="margin-left: 5px"  value="59">59</div>');
+            $("<input/>",{type : "hidden", id : "secondHidden"}).appendTo(secondsTab);
+            $(secondsTab).appendTo(tabContent);
+            
             //creating the minutesTab
             var minutesTab = $("<div/>", { "class": "tab-pane", id: "Minutes" });
-            $(minutesTab).append("Every&nbsp;");
-            $("<input/>", { id: "MinutesInput", type: "text", value: "1", style: "width: 40px" }).appendTo(minutesTab);
-            $(minutesTab).append("&nbsp;minute(s)");
+            
+            var minutes1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "min"}).appendTo(minutes1);
+            $(minutes1).append("每分钟 允许的通配符[, - * /]");
+            $(minutes1).appendTo(minutesTab);
+            
+            var minutes2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "min"}).appendTo(minutes2);
+            $(minutes2).append("周期 从");
+            $("<input/>",{type : "text", id : "minStart_0", value : "1", style:"width:35px; height:20px;"}).appendTo(minutes2);
+            $(minutes2).append("-");
+            $("<input/>",{type : "text", id : "minEnd_0", value : "2", style:"width:35px; height:20px;"}).appendTo(minutes2);
+            $(minutes2).append("分钟");
+            $(minutes2).appendTo(minutesTab);
+            
+            var minutes3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "min"}).appendTo(minutes3);
+            $(minutes3).append("从");
+            $("<input/>",{type : "text", id : "minStart_1", value : "0", style:"width:35px; height:20px;"}).appendTo(minutes3);
+            $(minutes3).append("分钟开始,每");
+            $("<input/>",{type : "text", id : "minEnd_1", value : "1", style:"width:35px; height:20px;"}).appendTo(minutes3);
+            $(minutes3).append("分钟执行一次");
+            $(minutes3).appendTo(minutesTab);
+            
+            var minutes4 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "4", name : "min", id: "min_appoint"}).appendTo(minutes4);
+            $(minutes4).append("指定");
+            $(minutes4).appendTo(minutesTab);
+            
+            $(minutesTab).append('<div class="imp minList"><input type="checkbox" style="margin-left: 5px"  value="0">00<input type="checkbox" style="margin-left: 5px"  value="1">01<input type="checkbox" style="margin-left: 5px"  value="2">02<input type="checkbox" style="margin-left: 5px"  value="3">03<input type="checkbox" style="margin-left: 5px"  value="4">04<input type="checkbox" style="margin-left: 5px"  value="5">05<input type="checkbox" style="margin-left: 5px"  value="6">06<input type="checkbox" style="margin-left: 5px"  value="7">07<input type="checkbox" style="margin-left: 5px"  value="8">08<input type="checkbox" style="margin-left: 5px"  value="9">09</div>');
+            $(minutesTab).append('<div class="imp minList"><input type="checkbox" style="margin-left: 5px"  value="10">10<input type="checkbox" style="margin-left: 5px"  value="11">11<input type="checkbox" style="margin-left: 5px"  value="12">12<input type="checkbox" style="margin-left: 5px"  value="13">13<input type="checkbox" style="margin-left: 5px"  value="14">14<input type="checkbox" style="margin-left: 5px"  value="15">15<input type="checkbox" style="margin-left: 5px"  value="16">16<input type="checkbox" style="margin-left: 5px"  value="17">17<input type="checkbox" style="margin-left: 5px"  value="18">18<input type="checkbox" style="margin-left: 5px"  value="19">19</div>');
+            $(minutesTab).append('<div class="imp minList"><input type="checkbox" style="margin-left: 5px"  value="20">20<input type="checkbox" style="margin-left: 5px"  value="21">21<input type="checkbox" style="margin-left: 5px"  value="22">22<input type="checkbox" style="margin-left: 5px"  value="23">23<input type="checkbox" style="margin-left: 5px"  value="24">24<input type="checkbox" style="margin-left: 5px"  value="25">25<input type="checkbox" style="margin-left: 5px"  value="26">26<input type="checkbox" style="margin-left: 5px"  value="27">27<input type="checkbox" style="margin-left: 5px"  value="28">28<input type="checkbox" style="margin-left: 5px"  value="29">29</div>');
+            $(minutesTab).append('<div class="imp minList"><input type="checkbox" style="margin-left: 5px"  value="30">30<input type="checkbox" style="margin-left: 5px"  value="31">31<input type="checkbox" style="margin-left: 5px"  value="32">32<input type="checkbox" style="margin-left: 5px"  value="33">33<input type="checkbox" style="margin-left: 5px"  value="34">34<input type="checkbox" style="margin-left: 5px"  value="35">35<input type="checkbox" style="margin-left: 5px"  value="36">36<input type="checkbox" style="margin-left: 5px"  value="37">37<input type="checkbox" style="margin-left: 5px"  value="38">38<input type="checkbox" style="margin-left: 5px"  value="39">39</div>');
+            $(minutesTab).append('<div class="imp minList"><input type="checkbox" style="margin-left: 5px"  value="40">40<input type="checkbox" style="margin-left: 5px"  value="41">41<input type="checkbox" style="margin-left: 5px"  value="42">42<input type="checkbox" style="margin-left: 5px"  value="43">43<input type="checkbox" style="margin-left: 5px"  value="44">44<input type="checkbox" style="margin-left: 5px"  value="45">45<input type="checkbox" style="margin-left: 5px"  value="46">46<input type="checkbox" style="margin-left: 5px"  value="47">47<input type="checkbox" style="margin-left: 5px"  value="48">48<input type="checkbox" style="margin-left: 5px"  value="49">49</div>');
+            $(minutesTab).append('<div class="imp minList"><input type="checkbox" style="margin-left: 5px"  value="50">50<input type="checkbox" style="margin-left: 5px"  value="51">51<input type="checkbox" style="margin-left: 5px"  value="52">52<input type="checkbox" style="margin-left: 5px"  value="53">53<input type="checkbox" style="margin-left: 5px"  value="54">54<input type="checkbox" style="margin-left: 5px"  value="55">55<input type="checkbox" style="margin-left: 5px"  value="56">56<input type="checkbox" style="margin-left: 5px"  value="57">57<input type="checkbox" style="margin-left: 5px"  value="58">58<input type="checkbox" style="margin-left: 5px"  value="59">59</div>');
+            $("<input/>",{type : "hidden", id : "minHidden"}).appendTo(minutesTab);
             $(minutesTab).appendTo(tabContent);
-
+            
             //creating the hourlyTab
             var hourlyTab = $("<div/>", { "class": "tab-pane", id: "Hourly" });
 
-            var hourlyOption1 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "1", name: "HourlyRadio", checked: "checked" }).appendTo(hourlyOption1);
-            $(hourlyOption1).append("&nbsp;Every&nbsp;");
-            $("<input/>", { id: "HoursInput", type: "text", value: "1", style: "width: 40px" }).appendTo(hourlyOption1);
-            $(hourlyOption1).append("&nbsp;hour(s)");
-            $(hourlyOption1).appendTo(hourlyTab);
-
-            var hourlyOption2 = $("<div/>", { "class": "well well-small" ,"style":"padding-left: 5px;"});
-            $("<input/>", { type: "radio", value: "2", name: "HourlyRadio" }).appendTo(hourlyOption2);
-            $(hourlyOption2).append("&nbsp;At&nbsp;");
-            $(hourlyOption2).append('<select id="AtHours" class="hours" style="width: 60px"></select>');
-            $(hourlyOption2).append('<select id="AtMinutes" class="minutes" style="width: 60px"></select>');
-            $(hourlyOption2).appendTo(hourlyTab);
-
+            var hourly1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "hour"}).appendTo(hourly1);
+            $(hourly1).append("每小时 允许的通配符[, - * /]");
+            $(hourly1).appendTo(hourlyTab);
+            
+            var hourly2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "hour"}).appendTo(hourly2);
+            $(hourly2).append("周期 从");
+            $("<input/>",{type : "text", id : "hourStart_0", value : "1", style:"width:35px; height:20px;"}).appendTo(hourly2);
+            $(hourly2).append("-");
+            $("<input/>",{type : "text", id : "hourEnd_0", value : "2", style:"width:35px; height:20px;"}).appendTo(hourly2);
+            $(hourly2).append("小时");
+            $(hourly2).appendTo(hourlyTab);
+            
+            var hourly3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "hour"}).appendTo(hourly3);
+            $(hourly3).append("从");
+            $("<input/>",{type : "text", id : "hourStart_1", value : "0", style:"width:35px; height:20px;"}).appendTo(hourly3);
+            $(hourly3).append("小时开始,每");
+            $("<input/>",{type : "text", id : "hourEnd_1", value : "1", style:"width:35px; height:20px;"}).appendTo(hourly3);
+            $(hourly3).append("小时执行一次");
+            $(hourly3).appendTo(hourlyTab);
+            
+            var hourly4 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "4", name : "hour", id: "hour_appoint"}).appendTo(hourly4);
+            $(hourly4).append("指定");
+            $(hourly4).appendTo(hourlyTab);
+            
+            $(hourlyTab).append('<div class="imp hourList"><input type="checkbox" style="margin-left: 5px"  value="0">00<input type="checkbox" style="margin-left: 5px"  value="1">01<input type="checkbox" style="margin-left: 5px"  value="2">02<input type="checkbox" style="margin-left: 5px"  value="3">03<input type="checkbox" style="margin-left: 5px"  value="4">04<input type="checkbox" style="margin-left: 5px"  value="5">05</div>');
+            $(hourlyTab).append('<div class="imp hourList"><input type="checkbox" style="margin-left: 5px"  value="6">06<input type="checkbox" style="margin-left: 5px"  value="7">07<input type="checkbox" style="margin-left: 5px"  value="8">08<input type="checkbox" style="margin-left: 5px"  value="9">09<input type="checkbox" style="margin-left: 5px"  value="10">10<input type="checkbox" style="margin-left: 5px"  value="11">11</div>');
+            $(hourlyTab).append('<div class="imp hourList"><input type="checkbox" style="margin-left: 5px"  value="12">12<input type="checkbox" style="margin-left: 5px"  value="13">13<input type="checkbox" style="margin-left: 5px"  value="14">14<input type="checkbox" style="margin-left: 5px"  value="15">15<input type="checkbox" style="margin-left: 5px"  value="16">16<input type="checkbox" style="margin-left: 5px"  value="17">17</div>');
+            $(hourlyTab).append('<div class="imp hourList"><input type="checkbox" style="margin-left: 5px"  value="18">18<input type="checkbox" style="margin-left: 5px"  value="19">19<input type="checkbox" style="margin-left: 5px"  value="20">20<input type="checkbox" style="margin-left: 5px"  value="21">21<input type="checkbox" style="margin-left: 5px"  value="22">22<input type="checkbox" style="margin-left: 5px"  value="23">23</div>');
+            $("<input/>",{type : "hidden", id : "hourHidden"}).appendTo(hourlyTab);
             $(hourlyTab).appendTo(tabContent);
+            
 
             //craeting the dailyTab
             var dailyTab = $("<div/>", { "class": "tab-pane", id: "Daily" });
 
-            var dailyOption1 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "1", name: "DailyRadio", checked: "checked" }).appendTo(dailyOption1);
-            $(dailyOption1).append("&nbsp;Every&nbsp;");
-            $("<input/>", { id: "DaysInput", type: "text", value: "1", style: "width: 40px" }).appendTo(dailyOption1);
-            $(dailyOption1).append("&nbsp;day(s)");
-            $(dailyOption1).appendTo(dailyTab);
-
-            var dailyOption2 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "2", name: "DailyRadio" }).appendTo(dailyOption2);
-            $(dailyOption2).append("&nbsp;Every week day&nbsp;");
-            $(dailyOption2).appendTo(dailyTab);
-
-            $(dailyTab).append("Start time&nbsp;");
-            $(dailyTab).append('<select id="DailyHours" class="hours" style="width: 60px"></select>');
-            $(dailyTab).append('<select id="DailyMinutes" class="minutes" style="width: 60px"></select>');
-
+            var daily1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "day"}).appendTo(daily1);
+            $(daily1).append("每天 允许的通配符[, - * / L W]");
+            $(daily1).appendTo(dailyTab);
+            
+            var daily5 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "day"}).appendTo(daily5);
+            $(daily5).append("不指定");
+            $(daily5).appendTo(dailyTab);
+            
+            var daily2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "day"}).appendTo(daily2);
+            $(daily2).append("周期 从");
+            $("<input/>",{type : "text", id : "dayStart_0", value : "1", style:"width:35px; height:20px;"}).appendTo(daily2);
+            $(daily2).append("-");
+            $("<input/>",{type : "text", id : "dayEnd_0", value : "2", style:"width:35px; height:20px;"}).appendTo(daily2);
+            $(daily2).append("日");
+            $(daily2).appendTo(dailyTab);
+            
+            var daily3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "4", name : "day"}).appendTo(daily3);
+            $(daily3).append("从");
+            $("<input/>",{type : "text", id : "dayStart_1", value : "1", style:"width:35px; height:20px;"}).appendTo(daily3);
+            $(daily3).append("日开始,每");
+            $("<input/>",{type : "text", id : "dayEnd_1", value : "1", style:"width:35px; height:20px;"}).appendTo(daily3);
+            $(daily3).append("天执行一次");
+            $(daily3).appendTo(dailyTab);
+            
+            var daily6 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "5", name : "day"}).appendTo(daily6);
+            $(daily6).append("每月");
+            $("<input/>",{type : "text", id : "dayStart_2", value : "1", style:"width:35px; height:20px;"}).appendTo(daily6);
+            $(daily6).append("号最近的那个工作日");
+            $(daily6).appendTo(dailyTab);
+            
+            var daily7 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "6", name : "day"}).appendTo(daily7);
+            $(daily7).append("本月最后一天");
+            $(daily7).appendTo(dailyTab);
+            
+            var daily4 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "7", name : "day", id: "day_appoint"}).appendTo(daily4);
+            $(daily4).append("指定");
+            $(daily4).appendTo(dailyTab);
+            
+            $(dailyTab).append('<div class="imp dayList"><input type="checkbox" style="margin-left: 5px"  value="1">1<input type="checkbox" style="margin-left: 5px"  value="2">2<input type="checkbox" style="margin-left: 5px"  value="3">3<input type="checkbox" style="margin-left: 5px"  value="4">4<input type="checkbox" style="margin-left: 5px"  value="5">5<input type="checkbox" style="margin-left: 5px"  value="6">6<input type="checkbox" style="margin-left: 5px"  value="7">7<input type="checkbox" style="margin-left: 5px"  value="8">8<input type="checkbox" style="margin-left: 5px"  value="9">9<input type="checkbox" style="margin-left: 5px"  value="10">10<input type="checkbox" style="margin-left: 5px"  value="11">11</div>');
+            $(dailyTab).append('<div class="imp dayList"><input type="checkbox" style="margin-left: 5px"  value="12">12<input type="checkbox" style="margin-left: 5px"  value="13">13<input type="checkbox" style="margin-left: 5px"  value="14">14<input type="checkbox" style="margin-left: 5px"  value="15">15<input type="checkbox" style="margin-left: 5px"  value="16">16<input type="checkbox" style="margin-left: 5px"  value="17">17<input type="checkbox" style="margin-left: 5px"  value="18">18<input type="checkbox" style="margin-left: 5px"  value="19">19<input type="checkbox" style="margin-left: 5px"  value="20">20<input type="checkbox" style="margin-left: 5px"  value="21">21</div>');
+            $(dailyTab).append('<div class="imp dayList"><input type="checkbox" style="margin-left: 5px"  value="22">22<input type="checkbox" style="margin-left: 5px"  value="23">23<input type="checkbox" style="margin-left: 5px"  value="24">24<input type="checkbox" style="margin-left: 5px"  value="25">25<input type="checkbox" style="margin-left: 5px"  value="26">26<input type="checkbox" style="margin-left: 5px"  value="27">27<input type="checkbox" style="margin-left: 5px"  value="28">28<input type="checkbox" style="margin-left: 5px"  value="29">29<input type="checkbox" style="margin-left: 5px"  value="30">30<input type="checkbox" style="margin-left: 5px"  value="31">31</div>');
+           
+            $("<input/>",{type : "hidden", id : "dayHidden"}).appendTo(dailyTab);
             $(dailyTab).appendTo(tabContent);
+            
 
             //craeting the weeklyTab
             var weeklyTab = $("<div/>", { "class": "tab-pane", id: "Weekly" });
-            var weeklyWell = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-
-            var span31 = $("<div/>", { "class": "span6 col-sm-6" });
-            $("<input/>", { type: "checkbox", value: "2" }).appendTo(span31);
-            $(span31).append("&nbsp;周一<br />");
-            $("<input/>", { type: "checkbox", value: "4" }).appendTo(span31);
-            $(span31).append("&nbsp;周三<br />");
-            $("<input/>", { type: "checkbox", value: "6" }).appendTo(span31);
-            $(span31).append("&nbsp;周五<br />");
-            $("<input/>", { type: "checkbox", value: "1" }).appendTo(span31);
-            $(span31).append("&nbsp;周天");
-
-            var span32 = $("<div/>", { "class": "span6 col-sm-6" });
-            $("<input/>", { type: "checkbox", value: "3" }).appendTo(span32);
-            $(span32).append("&nbsp;周二<br />");
-            $("<input/>", { type: "checkbox", value: "5" }).appendTo(span32);
-            $(span32).append("&nbsp;周四<br />");
-            $("<input/>", { type: "checkbox", value: "7" }).appendTo(span32);
-            $(span32).append("&nbsp;周六");
-
-            $(span31).appendTo(weeklyWell);
-            $(span32).appendTo(weeklyWell);
-            //Hack to fix the well box
-            $("<br /><br /><br /><br />").appendTo(weeklyWell);
-
-            $(weeklyWell).appendTo(weeklyTab);
-
-            $(weeklyTab).append("Start time&nbsp;");
-            $(weeklyTab).append('<select id="WeeklyHours" class="hours" style="width: 60px"></select>');
-            $(weeklyTab).append('<select id="WeeklyMinutes" class="minutes" style="width: 60px"></select>');
-
+            
+            var weekly1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "week"}).appendTo(weekly1);
+            $(weekly1).append("每周 允许的通配符[, - * / L #]");
+            $(weekly1).appendTo(weeklyTab);
+            
+            var weekly2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "week"}).appendTo(weekly2);
+            $(weekly2).append("不指定");
+            $(weekly2).appendTo(weeklyTab);
+            
+            var weekly3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "week"}).appendTo(weekly3);
+            $(weekly3).append("周期 从星期");
+            $("<input/>",{type : "text", id : "weekStart_0", value : "1", style:"width:35px; height:20px;"}).appendTo(weekly3);
+            $(weekly3).append("-");
+            $("<input/>",{type : "text", id : "weekEnd_0", value : "2", style:"width:35px; height:20px;"}).appendTo(weekly3);
+            $(weekly3).appendTo(weeklyTab);
+            
+            var weekly4 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "4", name : "week"}).appendTo(weekly4);
+            $(weekly4).append("第");
+            $("<input/>",{type : "text", id : "weekStart_1", value : "1", style:"width:35px; height:20px;"}).appendTo(weekly4);
+            $(weekly4).append("周的星期");
+            $("<input/>",{type : "text", id : "weekEnd_1", value : "1", style:"width:35px; height:20px;"}).appendTo(weekly4);
+            $(weekly4).appendTo(weeklyTab);
+            
+            var weekly5 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "5", name : "week"}).appendTo(weekly5);
+            $(weekly5).append("本月最后一个星期");
+            $("<input/>",{type : "text", id : "weekStart_2", value : "1", style:"width:35px; height:20px;"}).appendTo(weekly5);
+            $(weekly5).appendTo(weeklyTab);
+            
+            var weekly6 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "6", name : "week", id: "week_appoint"}).appendTo(weekly6);
+            $(weekly6).append("指定");
+            $(weekly6).appendTo(weeklyTab);
+            
+            $(weeklyTab).append('<div class="imp weekList"><input type="checkbox" style="margin-left: 5px"  value="1">1<input type="checkbox" style="margin-left: 5px"  value="2">2<input type="checkbox" style="margin-left: 5px"  value="3">3<input type="checkbox" style="margin-left: 5px"  value="4">4<input type="checkbox" style="margin-left: 5px"  value="5">5<input type="checkbox" style="margin-left: 5px"  value="6">6<input type="checkbox" style="margin-left: 5px"  value="7">7</div>');
+            
+            $("<input/>",{type : "hidden", id : "weekHidden"}).appendTo(weeklyTab);
             $(weeklyTab).appendTo(tabContent);
+
 
             //craeting the monthlyTab
             var monthlyTab = $("<div/>", { "class": "tab-pane", id: "Monthly" });
 
-            var monthlyOption1 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "1", name: "MonthlyRadio", checked: "checked" }).appendTo(monthlyOption1);
-            $(monthlyOption1).append("&nbsp;Day&nbsp");
-            $("<input/>", { id: "DayOfMOnthInput", type: "text", value: "1", style: "width: 40px" }).appendTo(monthlyOption1);
-            $(monthlyOption1).append("&nbsp;of every&nbsp;");
-            $("<input/>", { id: "MonthInput", type: "text", value: "1", style: "width: 40px" }).appendTo(monthlyOption1);
-            $(monthlyOption1).append("&nbsp;month(s)");
-            $(monthlyOption1).appendTo(monthlyTab);
-
-            var monthlyOption2 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "2", name: "MonthlyRadio" }).appendTo(monthlyOption2);
-            $(monthlyOption2).append("&nbsp;");
-            $(monthlyOption2).append('<select id="WeekDay" class="day-order-in-month" style="width: 70px"></select>');
-            $(monthlyOption2).append('<select id="DayInWeekOrder" class="week-days" style="width: 70px"></select>');
-            $(monthlyOption2).append("&nbsp;of every&nbsp;");
-            $("<input/>", { id: "EveryMonthInput", type: "text", value: "1", style: "width: 40px" }).appendTo(monthlyOption2);
-            $(monthlyOption2).append("&nbsp;month(s)");
-            $(monthlyOption2).appendTo(monthlyTab);
-
-            $(monthlyTab).append("Start time&nbsp;");
-            $(monthlyTab).append('<select id="MonthlyHours" class="hours" style="width: 60px"></select>');
-            $(monthlyTab).append('<select id="MonthlyMinutes" class="minutes" style="width: 60px"></select>');
-
+            var monthly1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "month"}).appendTo(monthly1);
+            $(monthly1).append("每月 允许的通配符[, - * /]");
+            $(monthly1).appendTo(monthlyTab);
+            
+            var monthly2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "month"}).appendTo(monthly2);
+            $(monthly2).append("不指定");
+            $(monthly2).appendTo(monthlyTab);
+            
+            var monthly3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "month"}).appendTo(monthly3);
+            $(monthly3).append("周期 从");
+            $("<input/>",{type : "text", id : "monthStart_0", value : "1", style:"width:35px; height:20px;"}).appendTo(monthly3);
+            $(monthly3).append("-");
+            $("<input/>",{type : "text", id : "monthEnd_0", value : "2", style:"width:35px; height:20px;"}).appendTo(monthly3);
+            $(monthly3).append("月");
+            $(monthly3).appendTo(monthlyTab);
+            
+            var monthly4 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "4", name : "month"}).appendTo(monthly4);
+            $(monthly4).append("从");
+            $("<input/>",{type : "text", id : "monthStart_1", value : "1", style:"width:35px; height:20px;"}).appendTo(monthly4);
+            $(monthly4).append("日开始,每");
+            $("<input/>",{type : "text", id : "monthEnd_1", value : "1", style:"width:35px; height:20px;"}).appendTo(monthly4);
+            $(monthly4).append("月执行一次");
+            $(monthly4).appendTo(monthlyTab);
+            
+            var monthly5 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "5", name : "month", id: "mouth_appoint"}).appendTo(monthly5);
+            $(monthly5).append("指定");
+            $(monthly5).appendTo(monthlyTab);
+            
+            $(monthlyTab).append('<div class="imp mouthList"><input type="checkbox" style="margin-left: 5px"  value="1">1<input type="checkbox" style="margin-left: 5px"  value="2">2<input type="checkbox" style="margin-left: 5px"  value="3">3<input type="checkbox" style="margin-left: 5px"  value="4">4<input type="checkbox" style="margin-left: 5px"  value="5">5<input type="checkbox" style="margin-left: 5px"  value="6">6</div>');
+            $(monthlyTab).append('<div class="imp mouthList"><input type="checkbox" style="margin-left: 5px"  value="7">7<input type="checkbox" style="margin-left: 5px"  value="8">8<input type="checkbox" style="margin-left: 5px"  value="9">9<input type="checkbox" style="margin-left: 5px"  value="10">10<input type="checkbox" style="margin-left: 5px"  value="11">11<input type="checkbox" style="margin-left: 5px"  value="12">12</div>');
+            $("<input/>",{type : "hidden", id : "monthHidden"}).appendTo(monthlyTab);
             $(monthlyTab).appendTo(tabContent);
 
             //craeting the yearlyTab
             var yearlyTab = $("<div/>", { "class": "tab-pane", id: "Yearly" });
-
-            var yearlyOption1 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "1", name: "YearlyRadio", checked: "checked" }).appendTo(yearlyOption1);
-            $(yearlyOption1).append("&nbsp;Every&nbsp");
-            $(yearlyOption1).append('<select id="MonthsOfYear" class="months" style="width: 70px"></select>');
-            $(yearlyOption1).append("&nbsp;in day&nbsp;");
-            $("<input/>", { id: "YearInput", type: "text", value: "1", style: "width: 40px" }).appendTo(yearlyOption1);
-            $(yearlyOption1).appendTo(yearlyTab);
-
-            var yearlyOption2 = $("<div/>", { "class": "well well-small","style":"padding-left: 5px;" });
-            $("<input/>", { type: "radio", value: "2", name: "YearlyRadio" }).appendTo(yearlyOption2);
-            $(yearlyOption2).append("&nbsp;The&nbsp;");
-            $(yearlyOption2).append('<select id="DayOrderInYear" class="day-order-in-month" style="width: 70px"></select>');
-            $(yearlyOption2).append('<select id="DayWeekForYear" class="week-days" style="width: 60px"></select>');
-            $(yearlyOption2).append("&nbsp;of&nbsp;");
-            $(yearlyOption2).append('<select id="MonthsOfYear2" class="months" style="width: 70px"></select>');
-            $(yearlyOption2).appendTo(yearlyTab);
-
-            $(yearlyTab).append("Start time&nbsp;");
-            $(yearlyTab).append('<select id="YearlyHours" class="hours" style="width: 60px"></select>');
-            $(yearlyTab).append('<select id="YearlyMinutes" class="minutes" style="width: 60px"></select>');
-
+            
+            var yearly1 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "1", name : "year"}).appendTo(yearly1);
+            $(yearly1).append("不指定 允许的通配符[, - * /] 非必填");
+            $(yearly1).appendTo(yearlyTab);
+            
+            var yearly3 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "2", name : "year"}).appendTo(yearly3);
+            $(yearly3).append("每年");
+            $(yearly3).appendTo(yearlyTab);
+            
+            var yearly2 = $("<div/>",{"class":"line"});
+            $("<input/>",{type : "radio", value : "3", name : "year"}).appendTo(yearly2);
+            $(yearly2).append("周期从");
+            $("<input/>",{type : "text", id : "yearStart_0", value : "2016", style:"width:45px; height:20px;"}).appendTo(yearly2);
+            $(yearly2).append("-");
+            $("<input/>",{type : "text", id : "yearEnd_0", value : "2017", style:"width:45px; height:20px;"}).appendTo(yearly2);
+            $(yearly2).append("年");
+            $(yearly2).appendTo(yearlyTab);
+            $("<input/>",{type : "hidden", id : "yearHidden"}).appendTo(yearlyTab);
             $(yearlyTab).appendTo(tabContent);
+            
             $(tabContent).appendTo(span12);
 
             //creating the button and results input           
@@ -207,8 +351,8 @@
                 content: function () {
                     return $(cronContainer).html();
                 },
-                template: '<div class="popover" style="max-width:500px !important; width:390px;left:-341.656px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-                placement: 'left'
+                template: '<div class="popover" style="max-width:500px !important; width:425px;left:-341.656px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+                placement: options.direction
 
             }).on('click', function (e) {
                 e.preventDefault();
@@ -217,6 +361,13 @@
                 fillDayWeekInMonth();
                 fillInWeekDays();
                 fillInMonths();
+                
+                $.fn.cronGen.tools.cronParse(inputElement.val());
+                
+                //绑定指定事件
+                $.fn.cronGen.tools.initChangeEvent();
+                
+                
                 $('#CronGenTabs a').click(function (e) {
                     e.preventDefault();
                     $(this).tab('show');
@@ -233,7 +384,7 @@
             return;
         }
     });
-    
+
 
     var fillInMonths = function () {
         var days = [
@@ -308,55 +459,156 @@
         var results = "";
         switch (activeTab) {
             case "SecondlyTab":
-                results = "0/" + $("#SecondsInput").val() + " * * 1/1 * ? *";
-                break;
-            case "MinutesTab":
-                results = "0 0/" + $("#MinutesInput").val() + " * 1/1 * ? *";
-                break;
-            case "HourlyTab":
-                switch ($("input:radio[name=HourlyRadio]:checked").val()) {
+                switch ($("input:radio[name=second]:checked").val()) {
                     case "1":
-                        results = "0 0 0/" + $("#HoursInput").val() + " 1/1 * ? *";
+                        $.fn.cronGen.tools.everyTime("second");
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                     case "2":
-                        results = "0 " + Number($("#AtMinutes").val()) + " " + Number($("#AtHours").val()) + " 1/1 * ? *";
+                        $.fn.cronGen.tools.cycle("second");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.startOn("second");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "4":
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                }
+                break;
+            case "MinutesTab":
+                switch ($("input:radio[name=min]:checked").val()) {
+                    case "1":
+                        $.fn.cronGen.tools.everyTime("min");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "2":
+                        $.fn.cronGen.tools.cycle("min");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.startOn("min");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "4":
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                }
+                break;
+            case "HourlyTab":
+                switch ($("input:radio[name=hour]:checked").val()) {
+                    case "1":
+                       $.fn.cronGen.tools.everyTime("hour");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "2":
+                       $.fn.cronGen.tools.cycle("hour");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.startOn("hour");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "4":
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                 }
                 break;
             case "DailyTab":
-                switch ($("input:radio[name=DailyRadio]:checked").val()) {
+                switch ($("input:radio[name=day]:checked").val()) {
                     case "1":
-                        results = "0 " + Number($("#DailyMinutes").val()) + " " + Number($("#DailyHours").val()) + " 1/" + $("#DaysInput").val() + " * ? *";
+                        $.fn.cronGen.tools.everyTime("day");
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                     case "2":
-                        results = "0 " + Number($("#DailyMinutes").val()) + " " + Number($("#DailyHours").val()) + " ? * MON-FRI *";
+                        $.fn.cronGen.tools.unAppoint("day");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.cycle("day");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "4":
+                        $.fn.cronGen.tools.startOn("day");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "5":
+                        $.fn.cronGen.tools.workDay("day");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "6":
+                        $.fn.cronGen.tools.lastDay("day");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "7":
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                 }
                 break;
             case "WeeklyTab":
-                var selectedDays = "";
-                $("#Weekly input:checkbox:checked").each(function () { selectedDays += $(this).val() + ","; });
-                if (selectedDays.length > 0)
-                    selectedDays = selectedDays.substr(0, selectedDays.length - 1);
-                results = "0 " + Number($("#WeeklyMinutes").val()) + " " + Number($("#WeeklyHours").val()) + " ? * " + selectedDays + " *";
-                break;
-            case "MonthlyTab":
-                switch ($("input:radio[name=MonthlyRadio]:checked").val()) {
+                switch ($("input:radio[name=week]:checked").val()) {
                     case "1":
-                        results = "0 " + Number($("#MonthlyMinutes").val()) + " " + Number($("#MonthlyHours").val()) + " " + $("#DayOfMOnthInput").val() + " 1/" + $("#MonthInput").val() + " ? *";
+                        $.fn.cronGen.tools.everyTime("week");
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                     case "2":
-                        results = "0 " + Number($("#MonthlyMinutes").val()) + " " + Number($("#MonthlyHours").val()) + " ? 1/" + Number($("#EveryMonthInput").val()) + " " + $("#DayInWeekOrder").val() + "#" + $("#WeekDay").val() + " *";
+                        $.fn.cronGen.tools.unAppoint("week");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.cycle("week");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "4":
+                        $.fn.cronGen.tools.startOn("week");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "5":
+                        $.fn.cronGen.tools.lastWeek("week");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "6":
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                }
+                break;
+            case "MonthlyTab":
+                switch ($("input:radio[name=month]:checked").val()) {
+                    case "1":
+                        $.fn.cronGen.tools.everyTime("month");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "2":
+                        $.fn.cronGen.tools.unAppoint("month");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.cycle("month");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "4":
+                        $.fn.cronGen.tools.startOn("month");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "5":
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                 }
                 break;
             case "YearlyTab":
-                switch ($("input:radio[name=YearlyRadio]:checked").val()) {
+                switch ($("input:radio[name=year]:checked").val()) {
                     case "1":
-                        results = "0 " + Number($("#YearlyMinutes").val()) + " " + Number($("#YearlyHours").val()) + " " + $("#YearInput").val() + " " + $("#MonthsOfYear").val() + " ? *";
+                        $.fn.cronGen.tools.unAppoint("year");
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                     case "2":
-                        results = "0 " + Number($("#YearlyMinutes").val()) + " " + Number($("#YearlyHours").val()) + " ? " + $("#MonthsOfYear2").val() + " " + $("#DayWeekForYear").val() + "#" + $("#DayOrderInYear").val() + " *";
+                        $.fn.cronGen.tools.everyTime("year");
+                        results = $.fn.cronGen.tools.cronResult();
+                        break;
+                    case "3":
+                        $.fn.cronGen.tools.cycle("year");
+                        results = $.fn.cronGen.tools.cronResult();
                         break;
                 }
                 break;
@@ -370,3 +622,406 @@
 
 })(jQuery);
 
+(function($) {
+    $.fn.cronGen.defaultOptions = {
+        direction : 'bottom'
+    };
+    $.fn.cronGen.tools = {
+        /**
+         * 每周期
+         */
+        everyTime : function(dom){
+            $("#"+dom+"Hidden").val("*");
+        },
+        /**
+         * 不指定
+         */
+        unAppoint : function(dom){
+            var val = "?";
+            if (dom == "year")
+            {
+                val = "";
+            }
+            $("#"+dom+"Hidden").val(val);
+        },
+        /**
+         * 周期
+         */
+        cycle : function(dom){
+            var start = $("#"+dom+"Start_0").val();
+            var end = $("#"+dom+"End_0").val();
+            $("#"+dom+"Hidden").val(start + "-" + end);
+        },
+        /**
+         * 从开始
+         */
+        startOn : function(dom) {
+            var start = $("#"+dom+"Start_1").val();
+            var end = $("#"+dom+"End_1").val();
+            $("#"+dom+"Hidden").val(start + "/" + end);
+        },
+        lastDay : function(dom){
+            $("#"+dom+"Hidden").val("L");
+        },
+        weekOfDay : function(dom){
+            var start = $("#"+dom+"Start_0").val();
+            var end = $("#"+dom+"End_0").val();
+            $("#"+dom+"Hidden").val(start + "#" + end);
+        },
+        lastWeek : function(dom){
+            var start = $("#"+dom+"Start_2").val();
+            $("#"+dom+"Hidden").val(start+"L");
+        },
+        workDay : function(dom) {
+            var start = $("#"+dom+"Start_2").val();
+            $("#"+dom+"Hidden").val(start + "W");
+        },
+        initChangeEvent : function(){
+            var secondList = $(".secondList").children();
+            $("#sencond_appoint").click(function(){
+                if (this.checked) {
+                    if ($(secondList).filter(":checked").length == 0) {
+                        $(secondList.eq(0)).attr("checked", true);
+                    }
+                    secondList.eq(0).change();
+                }
+            });
+        
+            secondList.change(function() {
+                var sencond_appoint = $("#sencond_appoint").prop("checked");
+                if (sencond_appoint) {
+                    var vals = [];
+                    secondList.each(function() {
+                        if (this.checked) {
+                            vals.push(this.value);
+                        }
+                    });
+                    var val = "?";
+                    if (vals.length > 0 && vals.length < 59) {
+                        val = vals.join(","); 
+                    }else if(vals.length == 59){
+                        val = "*";
+                    }
+                    $("#secondHidden").val(val);
+                }
+            });
+            
+            var minList = $(".minList").children();
+            $("#min_appoint").click(function(){
+                if (this.checked) {
+                    if ($(minList).filter(":checked").length == 0) {
+                        $(minList.eq(0)).attr("checked", true);
+                    }
+                    minList.eq(0).change();
+                }
+            });
+            
+            minList.change(function() {
+                var min_appoint = $("#min_appoint").prop("checked");
+                if (min_appoint) {
+                    var vals = [];
+                    minList.each(function() {
+                        if (this.checked) {
+                            vals.push(this.value);
+                        }
+                    });
+                    var val = "?";
+                    if (vals.length > 0 && vals.length < 59) {
+                        val = vals.join(",");
+                    }else if(vals.length == 59){
+                        val = "*";
+                    }
+                    $("#minHidden").val(val);
+                }
+            });
+            
+            var hourList = $(".hourList").children();
+            $("#hour_appoint").click(function(){
+                if (this.checked) {
+                    if ($(hourList).filter(":checked").length == 0) {
+                        $(hourList.eq(0)).attr("checked", true);
+                    }
+                    hourList.eq(0).change();
+                }
+            });
+            
+            hourList.change(function() {
+                var hour_appoint = $("#hour_appoint").prop("checked");
+                if (hour_appoint) {
+                    var vals = [];
+                    hourList.each(function() {
+                        if (this.checked) {
+                            vals.push(this.value);
+                        }
+                    });
+                    var val = "?";
+                    if (vals.length > 0 && vals.length < 24) {
+                        val = vals.join(",");
+                    }else if(vals.length == 24){
+                        val = "*";
+                    }
+                    $("#hourHidden").val(val);
+                }
+            });
+            
+            var dayList = $(".dayList").children();
+            $("#day_appoint").click(function(){
+                if (this.checked) {
+                    if ($(dayList).filter(":checked").length == 0) {
+                        $(dayList.eq(0)).attr("checked", true);
+                    }
+                    dayList.eq(0).change();
+                }
+            });
+            
+            dayList.change(function() {
+                var day_appoint = $("#day_appoint").prop("checked");
+                if (day_appoint) {
+                    var vals = [];
+                    dayList.each(function() {
+                        if (this.checked) {
+                            vals.push(this.value);
+                        }
+                    });
+                    var val = "?";
+                    if (vals.length > 0 && vals.length < 31) {
+                        val = vals.join(",");
+                    }else if(vals.length == 31){
+                        val = "*";
+                    }
+                   $("#dayHidden").val(val);
+                }
+            });
+            
+            var mouthList = $(".mouthList").children();
+            $("#mouth_appoint").click(function(){
+                if (this.checked) {
+                    if ($(mouthList).filter(":checked").length == 0) {
+                        $(mouthList.eq(0)).attr("checked", true);
+                    }
+                    mouthList.eq(0).change();
+                }
+            });
+            
+            mouthList.change(function() {
+                var mouth_appoint = $("#mouth_appoint").prop("checked");
+                if (mouth_appoint) {
+                    var vals = [];
+                    mouthList.each(function() {
+                        if (this.checked) {
+                            vals.push(this.value);
+                        }
+                    });
+                    var val = "?";
+                    if (vals.length > 0 && vals.length < 12) {
+                        val = vals.join(",");
+                    }else if(vals.length == 12){
+                        val = "*";
+                    }
+                    $("#monthHidden").val(val);
+                }
+            });
+            
+            var weekList = $(".weekList").children();
+            $("#week_appoint").click(function(){
+                if (this.checked) {
+                    if ($(weekList).filter(":checked").length == 0) {
+                        $(weekList.eq(0)).attr("checked", true);
+                    }
+                    weekList.eq(0).change();
+                }
+            });
+            
+            weekList.change(function() {
+                var week_appoint = $("#week_appoint").prop("checked");
+                if (week_appoint) {
+                    var vals = [];
+                    weekList.each(function() {
+                        if (this.checked) {
+                            vals.push(this.value);
+                        }
+                    });
+                    var val = "?";
+                    if (vals.length > 0 && vals.length < 7) {
+                        val = vals.join(",");
+                    }else if(vals.length == 7){
+                        val = "*";
+                    }
+                   $("#weekHidden").val(val);
+                }
+            });
+        },
+        initObj : function(strVal, strid){
+            var ary = null;
+            var objRadio = $("input[name='" + strid + "'");
+            if (strVal == "*") {
+                objRadio.eq(0).attr("checked", "checked");
+            } else if (strVal.split('-').length > 1) {
+                ary = strVal.split('-');
+                objRadio.eq(1).attr("checked", "checked");
+                $("#" + strid + "Start_0").val(ary[0]);
+                $("#" + strid + "End_0").val(ary[1]);
+            } else if (strVal.split('/').length > 1) {
+                ary = strVal.split('/');
+                objRadio.eq(2).attr("checked", "checked");
+                $("#" + strid + "Start_1").val(ary[0]);
+                $("#" + strid + "End_1").val(ary[1]);
+            } else {
+                objRadio.eq(3).attr("checked", "checked");
+                if (strVal != "?") {
+                    ary = strVal.split(",");
+                    for (var i = 0; i < ary.length; i++) {
+                        $("." + strid + "List input[value='" + ary[i] + "']").attr("checked", "checked");
+                    }
+                }
+            }
+        },
+        initDay : function(strVal) {
+            var ary = null;
+            var objRadio = $("input[name='day'");
+            if (strVal == "*") {
+                objRadio.eq(0).attr("checked", "checked");
+            } else if (strVal == "?") {
+                objRadio.eq(1).attr("checked", "checked");
+            } else if (strVal.split('-').length > 1) {
+                ary = strVal.split('-');
+                objRadio.eq(2).attr("checked", "checked");
+                $("#dayStart_0").val(ary[0]);
+                $("#dayEnd_0").val(ary[1]);
+            } else if (strVal.split('/').length > 1) {
+                ary = strVal.split('/');
+                objRadio.eq(3).attr("checked", "checked");
+                $("#dayStart_1").val(ary[0]);
+                $("#dayEnd_1").val(ary[1]);
+            } else if (strVal.split('W').length > 1) {
+                ary = strVal.split('W');
+                objRadio.eq(4).attr("checked", "checked");
+                $("#dayStart_2").val(ary[0]);
+            } else if (strVal == "L") {
+                objRadio.eq(5).attr("checked", "checked");
+            } else {
+                objRadio.eq(6).attr("checked", "checked");
+                ary = strVal.split(",");
+                for (var i = 0; i < ary.length; i++) {
+                    $(".dayList input[value='" + ary[i] + "']").attr("checked", "checked");
+                }
+            }
+        },
+        initMonth : function(strVal) {
+            var ary = null;
+            var objRadio = $("input[name='mouth'");
+            if (strVal == "*") {
+                objRadio.eq(0).attr("checked", "checked");
+            } else if (strVal == "?") {
+                objRadio.eq(1).attr("checked", "checked");
+            } else if (strVal.split('-').length > 1) {
+                ary = strVal.split('-');
+                objRadio.eq(2).attr("checked", "checked");
+                $("#mouthStart_0").val(ary[0]);
+                $("#mouthEnd_0").val(ary[1]);
+            } else if (strVal.split('/').length > 1) {
+                ary = strVal.split('/');
+                objRadio.eq(3).attr("checked", "checked");
+                $("#mouthStart_1").val(ary[0]);
+                $("#mouthEnd_1").val(ary[1]);
+
+            } else {
+                objRadio.eq(4).attr("checked", "checked");
+
+                ary = strVal.split(",");
+                for (var i = 0; i < ary.length; i++) {
+                    $(".mouthList input[value='" + ary[i] + "']").attr("checked", "checked");
+                }
+            }
+        },
+        initWeek : function(strVal) {
+            var ary = null;
+            var objRadio = $("input[name='week'");
+            if (strVal == "*") {
+                objRadio.eq(0).attr("checked", "checked");
+            } else if (strVal == "?") {
+                objRadio.eq(1).attr("checked", "checked");
+            } else if (strVal.split('/').length > 1) {
+                ary = strVal.split('/');
+                objRadio.eq(2).attr("checked", "checked");
+                $("#weekStart_0").val(ary[0]);
+                $("#weekEnd_0").val(ary[1]);
+            } else if (strVal.split('-').length > 1) {
+                ary = strVal.split('-');
+                objRadio.eq(3).attr("checked", "checked");
+                $("#weekStart_1").val(ary[0]);
+                $("#weekEnd_1").val(ary[1]);
+            } else if (strVal.split('L').length > 1) {
+                ary = strVal.split('L');
+                objRadio.eq(4).attr("checked", "checked");
+                $("#weekStart_2").val(ary[0]);
+            } else {
+                objRadio.eq(5).attr("checked", "checked");
+                ary = strVal.split(",");
+                for (var i = 0; i < ary.length; i++) {
+                    $(".weekList input[value='" + ary[i] + "']").attr("checked", "checked");
+                }
+            }
+        },
+        initYear : function(strVal) {
+            var ary = null;
+            var objRadio = $("input[name='year'");
+            if (strVal == "*") {
+                objRadio.eq(1).attr("checked", "checked");
+            } else if (strVal.split('-').length > 1) {
+                ary = strVal.split('-');
+                objRadio.eq(2).attr("checked", "checked");
+                $("#yearStart_0").val(ary[0]);
+                $("#yearEnd_0").val(ary[1]);
+            }
+        },
+        cronParse : function(cronExpress) {
+            //获取参数中表达式的值
+            if (cronExpress) {
+                var regs = cronExpress.split(' ');
+                $("input[name=secondHidden]").val(regs[0]);
+                $("input[name=minHidden]").val(regs[1]);
+                $("input[name=hourHidden]").val(regs[2]);
+                $("input[name=dayHidden]").val(regs[3]);
+                $("input[name=mouthHidden]").val(regs[4]);
+                $("input[name=weekHidden]").val(regs[5]);
+
+                $.fn.cronGen.tools.initObj(regs[0], "second");
+                $.fn.cronGen.tools.initObj(regs[1], "min");
+                $.fn.cronGen.tools.initObj(regs[2], "hour");
+                $.fn.cronGen.tools.initDay(regs[3]);
+                $.fn.cronGen.tools.initMonth(regs[4]);
+                $.fn.cronGen.tools.initWeek(regs[5]);
+
+                if (regs.length > 6) {
+                    $("input[name=yearHidden]").val(regs[6]);
+                    $.fn.cronGen.tools.initYear(regs[6]);
+                }
+            }
+    },
+        cronResult : function() {
+            var result;
+            var second = $("#secondHidden").val();
+            second = second== "" ? "*":second;
+            var minute = $("#minHidden").val();
+            minute = minute== "" ? "*":minute;
+            var hour = $("#hourHidden").val();
+            hour = hour== "" ? "*":hour;
+            var day = $("#dayHidden").val();
+            day = day== "" ? "*":day;
+            var month = $("#monthHidden").val();
+            month = month== "" ? "*":month;
+            var week = $("#weekHidden").val();
+            week = week== "" ? "?":week;
+            var year = $("#yearHidden").val();
+            if(year!="")
+            {
+                result = second+" "+minute+" "+hour+" "+day+" "+month+" "+week+" "+year;
+            }else
+            {
+                result = second+" "+minute+" "+hour+" "+day+" "+month+" "+week;
+            }
+            return result;
+        }
+    };
+})(jQuery);
