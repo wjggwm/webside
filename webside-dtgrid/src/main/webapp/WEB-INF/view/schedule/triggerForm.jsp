@@ -10,7 +10,7 @@
 <script type="text/javascript" src="${ctx }/resources/js/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
 <link rel="stylesheet" href="${ctx }/resources/js/cronGen/cronGen.css"/>
-<script type="text/javascript" src="${ctx }/resources/js/cronGen/cronGen.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/cronGen/cronGen.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
