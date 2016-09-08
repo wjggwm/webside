@@ -81,6 +81,10 @@ dtgrid bug修复记录：
 	添加表格属性：postParams //是否传递参数,只在loadAll=true时有效
 6、修改loadAll=true时刷新时是否重新从服务器获取数据
 	添加表格属性：isreload //刷新时是否重新从服务器获取数据,只在loadAll=true时有效
+	
+7、修复firefox下表格工具栏样式错乱bug
+	1、在dlshouwen.grid.min.css 中搜索.dlshouwen-grid-toolbar-container .dlshouwen-grid-tools 修改为 float:left;margin:0px 0px 12px 0px;white-space:nowrap;
+	2、在dlshouwen.grid.min.css 中搜索.change-page-size 修改为width:68px;display:inline;padding:2px 4px;line-height:0;height:29px;
 
 附加知识点：
 quartz cron 说明：

@@ -93,21 +93,21 @@
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
 
-
-	<!-- 系统根目录变量 -->
+	<!-- path in the application default is /sirona -->
 	<context-param>
-		<param-name>webAppRootKey</param-name>
-		<param-value>webside.dtgrid.root</param-value>
+		<param-name>org.apache.sirona.reporting.mapping</param-name>
+		<param-value>/sirona</param-value>
 	</context-param>
 	<!-- activated per default -->
 	<context-param>
 		<param-name>org.apache.sirona.reporting.activated</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	<!-- path in the application default is /sirona -->
+
+	<!-- 系统根目录变量 -->
 	<context-param>
-		<param-name>org.apache.sirona.reporting.mapping</param-name>
-		<param-value>/sirona</param-value>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webside.dtgrid.root</param-value>
 	</context-param>
 
 	<!-- 处理静态资源的访问 ,这种方式效率最高,但是无法访问classpath下的资源文件 -->
