@@ -13,7 +13,7 @@ $(function() {
 
 <div class="row" style="margin-top:5px;">
 	<div class="col-xs-12">
-		<form id="userPassword" name="userInfo" class="form-horizontal" role="form" method="post">
+		<form id="userPassword" name="userPassword" class="form-horizontal" role="form" method="post">
 			<input type="hidden" name="id" value="${userEntity.id }">
 			<input type="hidden" name="userName" value="${userEntity.userName }">
 		    <input type="hidden" name="accountName" value="${userEntity.accountName }"/>

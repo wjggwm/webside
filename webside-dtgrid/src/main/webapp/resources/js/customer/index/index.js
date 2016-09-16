@@ -370,7 +370,7 @@ var webside = {
                         error.insertAfter(element.parent());
                     },
                     submitHandler : function(form) {
-                        webside.common.commit('userInfo', '/user/password.html', '/logout.html');
+                        webside.common.commit('userPassword', '/user/password.html', '/logout.html');
                     },
                     invalidHandler : function(form) {
                     }
