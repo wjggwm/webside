@@ -21,7 +21,3 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 5、多维监控，添加druid监控和sirona监控，多重监控系统性能及各项指标
 
 **部署方法：**部署的详细步骤请见[wiki](https://git.oschina.net/wjggwm/webside/wikis/%E9%83%A8%E7%BD%B2%E5%B8%AE%E5%8A%A9)
-
-**感谢捐赠：**
-QQ            昵称            金额（元）
-100198754    拎壶冲            66
