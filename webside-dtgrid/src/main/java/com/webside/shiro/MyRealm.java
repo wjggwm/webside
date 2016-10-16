@@ -69,13 +69,13 @@ public class MyRealm extends AuthorizingRealm {
 
 	/**
 	 * 认证信息,认证回调函数,登录时调用
-	 * 首先根据传入的用户名获取User信息；然后如果user为空，那么抛出没找到帐号异常UnknownAccountException；
-	 * 如果user找到但锁定了抛出锁定异常LockedAccountException；最后生成AuthenticationInfo信息，
-	 * 交给间接父类AuthenticatingRealm使用CredentialsMatcher进行判断密码是否匹配，
-	 * 如果不匹配将抛出密码错误异常IncorrectCredentialsException；
-	 * 另外如果密码重试次数太多将抛出超出重试次数异常ExcessiveAttemptsException；
-	 * 在组装SimpleAuthenticationInfo信息时， 需要传入：身份信息（用户名）、凭据（密文密码）、加密盐（username+salt），
-	 * CredentialsMatcher使用盐加密传入的明文密码和此处的密文密码进行匹配。
+	 * </br>首先根据传入的用户名获取User信息；然后如果user为空，那么抛出没找到帐号异常UnknownAccountException；
+	 * </br>如果user找到但锁定了抛出锁定异常LockedAccountException；最后生成AuthenticationInfo信息，
+	 * </br>交给间接父类AuthenticatingRealm使用CredentialsMatcher进行判断密码是否匹配，
+	 * </br>如果不匹配将抛出密码错误异常IncorrectCredentialsException；
+	 * </br>另外如果密码重试次数太多将抛出超出重试次数异常ExcessiveAttemptsException；
+	 * </br>在组装SimpleAuthenticationInfo信息时， 需要传入：身份信息（用户名）、凭据（密文密码）、加密盐（username+salt），
+	 * </br>CredentialsMatcher使用盐加密传入的明文密码和此处的密文密码进行匹配。
 	 */
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		SimpleAuthenticationInfo authenticationInfo = null;
@@ -113,7 +113,7 @@ public class MyRealm extends AuthorizingRealm {
 	/**
      * 清除当前用户权限信息
      */
-	public  void clearCachedAuthorizationInfo() {
+	public void clearCachedAuthorizationInfo() {
 		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(
 				principalCollection, getName());
@@ -123,7 +123,7 @@ public class MyRealm extends AuthorizingRealm {
 	/**
      * 清除当前用户认证信息
      */
-	public  void clearCachedAuthenticationInfo() {
+	public void clearCachedAuthenticationInfo() {
 		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(
 				principalCollection, getName());

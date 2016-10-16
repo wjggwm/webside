@@ -74,10 +74,10 @@
 		   </div>   
 		   
 		   <div class="form-group">
-		      <label class="control-label col-sm-1 no-padding-right" for="userName">所属角色</label>
+		      <label class="control-label col-sm-1 no-padding-right" for="roleId">所属角色</label>
 		      <div class="col-sm-10">
 		      <div class="clearfix">
-		        <select class="form-control" name="role.id" id="roleId" style="width: 100%">
+		        <select <c:if test="${userSession.role.name eq '超级管理员'}">readonly</c:if> class="form-control" name="role.id" id="roleId" style="width: 100%">
 					<option value=""></option>
 					<c:choose>
 						<c:when test="${!empty userEntity}">
@@ -94,7 +94,7 @@
 										</c:if>
 									</c:when>
 									<c:otherwise>
-										<c:if test="${userEntity.role.id eq role.id}"><option value="${role.id }" selected="selected">${role.name }</option></c:if>
+										<option value="${role.id }" <c:if test="${userEntity.role.id eq role.id}">selected="selected"</c:if>>${role.name }</option>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>							

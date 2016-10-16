@@ -93,9 +93,11 @@
 		r.r_update_time
 		FROM tb_user u LEFT JOIN tb_role_user ru ON u.u_id = ru.u_id LEFT JOIN tb_role r ON ru.r_id = r.r_id 
 		<where>
+			<!-- 
 			<if test="userName != null and userName != ''">
 				u.u_name=#{userName} or u.u_account_name=#{userName}
 			</if>
+			 -->
 			<if test="creatorName !=null and creatorName != ''">
 				and u.u_creator_name = #{creatorName}
 			</if>

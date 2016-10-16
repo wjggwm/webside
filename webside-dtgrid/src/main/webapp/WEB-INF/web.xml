@@ -194,6 +194,10 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/view/error/error-500.jsp</location>
 	</error-page>
+	<error-page>  
+        <exception-type>org.apache.shiro.session.InvalidSessionException</exception-type>  
+        <location>/invalidSession.jsp</location>  
+    </error-page>
 
 	<!-- 配置jstl标签库为本地加载 -->
 	<jsp-config>

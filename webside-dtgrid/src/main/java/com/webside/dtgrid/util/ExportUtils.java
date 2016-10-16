@@ -78,19 +78,19 @@ public class ExportUtils {
 			return;
 		}
 		// 导出cvs
-		if (ExportType.CSV.name().equals(pager.getExportType())) {
+		if (ExportType.CSV.name().equalsIgnoreCase(pager.getExportType())) {
 			ExportUtils.exportCsv(response, pager, pager.getExportDatas(),
 					fileName);
 			return;
 		}
 		// 导出txt
-		if (ExportType.TXT.name().equals(pager.getExportType())) {
+		if (ExportType.TXT.name().equalsIgnoreCase(pager.getExportType())) {
 			ExportUtils.exportTxt(response, pager, pager.getExportDatas(),
 					fileName);
 			return;
 		}
 		// 导出pdf
-		if (ExportType.PDF.name().equals(pager.getExportType())) {
+		if (ExportType.PDF.name().equalsIgnoreCase(pager.getExportType())) {
 			ExportUtils.exportPdf(response, pager, pager.getExportDatas(),
 					fileName);
 			return;

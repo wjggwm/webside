@@ -26,11 +26,11 @@
 		<!-- 开启缓存 -->
 		<property name="cachingEnabled" value="true" />
 		<!-- 认证信息:这里不进行缓存 -->
-		<property name="authenticationCachingEnabled" value="true" />
+		<property name="authenticationCachingEnabled" value="false" />
 		<!-- ehcache中配置的认证缓存名称 -->
 		<property name="authenticationCacheName" value="authenticationCache" />
 		<!-- 授权信息 -->
-		<property name="authorizationCachingEnabled" value="true" />
+		<property name="authorizationCachingEnabled" value="false" />
 		<!-- ehcache中配置的授权缓存名称 -->
 		<property name="authorizationCacheName" value="authorizationCache" />
 	</bean>
@@ -51,10 +51,12 @@
 	</bean>
 
 	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
+	<!-- 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
         <property name="arguments" ref="securityManager"/>
     </bean>
+     -->
 
 	<!-- 用户登录数控制,超过最大回话数会强制退出 -->
 	<bean id="kickoutSessionFilter" class="com.webside.shiro.filter.KickoutSessionFilter">
@@ -64,6 +66,8 @@
 		<property name="maxSession" value="1" />
 		<property name="kickoutUrl" value="/login.html" />
 	</bean>
+	
+	<bean id="rememberMeFilter" class="com.webside.shiro.filter.RememberAuthenticationFilter"/>
 
 	<!-- 配置shiro的过滤器工厂类，这里bean的id shiroFilter要和我们在web.xml中配置的shior过滤器名称一致<filter-name>shiroFilter</filter-name> -->
 	<!-- Shiro主过滤器本身功能十分强大,其强大之处就在于它支持任何基于URL路径表达式的、自定义的过滤器的执行 -->
@@ -103,12 +107,10 @@
 		</property>
 		<!-- 自定义过滤器 -->
 		<property name="filters">
-			<util:map>
-				<!-- 
-				<entry key="sysUser" value-ref="sysUserFilter" />
-				 -->
+			<map>
+				<entry key="rememberMeFilter" value-ref="rememberMeFilter"/>
 				<entry key="kickout" value-ref="kickoutSessionFilter" />
-			</util:map>
+			</map>
 		</property>
 	</bean>
 
@@ -146,13 +148,10 @@
 	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 	
 	<!-- 会话Cookie模板 -->
-	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-		<!--cookie的name，修改cookie的名字 -->
-	    <constructor-arg value="webside_jsid"/>
-	    <property name="httpOnly" value="true"/>
-	    <!--cookie的有效时间 -->
-	    <property name="maxAge" value="-1"/>
-	</bean>
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+    </bean>
+
 
 
 	<!-- 会话管理器 -->
@@ -172,15 +171,8 @@
 	 	<property name="sessionValidationSchedulerEnabled" value="true" />
 		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
 		<!-- 会话Cookie模板 -->
-		<property name="sessionIdCookie" ref="sessionIdCookie" />
-	   <!-- session 监听，可以多个。 -->
-	   <property name="sessionListeners">
-	       <list>
-	       <!-- 
-	           <ref bean="customSessionListener"/>
-            -->
-	       </list>
-	   </property>
+		<property name="sessionIdCookie" ref="sessionIdCookie"/>
+
 	</bean>
 
 

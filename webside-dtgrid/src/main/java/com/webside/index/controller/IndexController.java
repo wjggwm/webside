@@ -129,35 +129,56 @@ public class IndexController extends BaseController {
 	        }
 		}catch (UnknownAccountException uae)
 		{
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "账户不存在！");
 			return "/login";
 		}
 		catch (IncorrectCredentialsException ice)
 		{
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "密码错误！");
 			return "/login";
 		}catch (LockedAccountException e) {
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "您的账户已被锁定,请与管理员联系或10分钟后重试！");
 			return "/login";
 		} catch (ExcessiveAttemptsException e) {
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "您连续输错5次,帐号将被锁定10分钟!");
 			return "/login";
 		}catch(ExpiredCredentialsException eca)
 		{
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "账户凭证过期！");
 			return "/login";
 		}catch (AuthenticationException e) {
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "账户验证失败！");
 			return "/login";
 		}catch (Exception e)
 		{
-			token.clear();
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("error", "登录异常，请联系管理员！");
 			return "/login";
 		}
@@ -259,9 +280,12 @@ public class IndexController extends BaseController {
 			throw new SystemException(e);
 		} finally {
             try {
-				out.close();
+            	if(null != out)
+            	{
+            		out.close();
+            	}
 			} catch (IOException e) {
-				throw new SystemException(e);
+				logger.error("关闭输出流异常:"+e.getMessage());
 			}
         }
     }

@@ -17,10 +17,6 @@ CREATE TABLE `webside`.`TB_SCHEMA_VERSION` (
 ) ENGINE=InnoDB;
 
 
-
-
-
-
 webside是基于RBAC的完全响应式权限管理系统，包括用户管理、角色管理，权限管理等功能，适合javaweb开发者入门学习，也可直接用于项目，省去重复开发权限管理模块，提高开发效率，项目使用主流技术如下：
 
 服务端：
@@ -43,7 +39,8 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 3、权限资源管理
 4、druid监控&sirona监控
 5、登录日志&操作日志监控
-
+6、多级菜单支持，最多支持四级
+7、基于quartz动态定时任务
 
 
 开发计划(不分先后)：
@@ -60,6 +57,8 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 9、keepalive+Nginx 高可用web负载均衡
 10、windows、linux下分布式集群部署
 11、集成ip2region模块-ip到地区的映射库，实现基于ip的定位
+12、flume-ng+Kafka+Storm+HDFS 实时系统搭建(http://www.aboutyun.com/thread-6855-1-1.html)
+
 
 webside系统bug：
 2016-07-07

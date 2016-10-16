@@ -3,6 +3,7 @@ package com.webside.shiro.filter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -10,6 +11,18 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import com.webside.user.model.UserEntity;
 
 public class RememberAuthenticationFilter extends FormAuthenticationFilter {
+	
+	@Override
+	protected boolean onLoginSuccess(AuthenticationToken token,
+			Subject subject, ServletRequest request, ServletResponse response)
+			throws Exception {
+		// 初始化
+		UserEntity userEntity = (UserEntity) subject.getPrincipal();
+		// 获取session看看是不是空的
+		Session session = subject.getSession(true);
+		session.setAttribute("userSession", userEntity);
+		return super.onLoginSuccess(token, subject, request, response);
+	}
 
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,

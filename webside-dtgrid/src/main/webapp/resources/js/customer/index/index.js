@@ -122,6 +122,22 @@ var webside = {
             //获取选择的行
             var rows = grid.getCheckedRecords();
             if (rows.length == 1) {
+            	if (nav == '/user/editUI.html') {
+                    if (rows[0].role.key == 'administrator') {
+                        layer.msg('该用户为超级管理员,不能编辑!', {
+                            icon : 0
+                        });
+                        return false;
+                    }
+                }
+                if (nav == '/role/editUI.html') {
+                    if (rows[0].key == 'administrator') {
+                        layer.msg('该角色为基础角色,不能编辑!', {
+                            icon : 0
+                        });
+                        return false;
+                    }
+                }
                 webside.common.loadPage(nav + '?id=' + rows[0].id + "&page=" + nowPage + "&rows=" + pageSize + "&sidx=" + columnId + "&sord=" + sortType);
             } else {
                 layer.msg("你没有选择行或选择了多行数据", {
@@ -138,7 +154,7 @@ var webside = {
             var rows = grid.getCheckedRecords();
             if (rows.length == 1) {
                 if (nav == '/user/deleteBatch.html') {
-                    if (rows[0].role.name == '超级管理员') {
+                    if (rows[0].role.key == 'administrator') {
                         layer.msg('该用户为超级管理员,不能删除!', {
                             icon : 0
                         });
@@ -146,7 +162,7 @@ var webside = {
                     }
                 }
                 if (nav == '/role/deleteBatch.html') {
-                    if (rows[0].name == '超级管理员') {
+                    if (rows[0].key == 'administrator') {
                         layer.msg('该角色为基础角色,不能删除!', {
                             icon : 0
                         });
@@ -227,6 +243,45 @@ var webside = {
                             icon : 1
                         });
                         webside.common.loadPage(jumpUrl);
+                    } else {
+                        layer.msg(resultdata.message, {
+                            icon : 5
+                        });
+                    }
+                },
+                error : function(data, errorMsg) {
+                    layer.close(index);
+                    layer.msg(data.responseText, {
+                        icon : 2
+                    });
+                }
+            });
+        },
+        /**
+         * 修改密码提交表单
+         * 适用场景：form表单的提交，主要用在修改密码
+         * @param {Object} commitUrl 表单提交地址
+         * @param {Object} listUrl 表单提交成功后转向的列表页地址
+         */
+        commitPassword : function(formId, commitUrl, jumpUrl) {
+            //组装表单数据
+            var index;
+            var data = $("#" + formId).serialize();
+            $.ajax({
+                type : "POST",
+                url : sys.rootPath + commitUrl,
+                data : data,
+                dataType : "json",
+                beforeSend : function() {
+                    index = layer.load();
+                },
+                success : function(resultdata) {
+                    layer.close(index);
+                    if (resultdata.success) {
+                        layer.msg(resultdata.message, {
+                            icon : 1
+                        });
+                        window.location.href=sys.rootPath + jumpUrl;
                     } else {
                         layer.msg(resultdata.message, {
                             icon : 5
@@ -370,7 +425,7 @@ var webside = {
                         error.insertAfter(element.parent());
                     },
                     submitHandler : function(form) {
-                        webside.common.commit('userPassword', '/user/password.html', '/logout.html');
+                        webside.common.commitPassword('userPassword', '/user/password.html', '/logout.html');
                     },
                     invalidHandler : function(form) {
                     }
