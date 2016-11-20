@@ -31,9 +31,14 @@ public interface ResourceService{
 
 	public int update(ResourceEntity resourceEntity);
     
-    public int deleteBatchById(List<Long> roleIds);
+    public int deleteBatchById(List<Long> resourceIds);
     
     public List<ResourceEntity> queryResourceList(Map<String, Object> parameter);
     
     public int insert(ResourceEntity resourceEntity);
+    
+    public int count(Map<String, Object> parameter);
+    
+    public boolean deleteRoleAndResource(List<Long> resourceIds);
+    
 }

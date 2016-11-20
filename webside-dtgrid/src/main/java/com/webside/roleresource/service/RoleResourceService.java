@@ -13,4 +13,5 @@ public interface RoleResourceService {
 	 * @throws
 	 */
 	public boolean insertRoleAndResource(ResourceEntity resourceEntity);
+	
 }

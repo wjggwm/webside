@@ -34,4 +34,15 @@ public interface ResourceMapper extends BaseMapper<ResourceEntity, Long>{
 	 * @return
 	 */
     public List<ResourceEntity> queryResourceList(Map<String, Object> parameter);
+    
+    /**
+     * 
+     * @Description 根据资源id删除角色和资源关联关系
+     * @param id
+     * @return
+     *
+     * @author wjggwm
+     * @data 2016年11月19日 上午1:21:03
+     */
+    public int deleteRolePerm(@Param(value="id") Long id);
 }

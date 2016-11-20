@@ -14,7 +14,7 @@
 	</button>
 	</shiro:hasPermission>
 	<shiro:hasPermission name="resource:deleteBatch">
-	<button id="btnDel" type="button" onclick="webside.common.delModel('/resource/deleteBatch.html', customSearch)" class="btn btn-danger btn-sm">
+	<button id="btnDel" type="button" onclick="webside.form.resource.delModel('/resource/deleteBatch.html', customSearch)" class="btn btn-danger btn-sm">
 		<i class="fa fa-trash-o"></i>&nbsp;删除
 	</button>
 	</shiro:hasPermission>

@@ -721,6 +721,101 @@ var webside = {
                     }
                 });
             },
+            delModel : function(nav, callback) {
+	            var rows = grid.getCheckedRecords();
+	            if (rows.length == 1) {
+	            var delete_ids = [];
+	            delete_ids.push(rows[0].id);
+	            $.ajax({
+	                        type : "POST",
+	                        url : sys.rootPath + '/resource/withoutAuth/validateResource.html',
+	                        data : {
+	                            "resourceId" : rows[0].id
+	                        },
+	                        dataType : "json",
+	                        success : function(resultdata) {
+	                            if (resultdata) {
+	                                layer.confirm('该资源已有角色管理关联,确认删除吗？', {
+					                    icon : 3,
+					                    title : '删除提示'
+						                }, function(index, layero) {
+										     $.ajax({
+					                        type : "POST",
+					                        url : sys.rootPath + nav,
+					                        data : {
+					                            "ids" : delete_ids.join(',')
+					                        },
+					                        dataType : "json",
+					                        success : function(resultdata) {
+					                            if (resultdata.success) {
+					                                layer.msg(resultdata.message, {
+					                                    icon : 1
+					                                });
+					                                if (callback) {
+					                                    callback();
+					                                }
+					                            } else {
+					                                layer.msg(resultdata.message, {
+					                                    icon : 5
+					                                });
+					                            }
+					                        },
+					                        error : function(errorMsg) {
+					                            layer.msg('服务器未响应,请稍后再试', {
+					                                icon : 3
+					                            });
+					                        }
+					                    });
+					                    layer.close(index);
+					                });
+	                            } else {
+	                                layer.confirm('确认删除吗？', {
+					                    icon : 3,
+					                    title : '删除提示'
+					                }, function(index, layero) {
+									     $.ajax({
+				                        type : "POST",
+				                        url : sys.rootPath + nav,
+				                        data : {
+				                            "ids" : delete_ids.join(',')
+				                        },
+				                        dataType : "json",
+				                        success : function(resultdata) {
+				                            if (resultdata.success) {
+				                                layer.msg(resultdata.message, {
+				                                    icon : 1
+				                                });
+				                                if (callback) {
+				                                    callback();
+				                                }
+				                            } else {
+				                                layer.msg(resultdata.message, {
+				                                    icon : 5
+				                                });
+				                            }
+				                        },
+				                        error : function(errorMsg) {
+				                            layer.msg('服务器未响应,请稍后再试', {
+				                                icon : 3
+				                            });
+				                        }
+				                    });
+				                    layer.close(index);
+				                });
+	                        }
+	                    },
+	                    error : function(errorMsg) {
+	                        layer.msg('服务器未响应,请稍后再试', {
+	                            icon : 3
+	                        });
+	                    }
+	                });
+	            } else {
+	                layer.msg("你没有选择行或选择了多行数据", {
+	                    icon : 0
+	                });
+	            }
+	        },
             authorize : {
                 ids : [],
                 initResourceTree : function() {
@@ -862,7 +957,7 @@ var webside = {
                     onText : '是',
                     offText : '否',
                     labelText : '是否添加trigger',
-                    labelWidth : 100,
+                    labelWidth : 105,
                     onSwitchChange : function(event, state){
                         if(state)
                         {
@@ -1048,20 +1143,21 @@ var webside = {
             delModel:function(nav,callback){
                 var index;
                 var rows = grid.getCheckedRecords();
-                var jobName = $("#jobName").val();
-                var param = {};
-                if(undefined ==jobName)
-                {
-                    //执行job
-                    param.jobName = rows[0].jobName;
-                    param.jobGroup = rows[0].jobGroup;
-                }else
-                {
-                    //执行trigger
-                    param.triggerName = rows[0].triggerName;
-                    param.triggerGroup = rows[0].triggerGroup;
-                }
                 if (rows.length == 1) {
+	                var jobName = $("#jobName").val();
+	                var param = {};
+	                if(undefined ==jobName)
+	                {
+	                    //执行job
+	                    param.jobName = rows[0].jobName;
+	                    param.jobGroup = rows[0].jobGroup;
+	                }else
+	                {
+	                    //执行trigger
+	                    param.triggerName = rows[0].triggerName;
+	                    param.triggerGroup = rows[0].triggerGroup;
+	                }
+                
                     layer.confirm('确认删除吗？', {
                     icon : 3,
                     title : '删除提示'
@@ -1101,21 +1197,23 @@ var webside = {
             },
             executeJob:function(nav, callback){
                 var rows = grid.getCheckedRecords();
-                var jobName = $("#jobName").val();
-                var param = {};
-                if(undefined ==jobName)
-                {
-                    //执行job
-                    param.jobName = rows[0].jobName;
-                    param.jobGroup = rows[0].jobGroup;
-                }else
-                {
-                    //执行trigger
-                    param.triggerName = rows[0].triggerName;
-                    param.triggerGroup = rows[0].triggerGroup;
-                }
                 var index;
                 if (rows.length == 1) {
+	                var jobName = $("#jobName").val();
+	                var param = {};
+	                if(undefined ==jobName)
+	                {
+	                    //执行job
+	                    param.jobName = rows[0].jobName;
+	                    param.jobGroup = rows[0].jobGroup;
+	                }else
+	                {
+	                    //执行trigger
+	                    param.triggerName = rows[0].triggerName;
+	                    param.triggerGroup = rows[0].triggerGroup;
+	                }
+	              
+                
                     $.ajax({
                         type : "POST",
                         url : sys.rootPath + nav,

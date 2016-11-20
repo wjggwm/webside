@@ -8,11 +8,6 @@
 		  	<i class="fa fa-plus"></i>&nbsp;添加job
 		</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="schedule:deleteJob">
-		<button id="btnDel" type="button" onclick="webside.form.schedule.delModel('/scheduleJob/deleteJob.html', customSearch)" class="btn btn-danger btn-sm">
-			<i class="fa fa-remove"></i>&nbsp;删除
-		</button>
-	</shiro:hasPermission>
 	<shiro:hasPermission name="schedule:executeJob">
 		<button id="btnDel" type="button" onclick="webside.form.schedule.executeJob('/scheduleJob/executeJob.html', customSearch)" class="btn btn-info btn-sm">
 			<i class="fa fa-cogs"></i>&nbsp;执行
@@ -26,6 +21,11 @@
 	<shiro:hasPermission name="schedule:resumeJob">
 		<button id="btnDel" type="button" onclick="webside.form.schedule.executeJob('/scheduleJob/resumeJob.html', customSearch)" class="btn btn-success btn-sm">
 			<i class="fa fa-play"></i>&nbsp;恢复
+		</button>
+	</shiro:hasPermission>
+	<shiro:hasPermission name="schedule:deleteJob">
+		<button id="btnDel" type="button" onclick="webside.form.schedule.delModel('/scheduleJob/deleteJob.html', customSearch)" class="btn btn-danger btn-sm">
+			<i class="fa fa-remove"></i>&nbsp;删除
 		</button>
 	</shiro:hasPermission>
 </div>

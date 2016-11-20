@@ -83,7 +83,7 @@ public class MyRealm extends AuthorizingRealm {
 
 		UserEntity userEntity = userMapper.findByName(username);
 		if (userEntity != null) {
-			if ("2".equals(userEntity.getLocked())) {
+			if (userEntity.getLocked() == 1) {
 				throw new LockedAccountException(); // 帐号被锁定
 			}
 			// 从数据库查询出来的账号名和密码,与用户输入的账号和密码对比

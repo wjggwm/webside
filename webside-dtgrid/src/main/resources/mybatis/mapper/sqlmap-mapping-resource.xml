@@ -209,4 +209,13 @@
 	    </foreach>  
 	</delete>
 	
+	<select id="count" parameterType="map" resultType="int" useCache="false">
+		SELECT count(*) FROM tb_resources_role t where t.s_id = ${id}
+	</select>
+	
+	<delete id="deleteRolePerm" parameterType="Long">
+		delete from tb_resources_role where s_id = ${id}
+	</delete>
+	
+	
 </mapper>

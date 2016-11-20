@@ -22,9 +22,9 @@ import com.webside.base.basecontroller.BaseController;
 import com.webside.common.Common;
 import com.webside.common.model.JSTreeEntity;
 import com.webside.common.model.Select2Entity;
+import com.webside.dtgrid.model.Pager;
 import com.webside.exception.AjaxException;
 import com.webside.exception.SystemException;
-import com.webside.dtgrid.model.Pager;
 import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
 import com.webside.roleresource.service.RoleResourceService;
@@ -239,8 +239,8 @@ public class ResourceController extends BaseController {
 			for (String string : roleIds) {
 				list.add(Long.valueOf(string));
 			}
-			int cnt = resourceService.deleteBatchById(list);
-			if(cnt == list.size())
+			boolean flag = resourceService.deleteRoleAndResource(list);
+			if(flag)
 			{
 				result.put("success", true);
 				result.put("data", null);
@@ -262,6 +262,28 @@ public class ResourceController extends BaseController {
 	@RequestMapping("icon.html")
 	public String icon() {
 		return Common.BACKGROUND_PATH + "/resource/icon";
+	}
+	
+	
+	@RequestMapping("withoutAuth/validateResource.html")
+	@ResponseBody
+	public Object validateResource(Integer resourceId){
+		try
+		{
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("id", resourceId);
+			int count = resourceService.count(param);
+			if(count > 0)
+			{
+				return true;
+			}else
+			{
+				return false;
+			}
+		}catch(Exception e)
+		{
+			throw new AjaxException(e);
+		}
 	}
 	
 }
