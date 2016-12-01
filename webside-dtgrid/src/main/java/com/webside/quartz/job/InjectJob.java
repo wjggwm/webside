@@ -1,8 +1,9 @@
 package com.webside.quartz.job;
 
-import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.webside.quartz.model.ScheduleJobEntity;
@@ -17,7 +18,7 @@ import com.webside.quartz.model.ScheduleJobEntity;
  */
 public class InjectJob extends QuartzJobBean {
 
-	private static Logger logger = Logger.getLogger(InjectJob.class);
+	private static final Logger logger = LoggerFactory.getLogger(InjectJob.class);
 	
 
 	@Override

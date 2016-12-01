@@ -10,10 +10,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webside.user.model.UserEntity;
@@ -42,7 +43,7 @@ import com.webside.user.model.UserOnline;
 
 public class CustomSessionManager {
 
-	private static Logger logger = Logger.getLogger(CustomSessionManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(CustomSessionManager.class);
 	
 	/**
 	 * session status 

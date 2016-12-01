@@ -1,0 +1,992 @@
+2016-07-18 15:40:16 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 15:40:17 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3fee9989, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@73ad2d6, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7085bdee, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1ce92674, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5700d6b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6fd02e5]
+2016-07-18 15:40:17 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 15:40:18 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 15:40:18 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 15:40:18 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 15:40:18 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 15:40:19 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 15:40:19 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 15:40:19 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 15:40:19 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 15:40:19 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@5b87ed94: startup date [Mon Jul 18 15:40:19 CST 2016]; root of context hierarchy
+2016-07-18 15:40:20 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 15:40:20 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 15:40:20 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 15:40:20 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 15:40:20 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:20 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:20 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:22 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:23 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:23 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:25 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 15:40:25 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:25 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#7ec7ffd3' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:25 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 15:40:25 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 15:40:25 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.054s)
+2016-07-18 15:40:25 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 15:40:25 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 15:40:25 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 15:40:27 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 15:40:27 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 15:40:27 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 15:40:27 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 15:40:27 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 15:40:27 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 15:40:27 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468827627619'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 15:40:27 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 15:40:27 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 15:40:27 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3c130745' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3c130745' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:40:27 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 15:40:28 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 15:40:28 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 15:40:28 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 15:40:28 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 15:40:28 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 15:40:28 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 15:40:28 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 15:40:28 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 15:40:28 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 15:40:28 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468827628362'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 15:40:28 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 15:40:28 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 15:40:28 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@2f897dab
+2016-07-18 15:40:28 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 15:40:28 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 15:40:28 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 15:40:29 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 15:40:30 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-55723-1468827629938-1:1,clientId=null,started=false}
+2016-07-18 15:40:30 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 15:40:30 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@5b87ed94: startup date [Mon Jul 18 15:40:19 CST 2016]; root of context hierarchy
+2016-07-18 15:40:30 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 15:40:31 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 15:40:31 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468827628362 shutting down.
+2016-07-18 15:40:31 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468827628362 paused.
+2016-07-18 15:40:31 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468827628362 shutdown complete.
+2016-07-18 15:40:31 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 15:40:31 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 15:40:32 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 15:42:08 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 15:42:08 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3fee9989, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@73ad2d6, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7085bdee, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1ce92674, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5700d6b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6fd02e5]
+2016-07-18 15:42:08 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 15:42:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 15:42:09 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@5b87ed94: startup date [Mon Jul 18 15:42:09 CST 2016]; root of context hierarchy
+2016-07-18 15:42:09 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 15:42:09 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 15:42:09 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 15:42:09 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 15:42:10 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:10 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:10 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:11 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:11 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:12 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:13 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 15:42:13 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:13 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#7ec7ffd3' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:13 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 15:42:13 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 15:42:13 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.043s)
+2016-07-18 15:42:13 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 15:42:13 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 15:42:13 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 15:42:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 15:42:14 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 15:42:14 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 15:42:14 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 15:42:14 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 15:42:14 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 15:42:14 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468827734367'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 15:42:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 15:42:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 15:42:14 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3c130745' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3c130745' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:42:14 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 15:42:14 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 15:42:14 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 15:42:14 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 15:42:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 15:42:14 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 15:42:14 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 15:42:14 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 15:42:14 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 15:42:14 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 15:42:14 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468827734880'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 15:42:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 15:42:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 15:42:14 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@1687eb01
+2016-07-18 15:42:14 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 15:42:14 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 15:42:15 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 15:42:15 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 15:42:15 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-55799-1468827735808-1:1,clientId=null,started=false}
+2016-07-18 15:42:15 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 15:42:16 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@5b87ed94: startup date [Mon Jul 18 15:42:09 CST 2016]; root of context hierarchy
+2016-07-18 15:42:16 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 15:42:17 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 15:42:17 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468827734880 shutting down.
+2016-07-18 15:42:17 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468827734880 paused.
+2016-07-18 15:42:17 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468827734880 shutdown complete.
+2016-07-18 15:42:17 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 15:42:17 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 15:42:17 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 15:55:13 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 15:55:13 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ed1993a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f3f4916, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@794cb805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4b5a5ed1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@59d016c9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3cc2931c]
+2016-07-18 15:55:13 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 15:55:13 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 15:55:14 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 15:55:14 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 15:55:14 CST 2016]; root of context hierarchy
+2016-07-18 15:55:14 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 15:55:14 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 15:55:14 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 15:55:14 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 15:55:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:16 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:17 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:17 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:18 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 15:55:18 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:18 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#39a2bb97' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:18 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 15:55:18 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 15:55:18 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.046s)
+2016-07-18 15:55:18 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 15:55:18 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 15:55:18 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 15:55:19 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 15:55:19 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 15:55:19 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 15:55:19 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 15:55:19 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 15:55:19 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 15:55:19 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468828519858'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 15:55:19 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 15:55:19 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 15:55:19 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:19 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:20 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 15:55:20 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 15:55:20 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 15:55:20 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 15:55:20 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 15:55:20 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 15:55:20 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 15:55:20 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 15:55:20 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 15:55:20 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 15:55:20 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 15:55:20 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468828520564'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 15:55:20 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 15:55:20 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 15:55:20 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@43c7fe8a
+2016-07-18 15:55:20 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 15:55:20 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 15:55:21 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 15:55:22 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 15:55:22 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-56232-1468828522100-1:1,clientId=null,started=false}
+2016-07-18 15:55:22 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 15:56:28 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 15:55:14 CST 2016]; root of context hierarchy
+2016-07-18 15:56:28 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 15:56:29 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 15:56:29 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828520564 shutting down.
+2016-07-18 15:56:29 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828520564 paused.
+2016-07-18 15:56:29 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828520564 shutdown complete.
+2016-07-18 15:56:29 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 15:56:29 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 15:56:29 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 16:01:23 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 16:01:23 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ed1993a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f3f4916, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@794cb805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4b5a5ed1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@59d016c9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3cc2931c]
+2016-07-18 16:01:23 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 16:01:23 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 16:01:23 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 16:01:23 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 16:01:24 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 16:01:24 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 16:01:24 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 16:01:24 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 16:01:24 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 16:01:24 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:01:24 CST 2016]; root of context hierarchy
+2016-07-18 16:01:24 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 16:01:24 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 16:01:24 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 16:01:24 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 16:01:25 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:25 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:25 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:26 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:26 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:27 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:28 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 16:01:28 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:28 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#39a2bb97' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:28 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 16:01:28 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 16:01:28 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.052s)
+2016-07-18 16:01:28 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 16:01:28 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 16:01:28 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:29 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 16:01:29 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:01:29 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:01:30 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:01:30 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:01:30 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:01:30 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 16:01:30 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468828889963'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 16:01:30 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 16:01:30 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:01:30 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 16:01:30 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:30 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:30 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:30 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:01:30 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 16:01:30 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 16:01:30 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 16:01:30 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 16:01:30 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:01:30 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:01:30 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:01:30 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:01:30 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:01:30 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 16:01:30 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468828890763'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 16:01:30 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 16:01:30 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:01:30 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@530ee28b
+2016-07-18 16:01:31 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 16:01:31 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 16:01:31 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 16:01:32 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 16:01:32 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-56397-1468828892285-1:1,clientId=null,started=false}
+2016-07-18 16:01:32 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 16:02:19 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:01:24 CST 2016]; root of context hierarchy
+2016-07-18 16:02:19 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 16:02:19 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 16:02:19 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828890763 shutting down.
+2016-07-18 16:02:19 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828890763 paused.
+2016-07-18 16:02:19 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828890763 shutdown complete.
+2016-07-18 16:02:19 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 16:02:19 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 16:02:19 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 16:02:59 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 16:02:59 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ed1993a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f3f4916, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@794cb805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4b5a5ed1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@59d016c9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3cc2931c]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 16:03:00 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 16:03:00 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:03:00 CST 2016]; root of context hierarchy
+2016-07-18 16:03:01 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 16:03:01 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 16:03:01 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 16:03:01 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 16:03:01 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:01 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:01 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:03 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:03 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:03 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:04 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 16:03:04 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:04 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#39a2bb97' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:04 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 16:03:04 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 16:03:04 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.049s)
+2016-07-18 16:03:05 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 16:03:05 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 16:03:05 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:05 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:05 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:05 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 16:03:06 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:03:06 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:03:06 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:03:06 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:03:06 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:03:06 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 16:03:06 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468828986599'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 16:03:06 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 16:03:06 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:03:06 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:03:06 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 16:03:07 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 16:03:07 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 16:03:07 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 16:03:07 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:03:07 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:03:07 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:03:07 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:03:07 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:03:07 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 16:03:07 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468828987292'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 16:03:07 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 16:03:07 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:03:07 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@3a3f96ab
+2016-07-18 16:03:07 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 16:03:07 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 16:03:07 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 16:03:08 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 16:03:08 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-56469-1468828988846-1:1,clientId=null,started=false}
+2016-07-18 16:03:09 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 16:04:46 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:03:00 CST 2016]; root of context hierarchy
+2016-07-18 16:04:46 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 16:04:46 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 16:04:46 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828987292 shutting down.
+2016-07-18 16:04:46 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828987292 paused.
+2016-07-18 16:04:46 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468828987292 shutdown complete.
+2016-07-18 16:04:46 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 16:04:46 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 16:04:46 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 16:09:08 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 16:09:08 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ed1993a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f3f4916, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@794cb805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4b5a5ed1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@59d016c9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3cc2931c]
+2016-07-18 16:09:08 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 16:09:09 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 16:09:09 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:09:09 CST 2016]; root of context hierarchy
+2016-07-18 16:09:09 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 16:09:09 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 16:09:09 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 16:09:10 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 16:09:10 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:10 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:10 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:11 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:12 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:12 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:13 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 16:09:13 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:13 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#39a2bb97' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:13 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 16:09:13 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 16:09:13 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.050s)
+2016-07-18 16:09:13 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 16:09:13 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 16:09:13 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:14 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 16:09:14 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:09:14 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:09:15 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:09:15 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:09:15 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:09:15 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 16:09:15 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468829354989'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 16:09:15 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 16:09:15 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:09:15 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 16:09:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:15 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:09:15 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 16:09:15 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 16:09:15 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 16:09:15 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 16:09:15 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:09:15 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:09:15 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:09:15 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:09:15 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:09:15 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 16:09:15 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468829355663'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 16:09:15 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 16:09:15 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:09:15 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@4def7d36
+2016-07-18 16:09:15 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 16:09:15 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 16:09:16 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 16:09:17 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 16:09:17 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-56797-1468829357100-1:1,clientId=null,started=false}
+2016-07-18 16:09:17 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 16:10:57 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Starting Quartz Scheduler now, after delay of 100 seconds
+2016-07-18 16:10:57 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: detected 2 failed or restarted instances.
+2016-07-18 16:10:57 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: Scanning for instance "gaog-PC1468820145559"'s failed in-progress jobs.
+2016-07-18 16:10:57 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: Scanning for instance "gaog-PC1468820163873"'s failed in-progress jobs.
+2016-07-18 16:10:57 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829355663 started.
+2016-07-18 16:11:30 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:09:09 CST 2016]; root of context hierarchy
+2016-07-18 16:11:30 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 16:11:30 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829355663 paused.
+2016-07-18 16:11:31 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 16:11:31 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829355663 shutting down.
+2016-07-18 16:11:31 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829355663 paused.
+2016-07-18 16:11:31 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829355663 shutdown complete.
+2016-07-18 16:11:31 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 16:11:31 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 16:11:31 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 16:13:36 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 16:13:36 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ed1993a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f3f4916, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@794cb805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4b5a5ed1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@59d016c9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3cc2931c]
+2016-07-18 16:13:36 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 16:13:36 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 16:13:36 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 16:13:36 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 16:13:36 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 16:13:36 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 16:13:37 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 16:13:37 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 16:13:37 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 16:13:37 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:13:37 CST 2016]; root of context hierarchy
+2016-07-18 16:13:37 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 16:13:37 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 16:13:37 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 16:13:37 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 16:13:37 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:37 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:37 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:39 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:39 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:39 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:40 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 16:13:40 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:41 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#8c3619e' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:41 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 16:13:41 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 16:13:41 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.050s)
+2016-07-18 16:13:41 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 16:13:41 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 16:13:41 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 16:13:42 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:13:42 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:13:42 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:13:42 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:13:42 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:13:42 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 16:13:42 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468829622551'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 16:13:42 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 16:13:42 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:13:42 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:13:42 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 16:13:43 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 16:13:43 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 16:13:43 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 16:13:43 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:13:43 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:13:43 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:13:43 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:13:43 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:13:43 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 16:13:43 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468829623226'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 16:13:43 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 16:13:43 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:13:43 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@3a3f96ab
+2016-07-18 16:13:43 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 16:13:43 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 16:13:43 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 16:13:44 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 16:13:44 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-56907-1468829624710-1:1,clientId=null,started=false}
+2016-07-18 16:13:44 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 16:15:24 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Starting Quartz Scheduler now, after delay of 100 seconds
+2016-07-18 16:15:25 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: detected 1 failed or restarted instances.
+2016-07-18 16:15:25 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: Scanning for instance "gaog-PC1468829355663"'s failed in-progress jobs.
+2016-07-18 16:15:25 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829623226 started.
+2016-07-18 16:16:10 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:13:37 CST 2016]; root of context hierarchy
+2016-07-18 16:16:10 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 16:16:10 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829623226 paused.
+2016-07-18 16:16:11 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 16:16:11 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829623226 shutting down.
+2016-07-18 16:16:11 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829623226 paused.
+2016-07-18 16:16:11 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468829623226 shutdown complete.
+2016-07-18 16:16:11 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 16:16:11 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 16:16:11 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed
+2016-07-18 16:30:48 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-18 16:30:48 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ed1993a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1f3f4916, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@794cb805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4b5a5ed1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@59d016c9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3cc2931c]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-applicationContext.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-shiro.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-kaptcha.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-jms.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-ehcache.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-flyway.xml]
+2016-07-18 16:30:49 [org.springframework.beans.factory.xml.XmlBeanDefinitionReader]-[INFO] - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-07-18 16:30:50 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Refreshing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:30:50 CST 2016]; root of context hierarchy
+2016-07-18 16:30:50 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [jdbc.properties]
+2016-07-18 16:30:50 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [webside.properties]
+2016-07-18 16:30:50 [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]-[INFO] - Loading properties file from class path resource [activemq.properties]
+2016-07-18 16:30:50 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[INFO] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-18 16:30:50 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:50 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'druid-stat-pointcut' of type [class org.springframework.aop.support.JdkRegexpMethodPointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:50 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1' of type [class org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:52 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:52 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'stat-filter' of type [class com.alibaba.druid.filter.stat.StatFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:53 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'log-filter' of type [class com.alibaba.druid.filter.logging.Log4jFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:54 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} inited
+2016-07-18 16:30:54 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:54 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'org.flywaydb.core.api.MigrationVersion#39a2bb97' of type [class org.flywaydb.core.api.MigrationVersion] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:54 [org.flywaydb.core.internal.util.VersionPrinter]-[INFO] - Flyway 4.0.3 by Boxfuse
+2016-07-18 16:30:54 [org.flywaydb.core.internal.dbsupport.DbSupportFactory]-[INFO] - Database: jdbc:mysql://127.0.0.1:3306/webside?relaxAutoCommit=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false (MySQL 5.5)
+2016-07-18 16:30:54 [org.flywaydb.core.internal.command.DbValidate]-[INFO] - Successfully validated 4 migrations (execution time 00:00.049s)
+2016-07-18 16:30:54 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Current version of schema `webside`: 1.0.2
+2016-07-18 16:30:54 [org.flywaydb.core.internal.command.DbMigrate]-[INFO] - Schema `webside` is up to date. No migration necessary.
+2016-07-18 16:30:54 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'flyway' of type [class org.flywaydb.core.Flyway] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'resourceMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'userMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Initializing EhCache CacheManager
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManagerFactory' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'ehCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroCacheManager' of type [class com.webside.shiro.ShiroCacheManagerWrapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'credentialsMatcher' of type [class com.webside.shiro.LimitRetryHashedMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.apache.shiro.realm.AuthorizingRealm]-[INFO] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'myRealm' of type [class com.webside.shiro.MyRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionValidationScheduler' of type [class org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'sessionIdCookie' of type [class org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'shiroSessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:55 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[WARN] - The 'sessionMode' property has been deprecated.  Please configure an appropriate WebSessionManager instance instead of using this property.  This property/method will be removed in a later version.
+2016-07-18 16:30:55 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:30:55 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:30:55 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:30:55 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:30:55 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:30:55 [org.quartz.impl.jdbcjobstore.JobStoreTX]-[INFO] - JobStoreTX initialized.
+2016-07-18 16:30:55 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_schedule' with instanceId 'gaog-PC1468830655858'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is clustered.
+
+2016-07-18 16:30:55 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_schedule' initialized from default resource file in Quartz package: 'quartz.properties'
+2016-07-18 16:30:55 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:30:55 [org.apache.shiro.web.mgt.DefaultWebSecurityManager]-[INFO] - native mode - enabling DefaultWebSessionManager (non-HTTP and HTTP Sessions)
+2016-07-18 16:30:55 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:56 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'kickoutSessionFilter' of type [class com.webside.shiro.filter.KickoutSessionFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:56 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:56 [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker]-[INFO] - Bean 'util:map#3561c410' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-07-18 16:30:56 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.loginfo.service.impl.LogInfoServiceImpl.setBaseMapper()
+2016-07-18 16:30:56 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.logininfo.service.impl.LoginInfoServiceImpl.setBaseMapper()
+2016-07-18 16:30:56 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.quartz.service.impl.ScheduleJobServiceImpl.setBaseMapper()
+2016-07-18 16:30:56 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Loading Quartz config from [class path resource [quartz.properties]]
+2016-07-18 16:30:56 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Using default implementation for ThreadExecutor
+2016-07-18 16:30:56 [org.quartz.simpl.SimpleThreadPool]-[INFO] - Job execution threads will use class loader of thread: main
+2016-07-18 16:30:56 [org.quartz.core.SchedulerSignalerImpl]-[INFO] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-07-18 16:30:56 [org.quartz.core.QuartzScheduler]-[INFO] - Quartz Scheduler v.2.2.1 created.
+2016-07-18 16:30:56 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - Using db table-based data access locking (synchronization).
+2016-07-18 16:30:56 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - JobStoreCMT initialized.
+2016-07-18 16:30:56 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'webside_quartzScheduler' with instanceId 'gaog-PC1468830656636'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2016-07-18 16:30:56 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler 'webside_quartzScheduler' initialized from an externally provided properties instance.
+2016-07-18 16:30:56 [org.quartz.impl.StdSchedulerFactory]-[INFO] - Quartz scheduler version: 2.2.1
+2016-07-18 16:30:56 [org.quartz.core.QuartzScheduler]-[INFO] - JobFactory set to: com.webside.quartz.extension.AutowiringSpringBeanJobFactory@4def7d36
+2016-07-18 16:30:56 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.resource.service.impl.ResourceServiceImpl.setBaseMapper()
+2016-07-18 16:30:56 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.role.service.impl.RoleServiceImpl.setBaseMapper()
+2016-07-18 16:30:56 [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]-[WARN] - Autowired annotation should be used on methods with parameters: public void com.webside.user.service.impl.UserServiceImpl.setBaseMapper()
+2016-07-18 16:30:58 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Starting beans in phase 2147483647
+2016-07-18 16:30:58 [org.springframework.jms.connection.CachingConnectionFactory]-[INFO] - Established shared JMS Connection: ActiveMQConnection {id=ID:gaog-PC-57399-1468830658277-1:1,clientId=null,started=false}
+2016-07-18 16:30:58 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Will start Quartz Scheduler [webside_quartzScheduler] in 100 seconds
+2016-07-18 16:32:38 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Starting Quartz Scheduler now, after delay of 100 seconds
+2016-07-18 16:32:38 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: detected 1 failed or restarted instances.
+2016-07-18 16:32:38 [org.springframework.scheduling.quartz.LocalDataSourceJobStore]-[INFO] - ClusterManager: Scanning for instance "gaog-PC1468829623226"'s failed in-progress jobs.
+2016-07-18 16:32:38 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468830656636 started.
+2016-07-18 16:33:10 [org.springframework.context.support.GenericApplicationContext]-[INFO] - Closing org.springframework.context.support.GenericApplicationContext@20ce78ec: startup date [Mon Jul 18 16:30:50 CST 2016]; root of context hierarchy
+2016-07-18 16:33:10 [org.springframework.context.support.DefaultLifecycleProcessor]-[INFO] - Stopping beans in phase 2147483647
+2016-07-18 16:33:10 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468830656636 paused.
+2016-07-18 16:33:11 [org.springframework.scheduling.quartz.SchedulerFactoryBean]-[INFO] - Shutting down Quartz Scheduler
+2016-07-18 16:33:11 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468830656636 shutting down.
+2016-07-18 16:33:11 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468830656636 paused.
+2016-07-18 16:33:11 [org.quartz.core.QuartzScheduler]-[INFO] - Scheduler webside_quartzScheduler_$_gaog-PC1468830656636 shutdown complete.
+2016-07-18 16:33:11 [org.springframework.beans.factory.support.DefaultListableBeanFactory]-[ERROR] - Destroy method on bean with name 'shiroSessionManager' threw an exception
+java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/String;Ljava/lang/String;)Z
+	at org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler.disableSessionValidation(QuartzSessionValidationScheduler.java:210)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.disableSessionValidation(AbstractValidatingSessionManager.java:244)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.destroy(AbstractValidatingSessionManager.java:263)
+	at org.apache.shiro.spring.LifecycleBeanPostProcessor.postProcessBeforeDestruction(LifecycleBeanPostProcessor.java:121)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:975)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:982)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1028)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1004)
+	at org.springframework.context.support.AbstractApplicationContext$2.run(AbstractApplicationContext.java:923)
+2016-07-18 16:33:11 [org.springframework.cache.ehcache.EhCacheManagerFactoryBean]-[INFO] - Shutting down EhCache CacheManager
+2016-07-18 16:33:11 [com.alibaba.druid.pool.DruidDataSource]-[INFO] - {dataSource-1} closed

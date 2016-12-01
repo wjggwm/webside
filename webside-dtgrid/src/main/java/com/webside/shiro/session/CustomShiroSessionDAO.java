@@ -3,10 +3,11 @@ package com.webside.shiro.session;
 import java.io.Serializable;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -18,7 +19,7 @@ import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
  */
 public class CustomShiroSessionDAO extends AbstractSessionDAO{ 
 	
-	private static Logger logger = Logger.getLogger(CustomShiroSessionDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(CustomShiroSessionDAO.class);
 	
     private ShiroSessionRepository shiroSessionRepository;  
   

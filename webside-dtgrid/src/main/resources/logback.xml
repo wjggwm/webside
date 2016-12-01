@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<property name="FILE_DIR" value="/logs" />
+	<property name="FILE_NAME" value="webside" />
+	<!-- console -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoder 默认配置为PatternLayoutEncoder -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	<!-- info -->
+	<appender name="SSPINFOAPPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${FILE_DIR}/${FILE_NAME}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 按天来滚动，如果需要按小时来滚动，则设置为{yyyyMMddHH}，如果要启用压缩，需要将fileNamePattern的后缀名设置为压缩格式.zip或.gz，如：${FILE_DIR}/${FILE_NAME}.%d{yyyyMMddHH}.zip -->
+			<fileNamePattern>${FILE_DIR}/${FILE_NAME}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<!-- 如果按天来回滚，则最大保存时间为30天，30天之前的都将被清理掉 -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%thread] %-5level %logger{0} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<!-- 临界过滤，过滤掉 TRACE 和 DEBUG 级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level><!-- 只打印info及以上级别日志 -->
+		</filter>
+	</appender>
+
+	<!-- debug -->
+	<appender name="SSPDEBUGAPPENDER"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${FILE_DIR}/${FILE_NAME}_debug.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 按天来滚动，如果需要按小时来滚动，则设置为{yyyyMMddHH}，如果要启用压缩，需要将fileNamePattern的后缀名设置为压缩格式.zip或.gz，如：${FILE_DIR}/${FILE_NAME}.%d{yyyyMMddHH}.zip -->
+			<fileNamePattern>${FILE_DIR}/${FILE_NAME}_debug.%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<!-- 如果按天来回滚，则最大保存时间为30天，30天之前的都将被清理掉 -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%thread] %-5level %logger{0} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印debug日志 -->
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<!-- 异步输出,这里可以根据具体需求再调整，或者不用异步输出 -->
+	<appender name="SSPASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>512</queueSize>
+		<!-- 5秒,单位毫秒,默认是1秒 -->
+		<maxFlushTime>5000</maxFlushTime>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref="SSPDEBUGAPPENDER" />
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="SSPINFOAPPENDER" />
+	</root>
+
+	<logger name="com.webside" level="INFO" additivity="false">
+		<appender-ref ref="SSPINFOAPPENDER" />
+	</logger>
+	
+	<logger name="com.webside" level="DEBUG" additivity="false">
+		<appender-ref ref="SSPASYNC" />
+	</logger>
+	
+	<!-- 所有的日志级别：OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL ，建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG-->
+
+</configuration>

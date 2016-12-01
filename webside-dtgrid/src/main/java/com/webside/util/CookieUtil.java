@@ -5,7 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
  */
 public class CookieUtil {
 	
-	private static Logger logger = Logger.getLogger(CookieUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(CookieUtil.class);
 
 	/**
 	 * 设置cookie

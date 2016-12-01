@@ -8,7 +8,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 
@@ -37,7 +41,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class ShiroFilterUtils {
 	
-	private static Logger logger = Logger.getLogger(ShiroFilterUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShiroFilterUtils.class);
 	
 	//登录页面
 	static final String LOGIN_URL = "/u/login.shtml";

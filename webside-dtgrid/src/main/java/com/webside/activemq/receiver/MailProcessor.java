@@ -8,7 +8,8 @@ import javax.mail.AuthenticationFailedException;
 
 import jodd.mail.MailException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ import com.webside.util.EmailUtil;
 @Component
 public class MailProcessor implements MessageListener{
 	
-	private static Logger logger = Logger.getLogger(MailProcessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(MailProcessor.class);
 	
 	@Autowired
 	private EmailUtil emailUtil;

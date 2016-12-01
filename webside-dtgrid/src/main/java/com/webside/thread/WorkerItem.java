@@ -2,11 +2,13 @@ package com.webside.thread;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class WorkerItem implements Runnable, Serializable {
 
-	Logger logger = Logger.getLogger(WorkerItem.class.getSimpleName());
+	private static final Logger logger = LoggerFactory.getLogger(WorkerItem.class);
 	/**
 	 * 
 	 */
@@ -21,7 +23,7 @@ public class WorkerItem implements Runnable, Serializable {
 			Thread.sleep(ThreadPool.SLEEP_TIME);
 			System.out.print("任务执行了");
 		} catch (InterruptedException e) {
-			logger.error(e);
+			logger.error("执行任务异常:{}", e);
 		}
 		
 	}

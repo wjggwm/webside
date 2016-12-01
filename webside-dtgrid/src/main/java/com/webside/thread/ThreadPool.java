@@ -8,11 +8,13 @@ import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class ThreadPool {
 	
-	private static Logger logger = Logger.getLogger(ThreadPool.class.getSimpleName());
+	private static final Logger logger = LoggerFactory.getLogger(ThreadPool.class.getSimpleName());
 	
 	/**
      * 最小执行任务数

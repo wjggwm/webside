@@ -4,12 +4,13 @@ import javax.mail.AuthenticationFailedException;
 
 import jodd.mail.MailException;
 
-import org.apache.log4j.Logger;
 import org.quartz.InterruptableJob;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import org.quartz.UnableToInterruptJobException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webside.util.EmailUtil;
@@ -25,7 +26,7 @@ import com.webside.util.EmailUtil;
  */
 public class EmailJob implements InterruptableJob {
 
-	private static Logger logger = Logger.getLogger(EmailJob.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmailJob.class);
 
 	@Autowired
 	EmailUtil emailUtil;

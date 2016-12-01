@@ -3,9 +3,10 @@ package com.webside.shiro.cache.redis;
 import java.util.Collection;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webside.util.SerializeUtil;
 
@@ -19,7 +20,7 @@ import com.webside.util.SerializeUtil;
 @SuppressWarnings("unchecked")
 public class JedisShiroCache<K, V> implements Cache<K, V> {
 
-	private Logger logger = Logger.getLogger(JedisShiroCache.class);
+	private static final Logger logger = LoggerFactory.getLogger(JedisShiroCache.class);
 	
 	/**
 	 * 为了不和其他的缓存混淆，采用追加前缀方式以作区分

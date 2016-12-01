@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 
 
 
-
-
-import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.webside.shiro.session.CustomSessionManager;
@@ -47,7 +46,7 @@ import com.webside.shiro.session.SessionStatus;
  */
 public class SimpleAuthFilter extends AccessControlFilter {
 	
-	private static Logger logger = Logger.getLogger(SimpleAuthFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimpleAuthFilter.class);
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,

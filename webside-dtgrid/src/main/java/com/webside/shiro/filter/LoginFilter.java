@@ -6,8 +6,9 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.model.UserEntity;
@@ -22,7 +23,7 @@ import com.webside.user.model.UserEntity;
  */
 public class LoginFilter  extends AccessControlFilter {
 	
-	private Logger logger = Logger.getLogger(LoginFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,

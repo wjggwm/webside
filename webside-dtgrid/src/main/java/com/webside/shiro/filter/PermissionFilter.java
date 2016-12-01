@@ -8,11 +8,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -35,7 +36,7 @@ import org.apache.shiro.web.util.WebUtils;
  */
 public class PermissionFilter extends AccessControlFilter {
 	
-	private static Logger logger = Logger.getLogger(PermissionFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(PermissionFilter.class);
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,

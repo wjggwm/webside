@@ -4,8 +4,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webside.util.SerializeUtil;
 
@@ -22,7 +23,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
  */
 public class JedisManager {
 
-	private Logger logger = Logger.getLogger(JedisManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(JedisManager.class);
 	
     private JedisPool jedisPool;
 

@@ -5,7 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,7 +29,7 @@ import com.webside.exception.SystemException;
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {
 
-	Logger logger = Logger.getLogger(GlobalDefaultExceptionHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(GlobalDefaultExceptionHandler.class);
 
 	/*
 	 * 如果抛出UnauthorizedException，将被该异常处理器截获来显示没有权限信息

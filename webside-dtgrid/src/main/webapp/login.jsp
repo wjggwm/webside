@@ -7,10 +7,18 @@
 <head>
 <title>webside-登录</title>
 <%@include file="common/common-login.jsp" %>
-<script type="text/javascript" src="${ctx }/resources/js/customer/index/login.js"></script>
+<link rel="stylesheet" href="${ctx }/resources/js/backgroundSlider/backgroundSlider.css" />
+<script type="text/javascript" src="${ctx }/resources/js/backgroundSlider/backgroundSlider.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/customer/index/login.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/layer-v2.3/layer.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	$('#backgroundSlider').backgroundSlider({
+		direction: 'slide', //场景动画类型：【in】:拉近;【out】:拉远;【slide】:幻灯片
+        speed: 5000
+	});
+	
 	//错误提示信息
 	if ("${error}" != "") {
     	layer.alert('${error}', {icon : 5,shift : 6,time : 0});
@@ -265,6 +273,15 @@ $(document).ready(function() {
 		<!-- /.main-content -->
 	</div>
 	<!-- /.main-container -->
-
+	
+	<!-- background -->
+	<div id="backgroundSlider">
+		<img src="${ctx }/resources/images/background/1.jpg" name="1"/>
+		<img src="${ctx }/resources/images/background/2.jpg" name="2"/>
+		<img src="${ctx }/resources/images/background/3.jpg" name="3"/>
+		<img src="${ctx }/resources/images/background/4.jpg" name="4"/>
+		<img src="${ctx }/resources/images/background/5.jpg" name="5"/>
+	</div>
+	<!-- / #backgroundSlider -->
 </body>
 </html>

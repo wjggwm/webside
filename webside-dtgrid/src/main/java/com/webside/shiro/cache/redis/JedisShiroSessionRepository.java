@@ -3,8 +3,9 @@ package com.webside.shiro.cache.redis;
 import java.io.Serializable;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webside.shiro.session.CustomSessionManager;
 import com.webside.shiro.session.SessionStatus;
@@ -20,7 +21,7 @@ import com.webside.util.SerializeUtil;
 @SuppressWarnings("unchecked")
 public class JedisShiroSessionRepository implements ShiroSessionRepository {
    
-	private static Logger logger = Logger.getLogger(JedisShiroSessionRepository.class);
+	private static final Logger logger = LoggerFactory.getLogger(JedisShiroSessionRepository.class);
 	
 	public static final String REDIS_SHIRO_SESSION = "sojson-shiro-demo-session:";
     //这里有个小BUG，因为Redis使用序列化后，Key反序列化回来发现前面有一段乱码，解决的办法是存储缓存不序列化
