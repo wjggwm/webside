@@ -43,6 +43,7 @@ import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.model.UserEntity;
 import com.webside.user.service.UserService;
 import com.webside.util.EndecryptUtils;
+import com.webside.util.IpUtil;
 import com.webside.util.TreeUtil;
 
 /**
@@ -122,7 +123,8 @@ public class IndexController extends BaseController {
 					LoginInfoEntity loginInfo = new LoginInfoEntity();
 					loginInfo.setUserId(userEntity.getId().intValue());
 					loginInfo.setAccountName(userEntity.getAccountName());
-					String ip = SecurityUtils.getSubject().getSession().getHost();
+					//String ip = SecurityUtils.getSubject().getSession().getHost();
+					String ip = IpUtil.getIpAddr(request);
 					String region = ipSearcher.memorySearch(ip).getRegion();
 					String[] regions = StringUtils.split(region, '|');
 					loginInfo.setLoginIp(ip);
