@@ -32,6 +32,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.exception.SystemException;
+import com.webside.ip2region.DbSearcher;
 import com.webside.logininfo.model.LoginInfoEntity;
 import com.webside.logininfo.service.LoginInfoService;
 import com.webside.resource.model.ResourceEntity;
@@ -71,6 +72,9 @@ public class IndexController extends BaseController {
 	
 	@Autowired
 	private Producer captchaProducer;
+	
+	@Autowired
+	private DbSearcher ipSearcher;
 
 	@RequestMapping(value = "login.html", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
 	public String login(HttpServletRequest request) {
@@ -118,7 +122,13 @@ public class IndexController extends BaseController {
 					LoginInfoEntity loginInfo = new LoginInfoEntity();
 					loginInfo.setUserId(userEntity.getId().intValue());
 					loginInfo.setAccountName(userEntity.getAccountName());
-					loginInfo.setLoginIp(SecurityUtils.getSubject().getSession().getHost());
+					String ip = SecurityUtils.getSubject().getSession().getHost();
+					String region = ipSearcher.memorySearch(ip).getRegion();
+					String[] regions = StringUtils.split(region, '|');
+					loginInfo.setLoginIp(ip);
+					loginInfo.setProvince(regions[2]);
+					loginInfo.setCity(regions[3]);
+					loginInfo.setRegion(region);
 					loginInfoService.log(loginInfo);
 					request.removeAttribute("error");
 				} else {

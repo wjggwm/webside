@@ -24,6 +24,13 @@ var dtGridColumns = [{
     headerClass : 'dlshouwen-grid-header',
     hideType : 'xs'
 }, {
+    id : 'region',
+    title : '地域',
+    type : 'string',
+    columnClass : 'text-center',
+    headerClass : 'dlshouwen-grid-header',
+    hideType : 'xs'
+},{
     id : 'loginTime',
     title : '登录时间',
     type : 'date',

@@ -1,5 +1,7 @@
 package com.webside.ip2region;
 
+import org.junit.Test;
+
 
 /**
  * project test script
@@ -8,7 +10,9 @@ package com.webside.ip2region;
 */
 public class TestUtil 
 {
-    public static void main(String[] argv)
+	
+	@Test
+    public void testUtil()
     {
 /*        //1. test the ip2long
         String[] ipSet = new String[]{

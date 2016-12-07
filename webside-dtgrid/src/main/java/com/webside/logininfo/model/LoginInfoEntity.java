@@ -34,6 +34,18 @@ public class LoginInfoEntity extends BaseEntity{
 	 */
 	private String loginIp;
 	/*
+	 * 用户省份
+	 */
+	private String province;
+	/*
+	 * 用户城市
+	 */
+	private String city;
+	/*
+	 * 用户地域信息
+	 */
+	private String region;
+	/*
 	 * 用户登录时间
 	 */
 	private Date loginTime;
@@ -69,5 +81,30 @@ public class LoginInfoEntity extends BaseEntity{
 	public void setLoginTime(Date loginTime) {
 		this.loginTime = loginTime;
 	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	
 	
 }

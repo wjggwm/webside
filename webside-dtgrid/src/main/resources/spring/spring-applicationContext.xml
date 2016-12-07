@@ -14,6 +14,8 @@
 	<context:component-scan base-package="com.webside.*.service" />
 	<context:component-scan base-package="com.webside.util" />
 	<context:component-scan base-package="com.webside.aop" />
+	<!-- 容器启动监听 -->
+	<context:component-scan base-package="com.webside.listener" />
 
 	<!-- spring 启用aop -->
 	<aop:aspectj-autoproxy />
@@ -31,6 +33,7 @@
 				<value>classpath:jdbc.properties</value>
 				<value>classpath:webside.properties</value>
 				<value>classpath:activemq.properties</value>
+				<value>classpath:ip2region.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -44,8 +47,8 @@
 			</map>
 		</property>
 	</bean>
-	
 
+	
 	<!-- 引入模块配置文件 -->
 	<import resource="spring-mybatis.xml" />
 	<import resource="spring-shiro.xml" />
@@ -55,4 +58,6 @@
 	<import resource="spring-redis.xml" />
 	<import resource="spring-flyway.xml" />
 	<import resource="spring-quartz.xml" />
+	<import resource="spring-ip2region.xml"/>
+	
 </beans>    

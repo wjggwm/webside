@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import org.junit.Test;
 
 
 /**
@@ -16,11 +17,13 @@ import java.io.FileWriter;
 
 public class TestUnit {
 
-    public static void main(String[] args) {
+	@Test
+    public void testUnit()
+    {
         try {
-            DbSearcher _searcher = new DbSearcher(new DbConfig(), "./data/ip2region.db");
-            BufferedReader bfr   = new BufferedReader(new FileReader("./data/ip.merge.txt"));
-            BufferedWriter bwr   = new BufferedWriter(new FileWriter("./data/error_log.txt", true));
+            DbSearcher _searcher = new DbSearcher(new DbConfig(), TestUnit.class.getResource("/ip2regiondata/ip2region.db").toURI().getPath());
+            BufferedReader bfr   = new BufferedReader(new FileReader(TestUnit.class.getResource("/ip2regiondata/ip.merge.txt").toURI().getPath()));
+            BufferedWriter bwr   = new BufferedWriter(new FileWriter(TestUnit.class.getResource("/ip2regiondata/error_log.txt").toURI().getPath(), true));
             int errCount  = 0;
             int lineCount = 0;
             String str = null;

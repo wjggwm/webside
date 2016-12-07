@@ -11,6 +11,9 @@
 		u_id,
 		u_account_name,
 		l_ip,
+		l_region,
+		l_province,
+		l_city,
 		l_login_time
 	</sql>
 
@@ -19,6 +22,9 @@
 		<result property="userId" column="u_id" />
 		<result property="accountName" column="u_account_name"/>
 		<result property="loginIp" column="l_ip"/>
+		<result property="region" column="l_region"/>
+		<result property="province" column="l_province"/>
+		<result property="city" column="l_city"/>
 		<result property="loginTime" column="l_login_time"/>
 	</resultMap>
 	
@@ -44,12 +50,18 @@
 		insert ignore into tb_login_info (
 			u_id,
 			u_account_name,
-			l_ip
+			l_ip,
+			l_region,
+			l_province,
+			l_city
 			)   
 		values (
 			#{userId},
 			#{accountName},
-			#{loginIp}
+			#{loginIp},
+			#{region},
+			#{province},
+			#{city}
 			)  
 	</insert>
 	

@@ -10,10 +10,11 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2016-09-16 23:23:02
+Date: 2016-12-06 18:25:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
 
 -- ----------------------------
 -- Table structure for tb_login_info
@@ -24,11 +25,17 @@ CREATE TABLE `tb_login_info` (
   `u_id` int(11) DEFAULT NULL,
   `u_account_name` varchar(255) DEFAULT NULL,
   `l_ip` varchar(255) DEFAULT NULL,
+  `l_region` varchar(255) DEFAULT NULL,
+  `l_province` varchar(255) DEFAULT NULL,
+  `l_city` varchar(255) DEFAULT NULL,
   `l_login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8;
 
-
+-- ----------------------------
+-- Records of tb_login_info
+-- ----------------------------
+INSERT INTO `tb_login_info` VALUES ('167', '4', 'admin@webside.com', '0:0:0:0:0:0:0:1', '未分配或者内网IP|0|0|0|0', '0', '0', '2016-12-06 18:20:21');
 
 -- ----------------------------
 -- Table structure for tb_log_info
@@ -42,8 +49,41 @@ CREATE TABLE `tb_log_info` (
   `l_content` varchar(1000) DEFAULT NULL COMMENT '日志内容',
   `l_create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建日期',
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Records of tb_log_info
+-- ----------------------------
+INSERT INTO `tb_log_info` VALUES ('1', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getUserName : admin)(getPassword : onubLCR5m1wongM4hJiIvw==)(getCredentialsSalt : 16a8ce0ac394eef994e9b91ef43c91e2)(getAccountName : 381543724@qq.com)]', '2016-09-25 22:30:21');
+INSERT INTO `tb_log_info` VALUES ('2', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getUserName : admin)(getAccountName : 381543724@qq.com)(getPassword : 8pN8x7U4RrG8VmgN+zBjRg==)(getCredentialsSalt : 76b96d1cf779911fec71bc422185eae8)]', '2016-09-25 22:34:35');
+INSERT INTO `tb_log_info` VALUES ('3', '4', 'admin@webside.com', 'update', 'password[参数1，类型：UserEntity，值：(getUserName : superadmin)(getAccountName : admin@webside.com)(getPassword : hBTttvmLmBb0Xe4NnKNq3g==)(getCredentialsSalt : d6f20fa13a79a33ec25cc72a8d688319)]', '2016-09-25 22:38:08');
+INSERT INTO `tb_log_info` VALUES ('4', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getPassword : rHntAIgqHL75WmGC135rXg==)(getUserName : admin)(getCredentialsSalt : cd94f6246418f1f959191ba721c73691)(getAccountName : 381543724@qq.com)]', '2016-09-25 23:01:37');
+INSERT INTO `tb_log_info` VALUES ('5', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getPassword : ztCFqUAMkHGpIeDOeLQ/eA==)(getUserName : admin)(getCredentialsSalt : 041a3c3664b831ed66a45bc5ebbeef10)(getAccountName : 381543724@qq.com)]', '2016-09-25 23:04:25');
+INSERT INTO `tb_log_info` VALUES ('6', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getPassword : mg923xUOhYut1Qs7uT7JfQ==)(getUserName : admin)(getCredentialsSalt : 3d01f585c0b9fb4c84bddc59191279b2)(getAccountName : 381543724@qq.com)]', '2016-09-25 23:06:21');
+INSERT INTO `tb_log_info` VALUES ('7', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getUserName : admin)(getPassword : 7TLkgE7QDmY6aqxuFN/eig==)(getCredentialsSalt : ed607b498cfb97736f4be1f9f3a6fa1a)(getAccountName : 381543724@qq.com)]', '2016-10-06 00:22:55');
+INSERT INTO `tb_log_info` VALUES ('8', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getUserName : admin)(getPassword : HtarMCuDwDaYhZunYiVtEw==)(getAccountName : 381543724@qq.com)(getCredentialsSalt : 2e6515be55d8bce6a9880495283f0ebc)]', '2016-10-06 00:40:43');
+INSERT INTO `tb_log_info` VALUES ('9', '4', 'admin@webside.com', 'update', 'resetPassword[参数1，类型：UserEntity，值：(getPassword : htBkkLrRpXHaZ8kz2b7Fgg==)(getUserName : admin)(getCredentialsSalt : d89125638c10df2a6ee53cc6afb16902)(getAccountName : 381543724@qq.com)]', '2016-10-06 00:45:12');
+INSERT INTO `tb_log_info` VALUES ('10', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getPassword : vwggiKioK8IT3vbTO5yOdA==)(getUserName : admin)(getCredentialsSalt : cdcb443f872e99d44491f2b4510c9198)(getAccountName : 381543724@qq.com)]', '2016-10-06 00:54:01');
+INSERT INTO `tb_log_info` VALUES ('11', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getPassword : Yuag/+p+WZ3wVuNxa7diww==)(getUserName : admin)(getCredentialsSalt : 7f2d13690beea5a2bb6642d43d0be9b1)(getAccountName : 381543724@qq.com)]', '2016-10-06 01:57:21');
+INSERT INTO `tb_log_info` VALUES ('12', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getPassword : 5MLeneNCueeDZufj9D09gQ==)(getUserName : admin)(getCredentialsSalt : 58b5198679a86f0b7074f0b0902ee444)(getAccountName : 381543724@qq.com)]', '2016-10-06 02:14:47');
+INSERT INTO `tb_log_info` VALUES ('13', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getPassword : gNpq5tRSAgpSnjW5VpLXnA==)(getUserName : admin)(getCredentialsSalt : f6ed47f0ee117f4416257973a3932a2c)(getAccountName : 381543724@qq.com)]', '2016-10-06 02:17:20');
+INSERT INTO `tb_log_info` VALUES ('14', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getUserName : admin)(getAccountName : 381543724@qq.com)(getPassword : JOCrJ6TWY3aA6xj2ogF+eA==)(getCredentialsSalt : 0869437fa68ef9a347cea6d3ff601529)]', '2016-10-06 02:41:34');
+INSERT INTO `tb_log_info` VALUES ('15', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getUserName : admin)(getPassword : eVg3d5VHipp4eC86qKFzyQ==)(getCredentialsSalt : e904fdf321fc383438b9473797a9a23e)(getAccountName : 381543724@qq.com)]', '2016-10-06 02:49:36');
+INSERT INTO `tb_log_info` VALUES ('16', '21', '381543724@qq.com', 'update', 'password[参数1，类型：UserEntity，值：(getUserName : admin)(getPassword : 2mqwiRrX3L0KPFn0gnAM8w==)(getAccountName : 381543724@qq.com)(getCredentialsSalt : 5ef9553384f7bf29e5f072b1dbd3e77e)]', '2016-10-06 03:17:47');
+INSERT INTO `tb_log_info` VALUES ('17', '21', '381543724@qq.com', 'update', 'update[参数1，类型：UserEntity，值：(getUserInfo : UserInfo [id=22, sex=null, birthday=null, telephone=null, email=null, address=null, createTime=null])(getDescription : 小三)(getRole : RoleEntity [id=3, name=null, key=null, status=null, description=null, createTime=null, updateTime=null, userList=null])(getUserName : 小三)(getAccountName : 254813870@qq.com)(getCreatorName : 381543724@qq.com)]', '2016-10-06 03:20:57');
+INSERT INTO `tb_log_info` VALUES ('18', '4', 'admin@webside.com', 'update', 'update[参数1，类型：RoleEntity，值：(getName : 华东部研发经理)(getKey : admin)(getDescription : 华东区域管理1)]', '2016-10-06 03:47:49');
+INSERT INTO `tb_log_info` VALUES ('19', '4', 'admin@webside.com', 'update', 'update[参数1，类型：RoleEntity，值：(getName : 普通用户)(getKey : user)(getDescription : 普通用户)]', '2016-10-06 03:48:00');
+INSERT INTO `tb_log_info` VALUES ('20', '4', 'admin@webside.com', 'update', 'update[参数1，类型：RoleEntity，值：(getName : 超级管理员)(getKey : administrator)(getDescription : 超级管理员1)]', '2016-10-06 04:00:47');
+INSERT INTO `tb_log_info` VALUES ('21', '4', 'admin@webside.com', 'update', 'update[参数1，类型：RoleEntity，值：(getName : 超级管理员)(getKey : administrator)(getDescription : 超级管理员)]', '2016-10-06 04:00:56');
+INSERT INTO `tb_log_info` VALUES ('22', '4', 'admin@webside.com', 'insert', 'add[参数1，类型：ResourceEntity，值：(getName : 二级菜单2)(getType : 0)(getDescription : sss)(getChildren : [])(getCreateTime : Sat Nov 19 00:43:16 CST 2016)(getParentId : 24)(getIsHide : 0)(getIsExpanded : false)(getIsLeaf : false)(getLoaded : true)(getSelected : false)(getIcon : fa  fa-bell-o)(getSourceUrl : http://www.baidu.com)(getSourceKey : test:test)]', '2016-11-19 00:43:17');
+INSERT INTO `tb_log_info` VALUES ('23', '4', 'admin@webside.com', 'permission', 'permission[参数1，类型：Integer，值：][参数2，类型：String，值：(getBytes : [B@497eea04)]', '2016-11-19 02:41:41');
+INSERT INTO `tb_log_info` VALUES ('24', '4', 'admin@webside.com', 'delete', 'deleteBatch[参数1，类型:String，值:(id:48)', '2016-11-19 02:42:16');
+INSERT INTO `tb_log_info` VALUES ('25', '4', 'admin@webside.com', 'insert', 'add[参数1，类型：ResourceEntity，值：(getName : 二级菜单)(getType : 0)(getDescription : )(getChildren : [])(getCreateTime : Sat Nov 19 02:42:52 CST 2016)(getParentId : 24)(getIsHide : 0)(getIsExpanded : false)(getIsLeaf : false)(getLoaded : true)(getSelected : false)(getIcon : fa  fa-battery-1)(getSourceUrl : h)(getSourceKey : test)]', '2016-11-19 02:42:53');
+INSERT INTO `tb_log_info` VALUES ('26', '4', 'admin@webside.com', 'permission', 'permission[参数1，类型：Integer，值：][参数2，类型：String，值：(getBytes : [B@4b51bc21)]', '2016-11-19 02:43:12');
+INSERT INTO `tb_log_info` VALUES ('27', '4', 'admin@webside.com', 'delete', 'deleteBatch[参数1，类型:String，值:(id:49)', '2016-11-19 02:44:36');
+INSERT INTO `tb_log_info` VALUES ('28', '4', 'admin@webside.com', 'permission', 'permission[参数1，类型：Integer，值：][参数2，类型：String，值：(getBytes : [B@519753ec)]', '2016-12-01 16:09:59');
+INSERT INTO `tb_log_info` VALUES ('29', '4', 'admin@webside.com', 'permission', 'permission[参数1，类型：Integer，值：][参数2，类型：String，值：(getBytes : [B@685008c3)]', '2016-12-01 16:10:23');
+INSERT INTO `tb_log_info` VALUES ('30', '4', 'admin@webside.com', 'delete', 'deleteBatch[参数1，类型:String，值:(id:33)', '2016-12-01 16:11:46');
 
 -- ----------------------------
 -- Table structure for tb_resource
@@ -98,7 +138,6 @@ INSERT INTO `tb_resource` VALUES ('28', '25', '三级菜单1', 'menu:menu1:menu2
 INSERT INTO `tb_resource` VALUES ('29', '24', '二级菜单1', 'menu:menu11', '0', '/logInfo/listUI.html', null, 'fa  fa-comment', '0', '二级菜单1', '2016-07-01 15:41:44', '2016-07-01 15:42:05');
 INSERT INTO `tb_resource` VALUES ('30', null, '计划任务管理', 'schedule', '0', '', null, 'fa  fa-list-ol', '0', '计划任务管理', '2016-07-17 01:09:27', '2016-07-20 16:01:08');
 INSERT INTO `tb_resource` VALUES ('32', '38', '添加job', 'schedule:addJob', '1', '/scheduleJob/addJobUI.html', null, null, '0', '添加任务', '2016-07-17 01:15:38', '2016-07-26 17:33:06');
-INSERT INTO `tb_resource` VALUES ('33', '40', '编辑trigger', 'schedule:editTrigger', '1', '/scheduleJob/editTriggerUI.html', null, null, '0', '编辑任务', '2016-07-17 01:17:19', '2016-07-26 18:11:19');
 INSERT INTO `tb_resource` VALUES ('34', '38', '删除job', 'schedule:deleteJob', '1', '/scheduleJob/deleteJob.html', null, null, '0', '删除任务', '2016-07-17 01:19:24', '2016-07-26 17:32:05');
 INSERT INTO `tb_resource` VALUES ('35', '38', '执行job', 'schedule:executeJob', '1', '/scheduleJob/executeJob.html', null, null, '0', '立即执行一次', '2016-07-17 01:22:01', '2016-07-26 17:33:26');
 INSERT INTO `tb_resource` VALUES ('36', '39', '暂停job', 'schedule:pauseJob', '1', '/scheduleJob/pauseJob.html', null, null, '0', '暂停任务', '2016-07-17 01:24:13', '2016-07-26 17:32:20');
@@ -128,7 +167,7 @@ CREATE TABLE `tb_resources_role` (
   KEY `FK_r_role_resource` (`r_id`),
   CONSTRAINT `FK_r_resource_role` FOREIGN KEY (`s_id`) REFERENCES `tb_resource` (`s_id`),
   CONSTRAINT `FK_r_role_resource` FOREIGN KEY (`r_id`) REFERENCES `tb_role` (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=616 DEFAULT CHARSET=utf8 COMMENT='角色权限映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=798 DEFAULT CHARSET=utf8 COMMENT='角色权限映射表';
 
 -- ----------------------------
 -- Records of tb_resources_role
@@ -144,51 +183,50 @@ INSERT INTO `tb_resources_role` VALUES ('225', '13', '2', '2016-03-08 22:55:56')
 INSERT INTO `tb_resources_role` VALUES ('226', '14', '2', '2016-03-08 22:55:56');
 INSERT INTO `tb_resources_role` VALUES ('227', '10', '2', '2016-03-08 22:55:56');
 INSERT INTO `tb_resources_role` VALUES ('228', '22', '2', '2016-03-08 22:55:56');
-INSERT INTO `tb_resources_role` VALUES ('571', '3', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('572', '2', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('573', '4', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('574', '5', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('575', '6', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('576', '9', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('577', '26', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('578', '25', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('579', '24', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('580', '38', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('581', '30', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('582', '40', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('583', '39', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('584', '1', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('585', '11', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('586', '12', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('587', '13', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('588', '14', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('589', '15', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('590', '16', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('591', '17', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('592', '18', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('593', '19', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('594', '20', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('595', '21', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('596', '7', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('597', '8', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('598', '10', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('599', '22', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('600', '27', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('601', '28', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('602', '29', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('603', '35', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('604', '41', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('605', '44', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('606', '45', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('607', '46', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('608', '47', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('609', '42', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('610', '43', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('611', '36', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('612', '37', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('613', '32', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('614', '34', '1', '2016-07-26 19:38:29');
-INSERT INTO `tb_resources_role` VALUES ('615', '33', '1', '2016-07-26 19:38:29');
+INSERT INTO `tb_resources_role` VALUES ('753', '3', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('754', '2', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('755', '4', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('756', '5', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('757', '6', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('758', '9', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('759', '25', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('760', '24', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('761', '38', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('762', '30', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('763', '40', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('764', '39', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('765', '26', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('766', '1', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('767', '11', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('768', '12', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('769', '13', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('770', '14', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('771', '15', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('772', '16', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('773', '17', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('774', '18', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('775', '19', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('776', '20', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('777', '21', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('778', '7', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('779', '8', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('780', '10', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('781', '22', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('782', '28', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('783', '29', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('784', '32', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('785', '34', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('786', '35', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('788', '41', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('789', '44', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('790', '45', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('791', '46', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('792', '47', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('793', '42', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('794', '43', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('795', '36', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('796', '37', '1', '2016-12-01 16:10:23');
+INSERT INTO `tb_resources_role` VALUES ('797', '27', '1', '2016-12-01 16:10:23');
 
 -- ----------------------------
 -- Table structure for tb_role
@@ -208,10 +246,10 @@ CREATE TABLE `tb_role` (
 -- ----------------------------
 -- Records of tb_role
 -- ----------------------------
-INSERT INTO `tb_role` VALUES ('1', '超级管理员', 'administrator', '0', '超级管理员', '2016-01-05 12:07:42', '2016-02-27 22:30:15');
+INSERT INTO `tb_role` VALUES ('1', '超级管理员', 'administrator', '0', '超级管理员', '2016-01-05 12:07:42', '2016-10-06 04:00:55');
 INSERT INTO `tb_role` VALUES ('2', '管理员', 'admin', '0', '管理员', '2016-01-05 12:07:42', '2016-02-27 22:30:22');
-INSERT INTO `tb_role` VALUES ('3', '普通用户', 'customer', '0', '普通用户', '2016-02-28 17:09:40', '2016-03-08 22:55:36');
-INSERT INTO `tb_role` VALUES ('4', '华东部研发经理', 'HDPM', '0', '华东区域管理1', '2016-07-05 19:07:45', '2016-07-12 20:16:12');
+INSERT INTO `tb_role` VALUES ('3', '普通用户', 'user', '0', '普通用户', '2016-02-28 17:09:40', '2016-10-06 03:48:00');
+INSERT INTO `tb_role` VALUES ('4', '华东部研发经理', 'admin', '0', '华东区域管理1', '2016-07-05 19:07:45', '2016-10-06 03:47:49');
 
 -- ----------------------------
 -- Table structure for tb_role_user
@@ -255,6 +293,10 @@ CREATE TABLE `tb_schedule_job` (
   PRIMARY KEY (`j_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Records of tb_schedule_job
+-- ----------------------------
+
 
 -- ----------------------------
 -- Table structure for tb_user
@@ -279,8 +321,8 @@ CREATE TABLE `tb_user` (
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
-INSERT INTO `tb_user` VALUES ('4', 'superadmin', 'admin@webside.com', 'VIlO0st6mlpQF70XwXyiGA==', '0', '0', '超级管理员', '6ca87d4b7820b5fd90bd821b8af1ecbc', 'admin@webside.com', '2016-02-15 17:17:26', '2016-09-16 23:16:33');
-INSERT INTO `tb_user` VALUES ('21', 'admin', '381543724@qq.com', 'cZCgAgosgWa42QtD2xiQxw==', '0', '0', 'admin', '40af745c825f0a72e64f53ea42f8f1a5', 'admin@webside.com', '2016-07-05 18:57:53', '2016-07-06 15:12:43');
+INSERT INTO `tb_user` VALUES ('4', 'superadmin', 'admin@webside.com', 'VIlO0st6mlpQF70XwXyiGA==', '0', '0', '超级管理员', '6ca87d4b7820b5fd90bd821b8af1ecbc', '', '2016-02-15 17:17:26', '2016-10-06 03:57:03');
+INSERT INTO `tb_user` VALUES ('21', 'admin', '381543724@qq.com', '2mqwiRrX3L0KPFn0gnAM8w==', '0', '0', 'admin', '5ef9553384f7bf29e5f072b1dbd3e77e', 'admin@webside.com', '2016-07-05 18:57:53', '2016-10-06 03:17:47');
 INSERT INTO `tb_user` VALUES ('22', '小三', '254813870@qq.com', 'mlotfbqQOEtgz/nR1JZ3+A==', '0', '0', '小三', '29d357932f0d62c73184411d86a4af22', '381543724@qq.com', '2016-07-05 19:06:40', '2016-07-05 19:06:40');
 
 -- ----------------------------
