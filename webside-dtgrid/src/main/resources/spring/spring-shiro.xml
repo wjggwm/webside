@@ -47,7 +47,7 @@
 			的Cache中 -->
 		<!-- By default the servlet container sessions will be used. Uncomment 
 			this line to use shiro's native sessions (see the JavaDoc for more): -->
-		<property name="sessionMode" value="native" />
+		<!-- 	<property name="sessionMode" value="native" /> -->
 	</bean>
 
 	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->

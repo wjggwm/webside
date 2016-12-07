@@ -53,7 +53,6 @@
 	<import resource="spring-mybatis.xml" />
 	<import resource="spring-shiro.xml" />
 	<import resource="spring-kaptcha.xml" />
-	<import resource="spring-jms.xml" />
 	<import resource="spring-ehcache.xml" />
 	<import resource="spring-redis.xml" />
 	<import resource="spring-flyway.xml" />
