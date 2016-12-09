@@ -10,8 +10,6 @@
 
 	<!-- quartz持久化存储 -->
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<!-- quartz 属性配置文件 -->
-		<!-- <property name="configLocation" value="classpath:quartz.properties" /> -->
 		<!-- 使用spring管理的数据源 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- 防止数据表锁定导致不能正常工作 -->
@@ -29,6 +27,11 @@
 		<property name="autoStartup" value="true" />
 		<!-- 延迟启动时间 -->
 		<property name="startupDelay" value="100" />
+		<!-- quartz 属性配置文件默认：优先顺序 Classpath:quartz.properties -> org/quartz/quartz.properties (quartz lib) -->
+		<property name="configLocation" value="classpath:quartz.properties"></property>
+		
+        <!-- override values in a Quartz properties config file -->
+        <!-- 
         <property name="quartzProperties">
         	<props>
         		<prop key="org.quartz.scheduler.instanceName">webside_schedule</prop>
@@ -51,6 +54,8 @@
 				<prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
         	</props>
         </property>
+         -->
+        
         <!-- 配置固定的job -->
         <!-- 
 		 <property name="triggers">

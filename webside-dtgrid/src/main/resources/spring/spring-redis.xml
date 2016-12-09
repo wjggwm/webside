@@ -9,14 +9,18 @@
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.maxIdle}" />
 		<property name="minIdle" value="${redis.minIdle}" />
+		<property name="maxTotal" value="${redis.maxTotal}"/>
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
 	</bean>
 
+	<!-- 为了保险起见，加上name和type，防止根据index对应会出问题 -->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<constructor-arg index="0" ref="jedisPoolConfig" />
-		<constructor-arg index="1" value="${redis.host}" />
-		<constructor-arg index="2" value="${redis.port}" />
-		<constructor-arg index="3" value="${redis.timeout}" />
-		<constructor-arg index="4" value="${redis.password}" />
+		<constructor-arg index="0" ref="jedisPoolConfig" name="poolConfig"/>
+		<constructor-arg index="1" value="${redis.host}" name="host" type="java.lang.String"/>
+		<constructor-arg index="2" value="${redis.port}" name="port" type="int"/>
+		<constructor-arg index="3" value="${redis.timeout}" name="timeout" type="int"/>
+		<constructor-arg index="4" value="${redis.password}" name="password" type="java.lang.String"/>
+		<constructor-arg index="5" value="${redis.database}" name="database" type="int"/>
 	</bean>
 
 </beans>
