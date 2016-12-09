@@ -12,7 +12,7 @@
 		</encoder>
 	</appender>
 	<!-- info -->
-	<appender name="SSPINFOAPPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="INFOAPPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${FILE_DIR}/${FILE_NAME}.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 			<!-- 按天来滚动，如果需要按小时来滚动，则设置为{yyyyMMddHH}，如果要启用压缩，需要将fileNamePattern的后缀名设置为压缩格式.zip或.gz，如：${FILE_DIR}/${FILE_NAME}.%d{yyyyMMddHH}.zip -->
@@ -32,7 +32,7 @@
 	</appender>
 
 	<!-- debug -->
-	<appender name="SSPDEBUGAPPENDER"
+	<appender name="DEBUGAPPENDER"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${FILE_DIR}/${FILE_NAME}_debug.log</File>
 		<rollingPolicy
@@ -55,7 +55,7 @@
 	</appender>
 
 	<!-- 异步输出,这里可以根据具体需求再调整，或者不用异步输出 -->
-	<appender name="SSPASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
 		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
 		<discardingThreshold>0</discardingThreshold>
 		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
@@ -63,21 +63,23 @@
 		<!-- 5秒,单位毫秒,默认是1秒 -->
 		<maxFlushTime>5000</maxFlushTime>
 		<!-- 添加附加的appender,最多只能添加一个 -->
-		<appender-ref ref="SSPDEBUGAPPENDER" />
+		<appender-ref ref="DEBUGAPPENDER" />
 	</appender>
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="SSPINFOAPPENDER" />
+		<appender-ref ref="INFOAPPENDER" />
 	</root>
 
 	<logger name="com.webside" level="INFO" additivity="false">
-		<appender-ref ref="SSPINFOAPPENDER" />
+		<appender-ref ref="INFOAPPENDER" />
 	</logger>
 	
 	<logger name="com.webside" level="DEBUG" additivity="false">
-		<appender-ref ref="SSPASYNC" />
+		<appender-ref ref="ASYNC" />
 	</logger>
+	
+	<logger name="org.mybatis" level="DEBUG"  additivity="false"/>
 	
 	<!-- 所有的日志级别：OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL ，建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG-->
 

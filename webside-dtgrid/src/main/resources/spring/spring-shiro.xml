@@ -136,20 +136,36 @@
 		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
 	</bean>
 
-	<!-- 会话验证调度器 -->
+	<!-- 会话验证调度器，升级shiro到1.2.6以上之后，SimpleTrigger变成了接口，
+	解决办法有两种：
+	1、自己重新实现SessionValidationScheduler类，WebsideQuartzSessionValidationScheduler  implements SessionValidationScheduler
+	2、使用ExecutorServiceSessionValidationScheduler代替QuartzSessionValidationScheduler
+	 -->
 	<!-- 全局的会话信息检测扫描信息间隔60分钟 -->
-	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
-		<!-- 相隔多久检查一次session的有效性 -->
+	<bean id="sessionValidationScheduler" class="com.webside.shiro.session.WebsideQuartzSessionValidationScheduler">
 		<property name="sessionValidationInterval" value="${shiro.session.validate.interval}" />
 		<property name="sessionManager" ref="shiroSessionManager" />
 	</bean>
-
+	
+	
+	<!-- 会话验证线程 -->
+	<!-- 全局的会话信息检测扫描信息间隔60分钟 -->
+	<!-- 
+	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+		<property name="interval" value="${shiro.session.validate.interval}" />
+		<property name="sessionManager" ref="shiroSessionManager" />
+	</bean>
+ 	-->
+ 	
 	<!-- 会话Session ID生成器 -->
 	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 	
 	<!-- 会话Cookie模板 -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="sid"/>
+        <constructor-arg value="webside_sid"/>
+        <property name="httpOnly" value="true"/>
+	    <!--cookie的有效时间 -->
+	    <property name="maxAge" value="-1"/>
     </bean>
 
 
