@@ -8,42 +8,44 @@ import org.apache.shiro.cache.CacheException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.webside.redis.RedisManager;
 import com.webside.util.SerializeUtil;
 
 /**
  * 
- * <p>Description: 缓存获取Manager</p>
- * <p>Company: 静之殇工作室</p>
+ * @ClassName RedisShiroCache
+ * @Description 使用redis来实现shiro cache接口
+ * @param <K>
+ * @param <V>
+ *
  * @author wjggwm
- * @date 2016年7月12日 上午11:32:04
+ * @data 2016年12月13日 下午1:05:00
  */
-@SuppressWarnings("unchecked")
-public class JedisShiroCache<K, V> implements Cache<K, V> {
 
-	private static final Logger logger = LoggerFactory.getLogger(JedisShiroCache.class);
+public class RedisShiroCache<K, V> implements Cache<K, V> {
+
+	private static final Logger logger = LoggerFactory.getLogger(RedisShiroCache.class);
 	
 	/**
 	 * 为了不和其他的缓存混淆，采用追加前缀方式以作区分
 	 */
-    private static final String REDIS_SHIRO_CACHE = "shiro-demo-cache:";
+    private static final String REDIS_SHIRO_CACHE = "shiro_cache:";
     /**
-     * Redis 分片(分区)，也可以在配置文件中配置
+     * Redis 分片(分区)，也可以在配置文件中配置,默认dbIndex=0
      */
     private static final int DB_INDEX = 1;
 
-    private JedisManager jedisManager;
+    private RedisManager redisManager;
     
     private String name;
 
     
-    public JedisShiroCache(String name, JedisManager jedisManager) {
+    public RedisShiroCache(String name, RedisManager redisManager) {
         this.name = name;
-        this.jedisManager = jedisManager;
+        this.redisManager = redisManager;
     }
 
-    /**
-     * 自定义relm中的授权/认证的类名加上授权/认证英文名字
-     */
+
     public String getName() {
         if (name == null)
             return "";
@@ -54,12 +56,12 @@ public class JedisShiroCache<K, V> implements Cache<K, V> {
         this.name = name;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public V get(K key) throws CacheException {
-        byte[] byteKey = SerializeUtil.serialize(buildCacheKey(key));
         byte[] byteValue = new byte[0];
         try {
-            byteValue = jedisManager.getValueByKey(DB_INDEX, byteKey);
+            byteValue = redisManager.getValueByKey(DB_INDEX, generateCacheKey(key).getBytes());
         } catch (Exception e) {
         	logger.error("get value by cache throw exception",e);
         }
@@ -70,8 +72,7 @@ public class JedisShiroCache<K, V> implements Cache<K, V> {
     public V put(K key, V value) throws CacheException {
         V previos = get(key);
         try {
-            jedisManager.saveValueByKey(DB_INDEX, SerializeUtil.serialize(buildCacheKey(key)),
-                    SerializeUtil.serialize(value), -1);
+        	redisManager.saveValueByKey(DB_INDEX, generateCacheKey(key).getBytes(), SerializeUtil.serialize(value), -1);
         } catch (Exception e) {
         	logger.error("put cache throw exception",e);
         }
@@ -82,7 +83,7 @@ public class JedisShiroCache<K, V> implements Cache<K, V> {
     public V remove(K key) throws CacheException {
         V previos = get(key);
         try {
-            jedisManager.deleteByKey(DB_INDEX, SerializeUtil.serialize(buildCacheKey(key)));
+        	redisManager.deleteByKey(DB_INDEX, generateCacheKey(key).getBytes());
         } catch (Exception e) {
         	logger.error("remove cache  throw exception",e);
         }
@@ -91,7 +92,6 @@ public class JedisShiroCache<K, V> implements Cache<K, V> {
 
     @Override
     public void clear() throws CacheException {
-        //TODO--
     }
 
     @Override
@@ -103,17 +103,15 @@ public class JedisShiroCache<K, V> implements Cache<K, V> {
 
     @Override
     public Set<K> keys() {
-        //TODO
         return null;
     }
 
     @Override
     public Collection<V> values() {
-        //TODO
         return null;
     }
 
-    private String buildCacheKey(Object key) {
+    private String generateCacheKey(Object key) {
         return REDIS_SHIRO_CACHE + getName() + ":" + key;
     }
 

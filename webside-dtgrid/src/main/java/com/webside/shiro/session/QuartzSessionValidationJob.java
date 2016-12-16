@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author wjggwm
  * @data 2016年12月10日 上午12:56:09
  */
-public class WebsideQuartzSessionValidationJob implements Job{
+public class QuartzSessionValidationJob implements Job{
 	/** 
      * Key used to store the session manager in the job data map for this job. 
      */  
@@ -27,7 +27,7 @@ public class WebsideQuartzSessionValidationJob implements Job{
     /*-------------------------------------------- 
     |    I N S T A N C E   V A R I A B L E S    | 
     ============================================*/  
-    private static final Logger log = LoggerFactory.getLogger(WebsideQuartzSessionValidationJob.class);  
+    private static final Logger log = LoggerFactory.getLogger(QuartzSessionValidationJob.class);  
   
     /*-------------------------------------------- 
     |         C O N S T R U C T O R S           | 

@@ -96,14 +96,9 @@ public class MyRealm extends AuthorizingRealm {
 					ByteSource.Util.bytes(username + userEntity.getCredentialsSalt()),// salt=username+salt
 					getName() // realm name
 			);
-            /*
-             * NOTE Shiro-redis don't support SimpleAuthenticationInfo created by this constructor 
-             * org.apache.shiro.authc.SimpleAuthenticationInfo.SimpleAuthenticationInfo(Object principal, Object hashedCredentials, ByteSource credentialsSalt, String realmName). 
-             * Please use org.apache.shiro.authc.SimpleAuthenticationInfo.SimpleAuthenticationInfo(Object principal, Object hashedCredentials, String realmName) instead.
-             */
-            //TODO：因为shiro-redies 不支持带加密盐方式的验证，所以暂时不使用shiro-redies，后续再研究
-            //authenticationInfo.setCredentialsSalt(new MySimpleByteSource(username + userEntity.getCredentialsSalt()));
-			return authenticationInfo;
+            //设置session
+            ShiroAuthenticationManager.getSession().setAttribute("userSession", userEntity);
+            return authenticationInfo;
 		} else {
 			throw new UnknownAccountException();// 没找到帐号
 		}

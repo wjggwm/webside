@@ -25,12 +25,12 @@ import org.slf4j.LoggerFactory;
  * @author wjggwm
  * @data 2016年12月10日 上午12:06:21
  */
-public class WebsideQuartzSessionValidationScheduler implements SessionValidationScheduler {
+public class QuartzSessionValidationScheduler implements SessionValidationScheduler {
 
     public static final long DEFAULT_SESSION_VALIDATION_INTERVAL = DefaultSessionManager.DEFAULT_SESSION_VALIDATION_INTERVAL;  
     private static final String JOB_NAME = "SessionValidationJob";  
-    private static final Logger log = LoggerFactory.getLogger(WebsideQuartzSessionValidationScheduler.class);  
-    private static final String SESSION_MANAGER_KEY = WebsideQuartzSessionValidationJob.SESSION_MANAGER_KEY;  
+    private static final Logger log = LoggerFactory.getLogger(QuartzSessionValidationScheduler.class);  
+    private static final String SESSION_MANAGER_KEY = QuartzSessionValidationJob.SESSION_MANAGER_KEY;  
     private Scheduler scheduler;  
     private boolean schedulerImplicitlyCreated = false;  
   
@@ -38,10 +38,10 @@ public class WebsideQuartzSessionValidationScheduler implements SessionValidatio
     private ValidatingSessionManager sessionManager;  
     private long sessionValidationInterval = DEFAULT_SESSION_VALIDATION_INTERVAL;  
   
-    public WebsideQuartzSessionValidationScheduler() {  
+    public QuartzSessionValidationScheduler() {  
     }  
   
-    public WebsideQuartzSessionValidationScheduler(ValidatingSessionManager sessionManager) {  
+    public QuartzSessionValidationScheduler(ValidatingSessionManager sessionManager) {  
         this.sessionManager = sessionManager;  
     }  
   
@@ -80,7 +80,7 @@ public class WebsideQuartzSessionValidationScheduler implements SessionValidatio
                     .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(sessionValidationInterval))  
                     .build(); 
   
-            JobDetail detail = JobBuilder.newJob(WebsideQuartzSessionValidationJob.class)  
+            JobDetail detail = JobBuilder.newJob(QuartzSessionValidationJob.class)  
                     .withIdentity(JOB_NAME, Scheduler.DEFAULT_GROUP).build();  
             detail.getJobDataMap().put(SESSION_MANAGER_KEY, this.sessionManager);  
             Scheduler scheduler = getScheduler();  

@@ -7,22 +7,11 @@ import java.util.Collection;
 
 /**
  * 
- * 开发公司：SOJSON在线工具 <p>
- * 版权所有：© www.sojson.com<p>
- * 博客地址：http://www.sojson.com/blog/  <p>
- * <p>
- * 
- * Session操作
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年6月2日 　<br/>
+ * @ClassName ShiroSessionRepository
+ * @Description Session操作
  *
- * @author zhou-baicheng
- * @email  so@sojson.com
- * @version 1.0,2016年6月2日 <br/>
- * 
+ * @author wjggwm
+ * @data 2016年12月13日 下午12:43:25
  */
 public interface ShiroSessionRepository {
 

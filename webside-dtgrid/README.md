@@ -56,7 +56,7 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 8、mysql集群
 9、keepalive+Nginx 高可用web负载均衡
 10、windows、linux下分布式集群部署
-11、集成ip2region模块-ip到地区的映射库，实现基于ip的定位
+11、集成ip2region模块-ip到地区的映射库，实现基于ip的定位(已实现)
 12、flume-ng+Kafka+Storm+HDFS 实时系统搭建(http://www.aboutyun.com/thread-6855-1-1.html)
 
 

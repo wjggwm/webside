@@ -9,9 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-
-
-
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
@@ -20,33 +17,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.webside.shiro.session.CustomSessionManager;
 import com.webside.shiro.session.SessionStatus;
+import com.webside.user.service.impl.UserSessionServiceImpl;
 
 
 
 /**
  * 
- * 开发公司：SOJSON在线工具 <p>
- * 版权所有：© www.sojson.com<p>
- * 博客地址：http://www.sojson.com/blog/  <p>
- * <p>
- * 
- * 判断是否踢出
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年6月2日 　<br/>
+ * @ClassName SimpleAuthFilter
+ * @Description 判断用户是否踢出
  *
- * @author zhou-baicheng
- * @email  so@sojson.com
- * @version 1.0,2016年6月2日 <br/>
- * 
+ * @author wjggwm
+ * @data 2016年12月13日 下午12:46:55
  */
-public class SimpleAuthFilter extends AccessControlFilter {
+public class KickoutAuthFilter extends AccessControlFilter {
 	
-	private static final Logger logger = LoggerFactory.getLogger(SimpleAuthFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(KickoutAuthFilter.class);
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,
@@ -54,14 +40,14 @@ public class SimpleAuthFilter extends AccessControlFilter {
 
 		HttpServletRequest httpRequest = ((HttpServletRequest)request);
 		String url = httpRequest.getRequestURI();
-		if(url.startsWith("/open/")){
+		if(url.startsWith("/api/")){
 			return Boolean.TRUE;
 		}
 		Subject subject = getSubject(request, response);
 		Session session = subject.getSession();
 		Map<String, String> resultMap = new HashMap<String, String>();
-		SessionStatus sessionStatus = (SessionStatus) session.getAttribute(CustomSessionManager.SESSION_STATUS);
-		if (null != sessionStatus && !sessionStatus.isOnlineStatus()) {
+		SessionStatus sessionStatus = (SessionStatus) session.getAttribute(UserSessionServiceImpl.SESSION_STATUS);
+		if (null != sessionStatus && !sessionStatus.isOnline()) {
 			//判断是不是Ajax请求
 			if (ShiroFilterUtils.isAjax(request) ) {
 				logger.debug("当前用户已经被踢出，并且是Ajax请求！");
@@ -92,7 +78,7 @@ public class SimpleAuthFilter extends AccessControlFilter {
 		 */
 		WebUtils.getSavedRequest(request);
 		//再重定向
-		WebUtils.issueRedirect(request, response, "/open/kickedOut.shtml");
+		WebUtils.issueRedirect(request, response, "/kickedOut.html");
 		return false;
 	}
 

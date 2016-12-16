@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>webside-登录</title>
+<title>webside	用心、专业、开源免费</title>
 <%@include file="common/common-login.jsp" %>
 <link rel="stylesheet" href="${ctx }/resources/js/backgroundSlider/backgroundSlider.css" />
 <script type="text/javascript" src="${ctx }/resources/js/backgroundSlider/backgroundSlider.min.js"></script>
@@ -25,6 +25,7 @@ $(document).ready(function() {
 	}
 	
 	//页面进行跳转到login.html
+	/*
 	if (window.location.href.indexOf("/login.html") == -1) {
 	    if($("#userId").val() == null || $("#userId").val() == "")
 	    {
@@ -34,12 +35,13 @@ $(document).ready(function() {
 	        top.location.href = "index.html";
 	    }
 	}
+	*/
 	
 });
 </script>
 </head>
 <body class="login-layout">
-<input id="userId" type="hidden" value="<c:if test="${not empty sessionScope.userSessionId}">${sessionScope.userSessionId }</c:if>"/>
+<input id="userId" type="hidden" value="<c:if test="${not empty sessionScope.userSession.id}">${sessionScope.userSession.id }</c:if>"/>
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">

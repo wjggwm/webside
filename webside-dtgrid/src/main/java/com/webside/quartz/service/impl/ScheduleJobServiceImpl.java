@@ -21,6 +21,7 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.druid.util.StringUtils;
 import com.webside.base.baseservice.impl.AbstractService;
@@ -120,6 +121,8 @@ public class ScheduleJobServiceImpl extends
 		return scheduleJobList;
 	}
 
+	
+	
 	@Override
 	 public ScheduleJobEntity getScheduleJobEntity(ScheduleJobEntity job){
 		try {
@@ -135,6 +138,7 @@ public class ScheduleJobServiceImpl extends
 		return job;
 	 }
 	 
+	@Transactional
 	@Override
 	public boolean addJob(ScheduleJobEntity job) {
 		try {
@@ -169,6 +173,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean updateJobTrigger(ScheduleJobEntity job) {
 		try {
@@ -197,6 +202,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean pauseJob(JobKey jobKey) {
 		try {
@@ -208,6 +214,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean resumeJob(JobKey jobKey) {
 		try {
@@ -219,6 +226,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean deleteJob(JobKey jobKey) {
 		try {
@@ -231,6 +239,7 @@ public class ScheduleJobServiceImpl extends
 	
 
 
+	@Transactional
 	@Override
 	public boolean executeJob(JobKey jobKey) {
 		try {
@@ -245,7 +254,7 @@ public class ScheduleJobServiceImpl extends
 		return Boolean.TRUE;
 	}
 
-
+	@Transactional
 	@Override
 	public boolean addJobTrigger(ScheduleJobEntity job) {
 		try {
@@ -268,6 +277,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 	
+	@Transactional
 	@Override
 	public boolean deleteJobTrigger(TriggerKey triggerKey) {
 		try {
@@ -278,6 +288,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean pauseJobTrigger(TriggerKey triggerKey) {
 		try
@@ -290,6 +301,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean resumeJobTrigger(TriggerKey triggerKey) {
 		try
@@ -339,6 +351,7 @@ public class ScheduleJobServiceImpl extends
 		}
 	}
 	
+	@Transactional
 	@Override
 	public boolean startAllJob() {
 		try {
@@ -350,6 +363,7 @@ public class ScheduleJobServiceImpl extends
 		return Boolean.TRUE;
 	}
 
+	@Transactional
 	@Override
 	public boolean shutdownAllJob() {
 		try {
@@ -361,6 +375,7 @@ public class ScheduleJobServiceImpl extends
 		return Boolean.TRUE;
 	}
 
+	@Transactional
 	@Override
 	public boolean interruptJob(JobKey jobKey) {
 		try

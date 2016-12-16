@@ -15,13 +15,26 @@
 		<property name="mergeSql" value="true" />
 		<property name="dbType" value="mysql" />
 	</bean>
-
-	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
-    	<property name="resultSetLogEnabled" value="true" />
+	
+	<bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+		<property name="dbType" value="mysql"/>
+		<property name="config" ref="wallConfig"></property>
 	</bean>
-
+	
+	<!-- 
+		数据库类型            目录
+		mysql		META-INF/druid/wall/mysql
+		Oracle		META-INF/druid/wall/oracle
+		sqlserver	META-INF/druid/wall/sqlserver
+		postgres	META-INF/druid/wall/postgres
+	 -->
+	<bean id="wallConfig" class="com.alibaba.druid.wall.WallConfig">
+		<property name="dir" value="META-INF/druid/wall/mysql"></property>
+		<property name="multiStatementAllow" value="true"/>
+	</bean>
+	
 	<!-- 配置数据源,使用 druid -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean id="dataSource" name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<!-- 基本属性 url、user、password -->
 		<property name="driverClassName" value="${jdbc.driver}" />
@@ -62,7 +75,7 @@
 		<property name="proxyFilters">
 			<list>
 				<ref bean="stat-filter" />
-				<ref bean="log-filter"/>
+				<ref bean="wall-filter"/>
 			</list>
 		</property>
 		<property name="connectionProperties" value="${druid.connectionProperties}" />

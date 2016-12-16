@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
 	<property name="FILE_DIR" value="/logs" />
 	<property name="FILE_NAME" value="webside" />
 	<!-- console -->
@@ -79,7 +80,10 @@
 		<appender-ref ref="ASYNC" />
 	</logger>
 	
-	<logger name="org.mybatis" level="DEBUG"  additivity="false"/>
+	<logger name="dao" level="DEBUG"  additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFOAPPENDER" />
+	</logger>
 	
 	<!-- 所有的日志级别：OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL ，建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG-->
 

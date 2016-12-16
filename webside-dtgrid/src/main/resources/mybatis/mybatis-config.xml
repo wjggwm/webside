@@ -33,6 +33,8 @@
 		<setting name="defaultExecutorType" value="REUSE"/>
 		<!-- 设置一个时限,以决定让驱动器等待数据库回应的多长时间为超时,格式为正整数 -->
 		<setting name="defaultStatementTimeout" value="5000"/>
+		<!-- 日志前缀 -->
+		<setting name="logPrefix" value="dao."/>
 	</settings>
 	
 	

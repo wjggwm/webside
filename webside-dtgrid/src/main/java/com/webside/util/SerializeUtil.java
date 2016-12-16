@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 /**
  * 
  * @ClassName: SerializeUtil
- * @Description: Java版的 Serialize,拷贝自www.sojson.com
+ * @Description: Serialize工具类
  * @author gaogang
  * @date 2016年7月12日 下午4:18:19
  *
@@ -43,6 +43,7 @@ public class SerializeUtil {
     }
 
     
+	
 	public static Object deserialize(byte[] in) {
         return deserialize(in, Object.class);
     }

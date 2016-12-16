@@ -9,7 +9,9 @@ import org.quartz.utils.ConnectionProvider;
 import com.alibaba.druid.pool.DruidDataSource;
 
 /**
- * <font color="red">配置让quartz使用单独的连接池,如果要使用spring管理的dataSource,请参考quartz配置文件</font>
+ * <font color="red">配置quartz的Non-XA数据源,请参考quartz配置文件</font>
+ * <br/>quartz在与其他数据库 打交道的时候需要俩种数据源（connection） 一种是需要参与到外围事物的(spring,servlet开发 )等，一种是自己来维护的
+ * <br/>因为当容器启动的时候，quartz框架会自动去其他数据库 查询需要启动的任务，这个时候的操作是不需要参与到外围事物的，它自己管理就可以了。另外一种情况就是当我们添加一个任务 比如 scheduler.schedulejob(job, trigger); 动态添加一个任务，我们往往都是需要关联一些业务数据的。所以在添加任务到其他数据库 中的同时也要保证业务数据同时入库，所以在这种情况下quartz就需要获取spring上下文的链接 connection，这样才能在同一个事物当中
  * @ClassName: DruidConnectionProvider
  * @Description: Druid连接池的Quartz扩展类
  * @author gaogang
@@ -29,7 +31,7 @@ public class DruidConnectionProviderManager implements ConnectionProvider {
     //JDBC驱动
     public String driver;
     //JDBC连接串
-    public String URL;
+    public String url;
     //数据库用户名
     public String user;
     //数据库用户密码
@@ -71,7 +73,7 @@ public class DruidConnectionProviderManager implements ConnectionProvider {
     }
     @SuppressWarnings("static-access")
 	public void initialize() throws SQLException{
-        if (this.URL == null) {
+        if (this.url == null) {
             throw new SQLException("DBPool could not be created: DB URL cannot be null");
         }
 
@@ -93,7 +95,7 @@ public class DruidConnectionProviderManager implements ConnectionProvider {
             }
         }
 
-        datasource.setUrl(this.URL);
+        datasource.setUrl(this.url);
         datasource.setUsername(this.user);
         datasource.setPassword(this.password);
         datasource.setMaxActive(this.maxConnections);
@@ -126,15 +128,15 @@ public class DruidConnectionProviderManager implements ConnectionProvider {
         this.driver = driver;
     }
 
-    public String getURL() {
-        return URL;
-    }
+    public String getUrl() {
+		return url;
+	}
 
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-    public String getUser() {
+	public String getUser() {
         return user;
     }
 

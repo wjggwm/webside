@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<title>webside 一个神奇的系统</title>
+<title>webside	用心、专业、开源免费</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Cache-Control" content="no-cache"/>

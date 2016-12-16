@@ -12,31 +12,16 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
- * 开发公司：SOJSON在线工具 <p>
- * 版权所有：© www.sojson.com<p>
- * 博客地址：http://www.sojson.com/blog/  <p>
- * <p>
- * 
- * 权限校验 Filter
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年6月2日 　<br/>
+ * @ClassName PermissionFilter
+ * @Description 权限校验 Filter
  *
- * @author zhou-baicheng
- * @email  so@sojson.com
- * @version 1.0,2016年6月2日 <br/>
- * 
+ * @author wjggwm
+ * @data 2016年12月17日 上午12:48:01
  */
 public class PermissionFilter extends AccessControlFilter {
-	
-	private static final Logger logger = LoggerFactory.getLogger(PermissionFilter.class);
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,
@@ -58,11 +43,11 @@ public class PermissionFilter extends AccessControlFilter {
 			return Boolean.TRUE;
 		}
 		if(ShiroFilterUtils.isAjax(request)){
-			Map<String,String> resultMap = new HashMap<String, String>();
-			logger.debug("当前用户没有登录，并且是Ajax请求！");
-			resultMap.put("login_status", "300");
-			resultMap.put("message", "\u5F53\u524D\u7528\u6237\u6CA1\u6709\u767B\u5F55\uFF01");//当前用户没有登录！
-			ShiroFilterUtils.out(response, resultMap);
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("status", "403");
+			result.put("success", false);
+			result.put("message", "当前用户没有登录");
+			ShiroFilterUtils.writeJson(response, result);
 		}
 		return Boolean.FALSE;
 	}

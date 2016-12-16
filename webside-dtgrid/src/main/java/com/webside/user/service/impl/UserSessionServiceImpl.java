@@ -1,4 +1,4 @@
-package com.webside.shiro.session;
+package com.webside.user.service.impl;
 
 
 import java.util.ArrayList;
@@ -16,56 +16,48 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.webside.shiro.session.SessionStatus;
+import com.webside.shiro.session.ShiroSessionDAO;
 import com.webside.user.model.UserEntity;
-import com.webside.user.model.UserOnline;
+import com.webside.user.model.UserSessionEntity;
+import com.webside.user.service.UserSessionService;
 
 
 /**
  * 
- * 开发公司：SOJSON在线工具 <p>
- * 版权所有：© www.sojson.com<p>
- * 博客地址：http://www.sojson.com/blog/  <p>
- * <p>
- * 
- * 用户Session 手动管理
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年6月2日 　<br/>
+ * @ClassName UserSessionServiceImpl
+ * @Description 手动操作Session，管理Session
  *
- * @author zhou-baicheng
- * @email  so@sojson.com
- * @version 1.0,2016年6月2日 <br/>
- * 
+ * @author wjggwm
+ * @data 2016年12月13日 下午12:33:10
  */
+@Service
+public class UserSessionServiceImpl implements UserSessionService {
 
-public class CustomSessionManager {
-
-	private static final Logger logger = LoggerFactory.getLogger(CustomSessionManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserSessionServiceImpl.class);
 	
 	/**
 	 * session status 
 	 */
-	public static final String SESSION_STATUS ="sojson-online-status";
-	@Autowired
-	ShiroSessionRepository shiroSessionRepository;
+	public static final String SESSION_STATUS ="webside_session_status";
 	
 	@Autowired
-	CustomShiroSessionDAO customShiroSessionDAO;
+	ShiroSessionDAO shiroSessionDao;
+	
+	
 	
 	/**
 	 * 获取所有的有效Session用户
 	 * @return
 	 */
-	public  List<UserOnline> getAllUser() {
+	public  List<UserSessionEntity> getAllUser() {
 		//获取所有session
-		Collection<Session> sessions = customShiroSessionDAO.getActiveSessions();
-		List<UserOnline> list = new ArrayList<UserOnline>();
-		
+		Collection<Session> sessions = shiroSessionDao.getActiveSessions();
+		List<UserSessionEntity> list = new ArrayList<UserSessionEntity>();
 		for (Session session : sessions) {
-			UserOnline bo = getSessionUser(session);
+			UserSessionEntity bo = getSessionUser(session);
 			if(null != bo){
 				list.add(bo);
 			}
@@ -81,7 +73,7 @@ public class CustomSessionManager {
 		//把userIds 转成Set，好判断
 		Set<Long> idset = new TreeSet<Long>(Arrays.asList(userIds));
 		//获取所有session
-		Collection<Session> sessions = customShiroSessionDAO.getActiveSessions();
+		Collection<Session> sessions = shiroSessionDao.getActiveSessions();
 		//定义返回
 		List<SimplePrincipalCollection> list = new ArrayList<SimplePrincipalCollection>();
 		for (Session session : sessions) {
@@ -111,14 +103,15 @@ public class CustomSessionManager {
 	 * @param sessionId
 	 * @return
 	 */
-	public UserOnline getSession(String sessionId) {
-		Session session = shiroSessionRepository.getSession(sessionId);
-		UserOnline bo = getSessionUser(session);
+	public UserSessionEntity getSession(String sessionId) {
+		Session session = shiroSessionDao.readSession(sessionId);
+		UserSessionEntity bo = getSessionUser(session);
 		return bo;
 	}
 	
-	private UserOnline getSessionUser(Session session){
-		//获取session登录信息。
+	
+	public UserSessionEntity getSessionUser(Session session){
+		//获取session登录信息
 		Object obj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 		if(null == obj){
 			return null;
@@ -133,7 +126,7 @@ public class CustomSessionManager {
 			obj = spc.getPrimaryPrincipal();
 			if(null != obj && obj instanceof UserEntity){
 				//存储session + user 综合信息
-				UserOnline userBo = new UserOnline((UserEntity)obj);
+				UserSessionEntity userBo = new UserSessionEntity((UserEntity)obj);
 				//最后一次和系统交互的时间
 				userBo.setLastAccess(session.getLastAccessTime());
 				//主机的ip地址
@@ -150,7 +143,7 @@ public class CustomSessionManager {
 				SessionStatus sessionStatus = (SessionStatus)session.getAttribute(SESSION_STATUS);
 				boolean status = Boolean.TRUE;
 				if(null != sessionStatus){
-					status = sessionStatus.getOnlineStatus();
+					status = sessionStatus.getStatus();
 				}
 				userBo.setSessionStatus(status);
 				return userBo;
@@ -175,11 +168,11 @@ public class CustomSessionManager {
 				sessionIdArray = sessionIds.split(",");
 			}
 			for (String id : sessionIdArray) {
-				Session session = shiroSessionRepository.getSession(id);
+				Session session = shiroSessionDao.readSession(id);
 				SessionStatus sessionStatus = new SessionStatus();
-				sessionStatus.setOnlineStatus(status);
+				sessionStatus.setStatus(status);
 				session.setAttribute(SESSION_STATUS, sessionStatus);
-				customShiroSessionDAO.update(session);
+				shiroSessionDao.update(session);
 			}
 			map.put("status", 200);
 			map.put("sessionStatus", status?1:0);
@@ -192,6 +185,7 @@ public class CustomSessionManager {
 		}
 		return map;
 	}
+	
 	/**
 	 * 查询要禁用的用户是否在线。
 	 * @param id		用户ID
@@ -199,27 +193,20 @@ public class CustomSessionManager {
 	 */
 	public void forbidUserById(Long id, Long status) {
 		//获取所有在线用户
-		for(UserOnline bo : getAllUser()){
-			Long userId = bo.getId();
+		for(UserSessionEntity user : getAllUser()){
+			Long userId = user.getId();
 			//匹配用户ID
 			if(userId.equals(id)){
 				//获取用户Session
-				Session session = shiroSessionRepository.getSession(bo.getSessionId());
+				Session session = shiroSessionDao.readSession(user.getSessionId());
 				//标记用户Session
 				SessionStatus sessionStatus = (SessionStatus) session.getAttribute(SESSION_STATUS);
 				//是否踢出 true:有效，false：踢出。
-				sessionStatus.setOnlineStatus(status.intValue() == 1);
+				sessionStatus.setStatus(status.intValue() == 1);
 				//更新Session
-				customShiroSessionDAO.update(session);
+				shiroSessionDao.update(session);
 			}
 		}
 	}
-	public void setShiroSessionRepository(
-			ShiroSessionRepository shiroSessionRepository) {
-		this.shiroSessionRepository = shiroSessionRepository;
-	}
 
-	public void setCustomShiroSessionDAO(CustomShiroSessionDAO customShiroSessionDAO) {
-		this.customShiroSessionDAO = customShiroSessionDAO;
-	}
 }

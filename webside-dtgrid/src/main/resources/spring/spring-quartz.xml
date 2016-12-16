@@ -11,7 +11,7 @@
 	<!-- quartz持久化存储 -->
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<!-- 使用spring管理的数据源 -->
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource"/>
 		<!-- 防止数据表锁定导致不能正常工作 -->
 		<property name="transactionManager" ref="transactionManager" />
 		<!-- 存储spring上下文到quartz的上下文中，在quartz中可通过如下方式获取：ApplicationContext appCtx = (ApplicationContext) context.getScheduler().getContext().get("applicationContextKey") -->
@@ -28,10 +28,11 @@
 		<!-- 延迟启动时间 -->
 		<property name="startupDelay" value="100" />
 		<!-- quartz 属性配置文件默认：优先顺序 Classpath:quartz.properties -> org/quartz/quartz.properties (quartz lib) -->
+		<!-- 
 		<property name="configLocation" value="classpath:quartz.properties"></property>
-		
+		 -->
         <!-- override values in a Quartz properties config file -->
-        <!-- 
+        
         <property name="quartzProperties">
         	<props>
         		<prop key="org.quartz.scheduler.instanceName">webside_schedule</prop>
@@ -39,22 +40,25 @@
 				<prop key="org.quartz.scheduler.rmi.export">false</prop>
 				<prop key="org.quartz.scheduler.rmi.proxy">false</prop>
 				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
-				<prop key="org.quartz.threadPool.threadCount">10</prop>
+				<prop key="org.quartz.threadPool.threadCount">5</prop>
 				<prop key="org.quartz.threadPool.threadPriority">5</prop>
 				<prop key="org.quartz.threadpool.threadsinheritgroupofinitializingthread">false</prop>
 				<prop key="org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread">true</prop>
 				<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
-				<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+				<prop key="org.quartz.jobStore.class">org.springframework.scheduling.quartz.LocalDataSourceJobStore</prop>
 				<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.StdJDBCDelegate</prop>
 				<prop key="org.quartz.jobStore.useProperties">false</prop>
 				<prop key="org.quartz.jobStore.tablePrefix">QRTZ_</prop>
+				<!-- 
 				<prop key="org.quartz.jobStore.dataSource">qzDS</prop>
+				 -->
 				<prop key="org.quartz.jobStore.isClustered">true</prop>
 				<prop key="org.quartz.jobStore.clusterCheckinInterval">20000</prop>
 				<prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
+				<prop key="org.quartz.jobstore.misfirethreshold">6000</prop>
         	</props>
         </property>
-         -->
+         
         
         <!-- 配置固定的job -->
         <!-- 

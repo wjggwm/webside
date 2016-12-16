@@ -1,32 +1,19 @@
-package com.webside.shiro.cache.redis.impl;
+/**
+ * 
+ */
+package com.webside.shiro.cache;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.util.Destroyable;
 
-import com.webside.shiro.cache.redis.ShiroCacheManager;
-
-
 /**
- * 
- * 开发公司：sojson.com<br/>
- * 版权：sojson.com<br/>
- * <p>
- * 
- * shiro Custom Cache
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年4月29日 　<br/>
- * <p>
- * *******
- * <p>
- * @author zhou-baicheng
- * @email  json@sojson.com
- * @version 1.0,2016年4月29日 <br/>
- * 
+ * @ClassName CustomerShiroCacheManager
+ * @Description 用户自定义cachemanager，方便扩展
+ *
+ * @author wjggwm
+ * @data 2016年12月13日 下午3:42:19
  */
 public class CustomShiroCacheManager implements CacheManager, Destroyable {
 

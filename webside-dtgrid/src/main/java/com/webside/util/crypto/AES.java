@@ -84,11 +84,26 @@ public class AES {
      * @data 2016年11月9日 上午10:20:31
      */
     public static String encrypt(String s, String token) throws Exception {
-        byte[] key = toBytes(StringUtils.isNotBlank(token) ? token : TOKEN);
-        byte[] encryptedBytes = encryptBytes(s, key);
-        return asHex(encryptedBytes);
+        return asHex(encryptBytes(s, token));
     }
     
+    
+    /**
+     * 
+     * @Description 加密
+     * @param s	需要加密的字符串
+     * @param token	加密token，16进制的hex格式，必须是32长度的字符串。如果token不合法，返回null
+     * @return 加密后的字符串
+     * @throws Exception
+     *
+     * @author wjggwm
+     * @data 2016年11月9日 上午10:20:31
+     */
+    public static byte[] encryptBytes(String s, String token) throws Exception {
+        byte[] key = toBytes(StringUtils.isNotBlank(token) ? token : TOKEN);
+        byte[] encryptedBytes = encryptBytes(s, key);
+        return encryptedBytes;
+    }
     
     /**
      * 

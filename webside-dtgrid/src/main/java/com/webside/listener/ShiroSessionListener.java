@@ -1,32 +1,25 @@
-package com.webside.shiro.listenter;
+package com.webside.listener;
 
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.webside.shiro.session.ShiroSessionRepository;
 
 /**
  * 
- * 开发公司：SOJSON在线工具 <p>
- * 版权所有：© www.sojson.com<p>
- * 博客地址：http://www.sojson.com/blog/  <p>
- * <p>
- * 
- * shiro 回话 监听
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年6月2日 　<br/>
+ * @ClassName ShiroSessionListener
+ * @Description shiro session 会话监听器
  *
- * @author zhou-baicheng
- * @email  so@sojson.com
- * @version 1.0,2016年6月2日 <br/>
- * 
+ * @author wjggwm
+ * @data 2016年12月13日 下午2:49:29
  */
-public class CustomSessionListener implements SessionListener {
+@Component
+public class ShiroSessionListener implements SessionListener {
 
+	@Autowired
     private ShiroSessionRepository shiroSessionRepository;
 
     /**
@@ -34,19 +27,21 @@ public class CustomSessionListener implements SessionListener {
      */
     @Override
     public void onStart(Session session) {
-        System.out.println("on start");
+        System.out.println("session start");
     }
     /**
      * 一个回话的生命周期结束
      */
     @Override
     public void onStop(Session session) {
-        System.out.println("on stop");
+        System.out.println("session stop");
     }
 
     @Override
     public void onExpiration(Session session) {
+    	//session过期进行清理
         shiroSessionRepository.deleteSession(session.getId());
+    	System.out.println("session onExpiration");
     }
 
     public ShiroSessionRepository getShiroSessionRepository() {

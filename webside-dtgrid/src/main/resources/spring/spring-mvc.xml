@@ -181,6 +181,17 @@
 		<property name="messageConverters" ref="messageConverters">
 		</property>
 	</bean>
+	
+	
+	<!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->
+	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
 
 
 </beans>

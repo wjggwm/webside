@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2016年7月12日 下午2:29:40
  *
  */
-public class UserOnline extends UserEntity implements Serializable{
+public class UserSessionEntity extends UserEntity implements Serializable{
 	/**
 	 * 
 	 */
@@ -42,10 +42,10 @@ public class UserOnline extends UserEntity implements Serializable{
 		private boolean sessionStatus = Boolean.TRUE;
 		
 		
-		public UserOnline() {
+		public UserSessionEntity() {
 		}
 		
-		public UserOnline(UserEntity user) {
+		public UserSessionEntity(UserEntity user) {
 			super(user);
 		}
 		

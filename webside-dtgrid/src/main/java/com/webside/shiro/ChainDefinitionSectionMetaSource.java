@@ -8,6 +8,8 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.config.Ini;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 
 import com.webside.resource.model.ResourceEntity;
@@ -117,6 +119,9 @@ import com.webside.resource.service.ResourceService;
  */
 public class ChainDefinitionSectionMetaSource implements
 		FactoryBean<Ini.Section> {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ChainDefinitionSectionMetaSource.class);
+
 
 	@Inject
 	private ResourceService resourceService;

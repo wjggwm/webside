@@ -18,10 +18,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2016年7月12日 下午4:44:23
  *
  */
-public class LimitRetryHashedMatcher extends HashedCredentialsMatcher {
+public class LimitRetryCredentialsMatcher extends HashedCredentialsMatcher {
     private Cache<String, AtomicInteger> passwordRetryCache;
 
-    public LimitRetryHashedMatcher(CacheManager cacheManager) {
+    public LimitRetryCredentialsMatcher(CacheManager cacheManager) {
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
     }
 

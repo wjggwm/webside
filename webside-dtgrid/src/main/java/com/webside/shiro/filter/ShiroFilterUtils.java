@@ -20,35 +20,22 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * 
- * 开发公司：itboy.net<br/>
- * 版权：itboy.net<br/>
- * <p>
- * 
- * Shiro Filter 工具类
- * 
- * <p>
- * 
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2016年5月27日 　<br/>
- * <p>
- * *******
- * <p>
- * 
- * @author zhou-baicheng
- * @email i@itboy.net
- * @version 1.0,2016年5月27日 <br/>
- * 
+ * @ClassName ShiroFilterUtils
+ * @Description Shiro Filter
+ *
+ * @author wjggwm
+ * @data 2016年12月12日 下午5:14:09
  */
 public class ShiroFilterUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ShiroFilterUtils.class);
 	
 	//登录页面
-	static final String LOGIN_URL = "/u/login.shtml";
+	static final String LOGIN_URL = "/login.html";
 	//踢出登录提示
-	final static String KICKED_OUT = "/open/kickedOut.shtml";
+	final static String KICKED_OUT = "/login.html";
 	//没有权限提醒
-	final static String UNAUTHORIZED = "/open/unauthorized.shtml";
+	final static String UNAUTHORIZED = "/denied.jsp";
 	/**
 	 * 是否是Ajax请求
 	 * @param request
@@ -64,7 +51,7 @@ public class ShiroFilterUtils {
 	 * @param resultMap
 	 * @throws IOException
 	 */
-	public static void out(ServletResponse response, Map<String, String> resultMap){
+	public static void writeJson(ServletResponse response, Map<String, Object> resultMap){
 		
 		PrintWriter out = null;
 		try {
@@ -72,7 +59,7 @@ public class ShiroFilterUtils {
 			out = response.getWriter();
 			out.println(JSON.toJSONString(resultMap));
 		} catch (Exception e) {
-			logger.error("输出JSON报错。", e);
+			logger.error("输出JSON异常:", e);
 		}finally{
 			if(null != out){
 				out.flush();

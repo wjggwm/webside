@@ -20,6 +20,8 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -103,6 +105,7 @@ public class IndexController extends BaseController {
 	@RequestMapping(value = "login.html", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
 	public String userLogin(UserEntity userEntity, String captcha, Boolean rememberMe, HttpServletRequest request) {
 		UsernamePasswordToken token = null;
+		String url = "";
 		try {
 	        String expected = ShiroAuthenticationManager.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
 	        //获取用户页面输入的验证码
@@ -133,6 +136,17 @@ public class IndexController extends BaseController {
 					loginInfo.setRegion(region);
 					loginInfoService.log(loginInfo);
 					request.removeAttribute("error");
+					/**
+					 * shiro 获取登录之前的地址
+					 */
+					SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+					if(null != savedRequest){
+						url = savedRequest.getRequestUrl().replace("/webside", "");
+					}
+					//如果登录之前没有地址，那么就跳转到首页。
+					if(StringUtils.isBlank(url)){
+						url = "/index.html";
+					}
 				} else {
 					token.clear();
 					request.setAttribute("error", "用户名或密码不正确！");
@@ -154,7 +168,7 @@ public class IndexController extends BaseController {
 			{
 				token.clear();
 			}
-			request.setAttribute("error", "密码错误！");
+			request.setAttribute("error", "密码错误,连续输错5次,帐号将被锁定10分钟");
 			return "/login";
 		}catch (LockedAccountException e) {
 			if(null != token)
@@ -194,7 +208,7 @@ public class IndexController extends BaseController {
 			request.setAttribute("error", "登录异常，请联系管理员！");
 			return "/login";
 		}
-		return "redirect:/index.html";
+		return "redirect:" + url;
 	}
 
 	/**
@@ -263,9 +277,11 @@ public class IndexController extends BaseController {
 	 */
 	@RequestMapping(value = "logout.html", method = RequestMethod.GET)
 	public String logout() {
+		//这里执行退出系统之前需要清理数据的操作
+		
 		// 注销登录
 		ShiroAuthenticationManager.logout();
-		return "redirect:login.html";
+		return "redirect:/";
 	}
 	
 	
@@ -297,7 +313,7 @@ public class IndexController extends BaseController {
             		out.close();
             	}
 			} catch (IOException e) {
-				logger.error("关闭输出流异常:"+e.getMessage());
+				logger.error("关闭输出流异常:", e);
 			}
         }
     }

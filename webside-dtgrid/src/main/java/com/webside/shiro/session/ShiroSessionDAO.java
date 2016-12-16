@@ -11,30 +11,26 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * @ClassName: CustomShiroSessionDAO
- * @Description: shiro Session 操作,拷贝自www.sojson.com
+ * @ClassName: ShiroSessionDAO
+ * @Description: shiro Session 操作
  * @author gaogang
  * @date 2016年7月12日 下午4:45:43
  *
  */
-public class CustomShiroSessionDAO extends AbstractSessionDAO{ 
+public class ShiroSessionDAO extends AbstractSessionDAO{ 
 	
-	private static final Logger logger = LoggerFactory.getLogger(CustomShiroSessionDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShiroSessionDAO.class);
 	
-    private ShiroSessionRepository shiroSessionRepository;  
-  
-    public ShiroSessionRepository getShiroSessionRepository() {  
-        return shiroSessionRepository;  
-    }  
-  
-    public void setShiroSessionRepository(  
-            ShiroSessionRepository shiroSessionRepository) {  
-        this.shiroSessionRepository = shiroSessionRepository;  
-    }  
-  
-    @Override  
+    private ShiroSessionRepository shiroSessionRepository;
+
+	public void setShiroSessionRepository(
+			ShiroSessionRepository shiroSessionRepository) {
+		this.shiroSessionRepository = shiroSessionRepository;
+	}
+
+	@Override  
     public void update(Session session) throws UnknownSessionException {  
-        getShiroSessionRepository().saveSession(session);  
+    	shiroSessionRepository.saveSession(session);  
     }  
   
     @Override  
@@ -45,23 +41,23 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO{
         }  
         Serializable id = session.getId();  
         if (id != null)  
-            getShiroSessionRepository().deleteSession(id);  
+        	shiroSessionRepository.deleteSession(id);  
     }  
   
     @Override  
     public Collection<Session> getActiveSessions() {  
-        return getShiroSessionRepository().getAllSessions();  
+        return shiroSessionRepository.getAllSessions();  
     }  
   
     @Override  
     protected Serializable doCreate(Session session) {  
         Serializable sessionId = this.generateSessionId(session);  
         this.assignSessionId(session, sessionId);  
-        getShiroSessionRepository().saveSession(session);  
+        shiroSessionRepository.saveSession(session);  
         return sessionId;  
     }  
   
     @Override  
     protected Session doReadSession(Serializable sessionId) {  
-        return getShiroSessionRepository().getSession(sessionId);  
+        return shiroSessionRepository.getSession(sessionId);  
     } }
