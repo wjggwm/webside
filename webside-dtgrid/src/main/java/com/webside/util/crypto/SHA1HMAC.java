@@ -21,6 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * @ClassName SHA1HMAC
  * @Description SHA1HMAC加解密
+ * <br/>这部分代码主要拷贝google-price加密解密
  *
  * @author wjggwm
  * @data 2016年11月10日 上午11:08:15

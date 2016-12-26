@@ -78,7 +78,7 @@ public class KickoutAuthFilter extends AccessControlFilter {
 		 */
 		WebUtils.getSavedRequest(request);
 		//再重定向
-		WebUtils.issueRedirect(request, response, "/kickedOut.html");
+		WebUtils.issueRedirect(request, response, "/kickout.html");
 		return false;
 	}
 

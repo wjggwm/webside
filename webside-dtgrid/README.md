@@ -1,3 +1,6 @@
+UPDATE  `a63c4c80f0f54`.`tb_user` SET  `u_password` =  'VIlO0st6mlpQF70XwXyiGA==',
+`u_credentials_salt` =  '6ca87d4b7820b5fd90bd821b8af1ecbc' WHERE  `tb_user`.`u_id` =4;
+
 项目部署说明：
 1、mysql数据库，只需要先手动执行如下sql脚本即可，其他系统会自动处理
 
@@ -140,20 +143,3 @@ maven操作：
 部署到Tomcat7:
 
 在project视图中选中项目，右键"Run As"->"Maven bulid"，执行tomcat7:deploy命令，即可完成部署，执行tomcat7:redeploy即可重新部署项目，tomcat7:undeploy卸载部署。
-
-logback+spring4配置：
-
-<dependency>
-  <groupId>org.logback-extensions</groupId>
-  <artifactId>logback-ext-spring</artifactId>
-  <version>0.1.4</version>
-</dependency>
-
-<context-param>
-        <param-name>logbackConfigLocation</param-name>
-        <param-value>/WEB-INF/classes/logback.xml</param-value>
-    </context-param>
-    <listener>
-        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
-    </listener>
-</context-param>

@@ -1,4 +1,4 @@
-package com.webside.util;
+package com.webside.util.crypto;
 
 import com.webside.user.model.UserEntity;
 
@@ -63,6 +63,7 @@ public class EndecryptUtils {
         Key key=aesCipherService.generateNewKey(); 
         return Base64.encodeToString(key.getEncoded()); 
     } 
+    
     /** 
      * 对密码进行md5加密,并返回密文和salt，包含在User对象中 
      * @param username 用户名 

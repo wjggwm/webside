@@ -44,9 +44,9 @@ import com.webside.role.service.RoleService;
 import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.model.UserEntity;
 import com.webside.user.service.UserService;
-import com.webside.util.EndecryptUtils;
 import com.webside.util.IpUtil;
 import com.webside.util.TreeUtil;
+import com.webside.util.crypto.EndecryptUtils;
 
 /**
  * 

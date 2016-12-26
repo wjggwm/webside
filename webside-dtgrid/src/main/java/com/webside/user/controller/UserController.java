@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +33,9 @@ import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.model.UserEntity;
 import com.webside.user.model.UserInfoEntity;
 import com.webside.user.service.UserService;
-import com.webside.util.EndecryptUtils;
 import com.webside.util.PageUtil;
 import com.webside.util.RandomUtil;
+import com.webside.util.crypto.EndecryptUtils;
 
 @Controller
 @Scope("prototype")
@@ -46,6 +47,9 @@ public class UserController extends BaseController {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Value("${shiro.hashIterations}")
+	private String hashIterations;
 	
 	@RequestMapping("listUI.html")
 	public String listUI(Model model, HttpServletRequest request) {
@@ -427,7 +431,7 @@ public class UserController extends BaseController {
 			String password = userEntity.getPassword();
 			userEntity.setUserName(new String(userEntity.getUserName().getBytes("iso-8859-1"),"utf-8"));
 			//加密用户输入的密码，得到密码和加密盐，保存到数据库
-			UserEntity user = EndecryptUtils.md5Password(userEntity.getAccountName(), userEntity.getPassword(), 2);
+			UserEntity user = EndecryptUtils.md5Password(userEntity.getAccountName(), userEntity.getPassword(), Integer.valueOf(hashIterations));
 			//设置添加用户的密码和加密盐
 			userEntity.setPassword(user.getPassword());
 			userEntity.setCredentialsSalt(user.getCredentialsSalt());
