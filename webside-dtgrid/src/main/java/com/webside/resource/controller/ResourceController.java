@@ -90,7 +90,7 @@ public class ResourceController extends BaseController {
 	}
 	
 	
-	@RequestMapping("resourceTree.html")
+	@RequestMapping("withoutAuth/resourceTree.html")
 	@ResponseBody
 	public Object resourceTree(int roleId) {
 		Map<String,Object> parameter = new HashMap<String,Object>();
@@ -110,7 +110,7 @@ public class ResourceController extends BaseController {
 	}
 	
 	
-	@RequestMapping("resourceSelectTree.html")
+	@RequestMapping("withoutAuth/resourceSelectTree.html")
 	@ResponseBody
 	public Object resourceSelectTree() {
 		List<Select2Entity> select2Entity = null;
@@ -259,7 +259,7 @@ public class ResourceController extends BaseController {
 	}
 	
 	
-	@RequestMapping("icon.html")
+	@RequestMapping("withoutAuth/icon.html")
 	public String icon() {
 		return Common.BACKGROUND_PATH + "/resource/icon";
 	}

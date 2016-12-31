@@ -3,7 +3,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/schedule/planningList.js"></script>
 <div class="page-header">
-	<shiro:hasPermission name="schedule:addJob">
+	<shiro:hasPermission name="schedule:addJobUI">
 		<button id="btnAdd" type="button" onclick="webside.common.addModel('/scheduleJob/addJobUI.html')" class="btn btn-primary btn-sm">
 		  	<i class="fa fa-plus"></i>&nbsp;添加job
 		</button>

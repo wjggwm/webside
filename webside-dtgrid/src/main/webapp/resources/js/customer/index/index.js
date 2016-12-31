@@ -7,7 +7,6 @@ var webside = {
         menu : {
             initMenuEvent : function() {
                 $("[nav-menu]").each(function() {
-                	
                     $(this).bind("click", function() {
                     	var lay;
                         var nav = $(this).attr("nav-menu");
@@ -29,8 +28,28 @@ var webside = {
                             $(".breadcrumb").html(breadcrumb);
                             //加载页面
                             $(".page-content").empty();//清除该节点子元素
-                            $(".page-content").load(sys.rootPath + sn[sn.length - 1],function(){
+                            $(".page-content").load(sys.rootPath + sn[sn.length - 1],function(data,status){
                             	layer.close(lay);
+				            	if(data.match("^\{(.+:.+,*){1,}\}$"))
+				            	{
+				            		$(".page-content").empty();//清除该节点子元素
+				            		
+				            		data = $.parseJSON(data);
+				            		if(data.status == "401")
+				            		{
+				            			layer.msg(dats.message, {
+				                            icon : 0
+				                        });
+				            		}else if(data.status == "403")
+				            		{
+				            			layer.confirm(data.message, {
+						                    icon : 3,
+						                    title : '提示'
+						                }, function(index, layero) {
+						                    window.location.href = sys.rootPath + data.url;
+						                });
+				            		}
+				            	}
                             });
                         }
                         var level = $(this).parent("li").attr("level");
@@ -96,7 +115,27 @@ var webside = {
          */
         loadPage : function(nav) {
             //加载页面
-            $(".page-content").load(sys.rootPath + nav);
+            $(".page-content").load(sys.rootPath + nav ,function(data,status){
+            	if(data.match("^\{(.+:.+,*){1,}\}$"))
+            	{
+            		$(".page-content").empty();//清除该节点子元素
+            		data = $.parseJSON(data);
+            		if(data.status == "401")
+            		{
+            			layer.msg(dats.message, {
+                            icon : 0
+                        });
+            		}else if(data.status == "403")
+            		{
+	                    layer.confirm(data.message, {
+		                    icon : 3,
+		                    title : '提示'
+		                }, function(index, layero) {
+		                    window.location.href = sys.rootPath + data.url;
+		                });
+            		}
+            	}
+            });
         },
         /**
          * 新增
@@ -605,7 +644,7 @@ var webside = {
                     var iconLayer = layer.open({
                         type : 2,
                         scrollbar : false,
-                        content : sys.rootPath + '/resource/icon.html',
+                        content : sys.rootPath + '/resource/withoutAuth/icon.html',
                         area : 'auto',
                         maxmin : true,
                         shift : 4,
@@ -822,7 +861,7 @@ var webside = {
                     $('#tree').jstree({
                         "core" : {
                             'data' : {
-                                "url" : sys.rootPath + "/resource/resourceTree.html?roleId=" + $("#id").val(),
+                                "url" : sys.rootPath + "/resource/withoutAuth/resourceTree.html?roleId=" + $("#id").val(),
                                 "dataType" : "json"
                             },
                             "themes" : {

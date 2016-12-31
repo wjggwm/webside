@@ -99,16 +99,17 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		 */
 		Boolean marker = (Boolean)session.getAttribute(KICKOUT_STATUS);
 		if (null != marker && marker ) {
-			Map<String, Object> resultMap = new HashMap<String, Object>();
+			Map<String, Object> result = new HashMap<String, Object>();
 			//判断是不是Ajax请求
 			if (ShiroFilterUtils.isAjax(request) ) {
 				if(logger.isDebugEnabled())
 				{
-					logger.debug( "当前用户已经在其他地方登录，并且是Ajax请求！");
+					logger.debug( "当前用户已经在其他地方登录");
 				}
-				resultMap.put("status", "300");
-				resultMap.put("message", "您已经在其他地方登录，请重新登录！");
-				ShiroFilterUtils.writeJson(response, resultMap);
+				result.put("status", "403");
+				result.put("message", "您已经被踢出，请重新登录！");
+				result.put("url", ShiroFilterUtils.LOGIN_URL);
+				ShiroFilterUtils.writeJson(response, result);
 			}
 			return  Boolean.FALSE;
 		}

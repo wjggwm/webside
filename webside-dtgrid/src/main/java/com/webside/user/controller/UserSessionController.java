@@ -3,6 +3,7 @@
  */
 package com.webside.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.webside.base.basecontroller.BaseController;
 import com.webside.common.Common;
-import com.webside.dtgrid.model.Pager;
-import com.webside.dtgrid.util.ExportUtils;
 import com.webside.exception.AjaxException;
 import com.webside.user.model.UserSessionEntity;
 import com.webside.user.service.impl.UserSessionServiceImpl;
@@ -58,7 +54,7 @@ public class UserSessionController extends BaseController{
 				page.setOrderByType(request.getParameter("sord"));
 			}
 			model.addAttribute("page", page);
-			return Common.BACKGROUND_PATH + "/userSession/list";
+			return Common.BACKGROUND_PATH + "/user/sessionList";
 		}catch(Exception e)
 		{
 			throw new AjaxException(e);
@@ -71,46 +67,60 @@ public class UserSessionController extends BaseController{
 	 * @param dtGridPager Pager对象
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/list.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/list.html")
 	@ResponseBody
 	public Object list(String gridPager, HttpServletResponse response) throws Exception{
-		Map<String, Object> parameters = null;
-		//1、映射Pager对象
-		Pager pager = JSON.parseObject(gridPager, Pager.class);
-		//2、设置查询参数
-		parameters = pager.getParameters();
-		//3、判断是否是导出操作
-		if(pager.getIsExport())
-		{
-			if(pager.getExportAllData())
-			{
-				//3.1、导出全部数据
-				List<UserSessionEntity> list = userSessionService.getAllUser();
-				ExportUtils.exportAll(response, pager, list);
-				return null;
-			}else
-			{
-				//3.2、导出当前页数据
-				ExportUtils.export(response, pager);
-				return null;
-			}
-		}else
-		{
-			//设置分页，page里面包含了分页信息
-			Page<Object> page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "u_id DESC");
-			List<UserSessionEntity> list = userSessionService.getAllUser();
-			parameters.clear();
-			parameters.put("isSuccess", Boolean.TRUE);
-			parameters.put("nowPage", pager.getNowPage());
-			parameters.put("pageSize", pager.getPageSize());
-			parameters.put("pageCount", page.getPages());
-			parameters.put("recordCount", page.getTotal());
-			parameters.put("startRecord", page.getStartRow());
-			//列表展示数据
-			parameters.put("exhibitDatas", list);
-			return parameters;
-		}
+		List<UserSessionEntity> list = userSessionService.getAllUser();
+		return list;
 	}
 	
+	
+	/**
+	 * 踢出用户
+	 * @param id	用户id
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/info.html")
+	public String info(Model model, String sessionId) throws Exception
+	{
+		UserSessionEntity userSessionEntity = userSessionService.getSession(sessionId);
+		model.addAttribute("userSessionEntity", userSessionEntity);
+		return Common.BACKGROUND_PATH + "/user/sessionInfo";
+	}
+	
+	
+	/**
+	 * 踢出用户
+	 * @param id	用户id
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/kickout.html", method = RequestMethod.POST)
+	@ResponseBody
+	public Object kickout(String ids) throws Exception
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		try
+		{
+			boolean flag = userSessionService.kickoutUser(ids);
+			if(flag)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "用户已被踢出");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "踢出用户失败");
+			}
+		}catch(Exception e)
+		{
+			map.put("success", Boolean.FALSE);
+			map.put("data", null);
+			map.put("message", "踢出用户失败");
+			throw new AjaxException(e);
+		}
+		return map;
+	}
 	
 }

@@ -18,12 +18,14 @@ import com.webside.util.SerializeUtil;
 
 /**
  * 
- * @ClassName RedisShiroSessionRepository
- * @Description redis 实现 Session 管理
+ * @ClassName EhCacheShiroSessionRepository
+ * @Description EhCache 实现 Session 管理
+ * <br/><font color=red>该类不建议使用，而改为使用shiro默认的实现EnterpriseCacheSessionDAO</font>
  *
  * @author wjggwm
  * @data 2016年12月13日 下午4:34:57
  */
+@Deprecated
 public class EhCacheShiroSessionRepository implements ShiroSessionRepository {
    
 	private static final Logger logger = LoggerFactory.getLogger(EhCacheShiroSessionRepository.class);

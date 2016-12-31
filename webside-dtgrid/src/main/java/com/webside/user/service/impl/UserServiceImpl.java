@@ -112,10 +112,22 @@ public class UserServiceImpl extends AbstractService<UserEntity, Long> implement
 	}
 
 	@Override
-	public int updateOnly(UserEntity userEntity, String password) throws ServiceException{
+	public int updateOnly(UserEntity userEntity) throws ServiceException{
+		try
+		{
+			int cnt = userMapper.update(userEntity);
+			return cnt;
+		}catch(Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public int updatePassword(UserEntity userEntity, String password) throws ServiceException{
 		try
 		{ 
-			int cnt = userMapper.update(userEntity);
+			int cnt = updateOnly(userEntity);
 			//发送邮件
 			emailUtil.send126Mail(userEntity.getAccountName(), "系统密码重置", "您好，您的密码已重置，新密码是:" + password);
 			return cnt;
@@ -124,5 +136,6 @@ public class UserServiceImpl extends AbstractService<UserEntity, Long> implement
 			throw new ServiceException(e);
 		}
 	}
+
 	
 }

@@ -33,9 +33,10 @@ public class ShiroFilterUtils {
 	//登录页面
 	static final String LOGIN_URL = "/login.html";
 	//踢出登录提示
-	final static String KICKED_OUT = "/login.html";
+	final static String KICKED_OUT = "/kickout.jsp";
 	//没有权限提醒
 	final static String UNAUTHORIZED = "/denied.jsp";
+	
 	/**
 	 * 是否是Ajax请求
 	 * @param request
@@ -47,17 +48,16 @@ public class ShiroFilterUtils {
 	
 	/**
 	 * response 输出JSON
-	 * @param hresponse
+	 * @param response
 	 * @param resultMap
 	 * @throws IOException
 	 */
 	public static void writeJson(ServletResponse response, Map<String, Object> resultMap){
-		
 		PrintWriter out = null;
 		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			out.println(JSON.toJSONString(resultMap));
+			out.print(JSON.toJSONString(resultMap));
 		} catch (Exception e) {
 			logger.error("输出JSON异常:", e);
 		}finally{

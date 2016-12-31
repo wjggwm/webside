@@ -155,7 +155,7 @@
     <body>
         <div class="container">
             <h1>发生错误 <span>:(</span></h1>
-            <p>抱歉,系统发生错误了</p>
+            <p>抱歉,系统出错了</p>
             <ul>
                 <li>请刷新再试试</li>
                 <li>或联系管理员</li>

@@ -92,6 +92,10 @@
 
 	<bean id="rememberMeFilter" class="com.webside.shiro.filter.RememberMeFilter"/>
 
+	<bean id="permissionFilter" class="com.webside.shiro.filter.PermissionFilter"/>
+	
+	<bean id="roleFilter" class="com.webside.shiro.filter.RoleFilter" />
+
 	<bean id="chainDefinitionService" class="com.webside.shiro.service.impl.ChainDefinitionServiceImpl" />
 
 	<!-- 配置shiro的过滤器工厂类，这里bean的id shiroFilter要和我们在web.xml中配置的shior过滤器名称一致<filter-name>shiroFilter</filter-name> -->
@@ -123,9 +127,11 @@
 		<property name="filters">
 			<map>
 				<entry key="kickout" value-ref="kickoutFilter" />
-				<entry key="kickoutAuth" value-ref="kickoutAuthFilter"></entry>
+				<entry key="kickoutAuth" value-ref="kickoutAuthFilter"/>
 				<entry key="login" value-ref="loginFilter" />
 				<entry key="remember" value-ref="rememberMeFilter"/>
+				<entry key="perm" value-ref="permissionFilter"/>
+				<entry key="roles" value-ref="roleFilter"/>
 			</map>
 		</property>
 	</bean>
@@ -133,7 +139,7 @@
 	<!-- 会话验证quartz实现，升级shiro到1.2.6以上之后，SimpleTrigger变成了接口， 解决办法有两种： 
 		1、自己重新实现SessionValidationScheduler类，QuartzSessionValidationScheduler implements SessionValidationScheduler 
 		2、使用ExecutorServiceSessionValidationScheduler代替QuartzSessionValidationScheduler -->
-	<bean id="sessionValidationScheduler" class="com.webside.shiro.session.QuartzSessionValidationScheduler">
+	<bean id="sessionValidationScheduler" class="com.webside.shiro.session.validation.QuartzSessionValidationScheduler">
 		<property name="sessionValidationInterval" value="${shiro.session.validate.interval}" />
 		<property name="sessionManager" ref="sessionManager" />
 	</bean>
@@ -154,7 +160,7 @@
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<!-- 是否删除无效的，默认也是开启 -->
 		<property name="deleteInvalidSessions" value="true" />
-		<property name="sessionDAO" ref="shiroSessionDAO" />
+		<property name="sessionDAO" ref="redisShiroSessionDAO" />
 		<!-- session 有效时间为半小时 （毫秒单位） -->
 		<property name="globalSessionTimeout" value="${shiro.session.timeout}" />
 		<!-- 相隔多久检查一次session的有效性 -->
@@ -172,7 +178,12 @@
 	   </property>
 	</bean>
 	
-
+	
+	<!--shiro session管理器 
+		shiroCacheManager有两种选择：
+		1、ehcache实现：EnterpriseCacheSessionDAO
+		2、redis实现	 ：ShiroSessionDAO extends AbstractSessionDAO
+	-->
 	<!-- ehcache shiro session dao -->
 	<bean id="ehcacheSessionDAO"
 		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
@@ -180,10 +191,14 @@
 		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
 	</bean>
 
-	<!-- custom redis shiro session dao -->
-	<bean id="shiroSessionDAO" class="com.webside.shiro.session.ShiroSessionDAO">
-	    <property name="shiroSessionRepository" ref="shiroSessionRepository"/>
+	<!-- redis shiro session dao -->
+	<bean id="redisShiroSessionDAO" class="com.webside.shiro.session.ShiroSessionDAO">
+	    <property name="shiroSessionRepository" ref="redisShiroSessionRepository"/>
 	    <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+	</bean>
+	
+	<bean id="redisShiroSessionRepository" class="com.webside.shiro.session.redis.RedisShiroSessionRepository">
+		<property name="redisManager" ref="redisManager"/>
 	</bean>
 	
 	
@@ -195,16 +210,7 @@
 	<bean id="cacheManager" class="com.webside.shiro.cache.CustomShiroCacheManager">
 		<property name="shiroCacheManager" ref="redisShiroCacheManager" />
 	</bean>
-	
-	<!--shiro session管理器 
-		shiroCacheManager有两种选择：
-		1、ehcache实现：ehcacheShiroCacheManager
-		2、redis实现	 ：redisShiroCacheManager
-	-->
-	<bean id="shiroSessionRepository" class="com.webside.shiro.session.CustomShiroSessionRepository">
-		<property name="shiroCacheManager" ref="redisShiroCacheManager"/>
-		<property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
-	</bean>
+
 	
 	<!--ehcache cache管理器 -->
 	<bean id="ehcacheShiroCacheManager" class="com.webside.shiro.cache.ehcache.EhCacheShiroCacheManager">
@@ -219,18 +225,7 @@
 	<bean id="redisManager" class="com.webside.redis.RedisManager">
 		<property name="jedisPool" ref="jedisPool"/>
 	</bean>
-	
-	<!-- 
-	<bean id="redisShiroSessionRepository" class="com.webside.shiro.session.redis.RedisShiroSessionRepository">
-		<property name="redisManager" ref="redisManager"/>
-	</bean>
-	
-	<bean id="ehcacheShiroSessionRepository" class="com.webside.shiro.session.ehcache.EhCacheShiroSessionRepository">
-		<property name="cacheManager" ref="ehCacheManager" />
-		<property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
-	</bean>
-	  -->
-
+	 
 	<!-- Shiro生命周期处理器 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 

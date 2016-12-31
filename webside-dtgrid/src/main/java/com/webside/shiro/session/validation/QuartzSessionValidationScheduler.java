@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.webside.shiro.session;
+package com.webside.shiro.session.validation;
 
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionValidationScheduler;

@@ -230,6 +230,62 @@ public class UserController extends BaseController {
 	}
 	
 	
+	@RequestMapping("lock.html")
+	@ResponseBody
+	public Object lock(UserEntity userEntity) throws AjaxException
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		try
+		{
+			userEntity.setLocked(1);
+			int result = userService.updateOnly(userEntity);
+			if(result == 1)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "账户已锁定");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "账户锁定失败");
+			}
+		}catch(Exception e)
+		{
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	
+	@RequestMapping("unlock.html")
+	@ResponseBody
+	public Object unlock(UserEntity userEntity) throws AjaxException
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		try
+		{
+			userEntity.setLocked(0);
+			int result = userService.updateOnly(userEntity);
+			if(result == 1)
+			{
+				map.put("success", Boolean.TRUE);
+				map.put("data", null);
+				map.put("message", "账户已解锁");
+			}else
+			{
+				map.put("success", Boolean.FALSE);
+				map.put("data", null);
+				map.put("message", "账户解锁失败");
+			}
+		}catch(Exception e)
+		{
+			throw new AjaxException(e);
+		}
+		return map;
+	}
+	
+	
 	@RequestMapping("deleteBatch.html")
 	@ResponseBody
 	public Object deleteBatch(String ids){
@@ -282,7 +338,7 @@ public class UserController extends BaseController {
 				{
 					userEntity.setId(user.getId());
 					userEntity.setUserName(user.getUserName());
-					int cnt = userService.updateOnly(userEntity, password);
+					int cnt = userService.updatePassword(userEntity, password);
 					if(cnt > 0)
 					{
 						result.put("success", true);
@@ -302,7 +358,7 @@ public class UserController extends BaseController {
 				}
 			}else
 			{
-				int cnt = userService.updateOnly(userEntity, password);
+				int cnt = userService.updatePassword(userEntity, password);
 				if(cnt > 0)
 				{
 					result.put("success", true);
@@ -343,7 +399,7 @@ public class UserController extends BaseController {
 			{
 				userEntity.setId(user.getId());
 				userEntity.setUserName(user.getUserName());
-				int cnt = userService.updateOnly(userEntity, password);
+				int cnt = userService.updatePassword(userEntity, password);
 				if(cnt > 0)
 				{
 					result.put("success", true);
@@ -435,7 +491,7 @@ public class UserController extends BaseController {
 			//设置添加用户的密码和加密盐
 			userEntity.setPassword(user.getPassword());
 			userEntity.setCredentialsSalt(user.getCredentialsSalt());
-			int cnt = userService.updateOnly(userEntity, password);
+			int cnt = userService.updatePassword(userEntity, password);
 			if(cnt > 0)
 			{
 				result.put("success", true);

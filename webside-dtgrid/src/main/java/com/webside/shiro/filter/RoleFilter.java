@@ -1,5 +1,8 @@
 package com.webside.shiro.filter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +27,9 @@ public class RoleFilter extends AccessControlFilter {
 	protected boolean isAccessAllowed(ServletRequest request,
 			ServletResponse response, Object mappedValue) throws Exception {
 		String[] arra = (String[])mappedValue;
-		
 		Subject subject = getSubject(request, response);
 		for (String role : arra) {
-			if(subject.hasRole("role:" + role)){
+			if(subject.hasRole(role)){
 				return true;
 			}
 		}
@@ -43,11 +45,20 @@ public class RoleFilter extends AccessControlFilter {
 	            saveRequest(request);  
 	            WebUtils.issueRedirect(request, response, ShiroFilterUtils.LOGIN_URL);  
 	        } else {  
-	            if (StringUtils.hasText(ShiroFilterUtils.UNAUTHORIZED)) {//如果有未授权页面跳转过去  
-	                WebUtils.issueRedirect(request, response, ShiroFilterUtils.UNAUTHORIZED);  
-	            } else {//否则返回401未授权状态码  
-	                WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);  
-	            }  
+	        	if(ShiroFilterUtils.isAjax(request)){
+	    			Map<String, Object> result = new HashMap<String, Object>();
+	    			result.put("status", "401");
+	    			result.put("message", "当前用户没有权限");
+	    			result.put("url", ShiroFilterUtils.UNAUTHORIZED);
+	    			ShiroFilterUtils.writeJson(response, result);
+	    		}else
+	    		{
+	    			if (StringUtils.hasText(ShiroFilterUtils.UNAUTHORIZED)) {//如果有未授权页面跳转过去  
+		                WebUtils.issueRedirect(request, response, ShiroFilterUtils.UNAUTHORIZED);  
+		            } else {//否则返回401未授权状态码  
+		                WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);  
+		            } 
+	    		}
 	        }  
 		return false;
 	}

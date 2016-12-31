@@ -3,12 +3,12 @@
 	<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/role/list.js"></script>
 <div class="page-header">
-	<shiro:hasPermission name="role:add">
+	<shiro:hasPermission name="role:addUI">
 	<button id="btnAdd" type="button" onclick="webside.common.addModel('/role/addUI.html')" class="btn btn-primary btn-sm">
 	  	<i class="fa fa-user-plus"></i>&nbsp;添加
 	</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="role:edit">
+	<shiro:hasPermission name="role:editUI">
 	<button id="btnEdit" type="button" onclick="webside.common.editModel('/role/editUI.html')" class="btn btn-success btn-sm">
 		 <i class="fa fa-pencil-square-o"></i>&nbsp;编辑
 	</button>
@@ -18,7 +18,7 @@
 		<i class="fa fa-trash-o"></i>&nbsp;删除
 	</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="role:permission">
+	<shiro:hasPermission name="role:permissionUI">
 	<button id="btnSetResource" type="button" onclick="webside.common.editModel('/role/permissionUI.html')" class="btn btn-info btn-sm">
 		<i class="fa fa-gears"></i>&nbsp;分配权限
 	</button>

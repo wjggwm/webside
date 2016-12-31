@@ -3,15 +3,15 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/user/list.js"></script>
 <div class="page-header">
-	<shiro:hasPermission name="user:add">
-	<button id="btnAdd" type="button" onclick="webside.common.addModel('/user/addUI.html')" class="btn btn-primary btn-sm">
-	  	<i class="fa fa-user-plus"></i>&nbsp;添加
-	</button>
+	<shiro:hasPermission name="user:addUI">
+		<button id="btnAdd" type="button" onclick="webside.common.addModel('/user/addUI.html')" class="btn btn-primary btn-sm">
+		  	<i class="fa fa-user-plus"></i>&nbsp;添加
+		</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="user:edit">
-	<button id="btnEdit" type="button" onclick="webside.common.editModel('/user/editUI.html')" class="btn btn-success btn-sm">
-		 <i class="fa fa-pencil-square-o"></i>&nbsp;编辑
-	</button>
+	<shiro:hasPermission name="user:editUI">
+		<button id="btnEdit" type="button" onclick="webside.common.editModel('/user/editUI.html')" class="btn btn-success btn-sm">
+			 <i class="fa fa-pencil-square-o"></i>&nbsp;编辑
+		</button>
 	</shiro:hasPermission>
 	<shiro:hasPermission name="user:deleteBatch ">
 	<button id="btnDel" type="button" onclick="webside.common.delModel('/user/deleteBatch.html', customSearch)" class="btn btn-danger btn-sm">
@@ -19,10 +19,21 @@
 	</button>
 	</shiro:hasPermission>
 	<shiro:hasPermission name="user:resetPassword">
-	<button id="btnDel" type="button" onclick="resetPWDModel()" class="btn btn-warning btn-sm">
-		<i class="fa fa-unlock-alt"></i>&nbsp;重置密码
-	</button>
+		<button id="btnDel" type="button" onclick="resetPWDModel()" class="btn btn-warning btn-sm">
+			<i class="fa fa-unlock-alt"></i>&nbsp;重置密码
+		</button>
 	</shiro:hasPermission>
+	<shiro:hasPermission name="user:resetPassword">
+		<button id="btnDel" type="button" onclick="lockModel('/user/lock.html')" class="btn btn-info btn-sm">
+			<i class="fa fa-lock"></i>&nbsp;锁定
+		</button>
+	</shiro:hasPermission>
+	<shiro:hasPermission name="user:resetPassword">
+		<button id="btnDel" type="button" onclick="lockModel('/user/unlock.html')" class="btn btn-success btn-sm">
+			<i class="fa fa-unlock"></i>&nbsp;解锁
+		</button>
+	</shiro:hasPermission>
+	
 </div>
 <div class="input-group">
      <input id="searchKey" type="text" class="input form-control" placeholder="姓名、账户名称...">

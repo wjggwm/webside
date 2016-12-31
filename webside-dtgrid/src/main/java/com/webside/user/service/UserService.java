@@ -18,7 +18,9 @@ public interface UserService {
 
 	public int update(UserEntity userEntity);
 	
-	public int updateOnly(UserEntity userEntity, String password) throws ServiceException;
+	public int updateOnly(UserEntity userEntity) throws ServiceException;
+	
+	public int updatePassword(UserEntity userEntity, String password) throws ServiceException;
     
     public int deleteBatchById(List<Long> userIds);
     

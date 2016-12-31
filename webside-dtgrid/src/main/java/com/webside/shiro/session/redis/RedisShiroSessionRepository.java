@@ -57,7 +57,7 @@ public class RedisShiroSessionRepository implements ShiroSessionRepository {
             
             //不存在才添加。
             if(null == session.getAttribute(UserSessionServiceImpl.SESSION_STATUS)){
-            	//Session 踢出
+            	//session状态
             	SessionStatus sessionStatus = new SessionStatus();
             	session.setAttribute(UserSessionServiceImpl.SESSION_STATUS, sessionStatus);
             }
@@ -67,7 +67,7 @@ public class RedisShiroSessionRepository implements ShiroSessionRepository {
             Long expireTime = sessionTimeOut + SESSION_VAL_TIME_SPAN + (5 * 60);
             getRedisManager().saveValueByKey(DB_INDEX, key, value, expireTime.intValue());
         } catch (Exception e) {
-        	logger.error("save session error，id:"+session.getId(), e);
+        	logger.error("save session error,id:"+session.getId(), e);
         }
     }
 

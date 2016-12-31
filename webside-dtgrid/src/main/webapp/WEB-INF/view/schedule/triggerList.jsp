@@ -6,12 +6,12 @@
 	<button id="btnAdd" type="button" onclick="webside.common.loadPage('/scheduleJob/planningJobListUI.html')" class="btn btn-grey btn-sm">
 	  	<i class="fa fa-reply"></i>&nbsp;返回
 	</button>
-	<shiro:hasPermission name="schedule:addTrigger">
+	<shiro:hasPermission name="schedule:addTriggerUI">
 	<button id="btnAdd" type="button" onclick="webside.common.addModel('/scheduleJob/addTriggerUI.html?jobName=${scheduleJobEntity.jobName }&jobGroup=${scheduleJobEntity.jobGroup }')" class="btn btn-primary btn-sm">
 	  	<i class="fa fa-user-plus"></i>&nbsp;添加
 	</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="schedule:editTrigger">
+	<shiro:hasPermission name="schedule:editTriggerUI">
 	<button id="btnEdit" type="button" onclick="webside.form.schedule.editModel('/scheduleJob/editTriggerUI.html')" class="btn btn-info btn-sm">
 		 <i class="fa fa-pencil-square-o"></i>&nbsp;编辑
 	</button>

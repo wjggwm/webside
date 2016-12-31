@@ -1,12 +1,18 @@
 package com.webside.shiro.cache.redis;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import redis.clients.jedis.Jedis;
 
 import com.webside.redis.RedisManager;
 import com.webside.util.SerializeUtil;
@@ -29,7 +35,7 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
 	/**
 	 * 为了不和其他的缓存混淆，采用追加前缀方式以作区分
 	 */
-    private static final String REDIS_SHIRO_CACHE = "shiro_cache:";
+    public static final String REDIS_SHIRO_CACHE = "";
     /**
      * Redis 分片(分区)，也可以在配置文件中配置,默认dbIndex=0
      */
@@ -92,6 +98,19 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
 
     @Override
     public void clear() throws CacheException {
+    	Jedis jedis = null;
+    	try
+    	{
+    		jedis = redisManager.getJedis();
+        	jedis.select(DB_INDEX);
+        	jedis.flushDB();
+    	}finally
+    	{
+    		jedis.close();
+    	}
+    	
+    	
+    	
     }
 
     @Override
@@ -101,14 +120,38 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
         return keys().size();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public Set<K> keys() {
-        return null;
+    	Jedis jedis = null;
+    	try
+    	{
+    		jedis = redisManager.getJedis();
+        	jedis.select(DB_INDEX);
+            Set<String> keys = jedis.keys("*" + getName() + "*");
+            return (Set<K>)keys;
+    	}finally
+    	{
+    		jedis.close();
+    	}
+    	
     }
 
     @Override
     public Collection<V> values() {
-        return null;
+    	Set<K> keys = keys();
+    	if (!CollectionUtils.isEmpty(keys)) {
+            List<V> values = new ArrayList<V>(keys.size());
+            keys.forEach(key -> {
+            	V value = get(key);
+                if (value != null) {
+                    values.add(value);
+                }
+        	});
+            return Collections.unmodifiableList(values);
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     private String generateCacheKey(Object key) {

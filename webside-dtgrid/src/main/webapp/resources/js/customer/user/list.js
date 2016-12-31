@@ -59,7 +59,7 @@ var dtGridColumns = [{
         if (value == 0) {
             return '<span class="label label-sm label-success arrowed arrowed-righ">正常</span>';
         } else {
-            return '<span class="label label-sm label-warning arrowed arrowed-righ">已删除</span>';
+            return '<span class="label label-sm label-warning arrowed arrowed-righ">锁定</span>';
         }
     }
 }, {
@@ -174,6 +174,49 @@ function resetPWDModel() {
                     layer.msg(resultdata.message, {
                         icon : 1
                     });
+                } else {
+                    layer.msg(resultdata.message, {
+                        icon : 5
+                    });
+                }
+            },
+            error : function(data, errorMsg) {
+                layer.close(index);
+                layer.msg(data.responseText, {icon : 2});
+            }
+        });
+    } else {
+        layer.msg("你没有选择行或选择了多行数据", {
+            icon : 0
+        });
+    }
+}
+
+/**
+ *锁定
+ */
+function lockModel(url) {
+    var rows = grid.getCheckedRecords();
+    if (rows.length == 1) {
+        var index;
+        $.ajax({
+            type : "POST",
+            url : sys.rootPath + url,
+            data : {
+                "id" : rows[0].id
+            },
+            dataType : "json",
+            beforeSend : function()
+            {
+                index = layer.load();
+            },
+            success : function(resultdata) {
+                layer.close(index);
+                if (resultdata.success) {
+                    layer.msg(resultdata.message, {
+                        icon : 1
+                    });
+                    webside.common.loadPage("/user/listUI.html");
                 } else {
                     layer.msg(resultdata.message, {
                         icon : 5

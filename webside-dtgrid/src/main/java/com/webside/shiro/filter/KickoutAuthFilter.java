@@ -1,7 +1,5 @@
 package com.webside.shiro.filter;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +14,6 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
 import com.webside.shiro.session.SessionStatus;
 import com.webside.user.service.impl.UserSessionServiceImpl;
 
@@ -45,16 +42,8 @@ public class KickoutAuthFilter extends AccessControlFilter {
 		}
 		Subject subject = getSubject(request, response);
 		Session session = subject.getSession();
-		Map<String, String> resultMap = new HashMap<String, String>();
 		SessionStatus sessionStatus = (SessionStatus) session.getAttribute(UserSessionServiceImpl.SESSION_STATUS);
 		if (null != sessionStatus && !sessionStatus.isOnline()) {
-			//判断是不是Ajax请求
-			if (ShiroFilterUtils.isAjax(request) ) {
-				logger.debug("当前用户已经被踢出，并且是Ajax请求！");
-				resultMap.put("user_status", "300");
-				resultMap.put("message", "您已经被踢出，请重新登录！");
-				out(response, resultMap);
-			}
 			return  Boolean.FALSE;
 		}
 		return Boolean.TRUE;
@@ -76,18 +65,21 @@ public class KickoutAuthFilter extends AccessControlFilter {
 		 * 							 然后：{@link UserLoginController.submitLogin(...)}中的<code>String url = WebUtils.getSavedRequest(request).getRequestUrl();</code>
 		 * 如果还有问题，请咨询我。
 		 */
-		WebUtils.getSavedRequest(request);
-		//再重定向
-		WebUtils.issueRedirect(request, response, "/kickout.html");
+		//判断是不是Ajax请求
+		if (ShiroFilterUtils.isAjax(request) ) {
+			Map<String, Object> result = new HashMap<String, Object>();
+			logger.debug("当前用户已经被踢出，并且是Ajax请求！");
+			result.put("status", "403");
+			result.put("message", "您已经被踢出，请重新登录！");
+			result.put("url", ShiroFilterUtils.LOGIN_URL);
+			ShiroFilterUtils.writeJson(response, result);
+		}else
+		{
+			WebUtils.getSavedRequest(request);
+			//再重定向
+			WebUtils.issueRedirect(request, response, ShiroFilterUtils.KICKED_OUT);
+		}
 		return false;
 	}
 
-	private void out(ServletResponse response, Map<String, String> resultMap)
-			throws IOException {
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println(JSON.toJSONString(resultMap));
-		out.flush();
-		out.close();
-	}
 }

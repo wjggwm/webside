@@ -36,13 +36,7 @@ public class LoginFilter extends AccessControlFilter {
 		if (null != user || isLoginRequest(request, response)) {
 			return Boolean.TRUE;
 		}
-		if (ShiroFilterUtils.isAjax(request)) {// ajax请求
-			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("status", "403");
-			result.put("success", false);
-			result.put("message", "当前用户没有登录");
-			ShiroFilterUtils.writeJson(response, result);
-		}
+		
 		return Boolean.FALSE;
 	}
 
@@ -56,8 +50,17 @@ public class LoginFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request,
 			ServletResponse response) throws Exception {
-		// 保存Request和Response 到登录后的链接
-		saveRequestAndRedirectToLogin(request, response);
+		if (ShiroFilterUtils.isAjax(request)) {// ajax请求
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("status", "403");
+			result.put("message", "用户未登陆,请重新登录!");
+			result.put("url", "");
+			ShiroFilterUtils.writeJson(response, result);
+		}else
+		{
+			// 保存Request和Response 到登录后的链接
+			saveRequestAndRedirectToLogin(request, response);
+		}
 		return Boolean.FALSE;
 	}
 

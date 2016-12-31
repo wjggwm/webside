@@ -38,16 +38,16 @@ public class PermissionFilter extends AccessControlFilter {
 			}
 		}
 		//取到请求的uri ，进行权限判断
-		String uri = ((HttpServletRequest)request).getRequestURI();
+		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		
+		String uri = httpRequest.getRequestURI();
+		String contextPath = httpRequest.getContextPath();
+		if(uri != null && uri.startsWith(contextPath))
+		{
+			uri = uri.replace(contextPath, "");
+		}
 		if(subject.isPermitted(uri)){
 			return Boolean.TRUE;
-		}
-		if(ShiroFilterUtils.isAjax(request)){
-			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("status", "403");
-			result.put("success", false);
-			result.put("message", "当前用户没有登录");
-			ShiroFilterUtils.writeJson(response, result);
 		}
 		return Boolean.FALSE;
 	}
@@ -58,14 +58,23 @@ public class PermissionFilter extends AccessControlFilter {
 		
 			Subject subject = getSubject(request, response);  
 	        if (null == subject.getPrincipal()) {//表示没有登录，重定向到登录页面  
-	            saveRequest(request);  
+	            saveRequest(request);
 	            WebUtils.issueRedirect(request, response, ShiroFilterUtils.LOGIN_URL);  
-	        } else {  
-	            if (StringUtils.hasText(ShiroFilterUtils.UNAUTHORIZED)) {//如果有未授权页面跳转过去  
-	                WebUtils.issueRedirect(request, response, ShiroFilterUtils.UNAUTHORIZED);  
-	            } else {//否则返回401未授权状态码  
-	                WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);  
-	            }  
+	        } else {
+	    		if(ShiroFilterUtils.isAjax(request)){
+	    			Map<String, Object> result = new HashMap<String, Object>();
+	    			result.put("status", "401");
+	    			result.put("message", "当前用户没有权限");
+	    			result.put("url", ShiroFilterUtils.UNAUTHORIZED);
+	    			ShiroFilterUtils.writeJson(response, result);
+	    		}else
+	    		{
+	    			if (StringUtils.hasText(ShiroFilterUtils.UNAUTHORIZED)) {//如果有未授权页面跳转过去  
+		                WebUtils.issueRedirect(request, response, ShiroFilterUtils.UNAUTHORIZED);  
+		            } else {//否则返回401未授权状态码  
+		                WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);  
+		            } 
+	    		}
 	        }  
 		return Boolean.FALSE;
 	}

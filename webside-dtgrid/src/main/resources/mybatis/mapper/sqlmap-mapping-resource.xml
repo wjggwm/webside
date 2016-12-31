@@ -88,7 +88,7 @@
 		FROM tb_resource t1 LEFT JOIN tb_resource t2 ON t1.s_parent_id = t2.s_id
 		<where>
 			<if test="name != null and name != ''">
-				and t1.s_name=#{name}
+				and t1.s_name=#{name} OR t2.s_name=#{name}
 			</if>
 			<if test="isHide != null">
 				and t1.s_is_hide=${isHide}

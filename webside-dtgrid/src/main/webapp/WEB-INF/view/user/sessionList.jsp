@@ -1,29 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/resource/list.js"></script>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/customer/user/sessionList.js"></script>
 <div class="page-header">
-	<shiro:hasPermission name="resource:addUI">
-	<button id="btnAdd" type="button" onclick="webside.common.addModel('/resource/addUI.html')" class="btn btn-primary btn-sm">
-	  	<i class="fa fa-user-plus"></i>&nbsp;添加
-	</button>
+	<shiro:hasPermission name="session:kickout">
+		<button id="btnDel" type="button" onclick="kickout()" class="btn btn-danger btn-sm">
+			<i class="fa fa-trash-o"></i>&nbsp;踢出
+		</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="resource:editUI">
-	<button id="btnEdit" type="button" onclick="webside.common.editModel('/resource/editUI.html')" class="btn btn-info btn-sm">
-		 <i class="fa fa-pencil-square-o"></i>&nbsp;编辑
-	</button>
+	<shiro:hasPermission name="session:info">
+		<button id="btnDel" type="button" onclick="sessionInfo()" class="btn btn-info btn-sm">
+			<i class="fa fa-trash-o"></i>&nbsp;详情
+		</button>
 	</shiro:hasPermission>
-	<shiro:hasPermission name="resource:deleteBatch">
-	<button id="btnDel" type="button" onclick="webside.form.resource.delModel('/resource/deleteBatch.html', customSearch)" class="btn btn-danger btn-sm">
-		<i class="fa fa-trash-o"></i>&nbsp;删除
-	</button>
-	</shiro:hasPermission>
-</div>
-<div class="input-group">
-     <input id="searchKey" type="text" class="input form-control" placeholder="资源名称...">
-     <span class="input-group-btn">
-         <button id="btnSearch" class="btn btn-primary btn-sm" type="button"> <i class="fa fa-search"></i> 搜索</button>
-     </span>
 </div>
 <div class="row" style="margin-top:5px;">
 	<div class="col-xs-12 widget-container-col ui-sortable"
@@ -32,7 +21,7 @@
 		<div class="widget-box transparent ui-sortable-handle"
 			style="opacity: 1; z-index: 0;">
 			<div class="widget-header">
-				<h4 class="widget-title lighter">资源列表</h4>
+				<h4 class="widget-title lighter">在线用户列表</h4>
 				<div class="widget-toolbar no-border">
 					<a href="#" data-action="fullscreen" class="orange2"> 
 						<i class="ace-icon fa fa-arrows-alt"></i>
@@ -55,6 +44,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
 </div>
 
 

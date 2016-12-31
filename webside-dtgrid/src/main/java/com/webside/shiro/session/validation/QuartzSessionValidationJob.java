@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.webside.shiro.session;
+package com.webside.shiro.session.validation;
 
 import org.apache.shiro.session.mgt.ValidatingSessionManager;
 import org.quartz.Job;
