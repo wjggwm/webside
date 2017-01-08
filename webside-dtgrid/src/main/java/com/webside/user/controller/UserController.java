@@ -485,7 +485,7 @@ public class UserController extends BaseController {
 		try
 		{
 			String password = userEntity.getPassword();
-			userEntity.setUserName(new String(userEntity.getUserName().getBytes("iso-8859-1"),"utf-8"));
+			//userEntity.setUserName(new String(userEntity.getUserName().getBytes("iso-8859-1"),"utf-8"));
 			//加密用户输入的密码，得到密码和加密盐，保存到数据库
 			UserEntity user = EndecryptUtils.md5Password(userEntity.getAccountName(), userEntity.getPassword(), Integer.valueOf(hashIterations));
 			//设置添加用户的密码和加密盐
@@ -496,7 +496,7 @@ public class UserController extends BaseController {
 			{
 				result.put("success", true);
 				result.put("data", null);
-				result.put("message", "密码修改成功");
+				result.put("message", "密码修改成功,请重新登录");
 			}else
 			{
 				result.put("success", false);

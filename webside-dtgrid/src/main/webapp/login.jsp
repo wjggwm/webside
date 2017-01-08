@@ -24,24 +24,10 @@ $(document).ready(function() {
     	layer.alert('${error}', {icon : 5,shift : 6,time : 0});
 	}
 	
-	//页面进行跳转到login.html
-	/*
-	if (window.location.href.indexOf("/login.html") == -1) {
-	    if($("#userId").val() == null || $("#userId").val() == "")
-	    {
-	        top.location.href = "login.html";
-	    }else
-	    {
-	        top.location.href = "index.html";
-	    }
-	}
-	*/
-	
 });
 </script>
 </head>
 <body class="login-layout">
-<input id="userId" type="hidden" value="<c:if test="${not empty sessionScope.userSession.id}">${sessionScope.userSession.id }</c:if>"/>
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
@@ -67,18 +53,18 @@ $(document).ready(function() {
 										<div class="space-6"></div>
 
 										<form id="loginform" name="loginform"
-											action="${ctx }/login.html"
+											action="${ctx }/signin.html"
 											method="post">
 											<fieldset>
 												<label class="block clearfix"> 
 												<span class="block input-icon input-icon-right"> 
-													<input name="accountName" id="accountName" type="email" class="form-control" placeholder="邮箱" /> 
+													<input value="${accountName}" name="accountName" id="accountName" type="email" class="form-control" placeholder="邮箱" /> 
 													<i class="ace-icon fa fa-user"></i>
 												</span>
 												</label> 
 												<label class="block clearfix"> 
 												<span class="block input-icon input-icon-right"> 
-													<input name="password" id="password" type="password" class="form-control" placeholder="密码" />
+													<input value="${password}" name="password" id="password" type="password" class="form-control" placeholder="密码" />
 													<i class="ace-icon fa fa-lock"></i>
 												</span>
 												</label>

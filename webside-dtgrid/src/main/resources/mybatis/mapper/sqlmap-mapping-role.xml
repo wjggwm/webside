@@ -178,13 +178,13 @@
 	</delete>
 	
 	<select id="findRoleUserById" parameterType="int" resultType="int" flushCache="true" useCache="true">
-		SELECT count(*)
+		SELECT count(id)
 		FROM tb_role_user
 		where r_id = ${roleId}
 	</select>
 	
 	<select id="findRoleResourceById" parameterType="int" resultType="int" flushCache="true" useCache="true">
-		SELECT count(*)
+		SELECT count(id)
 		FROM tb_resources_role
 		where r_id = ${roleId}
 	</select>
@@ -218,5 +218,9 @@
 				now()
 			)
 	</insert>
+	
+	<select id="findUserIdByRoleId" parameterType="int" resultType="long" flushCache="true" useCache="true">
+		SELECT DISTINCT u_id FROM tb_role_user where r_id = ${roleId}
+	</select>
 	
 </mapper>

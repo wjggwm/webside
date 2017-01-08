@@ -102,7 +102,7 @@ public class IndexController extends BaseController {
 	 * @param password	密码
 	 * @return
 	 */
-	@RequestMapping(value = "login.html", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+	@RequestMapping(value = "signin.html", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
 	public String userLogin(UserEntity userEntity, String captcha, Boolean rememberMe, HttpServletRequest request) {
 		UsernamePasswordToken token = null;
 		String url = "";
@@ -112,6 +112,8 @@ public class IndexController extends BaseController {
 	        if(!StringUtils.equalsIgnoreCase(expected, captcha))
 	        {
 	        	request.setAttribute("error", "验证码错误！");
+	        	request.setAttribute("accountName", userEntity.getAccountName());
+	        	request.setAttribute("password", userEntity.getPassword());
 				return "/login";
 	        }else
 	        {
@@ -140,17 +142,22 @@ public class IndexController extends BaseController {
 					 * shiro 获取登录之前的地址
 					 */
 					SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+					String contextPath = request.getContextPath();
 					if(null != savedRequest){
-						url = savedRequest.getRequestUrl().replace("/webside", "");
+						url = savedRequest.getRequestUrl().replace(contextPath, "");
 					}
 					//如果登录之前没有地址，那么就跳转到首页。
 					if(StringUtils.isBlank(url)){
 						url = "/index.html";
 					}
+					//由于系统使用ajax请求，所以均跳转到主页
+					url = "/index.html";
 				} else {
 					token.clear();
 					request.setAttribute("error", "用户名或密码不正确！");
-					return "/login";
+					request.setAttribute("accountName", userEntity.getAccountName());
+		        	request.setAttribute("password", userEntity.getPassword());
+					return "/loginUI";
 				}
 	        }
 		}catch (UnknownAccountException uae)
@@ -182,7 +189,7 @@ public class IndexController extends BaseController {
 			{
 				token.clear();
 			}
-			request.setAttribute("error", "您连续输错5次,帐号将被锁定10分钟!");
+			request.setAttribute("error", "您连续输错密码5次,帐号将被锁定10分钟!");
 			return "/login";
 		}catch(ExpiredCredentialsException eca)
 		{
@@ -207,6 +214,10 @@ public class IndexController extends BaseController {
 			}
 			request.setAttribute("error", "登录异常，请联系管理员！");
 			return "/login";
+		}finally
+		{
+			request.setAttribute("accountName", userEntity.getAccountName());
+        	request.setAttribute("password", userEntity.getPassword());
 		}
 		return "redirect:" + url;
 	}
@@ -222,7 +233,7 @@ public class IndexController extends BaseController {
 			// 获取登录的bean
 			UserEntity userEntity = (UserEntity)SecurityUtils.getSubject().getPrincipal();
 			List<ResourceEntity> list = resourceService.findResourcesMenuByUserId(userEntity.getId().intValue());
-			List<ResourceEntity> treeList = new TreeUtil().getChildResourceEntitys(list, null);
+			List<ResourceEntity> treeList = TreeUtil.getChildResourceEntitys(list, null);
 			model.addAttribute("list", treeList);
 			model.addAttribute("menu", JSON.toJSONString(treeList));
 			// 登陆的信息回传页面

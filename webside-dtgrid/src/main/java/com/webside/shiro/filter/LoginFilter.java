@@ -31,9 +31,16 @@ public class LoginFilter extends AccessControlFilter {
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,
 			ServletResponse response, Object mappedValue) throws Exception {
-		UserEntity user = ShiroAuthenticationManager.getUserEntity();
+		
+		UserEntity userEntity = ShiroAuthenticationManager.getUserEntity();
 
-		if (null != user || isLoginRequest(request, response)) {
+		if (null != userEntity || isLoginRequest(request, response)) {
+			//避免rememberme或其他情况session中用户信息丢失的情况
+			UserEntity userSession = (UserEntity)ShiroAuthenticationManager.getSessionAttribute(ShiroUtils.USERSESSION);
+			if(null == userSession)
+			{
+				ShiroAuthenticationManager.setSessionAttribute(ShiroUtils.USERSESSION, userEntity);
+			}
 			return Boolean.TRUE;
 		}
 		
@@ -50,12 +57,12 @@ public class LoginFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request,
 			ServletResponse response) throws Exception {
-		if (ShiroFilterUtils.isAjax(request)) {// ajax请求
+		if (ShiroUtils.isAjax(request)) {// ajax请求
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("status", "403");
 			result.put("message", "用户未登陆,请重新登录!");
-			result.put("url", "");
-			ShiroFilterUtils.writeJson(response, result);
+			result.put("url", ShiroUtils.LOGIN_URL);
+			ShiroUtils.writeJson(response, result);
 		}else
 		{
 			// 保存Request和Response 到登录后的链接

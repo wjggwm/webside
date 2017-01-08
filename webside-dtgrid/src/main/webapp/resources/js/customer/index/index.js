@@ -1,7 +1,8 @@
 var webside = {
     index : {
         initHomePage : function() {
-            $(".page-content").load(sys.rootPath + "/welcome.jsp");
+            //$(".page-content").load(sys.rootPath + "/welcome.jsp");
+            webside.common.loadPage("/welcome.jsp");
             $(".breadcrumb").html('<li><i class="ace-icon fa fa-home home-icon"></i><a href="javascript:webside.index.initHomePage();">首页</a></li><li class="active">控制台</li>');
         },
         menu : {
@@ -28,28 +29,35 @@ var webside = {
                             $(".breadcrumb").html(breadcrumb);
                             //加载页面
                             $(".page-content").empty();//清除该节点子元素
-                            $(".page-content").load(sys.rootPath + sn[sn.length - 1],function(data,status){
+                            $(".page-content").load(sys.rootPath + sn[sn.length - 1],function(data, statusTxt, xhr){
                             	layer.close(lay);
-				            	if(data.match("^\{(.+:.+,*){1,}\}$"))
-				            	{
-				            		$(".page-content").empty();//清除该节点子元素
-				            		
-				            		data = $.parseJSON(data);
-				            		if(data.status == "401")
-				            		{
-				            			layer.msg(dats.message, {
-				                            icon : 0
-				                        });
-				            		}else if(data.status == "403")
-				            		{
-				            			layer.confirm(data.message, {
-						                    icon : 3,
-						                    title : '提示'
-						                }, function(index, layero) {
-						                    window.location.href = sys.rootPath + data.url;
-						                });
-				            		}
-				            	}
+                            	if(statusTxt == "error" || statusTxt=="timeout" || statusTxt=="parsererror")
+                            	{
+                            		layer.msg("请求服务器超时,请重新登录或刷新浏览器再试!", {icon : 0});
+                            	}else //statusTxt=="success" || statusTxt=="notmodified"
+                            	{
+                            		//匹配json字符串
+                            		if(data.match("^\{(.+:.+,*){1,}\}$"))
+					            	{
+					            		$(".page-content").empty();//清除该节点子元素
+					            		
+					            		data = $.parseJSON(data);
+					            		if(data.status == "401")
+					            		{
+					            			//layer.msg(data.message, {icon : 0});
+					            			$(".page-content").load(sys.rootPath + data.url);
+					            		}else if(data.status == "403")
+					            		{
+					            			layer.confirm(data.message, {
+							                    icon : 3,
+							                    title : '提示',
+			                    				btn: ['重新登录','取消'] //按钮
+							                }, function(index, layero) {
+							                    window.location.href = sys.rootPath + data.url;
+							                });
+					            		}
+					            	}
+                            	}
                             });
                         }
                         var level = $(this).parent("li").attr("level");
@@ -115,25 +123,31 @@ var webside = {
          */
         loadPage : function(nav) {
             //加载页面
-            $(".page-content").load(sys.rootPath + nav ,function(data,status){
-            	if(data.match("^\{(.+:.+,*){1,}\}$"))
+            $(".page-content").load(sys.rootPath + nav ,function(data, statusTxt, xhr){
+            	if(statusTxt == "error" || statusTxt=="timeout" || statusTxt=="parsererror")
             	{
-            		$(".page-content").empty();//清除该节点子元素
-            		data = $.parseJSON(data);
-            		if(data.status == "401")
-            		{
-            			layer.msg(dats.message, {
-                            icon : 0
-                        });
-            		}else if(data.status == "403")
-            		{
-	                    layer.confirm(data.message, {
-		                    icon : 3,
-		                    title : '提示'
-		                }, function(index, layero) {
-		                    window.location.href = sys.rootPath + data.url;
-		                });
-            		}
+            		layer.msg("请求服务器超时,请重新登录或刷新浏览器再试!", {icon : 0});
+            	}else //statusTxt=="success" || statusTxt=="notmodified"
+            	{
+	            	if(data.match("^\{(.+:.+,*){1,}\}$"))
+	            	{
+	            		$(".page-content").empty();//清除该节点子元素
+	            		data = $.parseJSON(data);
+	            		if(data.status == "401")
+	            		{
+	            			//layer.msg(data.message, {icon : 0});
+	                        $(".page-content").load(sys.rootPath + data.url);
+	            		}else if(data.status == "403")
+	            		{
+		                    layer.confirm(data.message, {
+			                    icon : 3,
+			                    title : '提示',
+			                    btn: ['重新登录','取消'] //按钮
+			                }, function(index, layero) {
+			                    window.location.href = sys.rootPath + data.url;
+			                });
+	            		}
+	            	}
             	}
             });
         },
@@ -316,16 +330,30 @@ var webside = {
                 },
                 success : function(resultdata) {
                     layer.close(index);
-                    if (resultdata.success) {
-                        layer.msg(resultdata.message, {
-                            icon : 1
-                        });
-                        window.location.href=sys.rootPath + jumpUrl;
-                    } else {
-                        layer.msg(resultdata.message, {
-                            icon : 5
-                        });
-                    }
+                    if(resultdata.status == "403")
+            		{
+            			layer.confirm(resultdata.message, {
+		                    icon : 3,
+		                    title : '提示',
+		                    btn: ['重新登录','取消'] //按钮
+		                }, function(index, layero) {
+		                    window.location.href = sys.rootPath + resultdata.url;
+		                });
+            		}else
+            		{
+	            		if (resultdata.success) {
+	            			layer.confirm(resultdata.message, {
+		                    icon : 3,
+		                    title : '提示'
+			                }, function(index, layero) {
+			                    window.location.href=sys.rootPath + jumpUrl;
+			                });
+	                    } else {
+	                        layer.msg(resultdata.message, {
+	                            icon : 5
+	                        });
+	                    }
+            		}
                 },
                 error : function(data, errorMsg) {
                     layer.close(index);

@@ -1,10 +1,15 @@
 package com.webside.shiro;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.webside.user.model.UserEntity;
+import com.webside.user.service.UserSessionService;
+import com.webside.util.SpringContextUtil;
 
 /**
  * 
@@ -15,6 +20,14 @@ import com.webside.user.model.UserEntity;
  *
  */
 public class ShiroAuthenticationManager {
+	/*
+	 * 用户权限管理
+	 */
+	public static final MyDBRealm myDBRealm = SpringContextUtil.getBean("myDBRealm", MyDBRealm.class);
+	/*
+	 * 用户session管理
+	 */
+	public static final UserSessionService userSessionService = SpringContextUtil.getBean("userSessionService", UserSessionService.class);
 
 	/**
 	 * 获取shiro的session
@@ -106,6 +119,54 @@ public class ShiroAuthenticationManager {
 		String kaptcha = getSessionAttribute(key).toString();
 		getSession().removeAttribute(key);
 		return kaptcha;
+	}
+	
+	
+	/**
+	 * 
+	 * @Description	清空当前用户权限信息
+	 * </br>目的：为了在判断权限的时候，系统会再次调用 <code>doGetAuthorizationInfo(...)  </code>方法加载权限信息。
+	 *
+	 * @author wjggwm
+	 * @data 2017年1月5日 下午6:09:55
+	 */
+	public static void clearUserAuth(){
+		myDBRealm.clearCachedAuthorizationInfo();
+	}
+	
+	
+	/**
+	 * 
+	 * @Description 根据UserIds清空权限信息
+	 * @param userIds	用户ids
+	 *
+	 * @author wjggwm
+	 * @data 2017年1月5日 下午6:07:45
+	 */
+	public static void clearUserAuthByUserId(Long...userIds){
+		
+		if(null == userIds || userIds.length == 0)	return ;
+		List<SimplePrincipalCollection> result = userSessionService.getSimplePrincipalCollectionByUserId(userIds);
+		
+		for (SimplePrincipalCollection simplePrincipalCollection : result) {
+			myDBRealm.clearCachedAuthorizationInfo(simplePrincipalCollection);
+		}
+	}
+
+
+	/**
+	 * 
+	 * @Description 根据UserIds清空权限信息
+	 * @param userIds	用户ids
+	 *
+	 * @author wjggwm
+	 * @data 2017年1月5日 下午6:08:01
+	 */
+	public static void clearUserAuthByUserId(List<Long> userIds) {
+		if(null == userIds || userIds.size() == 0){
+			return ;
+		}
+		clearUserAuthByUserId(userIds.toArray(new Long[0]));
 	}
 
 }

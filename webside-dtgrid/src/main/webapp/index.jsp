@@ -12,6 +12,7 @@ $(function() {
     webside.index.initScrollBar();
     webside.index.menu.initDropdownMenuStyle();
     webside.index.menu.initMenuEvent();
+    
 });
 </script>
 </head>

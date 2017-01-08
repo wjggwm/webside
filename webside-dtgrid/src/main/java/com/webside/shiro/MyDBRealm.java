@@ -17,10 +17,11 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 
 import com.webside.resource.mapper.ResourceMapper;
 import com.webside.resource.model.ResourceEntity;
+import com.webside.shiro.filter.ShiroUtils;
+import com.webside.shiro.util.MyByteSource;
 import com.webside.user.mapper.UserMapper;
 import com.webside.user.model.UserEntity;
 
@@ -33,7 +34,7 @@ import com.webside.user.model.UserEntity;
  * @date 2016年7月12日 下午4:30:16
  *
  */
-public class MyRealm extends AuthorizingRealm {
+public class MyDBRealm extends AuthorizingRealm {
 
 	@Inject
 	private ResourceMapper resourceMapper;
@@ -59,10 +60,10 @@ public class MyRealm extends AuthorizingRealm {
 			// info.setRoles(user.getRolesName());
 			// 用户的角色对应的所有权限
 			for (ResourceEntity resourceEntity : resourceList) {
-				info.addStringPermission(resourceEntity.getSourceKey());
-				if(StringUtils.isNotBlank(resourceEntity.getSourceUrl()))
+				info.addStringPermission(resourceEntity.getSourceKey().trim());
+				if(StringUtils.isNotBlank(resourceEntity.getSourceUrl().trim()))
 				{
-					info.addStringPermission(resourceEntity.getSourceUrl());
+					info.addStringPermission(resourceEntity.getSourceUrl().trim());
 					//可以正则匹配,也可以根据规则匹配，针对/*/add.html或/*/edit.html进行扩展，追加表单页面的权限/*/addUI.html或/*/editUI.html，这里暂不使用这种方式，而是改为手动添加资源的方式，比较灵活
 					/*
 					if(resourceEntity.getSourceUrl().endsWith("/add.html"))
@@ -109,11 +110,12 @@ public class MyRealm extends AuthorizingRealm {
             authenticationInfo = new SimpleAuthenticationInfo(
             		userEntity, // 用户对象
             		userEntity.getPassword(), // 密码
-					ByteSource.Util.bytes(username + userEntity.getCredentialsSalt()),// salt=username+salt
+					//ByteSource.Util.bytes(username + userEntity.getCredentialsSalt()),// salt=username+salt
+            		new MyByteSource(username + userEntity.getCredentialsSalt()),
 					getName() // realm name
 			);
-            //设置session
-            ShiroAuthenticationManager.getSession().setAttribute("userSession", userEntity);
+            //设置session属性
+            ShiroAuthenticationManager.setSessionAttribute(ShiroUtils.USERSESSION, userEntity);
             return authenticationInfo;
 		} else {
 			throw new UnknownAccountException();// 没找到帐号

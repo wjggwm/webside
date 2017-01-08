@@ -153,6 +153,8 @@ public class ResourceController extends BaseController {
 		{
 			resourceEntity.setIsHide(0);
 			resourceEntity.setCreateTime(new Date(System.currentTimeMillis()));
+			resourceEntity.setSourceKey(resourceEntity.getSourceKey().trim());
+			resourceEntity.setSourceUrl(resourceEntity.getSourceUrl().trim());
 			boolean result = roleResourceService.insertRoleAndResource(resourceEntity);
 			if(result)
 			{

@@ -49,9 +49,8 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 开发计划(不分先后)：
 1、quartz计划任务(已实现)
 2、restful api 支持
-3、restful api引入Protostuff(基于 Protobuf 序列化框架，面向 POJO，无需编写 .proto 文件)
-4、Shiro Ajax请求权限不满足，拦截后解决方案
-5、shiro + redis(NoSql) 集成
+4、Shiro Ajax请求权限不满足，拦截后解决方案(已实现)
+5、shiro + redis(NoSql) 集成(已实现)
 6、管理员权限的自动添加(当有一个权限创建，自动添加到管理员角色下，保证管理员是最大权限)(已实现)
 7、RPC服务支持
 	7.1、Motan(是一套高性能、易于使用的分布式远程服务调用(RPC)框架)

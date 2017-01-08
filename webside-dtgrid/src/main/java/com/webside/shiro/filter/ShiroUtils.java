@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,16 +27,33 @@ import com.alibaba.fastjson.JSON;
  * @author wjggwm
  * @data 2016年12月12日 下午5:14:09
  */
-public class ShiroFilterUtils {
+public class ShiroUtils {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShiroFilterUtils.class);
-	
-	//登录页面
-	static final String LOGIN_URL = "/login.html";
-	//踢出登录提示
-	final static String KICKED_OUT = "/kickout.jsp";
-	//没有权限提醒
-	final static String UNAUTHORIZED = "/denied.jsp";
+	private static final Logger logger = LoggerFactory.getLogger(ShiroUtils.class);
+	/*
+	 * 登录地址：这里使用空的登录地址，是为了让程序根据contextPath自动跳转
+	 */
+	public static final String LOGIN_URL = "";
+	/*
+	 * 没有权限提醒
+	 */
+	public static final String UNAUTHORIZED = "/denied.jsp";
+	/*
+	 * 存储在session中用户信息的名称
+	 */
+	public static final String USERSESSION = "userSession";
+	/*
+	 * 不需要认证和授权的路径
+	 */
+	public static final String OPENAPI = "/openapi";
+	/*
+     * 在线用户
+     */
+	public static final String ONLINE_USER = "session_online_user";
+  	/*
+  	 * 踢出状态，true表示踢出
+  	 */
+	public static final String KICKOUT_STATUS = "session_kickout_status";
 	
 	/**
 	 * 是否是Ajax请求

@@ -14,8 +14,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
 	<meta http-equiv="X-UA-Compatible" content="E=edge;chrome=1" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>系统发生异常 :(</title>
+        <title>500 系统异常-webside 专业、用心、开源免费</title>
         <style>
             ::-moz-selection {
                 background: #b3d4fc;

@@ -37,7 +37,7 @@ public class KickoutAuthFilter extends AccessControlFilter {
 
 		HttpServletRequest httpRequest = ((HttpServletRequest)request);
 		String url = httpRequest.getRequestURI();
-		if(url.startsWith("/api/")){
+		if(url.startsWith(ShiroUtils.OPENAPI)){
 			return Boolean.TRUE;
 		}
 		Subject subject = getSubject(request, response);
@@ -52,32 +52,27 @@ public class KickoutAuthFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request,
 			ServletResponse response) throws Exception {
-		
 		//先退出
 		Subject subject = getSubject(request, response);
 		subject.logout();
 		/**
-		 * 保存Request，用来保存当前Request，然后登录后可以跳转到当前浏览的页面。
-		 * 比如：
-		 * 我要访问一个URL地址，/admin/index.html，这个页面是要登录。然后要跳转到登录页面，但是登录后要跳转回来到/admin/index.html这个地址，怎么办？
-		 * 传统的解决方法是变成/user/login.shtml?redirectUrl=/admin/index.html。
-		 * shiro的解决办法不是这样的。需要：<code>WebUtils.getSavedRequest(request);</code>
-		 * 							 然后：{@link UserLoginController.submitLogin(...)}中的<code>String url = WebUtils.getSavedRequest(request).getRequestUrl();</code>
-		 * 如果还有问题，请咨询我。
+		 * shiro保存上次请求地址：
+		 * WebUtils.getSavedRequest(request);
+		 * 然后在需要使用的地方：String url = WebUtils.getSavedRequest(request).getRequestUrl();
 		 */
 		//判断是不是Ajax请求
-		if (ShiroFilterUtils.isAjax(request) ) {
+		if (ShiroUtils.isAjax(request) ) {
 			Map<String, Object> result = new HashMap<String, Object>();
 			logger.debug("当前用户已经被踢出，并且是Ajax请求！");
 			result.put("status", "403");
 			result.put("message", "您已经被踢出，请重新登录！");
-			result.put("url", ShiroFilterUtils.LOGIN_URL);
-			ShiroFilterUtils.writeJson(response, result);
+			result.put("url", ShiroUtils.LOGIN_URL);
+			ShiroUtils.writeJson(response, result);
 		}else
 		{
 			WebUtils.getSavedRequest(request);
 			//再重定向
-			WebUtils.issueRedirect(request, response, ShiroFilterUtils.KICKED_OUT);
+			WebUtils.issueRedirect(request, response, ShiroUtils.LOGIN_URL);
 		}
 		return false;
 	}

@@ -154,6 +154,12 @@ function customSearch() {
 function resetPWDModel() {
     var rows = grid.getCheckedRecords();
     if (rows.length == 1) {
+	    if (rows[0].role.key == 'administrator') {
+	        layer.msg('该用户为超级管理员,不能重置密码!', {
+	            icon : 0
+	        });
+	        return false;
+	    }
         var index;
         $.ajax({
             type : "POST",
@@ -198,6 +204,14 @@ function resetPWDModel() {
 function lockModel(url) {
     var rows = grid.getCheckedRecords();
     if (rows.length == 1) {
+    	if (url == '/user/lock.html' || url == '/user/unlock.html') {
+	        if (rows[0].role.key == 'administrator') {
+	            layer.msg('该用户为超级管理员,不能锁定或解锁!', {
+	                icon : 0
+	            });
+	            return false;
+	        }
+	    }
         var index;
         $.ajax({
             type : "POST",

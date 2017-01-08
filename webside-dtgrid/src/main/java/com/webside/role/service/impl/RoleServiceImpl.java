@@ -12,6 +12,7 @@ import com.webside.exception.ServiceException;
 import com.webside.role.mapper.RoleMapper;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
+import com.webside.shiro.ShiroAuthenticationManager;
 
 @Service("roleService")
 public class RoleServiceImpl extends AbstractService<RoleEntity, Long>
@@ -52,6 +53,10 @@ public class RoleServiceImpl extends AbstractService<RoleEntity, Long>
 					flag = true;
 				}
 			}
+			
+			List<Long> userIds = roleMapper.findUserIdByRoleId(id);
+			ShiroAuthenticationManager.clearUserAuthByUserId(userIds);
+			
 			return flag;
 		} catch (Exception e) {
 			throw new ServiceException(e);

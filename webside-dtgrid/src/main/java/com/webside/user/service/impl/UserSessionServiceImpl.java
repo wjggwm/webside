@@ -30,7 +30,7 @@ import com.webside.user.service.UserSessionService;
  * @author wjggwm
  * @data 2016年12月13日 下午12:33:10
  */
-@Service
+@Service("userSessionService")
 public class UserSessionServiceImpl implements UserSessionService {
 
 	private static final Logger logger = LoggerFactory

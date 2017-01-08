@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.webside.base.baseservice.impl.AbstractService;
 import com.webside.exception.ServiceException;
+import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.user.mapper.UserMapper;
 import com.webside.user.model.UserEntity;
 import com.webside.user.service.UserService;
@@ -74,7 +75,9 @@ public class UserServiceImpl extends AbstractService<UserEntity, Long> implement
 			{
 				if(userMapper.updateUserRole(userEntity) == 1)
 				{
-					return userMapper.updateUserInfo(userEntity);
+					int result = userMapper.updateUserInfo(userEntity);
+					ShiroAuthenticationManager.clearUserAuthByUserId(userEntity.getId());
+					return result;
 				}else
 				{
 					return 0;

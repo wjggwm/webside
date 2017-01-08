@@ -23,25 +23,25 @@ public class ShiroSessionListener implements SessionListener {
     private ShiroSessionRepository shiroSessionRepository;
 
     /**
-     * 一个回话的生命周期开始
+     * session会话开始
      */
     @Override
     public void onStart(Session session) {
-        System.out.println("session start");
     }
     /**
-     * 一个回话的生命周期结束
+     * session会话结束
      */
     @Override
     public void onStop(Session session) {
-        System.out.println("session stop");
     }
 
+    /**
+     * session会话到期
+     */
     @Override
     public void onExpiration(Session session) {
     	//session过期进行清理
         shiroSessionRepository.deleteSession(session.getId());
-    	System.out.println("session onExpiration");
     }
 
     public ShiroSessionRepository getShiroSessionRepository() {

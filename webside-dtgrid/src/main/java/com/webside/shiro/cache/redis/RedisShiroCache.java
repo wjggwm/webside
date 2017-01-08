@@ -39,7 +39,7 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
     /**
      * Redis 分片(分区)，也可以在配置文件中配置,默认dbIndex=0
      */
-    private static final int DB_INDEX = 1;
+    public static final int DB_INDEX = 1;
 
     private RedisManager redisManager;
     
@@ -154,7 +154,7 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
         }
     }
 
-    private String generateCacheKey(Object key) {
+    public String generateCacheKey(Object key) {
         return REDIS_SHIRO_CACHE + getName() + ":" + key;
     }
 

@@ -1,5 +1,6 @@
 package com.webside.role.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -46,4 +47,16 @@ public interface RoleMapper extends BaseMapper<RoleEntity, Long>{
 	 * @return
 	 */
 	public int addRoleResource(Map<String, Object> parameter);
+	
+	/**
+	 * 
+	 * @Description 根据角色Id查询用户Ids
+	 * @param roleId
+	 * @return
+	 *
+	 * @author wjggwm
+	 * @data 2017年1月6日 下午2:35:16
+	 */
+	public List<Long> findUserIdByRoleId(@Param(value="roleId") Integer roleId);
+	
 }

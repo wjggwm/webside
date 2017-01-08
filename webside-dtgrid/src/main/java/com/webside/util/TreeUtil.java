@@ -108,12 +108,12 @@ public class TreeUtil {
 	 * @param parent	父节点ID
 	 * @return	树形结构集合
 	 */
-	public List<ResourceEntity> getChildResourceEntitys(List<ResourceEntity> list,Integer parentId) {
+	public static List<ResourceEntity> getChildResourceEntitys(List<ResourceEntity> list,Integer parentId) {
 		List<ResourceEntity> returnList = new ArrayList<ResourceEntity>();
 		for (Iterator<ResourceEntity> iterator = list.iterator(); iterator.hasNext();) {
 			ResourceEntity t = iterator.next();
 			// 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
-			if (t.getParentId()==parentId) {
+			if (null  == parentId ? null == t.getParentId() : parentId.equals(t.getParentId())) {
 				recursionFn(list, t);
 				returnList.add(t);
 			}
@@ -126,7 +126,7 @@ public class TreeUtil {
 	 * @param list
 	 * @param t
 	 */
-	private void recursionFn(List<ResourceEntity> list, ResourceEntity t) {
+	private static void recursionFn(List<ResourceEntity> list, ResourceEntity t) {
 		List<ResourceEntity> childList = getChildList(list, t);// 得到子节点列表
 		t.setChildren(childList);
 		for (ResourceEntity tChild : childList) {
@@ -146,14 +146,14 @@ public class TreeUtil {
 	 * @param t
 	 * @return
 	 */
-	private List<ResourceEntity> getChildList(List<ResourceEntity> list, ResourceEntity t) {
+	private static List<ResourceEntity> getChildList(List<ResourceEntity> list, ResourceEntity t) {
 		List<ResourceEntity> tlist = new ArrayList<ResourceEntity>();
 		Iterator<ResourceEntity> it = list.iterator();
 		while (it.hasNext()) {
 			ResourceEntity n = (ResourceEntity) it.next();
-			if(t.getType()!=2)
+			if(t.getType() != 2)
 			{
-				if (n.getParentId() == Integer.valueOf(t.getId().toString())) {
+				if (null == n.getParentId() ? null == Integer.valueOf(t.getId().toString()) : n.getParentId().equals(Integer.valueOf(t.getId().toString()))) {
 					//n.setParentName(t.getName());
 					tlist.add(n);
 				}
@@ -168,7 +168,7 @@ public class TreeUtil {
 	 * @param t
 	 * @return
 	 */
-	private boolean hasChild(List<ResourceEntity> list, ResourceEntity t) {
+	private static boolean hasChild(List<ResourceEntity> list, ResourceEntity t) {
 		return getChildList(list, t).size() > 0 ? true : false;
 	}
 	

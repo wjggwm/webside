@@ -43,18 +43,18 @@ public class RoleFilter extends AccessControlFilter {
 			Subject subject = getSubject(request, response);  
 	        if (subject.getPrincipal() == null) {//表示没有登录，重定向到登录页面  
 	            saveRequest(request);  
-	            WebUtils.issueRedirect(request, response, ShiroFilterUtils.LOGIN_URL);  
+	            WebUtils.issueRedirect(request, response, ShiroUtils.LOGIN_URL);  
 	        } else {  
-	        	if(ShiroFilterUtils.isAjax(request)){
+	        	if(ShiroUtils.isAjax(request)){
 	    			Map<String, Object> result = new HashMap<String, Object>();
 	    			result.put("status", "401");
 	    			result.put("message", "当前用户没有权限");
-	    			result.put("url", ShiroFilterUtils.UNAUTHORIZED);
-	    			ShiroFilterUtils.writeJson(response, result);
+	    			result.put("url", ShiroUtils.UNAUTHORIZED);
+	    			ShiroUtils.writeJson(response, result);
 	    		}else
 	    		{
-	    			if (StringUtils.hasText(ShiroFilterUtils.UNAUTHORIZED)) {//如果有未授权页面跳转过去  
-		                WebUtils.issueRedirect(request, response, ShiroFilterUtils.UNAUTHORIZED);  
+	    			if (StringUtils.hasText(ShiroUtils.UNAUTHORIZED)) {//如果有未授权页面跳转过去  
+		                WebUtils.issueRedirect(request, response, ShiroUtils.UNAUTHORIZED);  
 		            } else {//否则返回401未授权状态码  
 		                WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);  
 		            } 

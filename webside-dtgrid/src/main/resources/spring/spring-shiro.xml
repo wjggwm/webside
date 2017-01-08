@@ -11,7 +11,8 @@
 		<!-- hashAlgorithmName必须的，没有默认值。可以有MD5或者SHA-1，如果对密码安全有更高要求可以用SHA-256或者更高。 
 			这里使用MD5 storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码 
 			hashIterations迭代次数，默认值是1。 -->
-		<constructor-arg ref="cacheManager" />
+		<constructor-arg index="0" name="cacheManager" ref="cacheManager"/>
+		<constructor-arg index="1" name="redisManager" ref="redisManager"/>
 		<!-- RetryLimitHashedCredentialsMatcher继承父类HashedCredentialsMatcher，需要给父类注入以下属性 -->
 		<property name="hashAlgorithmName" value="MD5" />
 		<property name="hashIterations" value="${shiro.hashIterations}" />
@@ -20,17 +21,17 @@
 	</bean>
 
 	<!--自定义Realm -->
-	<bean id="myRealm" class="com.webside.shiro.MyRealm">
+	<bean id="myDBRealm" class="com.webside.shiro.MyDBRealm">
 		<property name="credentialsMatcher" ref="credentialsMatcher" />
 		<!-- 开启缓存 -->
 		<property name="cachingEnabled" value="true" />
 		<!-- 认证信息:这里不进行缓存 -->
 		<property name="authenticationCachingEnabled" value="false" />
-		<!-- ehcache中配置的认证缓存名称 -->
+		<!-- cache中配置的认证缓存名称 -->
 		<property name="authenticationCacheName" value="authenticationCache" />
-		<!-- 授权信息 -->
-		<property name="authorizationCachingEnabled" value="false" />
-		<!-- ehcache中配置的授权缓存名称 -->
+		<!-- 授权信息:这里进行缓存 -->
+		<property name="authorizationCachingEnabled" value="true" />
+		<!-- cache中配置的授权缓存名称 -->
 		<property name="authorizationCacheName" value="authorizationCache" />
 	</bean>
 
@@ -38,7 +39,7 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- Single realm app. If you have multiple realms, use the 'realms' property 
 			instead. -->
-		<property name="realm" ref="myRealm" />
+		<property name="realm" ref="myDBRealm" />
 		<property name="sessionManager" ref="sessionManager" />
 		<!-- 使用下面配置的缓存管理器 -->
 		<property name="cacheManager" ref="cacheManager" />
@@ -79,22 +80,15 @@
 		<property name="cookie" ref="rememberMeCookie" />
 	</bean>
 
-	<!-- 用户登录数控制,超过最大会话数会强制退出 -->
-	<bean id="kickoutFilter" class="com.webside.shiro.filter.KickoutSessionFilter">
-		<property name="kickoutAfter" value="false" />
-		<property name="maxSession" value="1" />
-		<property name="kickoutUrl" value="/login.html" />
-	</bean>
-
-	<bean id="kickoutAuthFilter" class="com.webside.shiro.filter.KickoutAuthFilter" />
-
-	<bean id="loginFilter" class="com.webside.shiro.filter.LoginFilter" />
-
+	<!-- 用户会话session控制 -->
+	<bean id="kickoutFilter" class="com.webside.shiro.filter.KickoutSessionFilter"/>
+	<!-- kickout Filter -->
+	<bean id="kickoutAuthFilter" class="com.webside.shiro.filter.KickoutAuthFilter"/>
+	<!-- user Filter -->
+	<bean id="loginFilter" class="com.webside.shiro.filter.LoginFilter"/>
 	<bean id="rememberMeFilter" class="com.webside.shiro.filter.RememberMeFilter"/>
-
 	<bean id="permissionFilter" class="com.webside.shiro.filter.PermissionFilter"/>
-	
-	<bean id="roleFilter" class="com.webside.shiro.filter.RoleFilter" />
+	<bean id="roleFilter" class="com.webside.shiro.filter.RoleFilter"/>
 
 	<bean id="chainDefinitionService" class="com.webside.shiro.service.impl.ChainDefinitionServiceImpl" />
 
