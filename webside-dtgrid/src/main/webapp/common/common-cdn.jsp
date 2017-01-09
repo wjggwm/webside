@@ -18,59 +18,59 @@
 <link href="${ctx }/resources/images/webside.ico" type="image/x-icon" rel="shortcut icon"/>  
 
 <link rel="stylesheet" href="${ctx}/resources/js/bootstrap/bootstrap.min.css"/>
-<link rel="stylesheet" href="${ctx}/resources/fonts/fontawesome/font-awesome.min.css" media="all"/>
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx}/resources/fonts/opensans/ace-fonts.min.css"/>
 <link rel="stylesheet" href="${ctx}/resources/css/ace/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
 <link rel="stylesheet" href="${ctx}/resources/css/customer/webside.min.css"/>
 <!--[if lte IE 9]>
 	<link rel="stylesheet" href="${ctx}/resources/css/ace/ace-part2.min.css" />
-<![endif]-->
-
-<!--[if lte IE 9]>
 	<link rel="stylesheet" href="${ctx}/resources/css/ace/ace-ie.min.css" />
 <![endif]-->
 <!-- JQuery script -->
+
 <!-- 非IE浏览器不会识别IE的条件注释，所以这里判断非IE需要如下写法：参照下面jquery-2.1.4.min.js引入的方式 -->
 <!--[if !IE]><!-->
-<script type="text/javascript" src="${ctx}/resources/js/jquery/jquery-2.1.4.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if IE]>
-	<script type="text/javascript" src="${ctx}/resources/js/jquery/jquery-1.11.3.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <![endif]-->
 <!-- basic scripts -->
 <script type="text/javascript">
-	if ('ontouchstart' in document.documentElement)document.write("<script src='${ctx}/resources/js/jquery/jquery.mobile.custom.min.js'>" + "<"+"script>");
+	if ('ontouchstart' in document.documentElement)document.write("<script src='//cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js'>" + "<"+"script>");
 </script>
-
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-	<script type="text/javascript" src="${ctx}/resources/js/ie/html5shiv.js"></script>
-	<script type="text/javascript" src="${ctx}/resources/js/ie/respond.min.js"></script>
+	<script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+	<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <!--[if lt IE 8]>
-    <script src="${ctx}/resources/js/ie/json2.js"></script>
+    <script src="//cdn.bootcss.com/json2/20160511/json2.min.js"></script>
 <![endif]-->
 <!--[if lte IE 8]>
 	<script type="text/javascript" src="${ctx}/resources/js/ie/excanvas.min.js"></script>
 <![endif]-->
 
-<script src="${ctx}/resources/js/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="${ctx}/resources/js/jqueryui/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+<script src="//cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="//cdn.bootcss.com/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
-<script type="text/javascript" src="${ctx}/resources/js/layer-v2.3/layer.js"></script>
+<script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.css" />
 <script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/i18n/zh-cn.js"></script>
 
-<script type="text/javascript" src="${ctx}/resources/js/jquery-validation/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/js/jquery-validation/localization/messages_zh.js"></script>
+<script src="//cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.min.js"></script>
 
-<script type="text/javascript" src="${ctx}/resources/js/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.0/jquery.nicescroll.min.js"></script>
 
-<link rel="stylesheet" href="${ctx }/resources/js/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css"/>
-<script type="text/javascript" src="${ctx }/resources/js/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="//cdn.bootcss.com/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
 
-<script type="text/javascript" src="${ctx }/resources/js/underscore/underscore-min.js"></script>
+<script src="//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="//cdn.bootcss.com/purl/2.3.1/purl.min.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/customer/index/index.min.js"></script>
 <script type="text/javascript" type="text/javascript">

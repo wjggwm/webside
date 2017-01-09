@@ -5,17 +5,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<!--  
 <link rel="stylesheet" href="${ctx }/resources/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="${ctx }/resources/fonts/fontawesome/font-awesome.min.css" media="all"/>
+-->
 <!--[if !IE]><!-->
+<!-- 
 <script type="text/javascript"
 	src="${ctx}/resources/js/jquery/jquery-2.1.4.min.js"></script>
+ -->
+ <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <!--<![endif]-->
+
 <!--[if IE]>
-	<script type="text/javascript" src="${ctx}/resources/js/jquery/jquery-1.11.3.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <![endif]-->
+
+<!--
 <script type="text/javascript"
 	src="${ctx}/resources/js/nicescroll/jquery.nicescroll.min.js"></script>
+-->
+
+<script src="//cdn.bootcss.com/jquery.nicescroll/3.6.0/jquery.nicescroll.min.js"></script>
 <link rel="stylesheet" href="${ctx }/resources/css/customer/webside-icon.min.css" />
 <script type="text/javascript">
 $(function() {

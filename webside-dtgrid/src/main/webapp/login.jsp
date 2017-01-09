@@ -6,11 +6,11 @@
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>webside	用心、专业、开源免费</title>
-<%@include file="common/common-login.jsp" %>
+<%@include file="common/common-login-cdn.jsp" %>
 <link rel="stylesheet" href="${ctx }/resources/js/backgroundSlider/backgroundSlider.css" />
 <script type="text/javascript" src="${ctx }/resources/js/backgroundSlider/backgroundSlider.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/customer/index/login.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/layer-v2.3/layer.js"></script>
+<script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	

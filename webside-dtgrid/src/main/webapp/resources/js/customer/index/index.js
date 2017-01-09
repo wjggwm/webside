@@ -1,3 +1,23 @@
+$(function(){
+	$(document).ajaxSend( function(event, jqXHR, options){
+		var loc = $.url().attr('path');
+		if(options.data == undefined)
+		{
+			if(options.url.indexOf("?") != -1)
+			{
+				options.url += "&baseUri=" + encodeURIComponent(loc);
+			}else
+			{
+				options.url += "?baseUri=" + encodeURIComponent(loc);
+			}
+			
+		}else
+		{
+			options.data = "baseUri=" + encodeURI(loc) + "&" +options.data;
+		}
+	});
+});
+
 var webside = {
     index : {
         initHomePage : function() {

@@ -89,6 +89,8 @@
 	<bean id="rememberMeFilter" class="com.webside.shiro.filter.RememberMeFilter"/>
 	<bean id="permissionFilter" class="com.webside.shiro.filter.PermissionFilter"/>
 	<bean id="roleFilter" class="com.webside.shiro.filter.RoleFilter"/>
+	<bean id="baseUrl" class="com.webside.shiro.filter.URLFilter"/>
+
 
 	<bean id="chainDefinitionService" class="com.webside.shiro.service.impl.ChainDefinitionServiceImpl" />
 
@@ -126,6 +128,7 @@
 				<entry key="remember" value-ref="rememberMeFilter"/>
 				<entry key="perm" value-ref="permissionFilter"/>
 				<entry key="roles" value-ref="roleFilter"/>
+				<entry key="baseUrl" value-ref="baseUrl"/>
 			</map>
 		</property>
 	</bean>

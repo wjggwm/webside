@@ -35,6 +35,10 @@ public class ShiroUtils {
 	 */
 	public static final String LOGIN_URL = "";
 	/*
+	 * 登录地址：这里使用空的登录地址，是为了让程序根据contextPath自动跳转
+	 */
+	public static final String INDEX_URL = "/";
+	/*
 	 * 没有权限提醒
 	 */
 	public static final String UNAUTHORIZED = "/denied.jsp";

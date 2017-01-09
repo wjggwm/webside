@@ -12,15 +12,15 @@
 
 #\u9700\u8981\u6388\u6743
 /index.html=kickout,kickoutAuth,login,remember
-/user/**=kickout,kickoutAuth,login,perm,remember
-/role/**=kickout,kickoutAuth,login,perm,remember
-/resource/**=kickout,kickoutAuth,login,perm,remember
-/logInfo/**=kickout,kickoutAuth,login,perm,remember
-/loginInfo/**=kickout,kickoutAuth,login,perm,remember
-/session/**=kickout,kickoutAuth,login,perm,remember,roles[administrator]
-/scheduleJob/**=kickout,kickoutAuth,login,perm,remember
-/welcome.jsp=login,remember,perm
+/user/**=kickout,kickoutAuth,login,perm,remember,baseUrl
+/role/**=kickout,kickoutAuth,login,perm,remember,baseUrl
+/resource/**=kickout,kickoutAuth,login,perm,remember,baseUrl
+/logInfo/**=kickout,kickoutAuth,login,perm,remember,baseUrl
+/loginInfo/**=kickout,kickoutAuth,login,perm,remember,baseUrl
+/session/**=kickout,kickoutAuth,login,perm,remember,baseUrl,roles[administrator]
+/scheduleJob/**=kickout,kickoutAuth,login,perm,remember,baseUrl
+/welcome.jsp=login,remember,perm,baseUrl
 /druid/**=login,remember,roles[administrator]
 /sirona/**=login,remember,roles[administrator]
 #\u9700\u8981\u767b\u5f55
-/**=login,remember,perm
+/**=login,remember,perm,baseUrl
