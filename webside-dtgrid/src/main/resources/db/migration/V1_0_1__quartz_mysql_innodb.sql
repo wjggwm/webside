@@ -29,9 +29,6 @@ CREATE TABLE `qrtz_blob_triggers` (
   CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of qrtz_blob_triggers
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for qrtz_calendars
@@ -43,10 +40,6 @@ CREATE TABLE `qrtz_calendars` (
   `CALENDAR` blob NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qrtz_calendars
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for qrtz_cron_triggers
@@ -65,9 +58,7 @@ CREATE TABLE `qrtz_cron_triggers` (
 -- ----------------------------
 -- Records of qrtz_cron_triggers
 -- ----------------------------
-INSERT INTO `qrtz_cron_triggers` VALUES ('webside_quartzScheduler', 'test', 'DEFAULT', '0 0/10 * 1/1 * ? *', 'Asia/Shanghai');
-INSERT INTO `qrtz_cron_triggers` VALUES ('webside_quartzScheduler', 'test1', 'DEFAULT', '0 0/10 * 1/1 * ? *', 'Asia/Shanghai');
-INSERT INTO `qrtz_cron_triggers` VALUES ('webside_quartzScheduler', '发送邮件-测试', 'default', '0 0/10 * 1/1 * ? *', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('webside_quartzScheduler', 'test', 'test', '00/30 * * * * ?', 'Asia/Shanghai');
 
 -- ----------------------------
 -- Table structure for qrtz_fired_triggers
@@ -95,10 +86,6 @@ CREATE TABLE `qrtz_fired_triggers` (
   KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qrtz_fired_triggers
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for qrtz_job_details
@@ -152,9 +139,6 @@ CREATE TABLE `qrtz_paused_trigger_grps` (
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of qrtz_paused_trigger_grps
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for qrtz_scheduler_state
@@ -171,7 +155,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('webside_quartzScheduler', 'gaog-PC1474037348774', '1474039034990', '20000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('webside_quartzScheduler', 'gaog-PC1483950726900', '1483956988687', '20000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -188,9 +172,6 @@ CREATE TABLE `qrtz_simple_triggers` (
   CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of qrtz_simple_triggers
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for qrtz_simprop_triggers
@@ -214,10 +195,6 @@ CREATE TABLE `qrtz_simprop_triggers` (
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qrtz_simprop_triggers
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for qrtz_triggers
@@ -259,7 +236,4 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('webside_quartzScheduler', 'test', 'DEFAULT', '发送邮件-测试', '发送邮件[无状态job]', null, '1469694000000', '1469693400000', '5', 'PAUSED', 'CRON', '1469548800000', '1469721600000', null, '0', '');
-INSERT INTO `qrtz_triggers` VALUES ('webside_quartzScheduler', 'test1', 'DEFAULT', 'test', '发送邮件[无状态job]', null, '1469694000000', '1469693400000', '5', 'PAUSED', 'CRON', '1469548800000', '1469721600000', null, '0', '');
-INSERT INTO `qrtz_triggers` VALUES ('webside_quartzScheduler', '发送邮件-测试', 'default', '发送邮件-测试', '发送邮件[无状态job]', null, '1469694000000', '1469693400000', '5', 'PAUSED', 'CRON', '1469548800000', '1469721600000', null, '0', '');
-
+INSERT INTO `qrtz_triggers` VALUES ('webside_quartzScheduler', 'test', 'test', 'test', '发送邮件[无状态job]', null, '1483513080000', '1483513050000', '5', 'PAUSED', 'CRON', '1483372800000', '1483545600000', null, '0', '');

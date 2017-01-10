@@ -4,7 +4,7 @@ UPDATE  `a63c4c80f0f54`.`tb_user` SET  `u_password` =  'VIlO0st6mlpQF70XwXyiGA==
 项目部署说明：
 1、mysql数据库，只需要先手动执行如下sql脚本即可，其他系统会自动处理
 
-CREATE TABLE `webside`.`TB_SCHEMA_VERSION` (
+CREATE TABLE `webside`.`tb_schema_version` (
     `installed_rank` INT NOT NULL,
     `version` VARCHAR(50),
     `description` VARCHAR(200) NOT NULL,
