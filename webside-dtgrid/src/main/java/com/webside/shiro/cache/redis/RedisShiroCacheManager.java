@@ -32,8 +32,7 @@ public class RedisShiroCacheManager implements ShiroCacheManager {
 
     @Override
     public void destroy() {
-    	//如果和其他系统，或者应用在一起就不能关闭
-    	cacheManager.getJedis().shutdown();
+    	//做一些需要释放资源的操作
     }
 
 }
