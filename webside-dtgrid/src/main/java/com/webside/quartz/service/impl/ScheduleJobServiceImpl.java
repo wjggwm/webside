@@ -197,7 +197,7 @@ public class ScheduleJobServiceImpl extends
 			// 按新的trigger重新设置job执行
 			scheduler.rescheduleJob(triggerKey, trigger);
 			return Boolean.TRUE;
-		} catch (SchedulerException e) {
+		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
 	}

@@ -71,11 +71,12 @@
 <script type="text/javascript" src="${ctx }/resources/js/underscore/underscore-min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/js/purl/purl.min.js"></script>
 
+<script type="text/javascript" src="${ctx }/resources/js/scrollreveal/scrollreveal.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/customer/index/index.min.js"></script>
 <script type="text/javascript" type="text/javascript">
 var sys = sys || {};
 sys.rootPath = "${ctx}";
 sys.pageNum = 10;
 sys.gridStyle = "Bootstrap";
-
+window.scrollreveal = ScrollReveal();
 </script> 

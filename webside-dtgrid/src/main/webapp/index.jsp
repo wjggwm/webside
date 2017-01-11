@@ -118,7 +118,7 @@ $(function() {
 					<!-- #section:basics/navbar.user_menu -->
 					<li class="light-blue"><a data-toggle="dropdown" href="#"
 						class="dropdown-toggle"> 
-						<img class="nav-user-photo" src="${ctx}/resources/images/user.jpg" alt="" />
+						<img class="nav-user-photo" src="${ctx}/resources/images/user.jpg"/>
 							<span class="user-info"> <small>欢迎</small> ${userEntity.userName }
 						</span> <i class="ace-icon fa fa-caret-down"></i>
 					</a>
@@ -128,11 +128,11 @@ $(function() {
 							</a></li>
 							<li><a href="javascript:void(0)"
 								nav-menu="个人资料,/user/infoUI.html?id=${userEntity.id }"> <i
-									class="ace-icon fa fa-user"></i> 个人资料
+									class="ace-icon fa fa-user"></i> 个人信息
 							</a></li>
 							<li class="divider"></li>
 							<li><a href="${ctx}/logout.html"> <i class="ace-icon fa fa-power-off"></i>
-									退出
+									安全退出
 							</a></li>
 						</ul></li>
 

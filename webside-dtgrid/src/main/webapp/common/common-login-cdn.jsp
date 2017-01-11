@@ -51,6 +51,11 @@
 	<script type="text/javascript" src="${ctx}/resources/js/ie/excanvas.min.js"></script>
 <![endif]-->
 
+<link rel="stylesheet" href="${ctx }/resources/js/backgroundSlider/backgroundSlider.css" />
+<script type="text/javascript" src="${ctx }/resources/js/backgroundSlider/backgroundSlider.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/customer/index/login.min.js"></script>
+<script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+
 <script type="text/javascript" type="text/javascript">
 var sys = sys || {};
 sys.rootPath = "${ctx}";

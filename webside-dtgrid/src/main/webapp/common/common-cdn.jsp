@@ -55,22 +55,24 @@
 <script src="//cdn.bootcss.com/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
 <script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
-
+<!-- 表格 -->
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.css" />
 <script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/i18n/zh-cn.js"></script>
-
+<!-- 校验 -->
 <script src="//cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"></script>
 <script src="//cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.min.js"></script>
-
+<!-- 滚动条 -->
 <script src="//cdn.bootcss.com/jquery.nicescroll/3.6.0/jquery.nicescroll.min.js"></script>
 
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="//cdn.bootcss.com/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
 <script src="//cdn.bootcss.com/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
-
+<!-- javascript tools -->
 <script src="//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="//cdn.bootcss.com/purl/2.3.1/purl.min.js"></script>
+<!-- 元素动画 -->
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/customer/index/index.min.js"></script>
 <script type="text/javascript" type="text/javascript">
@@ -78,5 +80,5 @@ var sys = sys || {};
 sys.rootPath = "${ctx}";
 sys.pageNum = 10;
 sys.gridStyle = "Bootstrap";
-
+window.scrollreveal = ScrollReveal();
 </script> 
