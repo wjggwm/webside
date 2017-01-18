@@ -29,10 +29,10 @@ $(document).ready(function() {
 	<div class="col-xs-12">
 		<form class="form-horizontal" role="form" method="post">
 			   <div class="form-group">
-					<button id="btnEdit" type="button" class="btn btn-success btn-sm">
+					<button id="btnEdit" type="button" class="btn btn-success btn-sm" style="margin-left: 13px;">
 					  	<i class="fa fa-user-plus"></i>&nbsp;编辑
 					</button>
-					<button id="btnAdd" type="button" onclick="javascript:$('#userInfoForm').submit();" class="btn btn-success btn-sm" style="display: none;">
+					<button id="btnAdd" type="button" onclick="javascript:$('#userInfoForm').submit();" class="btn btn-success btn-sm"  style="margin-left: 13px;" style="display: none;">
 					  	<i class="fa fa-user-plus"></i>&nbsp;保存
 					</button>
 					<button id="btnBack" type="button" onclick="javascript:top.location.href = 'index.html'" class="btn btn-info btn-sm">

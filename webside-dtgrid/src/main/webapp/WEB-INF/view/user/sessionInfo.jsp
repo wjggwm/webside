@@ -20,7 +20,7 @@
 	<div class="col-xs-12">
 		<form class="form-horizontal" role="form" method="post">
 			   <div class="form-group">
-					<button id="btnBack" type="button" onclick="webside.common.loadPage('/session/listUI.html')" class="btn btn-info btn-sm">
+					<button id="btnBack" type="button" onclick="webside.common.loadPage('/session/listUI.html')" class="btn btn-info btn-sm"  style="margin-left: 13px;">
 						<i class="fa fa-undo"></i>&nbsp;返回
 					</button>
 				</div>
