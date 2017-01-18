@@ -10,11 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2016-12-06 18:25:23
+Date: 2017-01-18 14:29:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
 
 -- ----------------------------
 -- Table structure for tb_login_info
@@ -30,8 +29,7 @@ CREATE TABLE `tb_login_info` (
   `l_city` varchar(255) DEFAULT NULL,
   `l_login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=378 DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=410 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -46,8 +44,7 @@ CREATE TABLE `tb_log_info` (
   `l_content` varchar(1000) DEFAULT NULL COMMENT '日志内容',
   `l_create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建日期',
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -68,7 +65,7 @@ CREATE TABLE `tb_resource` (
   `s_create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `s_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`s_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COMMENT='资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 -- ----------------------------
 -- Records of tb_resource
@@ -99,8 +96,8 @@ INSERT INTO `tb_resource` VALUES ('24', null, '一级菜单', 'menu', '0', '', n
 INSERT INTO `tb_resource` VALUES ('25', '24', '二级菜单', 'menu:menu1', '0', '', null, '', '0', '二级菜单', '2016-06-30 19:54:01', '2016-06-30 21:03:49');
 INSERT INTO `tb_resource` VALUES ('26', '25', '三级菜单', 'menu:menu1:menu2', '0', '', null, 'fa  fa-cloud-download', '0', '三级菜单', '2016-06-30 19:54:29', '2016-07-01 10:26:48');
 INSERT INTO `tb_resource` VALUES ('27', '26', '四级菜单', 'menu:menu1:menu2:menu3', '0', '/logInfo/listUI.html', null, 'fa  fa-line-chart', '0', '四级菜单', '2016-06-30 19:55:53', '2016-07-01 11:17:38');
-INSERT INTO `tb_resource` VALUES ('28', '25', '三级菜单1', 'menu:menu1:menu21', '0', '/logInfo/listUI.html', null, 'fa  fa-balance-scale', '0', '三级菜单1', '2016-06-30 20:16:44', '2016-07-01 16:37:53');
-INSERT INTO `tb_resource` VALUES ('29', '24', '二级菜单1', 'menu:menu11', '0', '/logInfo/listUI.html', null, 'fa  fa-comment', '0', '二级菜单1', '2016-07-01 15:41:44', '2016-07-01 15:42:05');
+INSERT INTO `tb_resource` VALUES ('28', '25', '三级菜单1', 'menu:menu1:menu21', '0', '/resource/listUI.html', null, 'fa  fa-balance-scale', '0', '三级菜单1', '2016-06-30 20:16:44', '2017-01-11 17:06:01');
+INSERT INTO `tb_resource` VALUES ('29', '24', '二级菜单1', 'menu:menu11', '0', '/logInfo/listUI.html', null, 'fa  fa-comment', '0', '二级菜单1', '2016-07-01 15:41:44', '2017-01-17 15:24:29');
 INSERT INTO `tb_resource` VALUES ('30', null, '计划任务管理', 'schedule', '0', '', null, 'fa  fa-list-ol', '0', '计划任务管理', '2016-07-17 01:09:27', '2016-07-20 16:01:08');
 INSERT INTO `tb_resource` VALUES ('32', '38', '添加jobUI', 'schedule:addJobUI', '1', '/scheduleJob/addJobUI.html', null, null, '0', '添加任务', '2016-07-17 01:15:38', '2016-12-29 13:47:48');
 INSERT INTO `tb_resource` VALUES ('34', '38', '删除job', 'schedule:deleteJob', '1', '/scheduleJob/deleteJob.html', null, null, '0', '删除任务', '2016-07-17 01:19:24', '2016-07-26 17:32:05');
@@ -145,6 +142,9 @@ INSERT INTO `tb_resource` VALUES ('72', '3', '个人信息', 'user:infoUI', '1',
 INSERT INTO `tb_resource` VALUES ('73', '3', '个人信息编辑', 'user:info', '1', '/user/info.html', null, '', '0', '个人信息编辑', '2017-01-03 18:03:51', '2017-01-03 18:03:51');
 INSERT INTO `tb_resource` VALUES ('74', '3', '修改密码UI', 'user:passwork', '1', '/user/passwordUI.html', null, '', '0', '修改个人密码UI', '2017-01-03 18:05:13', '2017-01-03 18:05:13');
 INSERT INTO `tb_resource` VALUES ('75', '3', '修改个人密码', 'user:password', '1', '/user/password.html', null, '', '0', '修改个人密码', '2017-01-03 18:05:58', '2017-01-03 18:05:58');
+INSERT INTO `tb_resource` VALUES ('76', '29', '列表', 'test', '1', '/resource/listGrid.html', null, '', '0', '列表', '2017-01-12 15:04:47', '2017-01-12 15:04:47');
+INSERT INTO `tb_resource` VALUES ('89', '2', '资源管理(TREEGRID)', 'system:resource', '0', '/resource/listGridUI.html', null, 'fa  fa-indent', '0', '资源管理(TREEGRID)', '2017-01-17 15:17:08', '2017-01-17 15:19:35');
+INSERT INTO `tb_resource` VALUES ('90', '89', '资源列表(TREEGRID)', 'resource:listGrid', '1', '/resource/listGrid.html', null, '', '0', '资源列表(TREEGRID)', '2017-01-17 15:21:21', '2017-01-17 15:21:21');
 
 -- ----------------------------
 -- Table structure for tb_resources_role
@@ -160,7 +160,7 @@ CREATE TABLE `tb_resources_role` (
   KEY `FK_r_role_resource` (`r_id`),
   CONSTRAINT `FK_r_resource_role` FOREIGN KEY (`s_id`) REFERENCES `tb_resource` (`s_id`),
   CONSTRAINT `FK_r_role_resource` FOREIGN KEY (`r_id`) REFERENCES `tb_role` (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2300 DEFAULT CHARSET=utf8 COMMENT='角色权限映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=2388 DEFAULT CHARSET=utf8 COMMENT='角色权限映射表';
 
 -- ----------------------------
 -- Records of tb_resources_role
@@ -181,78 +181,81 @@ INSERT INTO `tb_resources_role` VALUES ('896', '22', '2', '2016-12-12 13:37:42')
 INSERT INTO `tb_resources_role` VALUES ('897', '27', '2', '2016-12-12 13:37:42');
 INSERT INTO `tb_resources_role` VALUES ('898', '28', '2', '2016-12-12 13:37:42');
 INSERT INTO `tb_resources_role` VALUES ('899', '29', '2', '2016-12-12 13:37:42');
-INSERT INTO `tb_resources_role` VALUES ('2228', '3', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2229', '2', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2230', '4', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2231', '5', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2232', '6', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2233', '50', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2234', '10', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2235', '9', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2236', '22', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2237', '26', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2238', '25', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2239', '24', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2240', '38', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2241', '30', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2242', '40', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2243', '39', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2244', '1', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2245', '11', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2246', '12', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2247', '13', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2248', '14', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2249', '48', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2250', '49', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2251', '52', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2252', '61', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2253', '67', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2254', '72', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2255', '73', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2256', '74', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2257', '75', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2258', '15', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2259', '16', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2260', '17', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2261', '18', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2262', '53', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2263', '62', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2264', '66', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2265', '68', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2266', '19', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2267', '20', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2268', '21', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2269', '54', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2270', '63', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2271', '69', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2272', '7', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2273', '8', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2274', '51', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2275', '60', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2276', '71', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2277', '55', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2278', '56', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2279', '27', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2280', '28', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2281', '29', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2282', '32', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2283', '34', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2284', '35', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2285', '41', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2286', '44', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2287', '45', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2288', '46', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2289', '47', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2290', '59', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2291', '65', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2292', '70', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2293', '42', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2294', '43', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2295', '57', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2296', '64', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2297', '36', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2298', '37', '1', '2017-01-06 17:47:20');
-INSERT INTO `tb_resources_role` VALUES ('2299', '58', '1', '2017-01-06 17:47:20');
+INSERT INTO `tb_resources_role` VALUES ('2301', '3', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2302', '2', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2303', '4', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2304', '5', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2305', '6', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2306', '50', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2307', '10', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2308', '9', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2309', '22', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2310', '26', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2311', '25', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2312', '24', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2313', '29', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2314', '38', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2315', '30', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2316', '40', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2317', '39', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2318', '1', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2319', '11', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2320', '12', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2321', '13', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2322', '14', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2323', '48', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2324', '49', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2325', '52', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2326', '61', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2327', '67', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2328', '72', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2329', '73', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2330', '74', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2331', '75', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2332', '15', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2333', '16', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2334', '17', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2335', '18', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2336', '53', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2337', '62', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2338', '66', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2339', '68', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2340', '19', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2341', '20', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2342', '21', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2343', '54', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2344', '63', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2345', '69', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2346', '7', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2347', '8', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2348', '51', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2349', '60', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2350', '71', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2351', '55', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2352', '56', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2353', '27', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2354', '28', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2355', '76', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2356', '32', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2357', '34', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2358', '35', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2359', '41', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2360', '44', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2361', '45', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2362', '46', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2363', '47', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2364', '59', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2365', '65', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2366', '70', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2367', '42', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2368', '43', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2369', '57', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2370', '64', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2371', '36', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2372', '37', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2373', '58', '1', '2017-01-12 15:27:27');
+INSERT INTO `tb_resources_role` VALUES ('2386', '89', '1', '2017-01-17 15:17:08');
+INSERT INTO `tb_resources_role` VALUES ('2387', '90', '1', '2017-01-17 15:21:21');
 
 -- ----------------------------
 -- Table structure for tb_role
@@ -299,6 +302,7 @@ CREATE TABLE `tb_role_user` (
 INSERT INTO `tb_role_user` VALUES ('1', '1', '4', '2016-01-05 12:07:15');
 INSERT INTO `tb_role_user` VALUES ('17', '2', '21', '2016-07-05 18:57:53');
 INSERT INTO `tb_role_user` VALUES ('18', '3', '22', '2016-07-05 19:06:40');
+
 
 -- ----------------------------
 -- Table structure for tb_user

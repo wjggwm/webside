@@ -95,7 +95,8 @@ var dtGridOption = {
     isTreeGrid : true,
     isLeafColumn : 'isLeaf',
     iconColumn : 'name',
-    indexKey : 'id',
+    indexKey : 'id',//主键id 列名,默认值为id
+    parentId : 'parentId',//默认值为'parentId'
     loadURL : sys.rootPath + '/resource/listGrid.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
