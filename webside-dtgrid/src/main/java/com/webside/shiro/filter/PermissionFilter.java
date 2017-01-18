@@ -65,7 +65,7 @@ public class PermissionFilter extends AccessControlFilter {
 	    		if(ShiroUtils.isAjax(request)){
 	    			Map<String, Object> result = new HashMap<String, Object>();
 	    			result.put("status", "401");
-	    			result.put("message", "当前用户没有权限");
+	    			result.put("message", "sorry,您没有权限");
 	    			result.put("url", ShiroUtils.UNAUTHORIZED);
 	    			ShiroUtils.writeJson(response, result);
 	    		}else

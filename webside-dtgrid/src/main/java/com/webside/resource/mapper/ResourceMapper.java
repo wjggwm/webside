@@ -45,4 +45,19 @@ public interface ResourceMapper extends BaseMapper<ResourceEntity, Long>{
      * @data 2016年11月19日 上午1:21:03
      */
     public int deleteRolePerm(@Param(value="id") Long id);
+    
+	/**
+	 * 查询权限树集合
+	 * @param parameter 参数中必须包含roleId,其他参数可参考mapping文件
+	 * @return
+	 */
+    public List<ResourceEntity> queryTreeGridListByPage(Map<String, Object> parameter);
+    
+    /**
+	 * 根据父id查询资源
+	 * @param parameter 参数中必须包含roleId,其他参数可参考mapping文件
+	 * @return
+	 */
+    public List<ResourceEntity> queryListByParentId(Map<String, Object> parameter);
+    
 }

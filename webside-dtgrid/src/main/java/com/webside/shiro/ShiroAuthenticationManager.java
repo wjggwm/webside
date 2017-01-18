@@ -1,13 +1,17 @@
 package com.webside.shiro;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+
 import com.webside.user.model.UserEntity;
+import com.webside.user.model.UserSessionEntity;
 import com.webside.user.service.UserSessionService;
 import com.webside.util.SpringContextUtil;
 
@@ -168,5 +172,22 @@ public class ShiroAuthenticationManager {
 		}
 		clearUserAuthByUserId(userIds.toArray(new Long[0]));
 	}
+	
+	/**
+	 * 
+	 * @Description 清空所有用户权限信息
+	 *
+	 * @author wjggwm
+	 * @data 2017年1月5日 下午6:08:01
+	 */
+	public static void clearAllUserAuth() {
+		List<UserSessionEntity> list = userSessionService.getAllUser();
+		List<Long> userIds = new ArrayList<Long>();
+		list.forEach(user -> {
+			userIds.add(user.getId());
+		});
+		clearUserAuthByUserId(userIds.toArray(new Long[0]));
+	}
+	
 
 }

@@ -28,6 +28,7 @@ import com.webside.exception.SystemException;
 import com.webside.resource.model.ResourceEntity;
 import com.webside.resource.service.ResourceService;
 import com.webside.roleresource.service.RoleResourceService;
+import com.webside.shiro.ShiroAuthenticationManager;
 import com.webside.util.PageUtil;
 import com.webside.util.TreeUtil;
 
@@ -86,6 +87,85 @@ public class ResourceController extends BaseController {
 		parameters.put("startRecord", page.getStartRow());
 		//列表展示数据
 		parameters.put("exhibitDatas", list);
+		return parameters;
+	}
+	
+	@RequestMapping("listGridUI.html")
+	public String listTreeUI(Model model, HttpServletRequest request) {
+		try
+		{
+			PageUtil page = new PageUtil();
+			if(request.getParameterMap().containsKey("page")){
+				page.setPageNum(Integer.valueOf(request.getParameter("page")));
+				page.setPageSize(Integer.valueOf(request.getParameter("rows")));
+				page.setOrderByColumn(request.getParameter("sidx"));
+				page.setOrderByType(request.getParameter("sord"));
+			}
+			model.addAttribute("page", page);
+			return Common.BACKGROUND_PATH + "/resource/listGrid";
+		}catch(Exception e)
+		{
+			throw new SystemException(e);
+		}
+	}
+	
+	
+	@RequestMapping("listGrid.html")
+	@ResponseBody
+	public Object listTree(String gridPager) throws Exception{
+		Map<String,Object> parameters = null;
+		// 映射Pager对象
+		Pager pager = JSON.parseObject(gridPager, Pager.class);
+		// 判断是否包含自定义参数
+		parameters = pager.getParameters();
+		if (parameters.size() < 0) {
+			parameters.put("name", null);
+			parameters.put("parentId", null);
+		}else if(!parameters.containsKey("name"))
+		{
+			parameters.put("name", null);
+		}
+		Page<Object> page = null;
+		if(null == parameters.get("parentId") || "".equals(parameters.get("parentId")))
+		{
+			// 设置分页，page里面包含了分页信息
+			page = PageHelper.startPage(pager.getNowPage(),pager.getPageSize(), "s_id DESC");
+		}
+		List<ResourceEntity> list = resourceService.queryTreeGridListByPage(parameters);
+		parameters.clear();
+		parameters.put("isSuccess", Boolean.TRUE);
+		if(null != page)
+		{
+			parameters.put("nowPage", pager.getNowPage());
+			parameters.put("pageSize", pager.getPageSize());
+			parameters.put("pageCount", page.getPages());
+			parameters.put("recordCount", page.getTotal());
+			parameters.put("startRecord", page.getStartRow());
+		}
+		//列表展示数据
+		parameters.put("exhibitDatas", list);
+		return parameters;
+	}
+	
+	
+	@RequestMapping("listGridSub.html")
+	@ResponseBody
+	public Object listTreeSub(String parentId) throws Exception{
+		Map<String,Object> parameters = new HashMap<String, Object>();
+		parameters.put("name", null);
+		parameters.put("parentId", parentId);
+		try
+		{
+			List<ResourceEntity> list = resourceService.queryTreeGridListByPage(parameters);
+			List<ResourceEntity> result = TreeUtil.getChildResourceEntitys(list, null);
+			parameters.clear();
+			parameters.put("success", Boolean.TRUE);
+			parameters.put("data", result);
+			parameters.put("message", null);
+		}catch(Exception e)
+		{
+			throw new AjaxException(e);
+		}
 		return parameters;
 	}
 	
@@ -211,6 +291,8 @@ public class ResourceController extends BaseController {
 				resourceEntity.setIcon(null);
 			}
 			int result = resourceService.update(resourceEntity);
+			//清空所有用户权限,重新加载权限
+			ShiroAuthenticationManager.clearAllUserAuth();
 			if(result > 0)
 			{
 				map.put("success", Boolean.TRUE);

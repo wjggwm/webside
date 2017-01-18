@@ -9,6 +9,7 @@ import com.webside.resource.service.ResourceService;
 import com.webside.role.model.RoleEntity;
 import com.webside.role.service.RoleService;
 import com.webside.roleresource.service.RoleResourceService;
+import com.webside.shiro.ShiroAuthenticationManager;
 
 @Service("roleResourceService")
 public class RoleResourceServiceImpl implements RoleResourceService{
@@ -28,6 +29,8 @@ public class RoleResourceServiceImpl implements RoleResourceService{
 			//2、超级管理员直接赋予该权限
 			RoleEntity role = roleService.findByName("超级管理员");
 			roleService.addRolePerm(role.getId(), resourceEntity.getId());
+			//清空所有用户权限,重新加载权限
+			ShiroAuthenticationManager.clearAllUserAuth();
 			return true;
 		}catch(Exception e)
 		{

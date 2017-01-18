@@ -1,22 +1,9 @@
 var dtGridColumns = [{
-    id : 'id',
-    title : '编号',
-    type : 'number',
-    columnClass : 'text-center',
-    hideType : 'xs',
-	headerClass : 'dlshouwen-grid-header'
-}, {
     id : 'name',
     title : '资源名称',
     type : 'string',
-    columnClass : 'text-center',
+    width: '300px',
 	headerClass : 'dlshouwen-grid-header'
-}, {
-    id : 'parentName',
-    title : '上级名称',
-    type : 'string',
-    columnClass : 'text-center',
-    headerClass : 'dlshouwen-grid-header'
 }, {
     id : 'sourceKey',
     title : '资源标识',
@@ -75,7 +62,7 @@ var dtGridColumns = [{
     oformat : 'yyyy-MM-dd hh:mm:ss',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
-    hideType : 'xs|sm|md'
+    hideType : 'xs|sm|md|lg'
 }, {
     id : 'updateTime',
     title : '更新时间',
@@ -105,7 +92,11 @@ var dtGridOption = {
     check : true,
     checkWidth :'37px',
     extraWidth : '37px',
-    loadURL : sys.rootPath + '/resource/list.html',
+    isTreeGrid : true,
+    isLeafColumn : 'isLeaf',
+    iconColumn : 'name',
+    indexKey : 'id',
+    loadURL : sys.rootPath + '/resource/listGrid.html',
     columns : dtGridColumns,
     gridContainer : 'dtGridContainer',
     toolbarContainer : 'dtGridToolBarContainer',

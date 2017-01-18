@@ -57,7 +57,7 @@
 <script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 <!-- 表格 -->
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.css" />
-<script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.treegrid.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/i18n/zh-cn.js"></script>
 <!-- 校验 -->
 <script src="//cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"></script>

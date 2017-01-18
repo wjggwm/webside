@@ -56,7 +56,7 @@
 <script type="text/javascript" src="${ctx}/resources/js/layer-v2.3/layer.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.css" />
-<script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/dlshouwen.grid.treegrid.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/dlshouwen.grid.v1.2.1/i18n/zh-cn.js"></script>
 
 <script type="text/javascript" src="${ctx}/resources/js/jquery-validation/jquery.validate.min.js"></script>

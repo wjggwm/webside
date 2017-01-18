@@ -25,6 +25,8 @@ public interface ResourceService{
 	
 	public List<ResourceEntity> queryListByPage(Map<String, Object> parameter);
 	
+	public List<ResourceEntity> queryTreeGridListByPage(Map<String, Object> parameter);
+	
 	public ResourceEntity findByName(String name);
 	
 	public ResourceEntity findById(Long id);

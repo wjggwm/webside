@@ -64,8 +64,8 @@ var webside = {
 					            		data = $.parseJSON(data);
 					            		if(data.status == "401")
 					            		{
-					            			//layer.msg(data.message, {icon : 0});
-					            			$(".page-content").load(sys.rootPath + data.url);
+					            			layer.msg(data.message, {icon : 0});
+					            			//$(".page-content").load(sys.rootPath + data.url);
 					            		}else if(data.status == "403")
 					            		{
 					            			layer.confirm(data.message, {
@@ -155,8 +155,8 @@ var webside = {
 	            		data = $.parseJSON(data);
 	            		if(data.status == "401")
 	            		{
-	            			//layer.msg(data.message, {icon : 0});
-	                        $(".page-content").load(sys.rootPath + data.url);
+	            			layer.msg(data.message, {icon : 0});
+	                        //$(".page-content").load(sys.rootPath + data.url);
 	            		}else if(data.status == "403")
 	            		{
 		                    layer.confirm(data.message, {
@@ -822,7 +822,7 @@ var webside = {
 	                        dataType : "json",
 	                        success : function(resultdata) {
 	                            if (resultdata) {
-	                                layer.confirm('该资源已有角色管理关联,确认删除吗？', {
+	                                layer.confirm('该资源已授权给部分角色,确认删除吗？', {
 					                    icon : 3,
 					                    title : '删除提示'
 						                }, function(index, layero) {

@@ -109,7 +109,42 @@
 		</where>
 		-->
 	</select>
-
+	
+	<select id="queryTreeGridListByPage" parameterType="map" resultMap="resourceMap" flushCache="true" useCache="true">
+		<if test="name != null and name != ''">
+			<bind name="namePattern" value="'%' + _parameter.get('name') + '%'" />
+		</if>
+		SELECT t1.s_id,
+			t1.s_parent_id,
+			t1.s_name,
+			t1.s_source_key,
+			t1.s_type,
+			t1.s_source_url,
+			t1.s_level,
+			t1.s_icon,
+			t1.s_is_hide,
+			t1.s_description,
+			t1.s_create_time,
+			t1.s_update_time,
+		 CASE WHEN 
+		 	(SELECT count(s_id) FROM tb_resource t2 where t2.s_parent_id = t1.s_id)>0 
+		 THEN 
+		 	FALSE 
+		 ELSE 
+		 	TRUE 
+		 END AS s_isLeaf
+		 FROM tb_resource t1
+		<where>
+			<if test="name != null and name != ''">
+				and t1.s_name like #{namePattern}	
+			</if>
+			<choose>
+				<when test="parentId eq null or parentId == ''">and t1.s_parent_id IS null</when>
+				<otherwise>and t1.s_parent_id = ${parentId}</otherwise>
+			</choose>
+		</where>
+	</select>
+	
 	<select id="queryResourceList" parameterType="map" resultMap="resourceMap" flushCache="true" useCache="true">
 		SELECT t1.s_id,
 			t1.s_parent_id,

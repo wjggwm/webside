@@ -17,7 +17,11 @@
 		},
 		extraColumn : {
 			open : '<i class="fa fa-plus"></i>',
-			close : '<i class="fa fa-minus"></i>'
+			close : '<i class="fa fa-minus"></i>',
+			carent_right : '<i style="cursor:pointer;font-size:18px;" class="treegrid fa fa-caret-right">&nbsp;</i>',
+			carent_down : '<i style="cursor:pointer;font-size:18px;" class="treegrid fa fa-caret-down">&nbsp;</i>',
+			carent_right_class : 'fa-caret-right',
+			carent_down_class : 'fa-caret-down'
 		},
 		sortColumn : {
 			asc : '<i class="fa fa-sort-asc"></i>',
