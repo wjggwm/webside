@@ -3532,8 +3532,6 @@
 			lang : 'en',
 			ajaxLoad : true,
 			loadAll : false,
-			postParams : false,//是否传递参数,只在loadAll=true时有效
-			isreload : false,//刷新时是否重新从服务器获取数据,只在loadAll=true时有效
 			loadURL : '',
 			datas : null,
 			extraWidth : null,
@@ -3549,11 +3547,13 @@
 			exportURL : '/grid/export',
 			pageSize : 20,
 			pageSizeLimit : [20, 50, 100],
-			isTreeGrid : false,	//是否为treegrid
-			isLeafColumn : '',	//是否叶子节点	column name
-			indexKey : 'id',	//主键id column name,默认值为id
-			iconColumn : '',	//icon图标 column name
-			parentId :'parentId'//树展开时请求服务器发送parentId的参数名称，即服务器接收参数时的名称,当isTreeGrid为true时才会用到
+			postParams : false,//是否传递参数,只在loadAll=true时有效
+			isreload : false,//刷新时是否重新从服务器获取数据,只在loadAll=true时有效
+			isTreeGrid : false,	//是否为treegrid方式初始化表格
+			isLeafColumn : '',	//是否叶子节点列名，即服务端查询的数据中哪一列用来判断该行数据是否含有子节点,当isTreeGrid为true时，该属性为必填项
+			indexKey : 'id',	//主键id列，即树展开时取哪一列的值做为父节点的id传到服务端,默认值为id,当isTreeGrid为true时，该属性为必填项
+			iconColumn : '',	//icon图标列名，表示在哪一列做为树节点，即添加树展开、合并图标,当isTreeGrid为true时，该属性为必填项
+			parentId :'parentId'//树展开时请求服务器发送parentId的参数名称，即服务器接收参数时的名称,当isTreeGrid为true时，该属性为必填项
 		},
 		column : {
 			id : 'field',

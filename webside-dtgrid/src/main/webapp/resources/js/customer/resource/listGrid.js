@@ -86,7 +86,7 @@ var dtGridColumns = [{
 var pageSize = $("#pageSize").val();
 pageSize = pageSize == 0 || pageSize == "" ? sys.pageNum : pageSize;
 
-var dtGridOption = {
+var treeGridOption = {
     lang : 'zh-cn',
     ajaxLoad : true,
     check : true,
@@ -107,7 +107,7 @@ var dtGridOption = {
     pageSizeLimit : [10, 20, 30]
 };
 
-var grid = $.fn.dlshouwen.grid.init(dtGridOption);
+var grid = $.fn.dlshouwen.grid.init(treeGridOption);
 $(function() {
     if(null != $("#orderByColumn").val() && '' != $("#orderByColumn").val())
     {

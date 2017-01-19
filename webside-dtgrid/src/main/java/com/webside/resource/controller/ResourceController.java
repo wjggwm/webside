@@ -148,28 +148,6 @@ public class ResourceController extends BaseController {
 	}
 	
 	
-	@RequestMapping("listGridSub.html")
-	@ResponseBody
-	public Object listTreeSub(String parentId) throws Exception{
-		Map<String,Object> parameters = new HashMap<String, Object>();
-		parameters.put("name", null);
-		parameters.put("parentId", parentId);
-		try
-		{
-			List<ResourceEntity> list = resourceService.queryTreeGridListByPage(parameters);
-			List<ResourceEntity> result = TreeUtil.getChildResourceEntitys(list, null);
-			parameters.clear();
-			parameters.put("success", Boolean.TRUE);
-			parameters.put("data", result);
-			parameters.put("message", null);
-		}catch(Exception e)
-		{
-			throw new AjaxException(e);
-		}
-		return parameters;
-	}
-	
-	
 	@RequestMapping("withoutAuth/resourceTree.html")
 	@ResponseBody
 	public Object resourceTree(int roleId) {
