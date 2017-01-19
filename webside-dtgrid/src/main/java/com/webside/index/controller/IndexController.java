@@ -162,60 +162,36 @@ public class IndexController extends BaseController {
 	        }
 		}catch (UnknownAccountException uae)
 		{
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "账户不存在！");
 			return "/login";
 		}
 		catch (IncorrectCredentialsException ice)
 		{
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "密码错误,连续输错5次,帐号将被锁定10分钟");
 			return "/login";
 		}catch (LockedAccountException e) {
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "您的账户已被锁定,请与管理员联系或10分钟后重试！");
 			return "/login";
 		} catch (ExcessiveAttemptsException e) {
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "您连续输错密码5次,帐号将被锁定10分钟!");
 			return "/login";
 		}catch(ExpiredCredentialsException eca)
 		{
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "账户凭证过期！");
 			return "/login";
 		}catch (AuthenticationException e) {
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "账户验证失败！");
 			return "/login";
 		}catch (Exception e)
 		{
-			if(null != token)
-			{
-				token.clear();
-			}
 			request.setAttribute("error", "登录异常，请联系管理员！");
 			return "/login";
 		}finally
 		{
+			if(null != token)
+			{
+				token.clear();
+			}
 			request.setAttribute("accountName", userEntity.getAccountName());
         	request.setAttribute("password", userEntity.getPassword());
 		}
