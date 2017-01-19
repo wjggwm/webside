@@ -89,7 +89,7 @@ public class UserSessionServiceImpl implements UserSessionService {
 				if (null != obj && obj instanceof UserEntity) {
 					UserEntity user = (UserEntity) obj;
 					// 比较用户ID，符合即加入集合
-					if (null != user && idset.contains(user.getId())) {
+					if (idset.contains(user.getId())) {
 						list.add(spc);
 					}
 				}
