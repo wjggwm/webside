@@ -1,10 +1,12 @@
 package com.webside.dtgrid.util;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Date;
 
 import org.apache.commons.collections.MapUtils;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
 
 import com.webside.dtgrid.model.Column;
 
@@ -25,8 +27,7 @@ public class GridUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String formatContent(Column column, String content){
-		try{
+	public static String formatContent(Column column, String content) throws ParseException{
 //			处理码表
 			if(column.getCodeTable()!=null){
 				if(column.getCodeTable().containsKey(content)){
@@ -37,19 +38,14 @@ public class GridUtils {
 			if("date".equalsIgnoreCase(column.getType())&&column.getFormat()!=null&&!"".equals(column.getFormat())){
 				if(column.getOtype()!=null&&!"".equals(column.getOtype())){
 					if("time_stamp_s".equals(column.getOtype())){
-						SimpleDateFormat sdf = new SimpleDateFormat(column.getFormat());
 						Date date = new Date(Integer.parseInt(content)*1000);
-						return sdf.format(date);
+						return LocalDate.fromDateFields(date).toString(DateTimeFormat.forPattern(column.getFormat()));
 					}else if("time_stamp_ms".equals(column.getOtype())){
-						SimpleDateFormat sdf = new SimpleDateFormat(column.getFormat());
 						Date date = new Date(Integer.parseInt(content));
-						return sdf.format(date);
+						return LocalDate.fromDateFields(date).toString(DateTimeFormat.forPattern(column.getFormat()));
 					}else if("string".equals(column.getOtype())){
 						if(column.getOformat()!=null&&!"".equals(column.getOformat())){
-							SimpleDateFormat osdf = new SimpleDateFormat(column.getOformat());
-							SimpleDateFormat sdf = new SimpleDateFormat(column.getFormat());
-							Date date = osdf.parse(content);
-							return sdf.format(date);
+							return LocalDate.parse(content, DateTimeFormat.forPattern(column.getOformat())).toString(DateTimeFormat.forPattern(column.getFormat()));
 						}
 					}
 				}
@@ -57,9 +53,7 @@ public class GridUtils {
 				DecimalFormat df = new DecimalFormat(column.getFormat());
 				content = df.format(Double.parseDouble(content));
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		
 		return content;
 	}
 

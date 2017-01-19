@@ -3,8 +3,9 @@ package com.webside.quartz.extension;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.quartz.SchedulerException;
 import org.quartz.utils.ConnectionProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
@@ -27,6 +28,8 @@ public class DruidConnectionProviderManager implements ConnectionProvider {
      *
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
+	
+	private static final Logger logger = LoggerFactory.getLogger(DruidConnectionProviderManager.class);
 
     //JDBC驱动
     public String driver;
@@ -89,10 +92,7 @@ public class DruidConnectionProviderManager implements ConnectionProvider {
         try{
             datasource.setDriverClassName(this.driver);
         } catch (Exception e) {
-            try {
-                throw new SchedulerException("Problem setting driver class name on datasource: " + e.getMessage(), e);
-            } catch (SchedulerException e1) {
-            }
+            logger.error("Problem setting driver class name on datasource: {}" + e.getMessage(), e);
         }
 
         datasource.setUrl(this.url);

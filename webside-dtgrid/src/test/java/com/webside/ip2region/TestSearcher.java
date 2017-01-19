@@ -83,37 +83,32 @@ public class TestSearcher
                 }
                 
                 sTime = System.nanoTime();
-                dataBlock = (DataBlock) method.invoke(searcher, line);
-                cTime = (System.nanoTime() - sTime) / 1000000;
-                System.out.printf("%s in %.5f millseconds\n", dataBlock, cTime);
+                if(null != method)
+                {
+                	dataBlock = (DataBlock) method.invoke(searcher, line);
+                    cTime = (System.nanoTime() - sTime) / 1000000;
+                    System.out.printf("%s in %.5f millseconds\n", dataBlock, cTime);
+                }
             }
             
             reader.close();
             searcher.close();
             System.out.println("+--Bye");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (DbMakerConfigException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

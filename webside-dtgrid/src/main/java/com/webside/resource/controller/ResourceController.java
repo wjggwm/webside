@@ -65,7 +65,7 @@ public class ResourceController extends BaseController {
 	
 	@RequestMapping("list.html")
 	@ResponseBody
-	public Object list(String gridPager) throws Exception{
+	public Object list(String gridPager){
 		Map<String,Object> parameters = null;
 		// 映射Pager对象
 		Pager pager = JSON.parseObject(gridPager, Pager.class);
@@ -112,7 +112,7 @@ public class ResourceController extends BaseController {
 	
 	@RequestMapping("listGrid.html")
 	@ResponseBody
-	public Object listTree(String gridPager) throws Exception{
+	public Object listTree(String gridPager) {
 		Map<String,Object> parameters = null;
 		// 映射Pager对象
 		Pager pager = JSON.parseObject(gridPager, Pager.class);

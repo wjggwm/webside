@@ -46,7 +46,7 @@ public class PermissionFilter extends AccessControlFilter {
 		{
 			uri = uri.replace(contextPath, "");
 		}
-		if(uri.equals("/")) //http://localhost:8070/webside/  处理这样的url
+		if("/".equals(uri)) //http://localhost:8070/webside/  处理这样的url
 			return Boolean.TRUE;
 		if(subject.isPermitted(uri))
 			return Boolean.TRUE;

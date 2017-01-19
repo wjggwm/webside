@@ -58,7 +58,7 @@ public class KickoutSessionFilter extends AccessControlFilter {
 			url = url.replace(contextPath, "");
 		}
 		//如果是相关目录 or 没有登录 就直接return true
-		if(url.startsWith("/openapi/") || (!subject.isAuthenticated() && !subject.isRemembered())){
+		if(null != url && url.startsWith("/openapi/") || (!subject.isAuthenticated() && !subject.isRemembered())){
 			return Boolean.TRUE;
 		}
 		Session session = subject.getSession();

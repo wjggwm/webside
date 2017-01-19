@@ -78,7 +78,7 @@ public class ScheduleJobController {
 	 */
 	@RequestMapping(value = "/planningJobList.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object planJobList(String timestamp) throws Exception {
+	public Object planJobList(String timestamp){
 		// 1、映射Pager对象
 		List<ScheduleJobEntity> list = scheduleJobService.getPlanJobList();
 		// 列表展示数据
@@ -96,7 +96,7 @@ public class ScheduleJobController {
 	 */
 	@RequestMapping(value = "/runningJobList.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object runningJobList(String timestamp) throws Exception {
+	public Object runningJobList(String timestamp){
 		// 1、映射Pager对象
 		List<ScheduleJobEntity> list = scheduleJobService.getRunningJobList();
 		// 列表展示数据
@@ -114,7 +114,7 @@ public class ScheduleJobController {
 	 */
 	@RequestMapping(value = "/jobTriggerList.html", method = RequestMethod.POST)
 	@ResponseBody
-	public Object jobTriggerList(ScheduleJobEntity job) throws Exception {
+	public Object jobTriggerList(ScheduleJobEntity job) {
 		List<ScheduleJobEntity> list = scheduleJobService.getTriggers(job);
 		// 列表展示数据
 		return list;

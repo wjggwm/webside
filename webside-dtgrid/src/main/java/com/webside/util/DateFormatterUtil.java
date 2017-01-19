@@ -41,6 +41,7 @@ public class DateFormatterUtil implements Formatter<Date>{
 		} catch (Exception e) {
 			localDate = LocalDate.parse(text, DateTimeFormat.forPattern("yyyy-MM-dd"));
 			date = localDate.toDate();
+			throw e;
 		}
 		return date;
 	}

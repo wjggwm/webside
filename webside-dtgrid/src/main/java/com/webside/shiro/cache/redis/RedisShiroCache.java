@@ -106,7 +106,10 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
         	jedis.flushDB();
     	}finally
     	{
-    		jedis.close();
+    		if(null != jedis)
+    		{
+    			jedis.close();
+    		}
     	}
     	
     	
@@ -132,7 +135,10 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
             return (Set<K>)keys;
     	}finally
     	{
-    		jedis.close();
+    		if(null != jedis)
+    		{
+    			jedis.close();
+    		}
     	}
     	
     }

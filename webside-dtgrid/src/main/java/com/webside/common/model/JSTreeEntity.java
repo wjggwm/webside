@@ -66,8 +66,13 @@ public class JSTreeEntity implements Serializable{
 		this.state = state;
 	}
 
-	public class State
+	public class State  implements Serializable
 	{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		private boolean opened;
 		
 		private boolean selected;

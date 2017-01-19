@@ -152,7 +152,7 @@ public class SHA1HMAC {
 	 * @author wjggwm
 	 * @data 2016年11月29日 下午1:04:59
 	 */
-	public static long decryptPrice(String priceCipher, String ikey, String ekey, boolean isUrlSafe) {
+	public static long decryptPrice(String priceCipher, String ikey, String ekey, boolean isUrlSafe) throws Exception{
 		long price = -1l;
 		try {
 			byte[] unbase64Price = decodePrice(priceCipher, isUrlSafe);
@@ -164,7 +164,7 @@ public class SHA1HMAC {
 			byte[] plainData = decrypt(unbase64Price, ikey, ekey);
 			price = ByteBuffer.wrap(plainData).getLong(PAYLOAD_BASE);
 		} catch (SignatureException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return price;
 

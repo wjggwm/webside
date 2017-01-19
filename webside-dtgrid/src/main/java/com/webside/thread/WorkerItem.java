@@ -24,6 +24,7 @@ public class WorkerItem implements Runnable, Serializable {
 			System.out.print("任务执行了");
 		} catch (InterruptedException e) {
 			logger.error("执行任务异常:{}", e);
+			throw new RuntimeException(e);
 		}
 		
 	}

@@ -22,6 +22,7 @@ import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.webside.exception.SystemException;
 import com.webside.shiro.service.ChainDefinitionService;
 
 /**
@@ -64,30 +65,29 @@ public class ChainDefinitionServiceImpl implements ChainDefinitionService{
 		AbstractShiroFilter shiroFilter = null;
 		try {
 			shiroFilter = (AbstractShiroFilter) shiroFilterFactoryBean.getObject();
+
+			PathMatchingFilterChainResolver filterChainResolver = (PathMatchingFilterChainResolver) shiroFilter
+					.getFilterChainResolver();
+			DefaultFilterChainManager manager = (DefaultFilterChainManager) filterChainResolver
+					.getFilterChainManager();
+	
+			// 清空老的权限控制
+			manager.getFilterChains().clear();
+	
+			shiroFilterFactoryBean.getFilterChainDefinitionMap().clear();
+			shiroFilterFactoryBean.setFilterChainDefinitions(initFilterChainDefinitions());
+			// 重新构建生成
+			Map<String, String> chains = shiroFilterFactoryBean
+					.getFilterChainDefinitionMap();
+			for (Map.Entry<String, String> entry : chains.entrySet()) {
+				String url = entry.getKey();
+				String chainDefinition = entry.getValue().trim().replace(" ", "");
+				manager.createChain(url, chainDefinition);
+			}
 		} catch (Exception e) {
 			logger.error("getShiroFilter from shiroFilterFactoryBean error!", e);
-			throw new RuntimeException("get ShiroFilter from shiroFilterFactoryBean error!");
+			throw new SystemException("get ShiroFilter from shiroFilterFactoryBean error!");
 		}
-
-		PathMatchingFilterChainResolver filterChainResolver = (PathMatchingFilterChainResolver) shiroFilter
-				.getFilterChainResolver();
-		DefaultFilterChainManager manager = (DefaultFilterChainManager) filterChainResolver
-				.getFilterChainManager();
-
-		// 清空老的权限控制
-		manager.getFilterChains().clear();
-
-		shiroFilterFactoryBean.getFilterChainDefinitionMap().clear();
-		shiroFilterFactoryBean.setFilterChainDefinitions(initFilterChainDefinitions());
-		// 重新构建生成
-		Map<String, String> chains = shiroFilterFactoryBean
-				.getFilterChainDefinitionMap();
-		for (Map.Entry<String, String> entry : chains.entrySet()) {
-			String url = entry.getKey();
-			String chainDefinition = entry.getValue().trim().replace(" ", "");
-			manager.createChain(url, chainDefinition);
-		}
-		
 	}
 
 	/* (non-Javadoc)

@@ -31,7 +31,7 @@ public class ShiroEncrypt {
 			System.out.println(base);
 			System.out.println(AES.decryptBase64("GsHaWo4m1eNbE0kNSMULhg==", token));
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.print(e.getMessage());
 		}
 		
 	}
