@@ -52,5 +52,8 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 
 **部署方法：**部署的详细步骤请见[wiki](http://git.oschina.net/wjggwm/webside/wikis/deploy)
 
+**系统截图：** 
+
+![输入图片说明](http://git.oschina.net/uploads/images/2017/0119/111559_1f1c9a5e_413659.png "在这里输入图片标题")
 
 ![](http://git.oschina.net/uploads/images/2016/1013/144758_81218cf8_413659.png "")
