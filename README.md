@@ -2,11 +2,29 @@
 
 **服务端：**
 
-Spring4.3.0.RELEASE+SpringMVC4.3.0.RELEASE+Mybatis3.3.0+Shiro1.2.4+druid1.0.18+ehcache2.6.11 等
+Spring4.3.0.RELEASE+SpringMVC4.3.0.RELEASE+Mybatis3.3.0+Shiro1.3.2+druid1.0.27+quartz2.2.3+logback1.1.7等
 
 **前端：**
 
-JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板）+layer+JQuery validation等
+JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板）+layer+dlshouwen.grid.v1.2.1+JQuery validation等
+
+**数据存储：** 
+
+数据库使用Mysql + Redis + Ehcache
+
+**主要功能：** 
+
+- 这里是列表文本系统基础管理：用户管理、角色管理、资源管理
+- 
+- 系统监控管理：在线用户、Sirona监控、Druid监控
+- 
+- 日志信息管理：用户登录信息、用户操作信息
+- 
+- 多级菜单：最多支持四级菜单
+- 
+- 计划任务管理：计划中任务、运行中任务
+- 
+- 控制台：欢迎页
 
 **特点：**
 
@@ -19,6 +37,18 @@ JQuery+Bootstrap3.3.5+ACE1.3.4（基于bootstrap的响应式后台管理模板�
 4、高逼格，项目使用maven进行构建
 
 5、多维监控，添加druid监控和sirona监控，多重监控系统性能及各项指标
+
+6、跨浏览器支持，IE、360、google、firefox 等主流浏览器
+
+7、使用CDN加速，更快的页面加载体验
+
+8、使用bootstrap响应式布局，PC、移动端完美自适应
+
+9、地址栏智能过滤，防止用户直接输入地址进行操作
+
+10、公益404页面，爱心满满
+
+11、动态权限控制、session共享，集群更简单
 
 **部署方法：**部署的详细步骤请见[wiki](http://git.oschina.net/wjggwm/webside/wikis/deploy)
 
