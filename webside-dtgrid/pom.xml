@@ -48,7 +48,7 @@
 		<!-- Plugin的属性定义 -->
 		<jdk.version>1.8</jdk.version>
 	</properties>
-	
+
 
 	<!-- 项目发布到私服 -->
 	<distributionManagement>
@@ -65,8 +65,8 @@
 
 	<dependencies>
 		<!-- junit单元测试 -->
-		
-		
+
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -98,6 +98,11 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons-logging.version}</version>
 		</dependency>
 		<!-- logback和spring集成依赖包 -->
 		<dependency>
@@ -241,11 +246,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- aop代理 -->
