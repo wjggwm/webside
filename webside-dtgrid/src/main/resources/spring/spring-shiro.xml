@@ -91,6 +91,10 @@
 	<bean id="roleFilter" class="com.webside.shiro.filter.RoleFilter"/>
 	<bean id="baseUrl" class="com.webside.shiro.filter.URLFilter"/>
 
+	<!-- ssl过滤 -->
+	 <bean id="sslFilter" class="org.apache.shiro.web.filter.authz.SslFilter">
+        <property name="port" value="8443"/>
+    </bean>
 
 	<bean id="chainDefinitionService" class="com.webside.shiro.service.impl.ChainDefinitionServiceImpl" />
 
@@ -129,6 +133,7 @@
 				<entry key="perm" value-ref="permissionFilter"/>
 				<entry key="roles" value-ref="roleFilter"/>
 				<entry key="baseUrl" value-ref="baseUrl"/>
+				<entry key="ssl" value-ref="sslFilter"></entry>
 			</map>
 		</property>
 	</bean>

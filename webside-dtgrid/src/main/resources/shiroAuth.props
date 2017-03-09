@@ -22,5 +22,5 @@
 /welcome.jsp=login,remember,perm,baseUrl
 /druid/**=login,remember,roles[administrator]
 /sirona/**=login,remember,roles[administrator]
-#\u9700\u8981\u767b\u5f55
-/**=login,remember,perm,baseUrl
+#\u9700\u8981\u767b\u5f55,\u5e76\u4f7f\u7528ssl
+/**=ssl,login,remember,perm,baseUrl
