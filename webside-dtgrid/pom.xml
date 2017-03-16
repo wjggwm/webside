@@ -29,7 +29,7 @@
 		<ehcache.version>2.6.11</ehcache.version>
 		<mybatis.version>3.4.1</mybatis.version>
 		<pagehelper.version>4.1.0</pagehelper.version>
-		<fastjson.version>1.2.13</fastjson.version>
+		<fastjson.version>1.2.28</fastjson.version>
 		<slf4j-api.version>1.7.21</slf4j-api.version>
 		<aopalliance.version>1.0</aopalliance.version>
 		<spring.version>4.3.0.RELEASE</spring.version>
