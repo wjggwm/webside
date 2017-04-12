@@ -51,7 +51,7 @@
 		<property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
-
+		<!-- 验证语句、申请、归还是验证、申请连接的时候检测 -->
 		<property name="validationQuery" value="${druid.validationQuery}" />
 		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
 		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
@@ -61,14 +61,15 @@
 		<property name="maxPoolPreparedStatementPerConnectionSize"
 			value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
 
-		<property name="maxOpenPreparedStatements" value="${druid.maxOpenPreparedStatements}" />
-
 		<!-- 打开removeAbandoned功能 -->
 		<property name="removeAbandoned" value="${druid.removeAbandoned}" />
 		<!-- 1800秒，也就是30分钟,超过30分钟,连接会自动关闭 -->
 		<property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}" />
 		<!-- 关闭abanded连接时输出错误日志 -->
 		<property name="logAbandoned" value="${druid.logAbandoned}" />
+		
+		<property name="connectionProperties" value="${druid.connectionProperties}" />
+		<property name="useGlobalDataSourceStat" value="${druid.useGlobalDataSourceStat}" />
 
 		<!-- 配置监控统计拦截的filters -->
 		<property name="filters" value="${druid.filters}" />
@@ -78,8 +79,7 @@
 				<ref bean="wall-filter"/>
 			</list>
 		</property>
-		<property name="connectionProperties" value="${druid.connectionProperties}" />
-		<property name="useGlobalDataSourceStat" value="${druid.useGlobalDataSourceStat}" />
+		
 	</bean>
 
 	<!-- 使用sqlSessionFactoryBean工厂产生SqlSession对象，方便后期注入Dao -->
