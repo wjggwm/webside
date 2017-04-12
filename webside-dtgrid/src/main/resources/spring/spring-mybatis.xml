@@ -24,7 +24,7 @@
 	<!-- 
 		数据库类型            目录
 		mysql		META-INF/druid/wall/mysql
-		Oracle		META-INF/druid/wall/oracle
+		oracle		META-INF/druid/wall/oracle
 		sqlserver	META-INF/druid/wall/sqlserver
 		postgres	META-INF/druid/wall/postgres
 	 -->
