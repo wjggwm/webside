@@ -53,6 +53,7 @@
 		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
 		<!-- 验证语句、申请、归还是验证、申请连接的时候检测 -->
 		<property name="validationQuery" value="${druid.validationQuery}" />
+		<property name="validationQueryTimeout" value="${druid.validationQueryTimeout}"/>
 		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
 		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
 		<property name="testOnReturn" value="${druid.testOnReturn}" />
@@ -61,9 +62,9 @@
 		<property name="maxPoolPreparedStatementPerConnectionSize"
 			value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
 
-		<!-- 打开removeAbandoned功能 -->
+		<!-- 配置removeAbandoned功能 -->
 		<property name="removeAbandoned" value="${druid.removeAbandoned}" />
-		<!-- 1800秒，也就是30分钟,超过30分钟,连接会自动关闭 -->
+		<!-- 如果连接超过该时间,连接会被强制关闭 -->
 		<property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}" />
 		<!-- 关闭abanded连接时输出错误日志 -->
 		<property name="logAbandoned" value="${druid.logAbandoned}" />

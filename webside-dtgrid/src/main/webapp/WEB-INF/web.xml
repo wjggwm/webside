@@ -216,7 +216,7 @@
 	</session-config>
 
 	<!-- 
-	配置应用使用 SSL:目前通过shiro实现，如果不想通过shiro来做，可使用如下方式，注意：两种方式使用一种即可
+	配置应用使用 SSL:目前通过shiro实现，如果不想通过shiro来做(参照shiroAuth.props)，可使用如下方式，注意：两种方式使用一种即可
 	将 URL 映射设为 /* ，这样你的整个应用都要求是 HTTPS 访问，而 transport-guarantee 标签设置为 CONFIDENTIAL 以便使应用支持 SSL。
 	如果你希望关闭 SSL ，只需要将 CONFIDENTIAL 改为 NONE 即可
 	-->
