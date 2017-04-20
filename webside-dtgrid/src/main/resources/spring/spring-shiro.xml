@@ -162,6 +162,10 @@
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<!-- 是否删除无效的，默认也是开启 -->
 		<property name="deleteInvalidSessions" value="true" />
+		<!-- 这里可以选择使用ehcache或redis两种保存session的方式，具体视个人情况
+		1、ehcache实现：ehcacheShiroSessionDAO
+		2、redis实现	 ：redisShiroSessionDAO
+		 -->
 		<property name="sessionDAO" ref="redisShiroSessionDAO" />
 		<!-- session 有效时间为半小时 （毫秒单位） -->
 		<property name="globalSessionTimeout" value="${shiro.session.timeout}" />
@@ -187,7 +191,7 @@
 		2、redis实现	 ：ShiroSessionDAO extends AbstractSessionDAO
 	-->
 	<!-- ehcache shiro session dao -->
-	<bean id="ehcacheSessionDAO"
+	<bean id="ehcacheShiroSessionDAO"
 		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
 		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
 		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
@@ -210,6 +214,10 @@
 		2、redis实现	 ：redisShiroCacheManager
 	-->
 	<bean id="cacheManager" class="com.webside.shiro.cache.CustomShiroCacheManager">
+		<!-- 这里可以选择使用ehcache或redis两种缓存实现方式，具体视个人情况
+		1、ehcache实现：ehcacheShiroCacheManager
+		2、redis实现	 ：redisShiroCacheManager
+		 -->
 		<property name="shiroCacheManager" ref="redisShiroCacheManager" />
 	</bean>
 

@@ -9,14 +9,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.webside.redis.RedisManager;
 import com.webside.shiro.ShiroAuthenticationManager;
+import com.webside.shiro.cache.ehcache.EhcacheShiroCache;
+import com.webside.shiro.cache.redis.RedisShiroCache;
 import com.webside.shiro.session.ShiroSessionRepository;
 
 /**
@@ -34,18 +37,20 @@ public class KickoutSessionFilter extends AccessControlFilter {
   	private ShiroSessionRepository shiroSessionRepository;
   	
     @Autowired
-  	private RedisManager redisManager;
+  	private CacheManager cacheManager;
 
     public void setShiroSessionRepository(
 			ShiroSessionRepository shiroSessionRepository) {
 		this.shiroSessionRepository = shiroSessionRepository;
 	}
 
-	public void setRedisManager(RedisManager redisManager) {
-		this.redisManager = redisManager;
+	public void setCacheManager(CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
 	}
 
-	@SuppressWarnings("unchecked")
+
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
     	HttpServletRequest httpRequest = ((HttpServletRequest)request);
@@ -87,7 +92,19 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		}
 		
 		//从缓存获取用户-Session信息 <UserId,SessionId>
-		LinkedHashMap<Long, Serializable> infoMap = redisManager.get(ShiroUtils.ONLINE_USER, LinkedHashMap.class);
+		LinkedHashMap<Long, Serializable> infoMap = null;
+		
+		Cache cache = cacheManager.getCache(ShiroUtils.ONLINE_USER);
+		if(cache instanceof RedisShiroCache)
+		{
+			RedisShiroCache redisCache = (RedisShiroCache)cache;
+			infoMap = (LinkedHashMap<Long, Serializable>)redisCache.get(ShiroUtils.ONLINE_USER, LinkedHashMap.class);
+		}else if(cache instanceof EhcacheShiroCache)
+		{
+			EhcacheShiroCache ehCache = (EhcacheShiroCache)cache;
+			infoMap = (LinkedHashMap<Long, Serializable>)ehCache.get(ShiroUtils.ONLINE_USER);
+		}
+		
 		//如果不存在，创建一个新的
 		infoMap = null == infoMap ? new LinkedHashMap<Long, Serializable>() : infoMap;
 		
@@ -97,7 +114,16 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		//如果已经包含当前Session，并且是同一个用户则跳过
 		if(infoMap.containsKey(userId) && infoMap.containsValue(sessionId)){
 			//缓存30分钟（这个时间最好和session的有效期一致或者大于session的有效期）
-			redisManager.setex(ShiroUtils.ONLINE_USER, infoMap, 1800);
+			if(cache instanceof RedisShiroCache)
+			{
+				RedisShiroCache redisCache = (RedisShiroCache)cache;
+				redisCache.setex(ShiroUtils.ONLINE_USER, infoMap, 1800);
+			}else if(cache instanceof EhcacheShiroCache)
+			{
+				EhcacheShiroCache ehCache = (EhcacheShiroCache)cache;
+				ehCache.put(ShiroUtils.ONLINE_USER, infoMap);
+			}
+			
 			return Boolean.TRUE;
 		}
 		
@@ -117,7 +143,16 @@ public class KickoutSessionFilter extends AccessControlFilter {
 				shiroSessionRepository.deleteSession(oldSessionId);
 				infoMap.remove(userId);
 				//缓存30分钟（这个时间最好和session的有效期一致或者大于session的有效期）
-				redisManager.setex(ShiroUtils.ONLINE_USER, infoMap, 1800);
+				if(cache instanceof RedisShiroCache)
+				{
+					RedisShiroCache redisCache = (RedisShiroCache)cache;
+					redisCache.setex(ShiroUtils.ONLINE_USER, infoMap, 1800);
+				}else if(cache instanceof EhcacheShiroCache)
+				{
+					EhcacheShiroCache ehCache = (EhcacheShiroCache)cache;
+					ehCache.put(ShiroUtils.ONLINE_USER, infoMap);
+				}
+				
 			}
 			return  Boolean.TRUE;
 		}
@@ -125,7 +160,15 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		if(!infoMap.containsKey(userId) && !infoMap.containsValue(sessionId)){
 			infoMap.put(userId, sessionId);
 			//存储到缓存1个小时（这个时间最好和session的有效期一致或者大于session的有效期）
-			redisManager.setex(ShiroUtils.ONLINE_USER, infoMap, 1800);
+			if(cache instanceof RedisShiroCache)
+			{
+				RedisShiroCache redisCache = (RedisShiroCache)cache;
+				redisCache.setex(ShiroUtils.ONLINE_USER, infoMap, 1800);
+			}else if(cache instanceof EhcacheShiroCache)
+			{
+				EhcacheShiroCache ehCache = (EhcacheShiroCache)cache;
+				ehCache.put(ShiroUtils.ONLINE_USER, infoMap);
+			}
 		}
 		return Boolean.TRUE;
     }

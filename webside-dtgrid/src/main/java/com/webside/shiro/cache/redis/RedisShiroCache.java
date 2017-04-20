@@ -164,4 +164,41 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
         return REDIS_SHIRO_CACHE + getName() + ":" + key;
     }
 
+    /**
+     * 目前使用目标：获取在线用户
+     * @param key
+     * @param requiredType
+     * @return
+     * @throws Exception
+     */
+    public <V> V get(String key , Class<V>...requiredType) throws Exception
+    {
+    	return redisManager.get(key, requiredType);
+    }
+    
+    
+    /**
+	 * 有过期时间
+	 * @param key
+	 * @param value
+	 * @param timer （秒）
+	 */
+	public void setex(String key, V value, int timer) throws Exception {
+		Jedis jds = null;
+		try {
+			jds = redisManager.getJedis();
+			jds.select(0);
+			byte[] svalue = SerializeUtil.serialize(value);
+			jds.setex(key.getBytes(), timer, svalue);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+        	if(jds != null)
+			{
+				jds.close();
+			}
+        }
+		
+	}
+    
 }

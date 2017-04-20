@@ -27,9 +27,9 @@ var dtGridColumns = [{
     id : 'createTime',
     title : '操作时间',
     type : 'date',
-    format : 'yyyy-MM-dd hh:mm:ss',
+    format : 'yyyy-MM-dd HH:mm:ss',
     otype:'string', 
-    oformat:'yyyy-MM-dd hh:mm:ss',
+    oformat:'yyyy-MM-dd HH:mm:ss',
     columnClass : 'text-center',
     headerClass : 'dlshouwen-grid-header',
     hideType : 'sm|xs'

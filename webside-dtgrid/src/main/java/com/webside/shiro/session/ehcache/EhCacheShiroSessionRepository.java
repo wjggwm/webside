@@ -25,7 +25,6 @@ import com.webside.util.SerializeUtil;
  * @author wjggwm
  * @data 2016年12月13日 下午4:34:57
  */
-@Deprecated
 public class EhCacheShiroSessionRepository implements ShiroSessionRepository {
    
 	private static final Logger logger = LoggerFactory.getLogger(EhCacheShiroSessionRepository.class);

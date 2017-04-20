@@ -8,9 +8,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jodd.util.StringUtil;
+
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.webside.dtgrid.model.Pager;
 
 /**
  * 
@@ -43,6 +48,16 @@ public class URLFilter extends AccessControlFilter {
 			uriParam = uriParam.replace(contextPath, "");
 			if(uriParam.equals("/") || uriParam.equals("/index.html"))
 				return Boolean.TRUE;
+		}
+		String gridPager = httpRequest.getParameter("gridPager");
+		//导出时不做过滤
+		if(StringUtil.isNotBlank(gridPager))
+		{
+			Pager pager = JSON.parseObject(gridPager, Pager.class);
+			if(pager.getIsExport())
+			{
+				return Boolean.TRUE;
+			}
 		}
 		
 		return Boolean.FALSE;

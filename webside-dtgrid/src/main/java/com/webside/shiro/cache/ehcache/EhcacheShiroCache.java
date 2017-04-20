@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.Element;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
@@ -101,4 +102,23 @@ public class EhcacheShiroCache<K, V> implements Cache<K, V>{
         }
         throw new UnsupportedOperationException("invoke spring cache abstract values method not supported");
     }
+    
+    
+    public void setex(String key, V value) throws Exception {
+    	if(cache.getNativeCache() instanceof Ehcache) {
+            Ehcache ehcache = (Ehcache) cache.getNativeCache();
+            ehcache.put(new Element(key, value));
+    	}
+	}
+    
+    
+    @SuppressWarnings("unchecked")
+	public V get(String key) throws Exception {
+    	ValueWrapper value = cache.get(key);
+        if (value instanceof SimpleValueWrapper) {
+            return (V)((SimpleValueWrapper) value).get();
+        }
+        return (V)value;
+	}
+    
 }
