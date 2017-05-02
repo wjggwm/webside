@@ -178,7 +178,7 @@
 		<property name="patterns">
 			<list>
 				<value>com.webside.*.service.*</value>
-				<value>com.webisde.*.mapper.*</value>
+				<value>com.webside.*.mapper.*</value>
 			</list>
 		</property>
 	</bean>
