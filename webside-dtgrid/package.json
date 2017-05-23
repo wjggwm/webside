@@ -1,9 +1,0 @@
-{
-  "name": "webside api doc",
-  "version": "1.0.0",
-  "description": "webside api doc",
-  "apidoc": {
-    "title": "webside	用心、专业、开源免费",
-    "url" : "http://127.0.0.1:8080/webside/"
-  }
-}
