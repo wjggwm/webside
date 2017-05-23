@@ -271,7 +271,11 @@ public class IndexController extends BaseController {
 		return "redirect:/";
 	}
 	
-	
+	/**
+	 * 验证码
+	 * @param req
+	 * @param rsp
+	 */
 	@RequestMapping(value = "captcha.html", method = RequestMethod.GET)
     public void kaptcha(HttpServletRequest req, HttpServletResponse rsp) {
 		ServletOutputStream out = null;

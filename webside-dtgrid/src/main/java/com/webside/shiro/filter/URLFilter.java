@@ -37,7 +37,7 @@ public class URLFilter extends AccessControlFilter {
 		if(null != contextPath)
 		{
 			uri = uri.replace(contextPath, "");
-			if(uri.equals("/") || uri.equals("/index.html") || uri.equals("login.html") || uri.equals("signin.html"))
+			if(uri.startsWith("/openapi/") || uri.equals("/") || uri.equals("/index.html") || uri.equals("login.html") || uri.equals("signin.html"))
 			{
 				return Boolean.TRUE;
 			}
