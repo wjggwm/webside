@@ -1,0 +1,12 @@
+{
+  "name": "webside api doc",
+  "version": "1.0.0",
+  "description": "webside Attentively, professionally, free and open source",
+  "title": "webside api doc",
+  "url" : "http://127.0.0.1:8080/webside/",
+  "forceLanguage":"zh-cn",
+  "template": {
+   "withCompare": true,
+   "withGenerator": true
+  }
+}

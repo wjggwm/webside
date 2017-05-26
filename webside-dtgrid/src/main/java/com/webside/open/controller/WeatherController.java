@@ -16,11 +16,11 @@ import com.webside.base.basecontroller.BaseController;
 public class WeatherController extends BaseController {
 
 	/**
-	 * @api {GET} /openapi/v1/weather/:cityName Get weather information by cityName
+	 * @api {GET} /openapi/v1/weather/{cityName} 获取天气
 	 * 
 	 * @apiVersion 1.0.0
 	 * 
-	 * @apiName getWeatherByCityName
+	 * @apiName	Get weather information by cityName.
 	 * 
 	 * @apiGroup Weather
 	 * 
