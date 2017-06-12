@@ -18,9 +18,21 @@
 			<property name="suppressDate" value="false" />
 			<property name="addRemarkComments" value="true" />
 		</commentGenerator>
-
+		
+		<!-- 
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@远程ip地址或localhost:1521:orcl" userId="用户名"
+            password="密码">
+                              针对oracle数据库
+            <property name="remarksReporting" value="true"></property>
+        </jdbcConnection>
+		 -->
+		
+		
 		<!--数据库连接 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/webside" userId="root" password="root">
+	 		<!-- 针对mysql数据库 -->
+            <property name="useInformationSchema" value="true"></property>
 		</jdbcConnection>
 		<!--默认false Java type resolver will always use java.math.BigDecimal if 
 			the database column is of type DECIMAL or NUMERIC. -->
