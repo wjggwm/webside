@@ -139,7 +139,18 @@ Cron表达式示例：
 
 maven操作：
 
+打包：
+package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+
+自动生成代码：
+mybatis-generator:generate
+
 部署到Tomcat7:
 
 在project视图中选中项目，右键"Run As"->"Maven bulid"，执行tomcat7:deploy命令，即可完成部署，执行tomcat7:redeploy即可重新部署项目，tomcat7:undeploy卸载部署。
 
+apidoc使用说明：
+1.将apidoc.json文件放到需生成文档的项目的更目录,比如 src/下
+2.在项目根目录下，执行命令
+		apidoc -i 源文件路径 -o 文档生成目标路径
+demo：	apidoc -i src/ 	-o src/main/webapp/apidoc/

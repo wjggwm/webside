@@ -6,7 +6,6 @@ import java.util.Map;
 
 /**
  * 
- * @ClassName: BaseService
  * @Description: service层接口
  * @author gaogang
  * @date 2016年7月12日 下午3:03:19

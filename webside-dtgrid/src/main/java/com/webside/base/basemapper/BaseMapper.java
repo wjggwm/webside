@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * 
- * @ClassName: BaseMapper
  * @Description: 基础mapper定义,可以自己重写，也可加入自己的方法
  * @author gaogang
  * @date 2016年7月12日 下午3:01:23

@@ -21,7 +21,7 @@ import com.webside.shiro.ShiroAuthenticationManager;
  * 后通知（@After）：当某连接点退出的时候执行的通知（不论是正常返回还是异常退出） 环绕通知（@Around）：包围一个连接点（join
  * point）的通知，如方法调用。这是最强大的一种通知类型，环绕通知可以在方法调用前后完成自定义的行为，
  * 它也会选择是否继续执行连接点或直接返回它们自己的返回值或抛出异常来结束执行
- * @ClassName: LogAspect
+ * 
  * @Description: 日志记录，添加、删除、修改方法AOP
  * @author gaogang
  * @date 2016年7月12日 下午4:03:58
@@ -57,7 +57,7 @@ public class LogAspect {
 	@Pointcut("execution(* com.webside.*.controller.*.delete*(..))")
 	public void deleteServiceCall() {
 	}
-	
+
 	/**
 	 * 授权业务逻辑方法切入点 定义在controller包里以delete为前缀的方法的执行
 	 */
@@ -68,9 +68,6 @@ public class LogAspect {
 	/**
 	 * 管理员添加操作日志(后置通知)
 	 * 
-	 * @param joinPoint
-	 * @param rtv
-	 * @throws Throwable
 	 */
 	@AfterReturning(value = "insertServiceCall()", argNames = "rtv", returning = "rtv")
 	public void insertServiceCallCalls(JoinPoint joinPoint, Object rtv)
@@ -102,9 +99,6 @@ public class LogAspect {
 	/**
 	 * 管理员修改操作日志(后置通知)
 	 * 
-	 * @param joinPoint
-	 * @param rtv
-	 * @throws Throwable
 	 */
 	@AfterReturning(value = "updateServiceCall()", argNames = "rtv", returning = "rtv")
 	public void updateServiceCallCalls(JoinPoint joinPoint, Object rtv)
@@ -136,9 +130,6 @@ public class LogAspect {
 	/**
 	 * 管理员删除操作日志(后置通知)
 	 * 
-	 * @param joinPoint
-	 * @param rtv
-	 * @throws Throwable
 	 */
 	@AfterReturning(value = "deleteServiceCall()", argNames = "rtv", returning = "rtv")
 	public void deleteServiceCallCalls(JoinPoint joinPoint, Object rtv)
@@ -169,9 +160,6 @@ public class LogAspect {
 	/**
 	 * 管理员授权操作日志(后置通知)
 	 * 
-	 * @param joinPoint
-	 * @param rtv
-	 * @throws Throwable
 	 */
 	@AfterReturning(value = "permissionServiceCall()", argNames = "rtv", returning = "rtv")
 	public void permissionServiceCallCalls(JoinPoint joinPoint, Object rtv)
@@ -200,7 +188,6 @@ public class LogAspect {
 		logService.log(log);// 添加日志
 	}
 
-	
 	/**
 	 * 使用Java反射来获取被拦截方法(insert、update)的参数值， 将参数值拼接为操作内容
 	 */
